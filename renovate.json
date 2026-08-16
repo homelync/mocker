@@ -11,7 +11,6 @@
   "prHourlyLimit": 2,
 
   "rangeStrategy": "bump",
-  "allowedPostUpgradeCommands": ["pnpm update --changeset"],
 
   "postUpgradeTasks": {
     "commands": ["pnpm update --changeset"],

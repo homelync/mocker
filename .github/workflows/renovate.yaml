@@ -47,3 +47,4 @@ jobs:
         env:
           RENOVATE_REPOSITORIES: magicspon/mocker
           LOG_LEVEL: ${{ inputs.logLevel || 'info' }}
+          RENOVATE_ALLOWED_COMMANDS: '["^pnpm update --changeset$"]'
