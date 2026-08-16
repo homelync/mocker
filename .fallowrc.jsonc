@@ -11,7 +11,7 @@
     "packages/mocker-next/src/index.ts",
     "packages/mocker-next/src/config.ts",
     "packages/mocker-next/src/index.prod.ts",
-    "scripts/renovate-changeset.mjs",
+    "scripts/renovate-changeset.mjs"
   ],
 
   "ignorePatterns": [
@@ -21,17 +21,17 @@
     "**/dist/**",
     "**/snap/**",
     "**/vite.config.*.timestamp-*.*",
-    "graphify-out/**",
+    "graphify-out/**"
   ],
 
   "duplicates": {
     // Hide pair-only clones; focus on widespread copy-paste worth refactoring.
     // The two package-boundary tests are a deliberate pair: each must travel
     // with the package it constrains.
-    "minOccurrences": 3,
+    "minOccurrences": 3
   },
 
   "rules": {
-    "unused-dependencies": "warn",
-  },
+    "unused-dependencies": "warn"
+  }
 }
