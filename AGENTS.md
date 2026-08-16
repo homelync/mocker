@@ -86,6 +86,27 @@ CI (`.github/workflows/ci.yaml`) runs lint → typecheck → test → build on e
 map would first be noticed by a consumer. `publint` and `@arethetypeswrong/cli` on a packed tarball
 would close it.
 
+### Linking into a consumer
+
+| Task                       | Command                   |
+| -------------------------- | ------------------------- |
+| Build + publish to yalc    | `pnpm publish:local`      |
+| …and update every consumer | `pnpm publish:local:push` |
+
+`scripts/yalc-publish.mjs` packs with `pnpm pack` and hands yalc the unpacked tarball rather than
+calling `yalc publish` directly. Two reasons, and both failures are silent:
+
+- yalc copies the working-tree `package.json` verbatim and does **not** apply `publishConfig`, so the
+  store would get `exports` pointing at `./src/*.ts` while `files` ships only `dist`.
+- `@magicspon/mocker-next` depends on `@magicspon/mocker` as `workspace:^`, which npm cannot resolve.
+
+`pnpm pack` performs exactly the two rewrites that publishing performs, so what lands in the store is
+what a consumer would get from the registry. That also narrows the gap above: a broken exports map
+now breaks the local link, which someone notices.
+
+The consumer must yalc-add **both** packages — the adapter's dependency becomes a real `^0.1.0`
+range, satisfied by the top-level link rather than by the registry.
+
 ## graphify
 
 This project has a knowledge graph at `graphify-out/`.

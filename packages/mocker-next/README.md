@@ -147,6 +147,23 @@ the UI does not invalidate a key.
 `src/app/api`, which is how a host test proves its registry has not drifted from
 the routes on disk.
 
+## Testing with Vitest
+
+Inline this package, or importing it from a test fails to resolve:
+
+```ts
+// vitest.config.ts
+test: {
+  server: { deps: { inline: ['@magicspon/mocker-next'] } },
+}
+```
+
+The adapter imports `next/server`, which `next` ships as a bare file with no
+`exports` map — resolvable by a bundler, not by Node's ESM resolver. Vitest
+externalises `node_modules` and hands them to Node, so without this you get
+`Cannot find module '.../next/server'`. Only the runtime entry is affected;
+`/config` reaches nothing from `next` at runtime and needs no such treatment.
+
 ## Further reading
 
 Recipes, the control headers, the registry design and the reasoning behind each

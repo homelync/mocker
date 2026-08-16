@@ -1,12 +1,18 @@
-# Graph Report - .  (2026-08-16)
+# Graph Report - mocker  (2026-08-16)
 
 ## Corpus Check
-- Corpus is ~38,886 words - fits in a single context window. You may not need a graph.
+- 87 files · ~38,801 words
+- Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 567 nodes · 1012 edges · 24 communities (21 shown, 3 thin omitted)
-- Extraction: 92% EXTRACTED · 7% INFERRED · 1% AMBIGUOUS · INFERRED: 70 edges (avg confidence: 0.83)
-- Token cost: 336,168 input · 0 output
+- 655 nodes · 1023 edges · 42 communities (35 shown, 7 thin omitted)
+- Extraction: 96% EXTRACTED · 4% INFERRED · 0% AMBIGUOUS · INFERRED: 38 edges (avg confidence: 0.83)
+- Token cost: 0 input · 0 output
+
+## Graph Freshness
+- Built from commit: `2f0a7419`
+- Run `git rev-parse HEAD` and compare to check if the graph is stale.
+- Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
 - [[_COMMUNITY_Schema-Driven Data Generation|Schema-Driven Data Generation]]
@@ -32,30 +38,42 @@
 - [[_COMMUNITY_es-toolkit Error Handling|es-toolkit Error Handling]]
 - [[_COMMUNITY_Deprecated Husky Shim|Deprecated Husky Shim]]
 - [[_COMMUNITY_TanStack Router Config|TanStack Router Config]]
+- [[_COMMUNITY_Vitest Type Shims|Vitest Type Shims]]
+- [[_COMMUNITY_Community 24|Community 24]]
+- [[_COMMUNITY_Community 25|Community 25]]
+- [[_COMMUNITY_Community 26|Community 26]]
+- [[_COMMUNITY_Community 27|Community 27]]
+- [[_COMMUNITY_Community 28|Community 28]]
+- [[_COMMUNITY_Community 29|Community 29]]
+- [[_COMMUNITY_Community 30|Community 30]]
+- [[_COMMUNITY_Community 32|Community 32]]
+- [[_COMMUNITY_Community 33|Community 33]]
+- [[_COMMUNITY_Community 34|Community 34]]
+- [[_COMMUNITY_Community 35|Community 35]]
 
 ## God Nodes (most connected - your core abstractions)
-1. `generate()` - 23 edges
-2. `compilerOptions` - 21 edges
-3. `handle()` - 18 edges
-4. `runCreate()` - 15 edges
+1. `generate()` - 20 edges
+2. `compilerOptions` - 20 edges
+3. `handle()` - 17 edges
+4. `compilerOptions` - 16 edges
 5. `parseKey()` - 15 edges
-6. `serveRegistryRoute()` - 15 edges
-7. `mockRewrites()` - 15 edges
-8. `GenerateOptions` - 14 edges
-9. `withMock()` - 14 edges
-10. `serveFromRegistry()` - 13 edges
+6. `mockRewrites()` - 14 edges
+7. `GenerateOptions` - 14 edges
+8. `serveRegistryRoute()` - 12 edges
+9. `withMock()` - 12 edges
+10. `classify()` - 12 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `minimumReleaseAgeExclude escape hatch` --semantically_similar_to--> `Renovate package groups (TanStack Start, React, Vite, Vitest, Storybook)`  [INFERRED] [semantically similar]
   pnpm-workspace.yaml → renovate.json
 - `Agent skills lockfile (shadcn skill pin)` --semantically_similar_to--> `Storybook MCP property-verification rule`  [INFERRED] [semantically similar]
   skills-lock.json → AGENTS.md
-- `tsModule()` --semantically_similar_to--> `Request-hash determinism`  [INFERRED] [semantically similar]
-  packages/cli/src/output.ts → packages/mock/README.md
 - `pnpm workspace definition (packages/**)` --shares_data_with--> `mocker root package manifest`  [INFERRED]
   pnpm-workspace.yaml → package.json
 - `CI workflow (lint, typecheck, build, tests)` --shares_data_with--> `mocker root package manifest`  [AMBIGUOUS]
   .github/workflows/ci.yaml → package.json
+- `Release workflow via changesets/action` --references--> `mocker root package manifest`  [INFERRED]
+  .github/workflows/release.yaml → package.json
 
 ## Import Cycles
 - None detected.
@@ -74,59 +92,59 @@
 - **MOCK_API opt-in, both mechanisms** — src_flag_ismockconfigured, src_flag_ismockenabledfor, src_with_mock_withmock, src_rewrites_mockrewrites, src_registry_route_serveregistryroute, src_index_prod_withmock [EXTRACTED 1.00]
 - **Registry key to App Router dialect** — src_rewrites_torewritesource, src_rewrites_torewritedestination, src_rewrites_torewriteconditions, src_rewrites_toroutedirectory, src_rewrites_originalpathname, src_rewrites_requireapipath, src_rewrites_mockrewrites [EXTRACTED 1.00]
 
-## Communities (24 total, 3 thin omitted)
+## Communities (42 total, 7 thin omitted)
 
 ### Community 0 - "Schema-Driven Data Generation"
 Cohesion: 0.06
-Nodes (74): suggest(), UnknownOverridePathError, UnsupportedSchemaError, absentValue(), assertOverridePathsExist(), clampNumber(), clampString(), context() (+66 more)
+Nodes (76): suggest(), UnknownOverridePathError, UnsupportedSchemaError, absentValue(), assertOverridePathsExist(), clampNumber(), clampString(), context() (+68 more)
 
 ### Community 1 - "Next.js Adapter and Mock Flag"
-Cohesion: 0.06
-Nodes (47): @mocker/next-adapter manifest, Path/query split in a key, Serve the caller's original URL, The second platform-agnostic seam, Schema as a lazy thunk, planned entry marker, ENABLE_ALL, environment() (+39 more)
+Cohesion: 0.07
+Nodes (44): ENABLE_ALL, environment(), isMockConfigured(), isMockEnabledFor(), MockEndpointOptions, NextRouteHandler, serveRegistryRoute(), withMock() (+36 more)
 
 ### Community 2 - "Agent Instructions and Toolchain Policy"
 Cohesion: 0.06
-Nodes (52): Changesets versioning and publishing, oxfmt formatting configuration, Lint ignore patterns for generated artifacts, oxlint jsPlugins (@stylistic/eslint-plugin, eslint-plugin-storybook), oxlint configuration, Type-aware oxlint rule set, AGENTS.md project agent instructions, Comment the why, with requirement IDs and JSDoc (+44 more)
+Nodes (47): Changesets versioning and publishing, oxfmt formatting configuration, Lint ignore patterns for generated artifacts, oxlint jsPlugins (@stylistic/eslint-plugin, eslint-plugin-storybook), oxlint configuration, Type-aware oxlint rule set, AGENTS.md project agent instructions, Comment the why, with requirement IDs and JSDoc (+39 more)
 
 ### Community 3 - "Damp CLI Commands and Rendering"
-Cohesion: 0.10
-Nodes (41): @mocker/cli package, askQuery(), create, DATASETS, estimateRows(), releaseStdin(), runCreate(), SAMPLES_PER_DAY (+33 more)
+Cohesion: 0.05
+Nodes (43): author, bugs, default, types, default, dependencies, @magicspon/mocker, description (+35 more)
 
 ### Community 4 - "Registry Key Matching"
-Cohesion: 0.15
-Nodes (32): Registry public surface, bindingNames(), compareSpecificity(), describeConstraint(), DYNAMIC_SEGMENT, dynamicSegments(), findMatch(), InvalidRegistryKeyError (+24 more)
+Cohesion: 0.18
+Nodes (29): CheckedCounts, bindingNames(), compareSpecificity(), describeConstraint(), dynamicSegments(), findMatch(), InvalidRegistryKeyError, isPathRegistered() (+21 more)
 
 ### Community 5 - "Root Package Manifest"
 Cohesion: 0.06
-Nodes (32): bin, damp, dependencies, es-toolkit, @faker-js/faker, zod, devDependencies, @changesets/cli (+24 more)
+Nodes (30): @changesets/changelog-github, @changesets/cli, @commitlint/cli, @commitlint/config-conventional, husky, oxfmt, oxlint, oxlint-tsgolint (+22 more)
 
 ### Community 6 - "Request Handling and Controls"
-Cohesion: 0.09
-Nodes (26): InvalidControlError, MockControls, readControls(), readInt(), BODILESS_STATUSES, handle(), HandleContext, messageOf() (+18 more)
+Cohesion: 0.12
+Nodes (20): InvalidControlError, MockControls, readControls(), readInt(), BODILESS_STATUSES, handle(), HandleContext, messageOf() (+12 more)
 
 ### Community 7 - "Husky Git Hooks and Guardrails"
 Cohesion: 0.08
 Nodes (29): applypatch-msg Hook Shim, commit-msg Hook Shim, HUSKY Environment Bypass Switch, Husky Hook Dispatcher (h), Husky Init Script Sourcing (XDG config), node_modules/.bin PATH Injection, User Hook Delegation to .husky/<name>, Deprecated husky.sh Shim (+21 more)
 
 ### Community 8 - "TypeScript Compiler Options"
-Cohesion: 0.08
-Nodes (23): compilerOptions, allowImportingTsExtensions, erasableSyntaxOnly, isolatedModules, jsx, lib, module, moduleResolution (+15 more)
+Cohesion: 0.05
+Nodes (41): author, bugs, default, types, default, types, default, dependencies (+33 more)
 
 ### Community 9 - "shadcn/ui Component Config"
-Cohesion: 0.09
-Nodes (21): aliases, components, hooks, lib, ui, utils, iconLibrary, menuAccent (+13 more)
+Cohesion: 0.05
+Nodes (40): A note on dependencies, Adding a mock to a route, An endpoint nobody has built, Array sizing, Canonical paths, Determinism, Echoed inputs, Endpoints that take a query string (+32 more)
 
 ### Community 10 - "CLI Package Manifest"
 Cohesion: 0.10
-Nodes (20): bin, damp, dependencies, es-toolkit, devDependencies, citty, @clack/prompts, typescript (+12 more)
+Nodes (20): compilerOptions, declaration, erasableSyntaxOnly, isolatedDeclarations, isolatedModules, lib, module, moduleResolution (+12 more)
 
 ### Community 11 - "Next Adapter Manifest"
-Cohesion: 0.11
-Nodes (18): dependencies, es-toolkit, @faker-js/faker, next, zod, devDependencies, typescript, imports (+10 more)
+Cohesion: 0.10
+Nodes (19): dependencies, @magicspon/mocker, @magicspon/mocker-next, next, react, react-dom, devDependencies, @types/node (+11 more)
 
 ### Community 12 - "Mock Package Manifest"
-Cohesion: 0.11
-Nodes (17): dependencies, es-toolkit, @faker-js/faker, zod, devDependencies, typescript, imports, name (+9 more)
+Cohesion: 0.10
+Nodes (19): compilerOptions, allowJs, esModuleInterop, incremental, isolatedModules, jsx, lib, module (+11 more)
 
 ### Community 13 - "Renovate Update Policy"
 Cohesion: 0.12
@@ -141,12 +159,12 @@ Cohesion: 0.18
 Nodes (10): access, baseBranch, changelog, commit, fixed, format, ignore, linked (+2 more)
 
 ### Community 16 - "Mock Request Logging"
-Cohesion: 0.33
-Nodes (9): Malformed keys fail loudly, DISABLED, environment(), formatMockLog(), isMockLogEnabled(), logMock(), MockLogEntry, Log line asserted as text (+1 more)
+Cohesion: 0.22
+Nodes (8): Commands, Comments, Conventions, fallow, graphify, mocker, Releasing, The constraint everything else follows from
 
 ### Community 17 - "Directory Fuzzy Search"
-Cohesion: 0.27
-Nodes (7): Join, createDirectorySearch(), DirectoryOption, fuzzyScore(), IGNORED, listDirectories(), walk()
+Cohesion: 0.22
+Nodes (8): Controls, per request, Entry points, Further reading, @magicspon/mocker, Quickstart, The `MOCK_API` flag, The rule the layout exists for, With Next.js
 
 ### Community 18 - "Oxfmt Formatting Config"
 Cohesion: 0.25
@@ -156,39 +174,65 @@ Nodes (7): ignorePatterns, printWidth, $schema, semi, singleQuote, sortPackageJs
 Cohesion: 0.29
 Nodes (6): permissions, allow, ask, defaultMode, deny, $schema
 
+### Community 22 - "TanStack Router Config"
+Cohesion: 0.25
+Nodes (7): Entry points, Further reading, @magicspon/mocker-next, Or: one route at a time, Quickstart, Registry keys, What `withMocker` does
+
+### Community 23 - "Vitest Type Shims"
+Cohesion: 0.39
+Nodes (6): code(), Reference, referencesIn(), resolveLocal(), runtimeClosure(), exportedNames()
+
+### Community 24 - "Community 24"
+Cohesion: 0.36
+Nodes (5): code(), Reference, referencesIn(), resolveLocal(), runtimeClosure()
+
+### Community 25 - "Community 25"
+Cohesion: 0.29
+Nodes (6): declaration, isolatedDeclarations, compilerOptions, types, extends, include
+
+### Community 26 - "Community 26"
+Cohesion: 0.40
+Nodes (3): geistMono, geistSans, metadata
+
+### Community 27 - "Community 27"
+Cohesion: 0.40
+Nodes (4): compilerOptions, types, extends, include
+
+### Community 28 - "Community 28"
+Cohesion: 0.40
+Nodes (4): compilerOptions, types, extends, include
+
+### Community 29 - "Community 29"
+Cohesion: 0.50
+Nodes (3): Deploy on Vercel, Getting Started, Learn More
+
 ## Ambiguous Edges - Review These
-- `main` → `@mocker/cli package`  [AMBIGUOUS]
-  packages/cli/package.json · relation: references
 - `Changesets Release Config` → `pre-commit Hook Shim`  [AMBIGUOUS]
   .husky/_/pre-commit · relation: conceptually_related_to
 - `mocker root package manifest` → `CI workflow (lint, typecheck, build, tests)`  [AMBIGUOUS]
   .github/workflows/ci.yaml · relation: shares_data_with
-- `shadcn/ui components configuration` → `Renovate package groups (TanStack Start, React, Vite, Vitest, Storybook)`  [AMBIGUOUS]
-  renovate.json · relation: conceptually_related_to
 - `AGENTS.md project agent instructions` → `Three-tier test pipeline (unit, integration, e2e)`  [AMBIGUOUS]
   AGENTS.md · relation: conceptually_related_to
-- `@mocker/mock package` → `Faker kept out of the production bundle`  [AMBIGUOUS]
-  packages/mock/package.json · relation: conceptually_related_to
 
 ## Knowledge Gaps
-- **201 isolated node(s):** `$schema`, `baseBranch`, `access`, `format`, `changelog` (+196 more)
+- **301 isolated node(s):** `$schema`, `baseBranch`, `access`, `format`, `changelog` (+296 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **3 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **7 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **What is the exact relationship between `main` and `@mocker/cli package`?**
-  _Edge tagged AMBIGUOUS (relation: references) - confidence is low._
 - **What is the exact relationship between `Changesets Release Config` and `pre-commit Hook Shim`?**
   _Edge tagged AMBIGUOUS (relation: conceptually_related_to) - confidence is low._
 - **What is the exact relationship between `mocker root package manifest` and `CI workflow (lint, typecheck, build, tests)`?**
   _Edge tagged AMBIGUOUS (relation: shares_data_with) - confidence is low._
-- **What is the exact relationship between `shadcn/ui components configuration` and `Renovate package groups (TanStack Start, React, Vite, Vitest, Storybook)`?**
-  _Edge tagged AMBIGUOUS (relation: conceptually_related_to) - confidence is low._
 - **What is the exact relationship between `AGENTS.md project agent instructions` and `Three-tier test pipeline (unit, integration, e2e)`?**
   _Edge tagged AMBIGUOUS (relation: conceptually_related_to) - confidence is low._
-- **What is the exact relationship between `@mocker/mock package` and `Faker kept out of the production bundle`?**
-  _Edge tagged AMBIGUOUS (relation: conceptually_related_to) - confidence is low._
 - **Why does `handle()` connect `Request Handling and Controls` to `Schema-Driven Data Generation`, `Next.js Adapter and Mock Flag`, `Registry Key Matching`?**
-  _High betweenness centrality (0.072) - this node is a cross-community bridge._
+  _High betweenness centrality (0.019) - this node is a cross-community bridge._
+- **Why does `mockRewrites()` connect `Next.js Adapter and Mock Flag` to `Registry Key Matching`?**
+  _High betweenness centrality (0.016) - this node is a cross-community bridge._
+- **Why does `MockRegistry` connect `Registry Key Matching` to `Next.js Adapter and Mock Flag`?**
+  _High betweenness centrality (0.009) - this node is a cross-community bridge._
+- **Are the 2 inferred relationships involving `generate()` (e.g. with `envelope()` and `requestSignature()`) actually correct?**
+  _`generate()` has 2 INFERRED edges - model-reasoned connections that need verification._
