@@ -5,6 +5,9 @@ packages:
   # Excluded from `pnpm build`; see the root package.json.
   - 'apps/*'
 
+allowBuilds:
+  esbuild: true
+
 # esbuild arrives transitively (tsdown → rolldown toolchain) and needs its
 # postinstall to fetch the platform binary.
 onlyBuiltDependencies:

@@ -31,6 +31,6 @@ export {
   MOCK_ENDPOINT_PREFIX,
   toRouteDirectory,
 } from './rewrites'
-export type { Rewrite, RewriteHas } from './rewrites'
 export { withMocker } from './with-mocker'
+export type { Rewrite, RewriteHas } from './rewrites'
 export type { WithMockerOptions } from './with-mocker'

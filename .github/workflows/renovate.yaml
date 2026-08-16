@@ -5,7 +5,7 @@ on:
     # Mondays 06:00 UTC. This cron is the real cadence gate — renovate.json
     # deliberately sets no internal `schedule`, so everything (including
     # lockFileMaintenance) runs whenever this workflow runs.
-    - cron: '0 6 * * 1'
+    - cron: "0 6 * * 1"
   workflow_dispatch:
     inputs:
       logLevel:
@@ -45,5 +45,5 @@ jobs:
         with:
           token: ${{ secrets.RENOVATE_TOKEN }}
         env:
-          RENOVATE_REPOSITORIES: magicspon/playground
+          RENOVATE_REPOSITORIES: magicspon/mocker
           LOG_LEVEL: ${{ inputs.logLevel || 'info' }}
