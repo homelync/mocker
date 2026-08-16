@@ -7,18 +7,30 @@
 
   "dependencyDashboard": true,
 
+  "description": [
+    "prHourlyLimit is 0 (unlimited) rather than the default 2: the workflow runs once a week, so a per-hour cap is really a per-week cap and a backlog would drain two PRs at a time. prConcurrentLimit is the gate that is meant to bite."
+  ],
+
   "prConcurrentLimit": 5,
-  "prHourlyLimit": 2,
+  "prHourlyLimit": 0,
 
   "rangeStrategy": "bump",
 
   "postUpgradeTasks": {
-    "commands": ["pnpm update --changeset"],
+    "description": "`pnpm update --changeset` writes a changeset for the bumps its own run makes, and Renovate never makes such a run — it rewrites the range itself. The script reads the change Renovate has already made and hands the writing to `pnpm change`. `update` mode rather than `branch` because only per-upgrade mode exposes the templated fields that say which dep in which manifest moved.",
+    "commands": [
+      "node scripts/renovate-changeset.mjs '{{{packageFile}}}' '{{{depType}}}' '{{{depName}}}'"
+    ],
     "fileFilters": [".changeset/**"],
-    "executionMode": "branch"
+    "executionMode": "update"
   },
 
   "packageRules": [
+    {
+      "description": "Never raise a published peer range on a consumer's behalf — bumping the `zod` or `next` floor drops support for versions that worked, which is a breaking change dressed up as a chore. `widen` only ever adds a major to the range. Dev ranges still track latest via the top-level `bump`, so the lockfile stays current either way.",
+      "matchDepTypes": ["peerDependencies"],
+      "rangeStrategy": "widen"
+    },
     {
       "groupName": "Vitest",
       "matchPackageNames": ["vitest"]
@@ -42,12 +54,12 @@
         "husky",
         "nano-staged",
         "@changesets/**",
-        "@commitlint/"
+        "@commitlint/**"
       ]
     },
 
     {
-      "description": "Next and React must move in lockstep with their types, and are fast-tracked daily rather than waiting for the Monday batch — this mirrors the old dependabot `core-framework` group. Listed last so it wins over the `@types/**` and `eslint-*` globs above.",
+      "description": "Next and React must move in lockstep with their types — this mirrors the old dependabot `core-framework` group. Listed last so it wins over the `@types/**` glob above. `at any time` only means this group is never held back by a schedule; the workflow cron is still the only thing that makes Renovate run at all.",
       "groupName": "core framework",
       "matchPackageNames": [
         "next",

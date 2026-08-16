@@ -84,6 +84,28 @@ CI (`.github/workflows/ci.yaml`) runs lint → typecheck → test → build on e
 map would first be noticed by a consumer. `publint` and `@arethetypeswrong/cli` on a packed tarball
 would close it.
 
+### Renovate changesets
+
+`pnpm update --changeset` writes a changeset for the bumps **its own run** makes. Renovate never
+makes such a run — it rewrites the range in `package.json` itself and then refreshes the lockfile. So
+as a post-upgrade task the flag always fired with nothing left to do and reported "No changeset was
+generated", including for the `@faker-js/faker` and `zod` bumps that a consumer does install.
+
+`scripts/renovate-changeset.mjs` supplies what Renovate's update leaves implicit — whether the change
+is releasable, and which package owns it — then calls `pnpm change` to do the writing, so the
+changesets format stays pnpm's problem rather than ours. It records a patch intent only when the
+moved dep is a `dependencies` or `peerDependencies` entry of a published package; devDeps, the root
+manifest, `apps/next` and github-actions are invisible to consumers and get nothing.
+
+Two constraints on that script, both easy to break:
+
+- It runs in the Renovate container, which has **no `node_modules`** — so no `@changesets/cli`, and
+  nothing outside the standard library. `pnpm change` is safe there because it is native to pnpm
+  (v11.13.0+) rather than a bin; it has been verified against a workspace with no install.
+- Its command is allowlisted by `RENOVATE_ALLOWED_COMMANDS` in `renovate.yaml`, matched _after_
+  template expansion, so the command and the allowlist must change together. The allowlist governs
+  only what Renovate itself launches, not the `pnpm` the script spawns.
+
 ### Linking into a consumer
 
 | Task                       | Command                   |
