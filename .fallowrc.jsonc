@@ -23,10 +23,6 @@
     "graphify-out/**",
   ],
 
-  // oxlint loads this through `jsPlugins` in .oxlintrc.json, not through an
-  // import, so fallow cannot see the reference.
-  "ignoreDependencies": ["@stylistic/eslint-plugin"],
-
   "duplicates": {
     // Hide pair-only clones; focus on widespread copy-paste worth refactoring.
     // The two package-boundary tests are a deliberate pair: each must travel

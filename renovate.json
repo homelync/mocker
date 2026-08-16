@@ -22,6 +22,47 @@
     {
       "groupName": "Vitest",
       "matchPackageNames": ["vitest"]
+    },
+    {
+      "description": "Lint and type tooling moves together — replaces the dependabot `typescript` group",
+      "groupName": "lint and type tooling",
+      "matchPackageNames": [
+        "@types/**",
+        "oxfmt",
+        "oxlint",
+        "oxlint-*",
+        "tsdown",
+        "typescript"
+      ]
+    },
+    {
+      "description": "Local dev hooks — replaces the dependabot `dev-tools` group",
+      "groupName": "dev tooling",
+      "matchPackageNames": [
+        "husky",
+        "nano-staged",
+        "@changesets/**",
+        "@commitlint/"
+      ]
+    },
+
+    {
+      "description": "Next and React must move in lockstep with their types, and are fast-tracked daily rather than waiting for the Monday batch — this mirrors the old dependabot `core-framework` group. Listed last so it wins over the `@types/**` and `eslint-*` globs above.",
+      "groupName": "core framework",
+      "matchPackageNames": [
+        "next",
+        "react",
+        "react-dom",
+        "@types/react",
+        "@types/react-dom"
+      ],
+      "schedule": ["at any time"],
+      "labels": ["core-dependencies"]
+    },
+
+    {
+      "groupName": "github-actions",
+      "matchManagers": ["github-actions"]
     }
   ]
 }

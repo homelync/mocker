@@ -67,8 +67,6 @@ emit and nothing at the root is ever emitted.
   type-aware lint would have us delete the check that makes a malformed registry key throw.
 - **ESM only.** Both packages are `"type": "module"` and ship no CJS. `zod` is a peer dependency
   because users pass their own schemas in and a second copy breaks `_zod.def` reads.
-- **`.oxlintrc.json` loads `@stylistic/eslint-plugin` through `jsPlugins`.** Do not delete that key
-  when editing the file; without it the config fails to build.
 - **TypeScript is strict** — `noUnusedLocals`, `noUnusedParameters`, `noFallthroughCasesInSwitch`,
   `verbatimModuleSyntax`, `erasableSyntaxOnly`. Never cast where a narrowing will do.
 - **Formatting** is Oxfmt, then `oxlint --fix`. Run `pnpm format` before committing.
