@@ -11,6 +11,7 @@
     "packages/mocker-next/src/index.ts",
     "packages/mocker-next/src/config.ts",
     "packages/mocker-next/src/index.prod.ts",
+    "scripts/renovate-changeset.mjs",
   ],
 
   "ignorePatterns": [
