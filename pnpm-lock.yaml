@@ -111,7 +111,7 @@ importers:
         version: link:../mocker
     devDependencies:
       next:
-        specifier: ^16.2.0
+        specifier: ^16.3.1
         version: 16.3.1(@types/node@22.20.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       tsdown:
         specifier: ^0.22.14
