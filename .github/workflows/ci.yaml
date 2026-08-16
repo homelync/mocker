@@ -18,11 +18,11 @@ jobs:
 
       - uses: pnpm/action-setup@v5
         with:
-          version: 11
+          version: 11.21.0
 
       - uses: actions/setup-node@v5
         with:
-          node: 24
+          node-version: 24
           cache: pnpm
 
       - name: Install dependencies
