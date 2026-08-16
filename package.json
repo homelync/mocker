@@ -1,0 +1,41 @@
+{
+  "name": "mocker",
+  "private": true,
+  "type": "module",
+  "imports": {
+    "#/*": "./src/*"
+  },
+  "bin": {
+    "damp": "./src/cli/index.ts"
+  },
+  "scripts": {
+    "damp": "node src/cli/index.ts",
+    "lint": "oxlint",
+    "format": "oxfmt && oxlint --fix",
+    "check": "oxfmt --check && oxlint",
+    "typecheck": "tsc --noEmit",
+    "prepare": "husky",
+    "postinstall": "npx husky install"
+  },
+  "dependencies": {
+    "@faker-js/faker": "^10.5.0",
+    "es-toolkit": "^1.50.0",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^3.0.0",
+    "@chromatic-com/storybook": "latest",
+    "@clack/prompts": "^1.7.0",
+    "@commitlint/cli": "^21.2.2",
+    "@commitlint/config-conventional": "^21.2.2",
+    "@types/node": "^22.10.2",
+    "citty": "^0.2.2",
+    "husky": "^9.1.7",
+    "nano-staged": "^1.0.2",
+    "oxfmt": "^0.63.0",
+    "oxlint": "^1.78.0",
+    "oxlint-tsgolint": "^7.0.2001",
+    "typescript": "^7.0.2",
+    "vitest": "latest"
+  }
+}

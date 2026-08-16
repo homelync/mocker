@@ -1,0 +1,40 @@
+{
+  // This file is JSONC: fallow reads these comments; generic JSON tools may not.
+  "$schema": "https://raw.githubusercontent.com/fallow-rs/fallow/main/schema.json",
+  "entry": ["src/router.{ts,tsx,js,jsx}"],
+  "ignorePatterns": [".storybook/**", "*.gen.ts"],
+  "ignoreDependencies": [
+    // oxlint loads these via "jsPlugins" in .oxlintrc.json, which fallow does not parse.
+    "@stylistic/eslint-plugin",
+    "eslint-plugin-storybook",
+    // Build-time vite plugins. vite.config.ts carries the Vitest `test:` block, so
+    // fallow classifies it as a test file and reports these as test-only deps.
+    "@tailwindcss/vite",
+    "nitro",
+    "@tanstack/react-start",
+    // Transitive deps of @tanstack/react-router that the router's vite plugin lists in
+    // optimizeDeps.include. pnpm does not hoist transitives to the root node_modules, so
+    // they must stay direct dependencies to stay resolvable from the project root.
+    "@tanstack/react-store",
+    "@tanstack/store",
+    "use-sync-external-store",
+  ],
+  // Storybook renders these via the "../src/**/*.mdx" glob in .storybook/main.ts,
+  // but fallow's storybook plugin only registers *.stories.* as entry points.
+  "dynamicallyLoaded": ["src/**/*.mdx"],
+  "duplicates": {
+    // Hide pair-only clones; focus on widespread copy-paste
+    // worth refactoring. Lower to 2 to report every duplicate pair.
+    "minOccurrences": 3,
+    // Common additions (uncomment to enable):
+    // "ignore": [
+    //   "**/lib/**",          // for repos that publish transpiled output to lib/
+    //   "**/legacy/**",       // for repos with legacy-build artifacts
+    //   "**/__generated__/**", // Relay, GraphQL Code Generator
+    //   "**/generated/**"     // OpenAPI, Protobuf codegen
+    // ]
+  },
+  "rules": {
+    "unused-dependencies": "warn",
+  },
+}
