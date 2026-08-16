@@ -33,7 +33,7 @@ jobs:
       - name: Build
         run: pnpm build
 
-      - uses: changesets/action@v1
+      - uses: changesets/action@v2.1.0
         with:
           publish: pnpm release
         env:
