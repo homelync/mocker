@@ -31,7 +31,7 @@ jobs:
 
       - uses: actions/setup-node@v5
         with:
-          node-version: 24
+          node-version: 24.19.0
           cache: pnpm
 
       # Fallow resolves package `exports` maps through node_modules. It runs
