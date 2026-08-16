@@ -22,7 +22,7 @@
   "type": "module",
   "sideEffects": false,
   "engines": {
-    "node": ">=20"
+    "node": ">=24.19.0"
   },
   "files": [
     "dist"
