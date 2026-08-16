@@ -1,10 +1,11 @@
 packages:
-  - '.'
-allowBuilds:
-  esbuild: true
-  lightningcss: true
-  unrs-resolver: true
-minimumReleaseAgeExclude:
-  - '@tanstack/react-start-client@1.168.26'
-  - '@tanstack/start-server-core@1.169.27'
-  - '@tanstack/charts@0.14.0'
+  - 'packages/*'
+  # The example app. In the workspace so it consumes the packages by link — it
+  # is the only thing in the repo that exercises them the way a consumer does.
+  # Excluded from `pnpm build`; see the root package.json.
+  - 'apps/*'
+
+# esbuild arrives transitively (tsdown → rolldown toolchain) and needs its
+# postinstall to fetch the platform binary.
+onlyBuiltDependencies:
+  - esbuild

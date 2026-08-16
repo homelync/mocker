@@ -13,9 +13,6 @@ jobs:
     name: CI
     runs-on: ubuntu-latest
 
-    env:
-      PAYLOAD_SECRET: ci-test-secret
-
     steps:
       - uses: actions/checkout@v5
 
@@ -37,17 +34,8 @@ jobs:
       - name: Typecheck
         run: pnpm typecheck
 
+      - name: Test
+        run: pnpm test
+
       - name: Build
         run: pnpm build
-
-      - name: Unit tests
-        run: pnpm test:unit
-
-      - name: Integration tests
-        run: pnpm test:integration
-
-      - name: Install Playwright browsers
-        run: pnpm exec playwright install --with-deps chromium
-
-      - name: E2e tests
-        run: pnpm test:e2e

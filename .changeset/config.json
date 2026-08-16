@@ -1,17 +1,17 @@
 {
   "$schema": "https://unpkg.com/@changesets/config@4.0.0/schema.json",
   "baseBranch": "main",
-  "access": "restricted",
+  "access": "public",
   "format": "auto",
   "changelog": [
     "@changesets/changelog-github",
     {
-      "repo": "magicspon/playground"
+      "repo": "magicspon/mocker"
     }
   ],
   "commit": true,
   "ignore": [],
   "fixed": [],
-  "linked": [],
+  "linked": [["@magicspon/mocker", "@magicspon/mocker-next"]],
   "updateInternalDependencies": "patch"
 }

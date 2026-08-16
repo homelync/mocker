@@ -1,132 +1,119 @@
 # mocker
 
-A Cli for generating fake data based on zod schemas and a mocker server for handling http respones
+A pnpm monorepo publishing two packages: a library that generates fake data from zod schemas and
+serves it over HTTP, and a Next.js App Router adapter for it.
+
+| Package                  | Directory              | Entries                           |
+| ------------------------ | ---------------------- | --------------------------------- |
+| `@magicspon/mocker`      | `packages/mocker`      | `.` · `./core` · `./config`       |
+| `@magicspon/mocker-next` | `packages/mocker-next` | `.` · `./config` · `./production` |
+
+## The constraint everything else follows from
+
+A bundler config file — `next.config.ts` above all — is evaluated by the framework's own loader,
+**unbundled**, before any build graph exists. Tree-shaking cannot protect it.
+
+So each package has a `./config` entry, and **nothing reachable from it at runtime may import `zod`
+or `@faker-js/faker`**. Break that and faker loads on every `next dev` and can be emitted into a
+production build that must not contain it — silently, with no error anywhere.
+
+Three things enforce it, and none of them is a comment:
+
+- `packages/mocker/src/package-boundary.test.ts` walks the real import graph from `config.ts`,
+  following runtime edges only (`import type` is erased, so it is not followed).
+- `packages/mocker-next/src/package-boundary.test.ts` proves the adapter's config chain reaches
+  nothing but `@magicspon/mocker/config`. Composed with the above, that is the whole guarantee.
+- The same file asserts `index.prod.ts` exports exactly what `index.ts` exports. The production stub
+  is swapped in by **resolution**, not by a flag, so a drifted export is a consumer's build error and
+  nobody else's.
+
+These were eslint zones in the project this code came from. They did not survive extraction — which
+is the argument for keeping them as tests. A test travels with the code it constrains.
+
+`core/` carries a second boundary: it may import `zod` and `@faker-js/faker` and nothing else, and
+may not reach `registry/`, `flag.ts` or `log.ts`. It must stay usable as a plain fixture factory in a
+runtime with no `process` and no console.
+
+## Commands
+
+Package manager is **pnpm**. Run these from the repo root.
+
+| Task                | Command           |
+| ------------------- | ----------------- |
+| Build both packages | `pnpm build`      |
+| Test (whole repo)   | `pnpm test`       |
+| Test in watch mode  | `pnpm test:watch` |
+| Typecheck           | `pnpm typecheck`  |
+| Lint                | `pnpm lint`       |
+| Format + autofix    | `pnpm format`     |
+| Check formatting    | `pnpm check`      |
+
+`pnpm test` needs **no build**: the workspace `exports` point at `src/*.ts` during development, and
+`publishConfig.exports` swaps in `dist/*.js` at publish time. Keep the two maps in step — nothing in
+CI executes the published one.
+
+`pnpm typecheck` is two passes. The root tsconfig checks only tooling files; each package checks its
+own `src/`, because the constraint that matters there (`isolatedDeclarations`) exists for declaration
+emit and nothing at the root is ever emitted.
+
+## Conventions
+
+- **`isolatedDeclarations` is on.** tsdown emits `.d.ts` with oxc rather than a typechecker, which is
+  only correct while every exported signature is explicitly annotated. That is why an exported
+  `const` carries a type annotation that looks redundant — `typescript/no-inferrable-types` is off
+  for exactly this reason.
+- **`noUncheckedIndexedAccess` is on.** Guards like `const [, target] = key.split(" "); if (target
+=== undefined)` are correct at runtime and invisible to the typechecker without it — and the
+  type-aware lint would have us delete the check that makes a malformed registry key throw.
+- **ESM only.** Both packages are `"type": "module"` and ship no CJS. `zod` is a peer dependency
+  because users pass their own schemas in and a second copy breaks `_zod.def` reads.
+- **`.oxlintrc.json` loads `@stylistic/eslint-plugin` through `jsPlugins`.** Do not delete that key
+  when editing the file; without it the config fails to build.
+- **TypeScript is strict** — `noUnusedLocals`, `noUnusedParameters`, `noFallthroughCasesInSwitch`,
+  `verbatimModuleSyntax`, `erasableSyntaxOnly`. Never cast where a narrowing will do.
+- **Formatting** is Oxfmt, then `oxlint --fix`. Run `pnpm format` before committing.
+- Try to keep files **under 200 lines** of code (excluding comments).
+
+## Releasing
+
+Changesets, with the two packages `linked` — they bump together, so a consumer never has to work out
+which adapter version pairs with which library version. `access` is `public`; both are scoped.
+
+CI (`.github/workflows/ci.yaml`) runs lint → typecheck → test → build on every PR.
+`release.yaml` builds and runs `changeset publish` on pushes to `main`.
+
+**Known gap:** nothing in CI exercises the `publishConfig.exports` map, so a broken published exports
+map would first be noticed by a consumer. `publint` and `@arethetypeswrong/cli` on a packed tarball
+would close it.
 
 ## graphify
 
-This project has a knowledge graph at `graphify-out/` with god nodes, community structure, and
-cross-file relationships.
-
-Rules:
+This project has a knowledge graph at `graphify-out/`.
 
 - For codebase questions, first run `graphify query "<question>"` when `graphify-out/graph.json`
   exists. Use `graphify path "<A>" "<B>"` for relationships and `graphify explain "<concept>"` for
-  focused concepts. These return a scoped subgraph, usually much smaller than `GRAPH_REPORT.md` or
-  raw grep output.
-- Read `graphify-out/GRAPH_REPORT.md` only for broad architecture review, or when
-  query/path/explain do not surface enough context.
-- After modifying code, run `graphify update .` to keep the graph current (AST-only, no API cost).
-- Doc, image, and config changes are not picked up by `graphify update`. Run `/graphify . --update`
-  for those — it re-runs semantic extraction on changed non-code files.
+  focused concepts.
+- Read `graphify-out/GRAPH_REPORT.md` only for broad architecture review.
+- After modifying code, run `graphify update .` (AST-only, no API cost). Doc, image and config
+  changes need `/graphify . --update`.
 - Graph outputs are derived artifacts. Never hand-edit anything in `graphify-out/`.
 
 ## fallow
 
-Static analysis for dead code, duplication, complexity, and dependency hygiene. Config lives in
-`.fallowrc.jsonc`.
+Static analysis for dead code, duplication, complexity and dependency hygiene. Config is
+`.fallowrc.jsonc`, whose `entry` list is every published entry point — anything unreachable from one
+of those is genuinely dead.
 
-Rules:
-
-- **After modifying code, run `fallow audit --format json --quiet --base main`.** It scopes
-  dead-code, complexity, and duplication checks to the changed files and returns a pass/warn/fail
-  verdict, so it is the cheap post-change gate. Run the full `fallow` only for a whole-project
-  audit.
-- Append `|| true` to every fallow command. Exit code 1 means "issues found", not a failure; only
-  exit 2 is a real error.
-- Before deleting anything fallow reports as unused, confirm it with `fallow dead-code --trace
-FILE:EXPORT`, `--trace-file PATH`, or `--trace-dependency PKG`. Fallow is syntactic, so an export
-  can be imported-but-unreferenced and a dependency can be loaded by config rather than by import.
-- Known false positives are suppressed in `.fallowrc.jsonc`. Add to `ignoreDependencies` rather
-  than deleting a package fallow cannot see: oxlint loads `@stylistic/eslint-plugin` and
-  `eslint-plugin-storybook` through `jsPlugins` in `.oxlintrc.json`, and `vite.config.ts` is
-  misread as a test file because it carries the Vitest `test:` block.
-- CI runs the same gate on every PR into `main` (`.github/workflows/fallow.yml`), using
-  `--gate new-only` so only findings the PR _introduces_ fail the build. Pre-existing findings are
-  reported in the job summary but do not block. The fallow version there is pinned — bump it
-  deliberately.
-
-## Commands
-
-Package manager is **pnpm**.
-
-| Task                   | Command                |
-| ---------------------- | ---------------------- |
-| Dev server (port 3000) | `pnpm dev`             |
-| Production build       | `pnpm build`           |
-| Preview build          | `pnpm preview`         |
-| Regenerate route tree  | `pnpm generate-routes` |
-| Lint                   | `pnpm lint`            |
-| Format + autofix       | `pnpm format`          |
-| Check formatting only  | `pnpm check`           |
-| Storybook (port 6006)  | `pnpm storybook`       |
-| Build Storybook        | `pnpm build-storybook` |
-
-There is no `test` script. Vitest is configured in `vite.config.ts` as a single `storybook`
-project that runs stories in headless Chromium via Playwright — invoke it with `pnpm exec vitest`.
-
-## Conventions
-
-- **`src/routeTree.gen.ts` is generated.** Never edit it by hand; it is marked read-only in
-  `.vscode/settings.json`. Regenerate with `pnpm generate-routes` after adding or renaming routes.
-- **Import alias:** prefer `#/*` (→ `./src/*`). It is declared in both `package.json` `imports` and
-  `tsconfig.json` `paths`, so it resolves at runtime and in TS. `@/*` is also mapped in tsconfig
-  but is not a package subpath import — use `#/*` for new code.
-- **Devtools Vite plugin must be first.** `devtools()` leads the `plugins` array in
-  `vite.config.ts`; source inspection and console piping break if it is reordered.
-- **Isomorphic by default.** Code runs on both server and client unless it is wrapped in a boundary
-  (`createServerFn`, `createServerOnlyFn`, `createClientOnlyFn`, `createIsomorphicFn`). Assume any
-  module you touch may execute in both environments.
-- **Environment variables** go through `src/env.ts` (`@t3-oss/env-core` + Zod). Do not read
-  `process.env` or `import.meta.env` directly; add the variable to the schema and import `env`
-  instead. Note: `src/env.ts` is currently scaffolded but imported nowhere — the first consumer
-  should wire it in rather than reaching for `import.meta.env`. Client-side vars need the `VITE_`
-  prefix.
-- **Router context** is typed as `MyRouterContext` in `src/routes/__root.tsx` and carries the
-  `queryClient`. Query/Router SSR wiring lives in `src/router.tsx` and
-  `src/integrations/tanstack-query/root-provider.tsx`.
-- **TypeScript is strict**, with `noUnusedLocals`, `noUnusedParameters`,
-  `noFallthroughCasesInSwitch`, and `verbatimModuleSyntax` all on. Follow TanStack Router's full
-  type-inference philosophy: never cast, never annotate values the router already infers.
-- **Formatting** is Oxfmt, then `oxlint --fix`. Run `pnpm format` before committing.
-- Try to keep files **under 200 lines** of code (excluding comments).
-- **Try/Catch** prefer `attempt` or `attemptAsync` from `es-toolkit`
-- **hook** check `usehooks-ts` before writing custom hooks
-
-When working on UI components, always use the `playground-storybook-mcp` MCP tools to access Storybook's component and documentation knowledge before answering or taking any action.
-
-- **CRITICAL: Never hallucinate component properties!** Before using ANY property on a component from a design system (including common-sounding ones like `shadow`, etc.), you MUST use the MCP tools to check if the property is actually documented for that component.
-- Query `list-all-documentation` to get a list of all components
-- Query `get-documentation` for that component to see all available properties and examples
-- Only use properties that are explicitly documented or shown in example stories
-- If a property isn't documented, do not assume properties based on naming conventions or common patterns from other libraries. Check back with the user in these cases.
-- Use the `get-storybook-story-instructions` tool to fetch the latest instructions for creating or updating stories. This will ensure you follow current conventions and recommendations.
-- Check your work by running `run-story-tests`.
-
-Remember: A story name might not reflect the property name correctly, so always verify properties through documentation or example stories before using them.
-
-## Layout
-
-```
-src/
-  env.ts                              # validated env schema (currently unused)
-  styles.css                          # Tailwind entry, imported by __root.tsx
-  router.tsx                          # getRouter(), Register declaration, SSR/Query integration
-  routeTree.gen.ts                    # GENERATED
-  routes/
-    __root.tsx                        # root route, MyRouterContext, RootDocument shell
-    index.tsx                         # /
-  integrations/tanstack-query/
-    root-provider.tsx                 # getContext()
-    devtools.tsx                      # Query devtools plugin
-  stories/                            # Storybook examples (Button, Header, Page)
-.storybook/                           # main.ts, preview.tsx
-```
+- After modifying code, run `fallow audit --format json --quiet --base main || true`.
+- Append `|| true` to every fallow command: exit 1 means "issues found", only exit 2 is a real error.
+- Before deleting anything fallow reports as unused, confirm with `fallow dead-code --trace
+FILE:EXPORT`. Fallow is syntactic; an export can be imported-but-unreferenced and a dependency can be
+  loaded by config rather than by import.
 
 ## Comments
 
 - Always comment your code (unless it's very obvious).
 - Explain **why**, not what. The code shows what.
-- Reference requirement IDs: `// (FR-012)` `// (NFR-003)`
-- `// TODO(WP-xxx):` for known incomplete work
-- JSDoc on all exported functions and types
-- Try to keep comments as short as possible, a single paragraph should be enough
+- `// TODO(WP-xxx):` for known incomplete work.
+- JSDoc on all exported functions and types.
+- Keep comments short; a single paragraph is usually enough.

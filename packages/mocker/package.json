@@ -1,0 +1,69 @@
+{
+  "name": "@magicspon/mocker",
+  "version": "0.1.0",
+  "description": "Generate fake data from zod schemas and serve it over HTTP",
+  "keywords": [
+    "zod",
+    "mock",
+    "faker",
+    "fixtures",
+    "test-data",
+    "msw"
+  ],
+  "license": "MIT",
+  "author": "magicspon",
+  "homepage": "https://github.com/magicspon/mocker/tree/main/packages/mocker#readme",
+  "bugs": "https://github.com/magicspon/mocker/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/magicspon/mocker.git",
+    "directory": "packages/mocker"
+  },
+  "type": "module",
+  "sideEffects": false,
+  "engines": {
+    "node": ">=20"
+  },
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": "./src/index.ts",
+    "./core": "./src/core/index.ts",
+    "./config": "./src/config.ts",
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "access": "public",
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "./core": {
+        "types": "./dist/core.d.ts",
+        "default": "./dist/core.js"
+      },
+      "./config": {
+        "types": "./dist/config.d.ts",
+        "default": "./dist/config.js"
+      },
+      "./package.json": "./package.json"
+    }
+  },
+  "scripts": {
+    "build": "tsdown",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@faker-js/faker": "^10.5.0"
+  },
+  "peerDependencies": {
+    "zod": "^4.0.0"
+  },
+  "devDependencies": {
+    "tsdown": "^0.22.14",
+    "typescript": "^7.0.2",
+    "zod": "^4.3.6"
+  }
+}

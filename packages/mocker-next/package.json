@@ -1,0 +1,71 @@
+{
+  "name": "@magicspon/mocker-next",
+  "version": "0.1.0",
+  "description": "Next.js App Router adapter for @magicspon/mocker",
+  "keywords": [
+    "zod",
+    "mock",
+    "faker",
+    "nextjs",
+    "app-router",
+    "fixtures"
+  ],
+  "license": "MIT",
+  "author": "magicspon",
+  "homepage": "https://github.com/magicspon/mocker/tree/main/packages/mocker-next#readme",
+  "bugs": "https://github.com/magicspon/mocker/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/magicspon/mocker.git",
+    "directory": "packages/mocker-next"
+  },
+  "type": "module",
+  "sideEffects": false,
+  "engines": {
+    "node": ">=20"
+  },
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": "./src/index.ts",
+    "./config": "./src/config.ts",
+    "./production": "./src/index.prod.ts",
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "access": "public",
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "./config": {
+        "types": "./dist/config.d.ts",
+        "default": "./dist/config.js"
+      },
+      "./production": {
+        "types": "./dist/index.prod.d.ts",
+        "default": "./dist/index.prod.js"
+      },
+      "./package.json": "./package.json"
+    }
+  },
+  "scripts": {
+    "build": "tsdown",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@magicspon/mocker": "workspace:^"
+  },
+  "peerDependencies": {
+    "next": "^15.0.0 || ^16.0.0",
+    "zod": "^4.0.0"
+  },
+  "devDependencies": {
+    "next": "^16.2.0",
+    "tsdown": "^0.22.14",
+    "typescript": "^7.0.2",
+    "zod": "^4.3.6"
+  }
+}

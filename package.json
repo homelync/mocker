@@ -1,41 +1,37 @@
 {
-  "name": "mocker",
+  "name": "mocker-monorepo",
   "private": true,
   "type": "module",
-  "imports": {
-    "#/*": "./src/*"
-  },
-  "bin": {
-    "damp": "./src/cli/index.ts"
+  "packageManager": "pnpm@10.0.0",
+  "engines": {
+    "node": ">=20"
   },
   "scripts": {
-    "damp": "node src/cli/index.ts",
+    "build": "pnpm -r --filter \"./packages/*\" build",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "lint": "oxlint",
     "format": "oxfmt && oxlint --fix",
     "check": "oxfmt --check && oxlint",
-    "typecheck": "tsc --noEmit",
-    "prepare": "husky",
-    "postinstall": "npx husky install"
-  },
-  "dependencies": {
-    "@faker-js/faker": "^10.5.0",
-    "es-toolkit": "^1.50.0",
-    "zod": "^4.3.6"
+    "typecheck": "tsc --noEmit && pnpm -r typecheck",
+    "release": "changeset publish",
+    "prepare": "husky"
   },
   "devDependencies": {
+    "@changesets/changelog-github": "^1.0.0",
     "@changesets/cli": "^3.0.0",
-    "@chromatic-com/storybook": "latest",
-    "@clack/prompts": "^1.7.0",
     "@commitlint/cli": "^21.2.2",
     "@commitlint/config-conventional": "^21.2.2",
+    "@stylistic/eslint-plugin": "^5.10.0",
+    "@tanstack/intent": "^0.3.6",
     "@types/node": "^22.10.2",
-    "citty": "^0.2.2",
     "husky": "^9.1.7",
     "nano-staged": "^1.0.2",
     "oxfmt": "^0.63.0",
     "oxlint": "^1.78.0",
     "oxlint-tsgolint": "^7.0.2001",
+    "tsdown": "^0.22.14",
     "typescript": "^7.0.2",
-    "vitest": "latest"
+    "vitest": "^4.1.10"
   }
 }

@@ -1,11 +1,15 @@
-import { isMockConfigured, isMockEnabledFor } from "../../flag";
-// Imported from the leaf module rather than `../../registry`, deliberately: the
-// index pulls in `serve.ts`, and through it `core` and faker. `next.config.ts`
-// evaluates this file in plain Node before any bundling, and it must stay cheap
-// enough that nobody is tempted to make config loading conditional.
-import { DYNAMIC_SEGMENT, parseKey } from "../../registry/match";
-import type { QueryConstraint } from "../../registry/match";
-import type { MockRegistry } from "../../registry/types";
+// The `/config` entry rather than the package root, deliberately: the root
+// re-exports `serve.ts` and through it `core` and faker. `next.config.ts`
+// evaluates this file in plain Node before any bundling, so it must stay cheap
+// enough that nobody is tempted to make config loading conditional — and a
+// production build must not be able to reach the generator from here at all.
+import {
+  DYNAMIC_SEGMENT,
+  isMockConfigured,
+  isMockEnabledFor,
+  parseKey,
+} from '@magicspon/mocker/config'
+import type { MockRegistry, QueryConstraint } from '@magicspon/mocker/config'
 
 /**
  * Everything the App Router needs to send a registered route to the mock, and
@@ -22,10 +26,10 @@ import type { MockRegistry } from "../../registry/types";
  */
 
 /** Where the rewrites land. Not a real route in its own right. */
-export const MOCK_ENDPOINT_PREFIX = "/api/mock";
+export const MOCK_ENDPOINT_PREFIX = '/api/mock'
 
 /** The prefix every key must carry: these are BFF routes under `/api`. */
-const API_PREFIX = "/api/";
+const API_PREFIX = '/api/'
 
 /**
  * One condition on a rewrite, beyond the path.
@@ -36,9 +40,9 @@ const API_PREFIX = "/api/";
  * `has` array.
  */
 export interface RewriteHas {
-  readonly type: "query";
-  readonly key: string;
-  readonly value?: string;
+  readonly type: 'query'
+  readonly key: string
+  readonly value?: string
 }
 
 /**
@@ -50,9 +54,9 @@ export interface RewriteHas {
  * away from the code that caused it.
  */
 export interface Rewrite {
-  readonly source: string;
-  readonly destination: string;
-  readonly has?: RewriteHas[];
+  readonly source: string
+  readonly destination: string
+  readonly has?: RewriteHas[]
 }
 
 /**
@@ -66,10 +70,10 @@ export interface Rewrite {
 function requireApiPath(pattern: string): string {
   if (!pattern.startsWith(API_PREFIX)) {
     throw new Error(
-      `Mock registry key "${pattern}" must start with "${API_PREFIX}" to be served by the Next adapter.`
-    );
+      `Mock registry key "${pattern}" must start with "${API_PREFIX}" to be served by the Next adapter.`,
+    )
   }
-  return pattern;
+  return pattern
 }
 
 /**
@@ -85,12 +89,12 @@ function requireApiPath(pattern: string): string {
  */
 export function toRewriteSource(pattern: string): string {
   return pattern
-    .split("/")
+    .split('/')
     .map((segment) => {
-      const dynamic = DYNAMIC_SEGMENT.exec(segment);
-      return dynamic ? `:${dynamic[1]}` : segment;
+      const dynamic = DYNAMIC_SEGMENT.exec(segment)
+      return dynamic ? `:${dynamic[1]}` : segment
     })
-    .join("/");
+    .join('/')
 }
 
 /**
@@ -101,11 +105,11 @@ export function toRewriteSource(pattern: string): string {
  * {@link originalPathname}.
  */
 export function toRewriteDestination(pattern: string): string {
-  return `${MOCK_ENDPOINT_PREFIX}${toRewriteSource(requireApiPath(pattern)).slice("/api".length)}`;
+  return `${MOCK_ENDPOINT_PREFIX}${toRewriteSource(requireApiPath(pattern)).slice('/api'.length)}`
 }
 
 /** Regex metacharacters, for literals that must match themselves. */
-const REGEX_METACHARACTER = /[.*+?^${}()|[\]\\]/g;
+const REGEX_METACHARACTER = /[.*+?^${}()|[\]\\]/g
 
 /**
  * The `has` conditions a key's query constraints become.
@@ -127,19 +131,19 @@ const REGEX_METACHARACTER = /[.*+?^${}()|[\]\\]/g;
  *   Next treats an empty `has` array as a rule that can never match
  */
 export function toRewriteConditions(
-  query: readonly QueryConstraint[]
+  query: readonly QueryConstraint[],
 ): RewriteHas[] | undefined {
-  if (query.length === 0) return undefined;
+  if (query.length === 0) return undefined
 
   return query.map((constraint) => ({
-    type: "query" as const,
+    type: 'query' as const,
     // Escaped: Next compiles `value` to a regex, so an unescaped `.` in a
     // literal would quietly match any character.
     ...(constraint.value === undefined
       ? {}
-      : { value: constraint.value.replace(REGEX_METACHARACTER, "\\$&") }),
+      : { value: constraint.value.replace(REGEX_METACHARACTER, '\\$&') }),
     key: constraint.name,
-  }));
+  }))
 }
 
 /**
@@ -151,7 +155,7 @@ export function toRewriteConditions(
  * transform, so a moved route fails a test the same day.
  */
 export function toRouteDirectory(pattern: string): string {
-  return requireApiPath(pattern).slice(API_PREFIX.length);
+  return requireApiPath(pattern).slice(API_PREFIX.length)
 }
 
 /**
@@ -162,7 +166,7 @@ export function toRouteDirectory(pattern: string): string {
  * they *are* the original path minus `/api`, put there by the rewrite.
  */
 export function originalPathname(segments: readonly string[]): string {
-  return `${API_PREFIX}${segments.map(encodeURIComponent).join("/")}`;
+  return `${API_PREFIX}${segments.map(encodeURIComponent).join('/')}`
 }
 
 /**
@@ -191,38 +195,38 @@ export function originalPathname(segments: readonly string[]): string {
  *   the library has no opinion about which endpoints exist
  */
 export function mockRewrites(registry: MockRegistry): Rewrite[] {
-  if (!isMockConfigured()) return [];
+  if (!isMockConfigured()) return []
 
-  const byRule = new Map<string, Rewrite>();
+  const byRule = new Map<string, Rewrite>()
 
   for (const key of Object.keys(registry)) {
-    const { pattern, query } = parseKey(key);
+    const { pattern, query } = parseKey(key)
 
     // Matched against the *original* path, exactly as `withMock` matches it, so
     // `MOCK_API=property/search` means the same thing under both mechanisms.
-    if (!isMockEnabledFor(pattern)) continue;
+    if (!isMockEnabledFor(pattern)) continue
 
-    const source = toRewriteSource(requireApiPath(pattern));
-    const has = toRewriteConditions(query);
+    const source = toRewriteSource(requireApiPath(pattern))
+    const has = toRewriteConditions(query)
     const rule: Rewrite = {
       source,
       destination: toRewriteDestination(pattern),
       ...(has === undefined ? {} : { has }),
-    };
+    }
 
-    byRule.set(ruleSignature(rule), rule);
+    byRule.set(ruleSignature(rule), rule)
   }
 
   return [...byRule.values()].sort(
-    (a, b) => (b.has?.length ?? 0) - (a.has?.length ?? 0)
-  );
+    (a, b) => (b.has?.length ?? 0) - (a.has?.length ?? 0),
+  )
 }
 
 /** A rewrite's identity for de-duplication: what it matches, not where it goes. */
 function ruleSignature(rule: Rewrite): string {
   const conditions = (rule.has ?? [])
-    .map((condition) => `${condition.key}=${condition.value ?? ""}`)
-    .join("&");
+    .map((condition) => `${condition.key}=${condition.value ?? ''}`)
+    .join('&')
 
-  return `${rule.source}?${conditions}`;
+  return `${rule.source}?${conditions}`
 }

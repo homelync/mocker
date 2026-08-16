@@ -1,14 +1,15 @@
-import { NextResponse, type NextRequest } from "next/server";
+import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
 
 /**
- * The production stand-in for `@mock/adapters/next`.
+ * The production stand-in for `@magicspon/mocker-next`.
  *
- * `next.config.ts` points `turbopack.resolveAlias` at this file when
- * `NODE_ENV === "production"`, so every route file that imports the adapter
- * resolves *here* instead. Turbopack never reads the real adapter, so neither
- * the generator nor faker can be emitted into a chunk — the mock is absent from
- * the build by resolution, not by a flag check the bundler has to be clever
- * enough to eliminate.
+ * `withMocker()` points `turbopack.resolveAlias` at this module — published as
+ * `@magicspon/mocker-next/production` — when `NODE_ENV === "production"`, so
+ * every route file that imports the adapter resolves *here* instead. Turbopack
+ * never reads the real adapter, so neither the generator nor faker can be
+ * emitted into a chunk: the mock is absent from the build by resolution, not by
+ * a flag check the bundler has to be clever enough to eliminate.
  *
  * Route sources are untouched by this. `withMock(schema, handler)` still reads
  * exactly as it did; it just resolves to a function that hands the handler back.
@@ -22,7 +23,7 @@ import { NextResponse, type NextRequest } from "next/server";
 export type NextRouteHandler<TArgs extends unknown[] = []> = (
   request: NextRequest,
   ...args: TArgs
-) => Promise<NextResponse>;
+) => Promise<NextResponse>
 
 /**
  * Per-endpoint options, structurally rather than by importing the real type.
@@ -33,8 +34,8 @@ export type NextRouteHandler<TArgs extends unknown[] = []> = (
  * parameter typed `unknown`.
  */
 export interface MockEndpointOptions {
-  readonly status?: number;
-  readonly options?: unknown;
+  readonly status?: number
+  readonly options?: unknown
 }
 
 /**
@@ -51,9 +52,9 @@ export function withMock<TArgs extends unknown[]>(
   // generation options pass a third argument, and a two-parameter stub would
   // make those call sites a type error under a production-shaped typecheck.
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  _options?: unknown
+  _options?: unknown,
 ): NextRouteHandler<TArgs> {
-  return handler;
+  return handler
 }
 
 /**
@@ -73,9 +74,9 @@ export function serveRegistryRoute(
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   _segments: readonly string[],
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  _registry?: unknown
+  _registry?: unknown,
 ): Promise<NextResponse> {
   return Promise.resolve(
-    NextResponse.json({ error: "Not found" }, { status: 404 })
-  );
+    NextResponse.json({ error: 'Not found' }, { status: 404 }),
+  )
 }

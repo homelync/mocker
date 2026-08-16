@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["import", "typescript", "unicorn", "react"],
+  "plugins": ["import", "typescript", "unicorn"],
   "categories": {
     "correctness": "error"
   },
@@ -11,14 +11,11 @@
     "builtin": true
   },
   "ignorePatterns": [
-    "**/.nx/**",
-    "**/.svelte-kit/**",
     "**/build/**",
     "**/coverage/**",
     "**/dist/**",
     "**/snap/**",
     "**/vite.config.*.timestamp-*.*",
-    "**/routeTree.gen.ts",
     "graphify-out/**"
   ],
   "rules": {},
@@ -26,160 +23,10 @@
     {
       "files": ["**/*.{js,ts,tsx}"],
       "env": {
-        "es2020": true,
-        "browser": true
+        "es2020": true
       },
-      "jsPlugins": ["@stylistic/eslint-plugin"],
-      "rules": {
-        "for-direction": "error",
-        "no-async-promise-executor": "error",
-        "no-case-declarations": "error",
-        "no-class-assign": "error",
-        "no-compare-neg-zero": "error",
-        "no-cond-assign": "error",
-        "no-constant-binary-expression": "error",
-        "no-constant-condition": "error",
-        "no-control-regex": "error",
-        "no-debugger": "error",
-        "no-delete-var": "error",
-        "no-dupe-else-if": "error",
-        "no-duplicate-case": "error",
-        "no-empty-character-class": "error",
-        "no-empty-pattern": "error",
-        "no-empty-static-block": "error",
-        "no-ex-assign": "error",
-        "no-extra-boolean-cast": "error",
-        "no-fallthrough": "error",
-        "no-global-assign": "error",
-        "no-invalid-regexp": "error",
-        "no-irregular-whitespace": "error",
-        "no-loss-of-precision": "error",
-        "no-misleading-character-class": "error",
-        "no-nonoctal-decimal-escape": "error",
-        "no-regex-spaces": "error",
-        "no-self-assign": "error",
-        "no-shadow": "warn",
-        "no-shadow-restricted-names": "error",
-        "no-sparse-arrays": "error",
-        "no-unsafe-finally": "error",
-        "no-unsafe-optional-chaining": "error",
-        "no-unused-labels": "error",
-        "no-unused-private-class-members": "error",
-        "no-useless-backreference": "error",
-        "no-useless-catch": "error",
-        "no-useless-escape": "error",
-        "no-var": "error",
-        "no-with": "error",
-        "prefer-const": "error",
-        "require-yield": "error",
-        "use-isnan": "error",
-        "valid-typeof": "error",
-
-        "@stylistic/spaced-comment": "error",
-
-        "import/consistent-type-specifier-style": ["error", "prefer-top-level"],
-        "import/first": "error",
-        "import/newline-after-import": "error",
-        "import/no-commonjs": "error",
-        "import/no-duplicates": "error",
-
-        "unicorn/prefer-node-protocol": "error",
-
-        "typescript/ban-ts-comment": [
-          "error",
-          {
-            "ts-expect-error": false,
-            "ts-ignore": "allow-with-description"
-          }
-        ],
-        "typescript/consistent-type-imports": [
-          "error",
-          { "prefer": "type-imports" }
-        ],
-        "typescript/method-signature-style": ["error", "property"],
-        "typescript/no-duplicate-enum-values": "error",
-        "typescript/no-extra-non-null-assertion": "error",
-        "typescript/no-for-in-array": "error",
-        "typescript/no-inferrable-types": [
-          "error",
-          { "ignoreParameters": true }
-        ],
-        "typescript/no-misused-new": "error",
-        "typescript/no-namespace": "error",
-        "typescript/no-non-null-asserted-optional-chain": "error",
-        "typescript/no-unnecessary-condition": "error",
-        "typescript/no-unnecessary-type-assertion": "error",
-        "typescript/no-unsafe-function-type": "error",
-        "typescript/no-wrapper-object-types": "error",
-        "typescript/prefer-as-const": "error",
-        "typescript/prefer-for-of": "warn",
-        "typescript/triple-slash-reference": "error",
-
-        "typescript/await-thenable": "error",
-        "typescript/no-array-delete": "error",
-        "typescript/no-base-to-string": "error",
-        "typescript/no-confusing-void-expression": "error",
-        "typescript/no-duplicate-type-constituents": "error",
-        "typescript/no-explicit-any": "error",
-        "typescript/no-floating-promises": "error",
-        "typescript/no-implied-eval": "error",
-        "typescript/no-meaningless-void-operator": "error",
-        "typescript/no-misused-promises": "error",
-        "typescript/no-mixed-enums": "error",
-        "typescript/no-redundant-type-constituents": "error",
-        "typescript/no-unnecessary-boolean-literal-compare": "error",
-        "typescript/no-unnecessary-template-expression": "error",
-        "typescript/no-unnecessary-type-arguments": "error",
-        "typescript/no-unsafe-argument": "error",
-        "typescript/no-unsafe-assignment": "error",
-        "typescript/no-unsafe-call": "error",
-        "typescript/no-unsafe-declaration-merging": "error",
-        "typescript/no-unsafe-enum-comparison": "error",
-        "typescript/no-unsafe-member-access": "error",
-        "typescript/no-unsafe-return": "error",
-        "typescript/no-unsafe-unary-minus": "error",
-        "typescript/only-throw-error": "error",
-        "typescript/prefer-promise-reject-errors": "error",
-        "typescript/prefer-reduce-type-parameter": "error",
-        "typescript/prefer-return-this-type": "error",
-        "typescript/restrict-plus-operands": "error",
-        "typescript/restrict-template-expressions": "error",
-        "typescript/unbound-method": "error",
-        "typescript/use-unknown-in-catch-callback-variable": "error",
-
-        "typescript/consistent-type-exports": "error",
-        "typescript/no-import-type-side-effects": "error",
-        "typescript/non-nullable-type-assertion-style": "error",
-        "typescript/switch-exhaustiveness-check": "error"
-      }
-    },
-    {
-      "files": [
-        "**/*.stories.{ts,tsx,js,jsx,mjs,cjs}",
-        "**/*.story.{ts,tsx,js,jsx,mjs,cjs}"
-      ],
-      "jsPlugins": ["eslint-plugin-storybook"],
-      "rules": {
-        "storybook/await-interactions": "error",
-        "storybook/context-in-play-function": "error",
-        "storybook/default-exports": "error",
-        "storybook/hierarchy-separator": "warn",
-        "storybook/no-redundant-story-name": "warn",
-        "storybook/no-renderer-packages": "error",
-        "storybook/prefer-pascal-case": "warn",
-        "storybook/story-exports": "error",
-        "storybook/use-storybook-expect": "error",
-        "storybook/use-storybook-testing-library": "error",
-        "import/no-anonymous-default-export": "off",
-        "react/rules-of-hooks": "off"
-      }
-    },
-    {
-      "files": [".storybook/main.{js,cjs,mjs,ts}"],
-      "jsPlugins": ["eslint-plugin-storybook"],
-      "rules": {
-        "storybook/no-uninstalled-addons": "error"
-      }
+      "rules": {},
+      "jsPlugins": ["@stylistic/eslint-plugin"]
     }
   ]
 }

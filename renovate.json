@@ -21,52 +21,8 @@
 
   "packageRules": [
     {
-      "groupName": "TanStack Start",
-      "matchPackageNames": [
-        "@tanstack/react-start",
-        "@tanstack/react-router",
-        "@tanstack/react-router-devtools",
-        "@tanstack/react-router-ssr-query",
-        "@tanstack/react-query",
-        "@tanstack/react-query-devtools",
-        "@tanstack/react-devtools",
-        "@tanstack/devtools-vite",
-        "@tanstack/react-store",
-        "@tanstack/store",
-        "@tanstack/router-cli"
-      ]
-    },
-    {
-      "groupName": "React",
-      "matchPackageNames": [
-        "react",
-        "react-dom",
-        "@types/react",
-        "@types/react-dom"
-      ]
-    },
-    {
-      "groupName": "Vite",
-      "matchPackageNames": ["vite", "@vitejs/plugin-react"]
-    },
-    {
       "groupName": "Vitest",
-      "matchPackageNames": [
-        "vitest",
-        "@vitest/browser-playwright",
-        "@vitest/coverage-v8"
-      ]
-    },
-    {
-      "groupName": "Storybook",
-      "matchPackageNames": [
-        "storybook",
-        "@storybook/addon-a11y",
-        "@storybook/addon-docs",
-        "@storybook/addon-mcp",
-        "@storybook/addon-vitest",
-        "@storybook/tanstack-react"
-      ]
+      "matchPackageNames": ["vitest"]
     }
   ]
 }

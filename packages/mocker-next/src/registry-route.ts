@@ -1,12 +1,13 @@
-import { NextResponse, type NextRequest } from "next/server";
+import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
 import {
+  isMockConfigured,
   isRegistryMiss,
+  logMock,
   serveFromRegistry,
-  type MockRegistry,
-} from "../../registry";
-import { isMockConfigured } from "../../flag";
-import { logMock } from "../../log";
-import { originalPathname } from "./rewrites";
+} from '@magicspon/mocker'
+import type { MockRegistry } from '@magicspon/mocker'
+import { originalPathname } from './rewrites'
 
 /**
  * The registry adapter: one endpoint that serves every registered route.
@@ -22,7 +23,7 @@ import { originalPathname } from "./rewrites";
  */
 
 /** Statuses this adapter returns itself, rather than generating a body. */
-const NOT_FOUND = 404;
+const NOT_FOUND = 404
 
 /**
  * Rebuild the request as the caller originally made it.
@@ -43,21 +44,21 @@ const NOT_FOUND = 404;
  */
 function reconstruct(
   request: NextRequest,
-  segments: readonly string[]
+  segments: readonly string[],
 ): Request {
   const url = new URL(
     `${originalPathname(segments)}${request.nextUrl.search}`,
-    request.nextUrl.origin
-  );
+    request.nextUrl.origin,
+  )
 
   return new Request(url, {
     method: request.method,
     headers: request.headers,
-  });
+  })
 }
 
 function problem(message: string, status: number): NextResponse {
-  return NextResponse.json({ error: message }, { status });
+  return NextResponse.json({ error: message }, { status })
 }
 
 /**
@@ -71,15 +72,15 @@ function problem(message: string, status: number): NextResponse {
 export async function serveRegistryRoute(
   request: NextRequest,
   segments: readonly string[],
-  registry: MockRegistry
+  registry: MockRegistry,
 ): Promise<NextResponse> {
-  const started = Date.now();
+  const started = Date.now()
   // The path the caller asked for, not the `/api/mock/...` one Next invoked this
   // route at — logging the rewritten path would name a URL nobody requested and
   // that no other tool (devtools, the access log) agrees with.
-  const original = reconstruct(request, segments);
-  const { pathname, search } = new URL(original.url);
-  const target = `${pathname}${search}`;
+  const original = reconstruct(request, segments)
+  const { pathname, search } = new URL(original.url)
+  const target = `${pathname}${search}`
 
   const log = (status: number, note?: string): void => {
     logMock({
@@ -88,29 +89,29 @@ export async function serveRegistryRoute(
       status,
       durationMs: Date.now() - started,
       note,
-    });
-  };
+    })
+  }
 
   // Defence in depth. A production build emits no rewrite to this endpoint, so
   // reaching it at all means someone requested `/api/mock/...` by hand.
   if (!isMockConfigured()) {
-    log(NOT_FOUND, "mocking is not enabled");
-    return problem("Mocking is not enabled", NOT_FOUND);
+    log(NOT_FOUND, 'mocking is not enabled')
+    return problem('Mocking is not enabled', NOT_FOUND)
   }
 
-  const result = await serveFromRegistry(original, registry);
+  const result = await serveFromRegistry(original, registry)
 
   if (isRegistryMiss(result)) {
-    log(result.status, result.error);
-    return problem(result.error, result.status);
+    log(result.status, result.error)
+    return problem(result.error, result.status)
   }
 
-  log(result.status);
+  log(result.status)
 
   // Rebuilt rather than returned directly: Next narrows route return types to
   // NextResponse, and a plain Response fails the generated route check.
   return new NextResponse(result.body, {
     status: result.status,
     headers: result.headers,
-  });
+  })
 }
