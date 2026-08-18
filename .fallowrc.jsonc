@@ -11,6 +11,7 @@
     "packages/mocker-next/src/index.ts",
     "packages/mocker-next/src/config.ts",
     "packages/mocker-next/src/index.prod.ts",
+    "packages/mocker-storybook/src/index.ts",
     "scripts/renovate-changeset.mjs"
   ],
 
@@ -20,15 +21,17 @@
     "**/coverage/**",
     "**/dist/**",
     "**/snap/**",
+    "**/storybook-static/**",
     "**/vite.config.*.timestamp-*.*",
     "graphify-out/**"
   ],
 
   "duplicates": {
-    // Hide pair-only clones; focus on widespread copy-paste worth refactoring.
-    // The two package-boundary tests are a deliberate pair: each must travel
-    // with the package it constrains.
-    "minOccurrences": 3
+    // Hide small-N clones; focus on widespread copy-paste worth refactoring.
+    // The three package-boundary tests share an import-graph walker on purpose:
+    // each must travel with the package it constrains, and a shared helper would
+    // be exactly the repo-level thing that did not survive the last extraction.
+    "minOccurrences": 4
   },
 
   "rules": {

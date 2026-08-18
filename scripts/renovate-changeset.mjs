@@ -87,7 +87,7 @@ const alreadyRecorded = readdirSync(changesetDir)
 if (alreadyRecorded) skip(`${summary} is already recorded`)
 
 // Patch, matching what `pnpm update --changeset` writes for a dependency bump.
-// The two packages are `linked`, so one patch here moves both in step.
+// The packages are `linked`, so one patch here moves them all in step.
 execFileSync(
   'pnpm',
   ['change', '--bump', 'patch', '--summary', summary, manifest.name],

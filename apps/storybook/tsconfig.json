@@ -1,0 +1,17 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "include": [".storybook/**/*.ts", "src/**/*.ts", "src/**/*.tsx"],
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "types": ["node", "msw-storybook-addon/types"],
+
+    /**
+     * Off here, on in the packages. `isolatedDeclarations` exists so tsdown can
+     * emit `.d.ts` with oxc instead of a typechecker; nothing in this app is
+     * ever published, and requiring an annotation on every story would say
+     * something about this library that is not true of using it.
+     */
+    "isolatedDeclarations": false,
+    "declaration": false
+  }
+}

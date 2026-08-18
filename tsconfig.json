@@ -7,7 +7,12 @@
    * that matters there (`isolatedDeclarations`) exists for declaration emit, and
    * nothing here is ever emitted.
    */
-  "include": ["packages/*/tsdown.config.ts", "vitest.config.ts"],
+  "include": [
+    "packages/*/tsdown.config.ts",
+    "packages/*/vitest.config.ts",
+    "packages/*/vitest.setup.ts",
+    "vitest.config.ts"
+  ],
 
   "compilerOptions": {
     "types": ["node"],

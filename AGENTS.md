@@ -1,12 +1,13 @@
 # mocker
 
-A pnpm monorepo publishing two packages: a library that generates fake data from zod schemas and
-serves it over HTTP, and a Next.js App Router adapter for it.
+A pnpm monorepo publishing three packages: a library that generates fake data from zod schemas and
+serves it over HTTP, and two adapters over it — Next.js App Router, and Storybook via MSW.
 
-| Package                  | Directory              | Entries                           |
-| ------------------------ | ---------------------- | --------------------------------- |
-| `@magicspon/mocker`      | `packages/mocker`      | `.` · `./core` · `./config`       |
-| `@magicspon/mocker-next` | `packages/mocker-next` | `.` · `./config` · `./production` |
+| Package                       | Directory                   | Entries                           |
+| ----------------------------- | --------------------------- | --------------------------------- |
+| `@magicspon/mocker`           | `packages/mocker`           | `.` · `./core` · `./config`       |
+| `@magicspon/mocker-next`      | `packages/mocker-next`      | `.` · `./config` · `./production` |
+| `@magicspon/mocker-storybook` | `packages/mocker-storybook` | `.`                               |
 
 ## The constraint everything else follows from
 
@@ -34,19 +35,33 @@ is the argument for keeping them as tests. A test travels with the code it const
 may not reach `registry/`, `flag.ts` or `log.ts`. It must stay usable as a plain fixture factory in a
 runtime with no `process` and no console.
 
+`mocker-storybook` has no `./config` entry and no production stub, because neither constraint
+reaches it: a preview _is_ the mock, and `.storybook/main.ts` never imports the package. It carries
+two claims of its own instead, in `packages/mocker-storybook/src/package-boundary.test.ts`, and both
+fail silently if broken:
+
+- **Nothing reachable from `index.ts` may import a node builtin.** Storybook bundles this into the
+  preview. Vite resolves a `node:` import happily and the preview dies on load, in a consumer's app.
+- **Nothing in the package may import `storybook` — tests included.** These are plain MSW handlers,
+  which is what lets the same call answer a Vitest browser test, and what keeps the package building
+  when Storybook's addon API moves. The loader reads `{ id }` structurally rather than importing
+  `StoryContext` for exactly this reason; a test that imported it would make adopting the coupling in
+  `src/` look harmless.
+
 ## Commands
 
 Package manager is **pnpm**. Run these from the repo root.
 
 | Task                | Command           |
 | ------------------- | ----------------- |
-| Build both packages | `pnpm build`      |
+| Build every package | `pnpm build`      |
 | Test (whole repo)   | `pnpm test`       |
 | Test in watch mode  | `pnpm test:watch` |
 | Typecheck           | `pnpm typecheck`  |
 | Lint                | `pnpm lint`       |
 | Format + autofix    | `pnpm format`     |
 | Check formatting    | `pnpm check`      |
+| Storybook example   | `pnpm storybook`  |
 
 `pnpm test` needs **no build**: the workspace `exports` point at `src/*.ts` during development, and
 `publishConfig.exports` swaps in `dist/*.js` at publish time. Keep the two maps in step — nothing in
@@ -55,6 +70,11 @@ CI executes the published one.
 `pnpm typecheck` is two passes. The root tsconfig checks only tooling files; each package checks its
 own `src/`, because the constraint that matters there (`isolatedDeclarations`) exists for declaration
 emit and nothing at the root is ever emitted.
+
+`packages/mocker-storybook` carries its own `vitest.config.ts`, which the root config's `projects`
+glob picks up. It exists for one line in `vitest.setup.ts`: MSW resolves a relative handler path
+against `location.href`, and Node has none — without a stubbed `location` every handler matches
+nothing and the whole suite passes by falling through.
 
 ## Communication
 
