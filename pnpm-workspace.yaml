@@ -1,14 +1,32 @@
 packages:
   - 'packages/*'
-  # The example app. In the workspace so it consumes the packages by link — it
-  # is the only thing in the repo that exercises them the way a consumer does.
-  # Excluded from `pnpm build`; see the root package.json.
+  # The example apps. In the workspace so they consume the packages by link —
+  # they are the only things in the repo that exercise them the way a consumer
+  # does. Excluded from `pnpm build`; see the root package.json.
   - 'apps/*'
 
 allowBuilds:
   esbuild: true
+  msw: true
+
+# Written by pnpm, not by hand. A release younger than the store's minimum age
+# is held back until it appears here; these were the Storybook packages current
+# on the day the example app was added. Renovate's bumps will rewrite the list.
+minimumReleaseAgeExclude:
+  - '@storybook/builder-vite@10.5.9'
+  - '@storybook/csf-plugin@10.5.9'
+  - '@storybook/react-dom-shim@10.5.9'
+  - '@storybook/react-vite@10.5.9'
+  - '@storybook/react@10.5.9'
+  - storybook@10.5.9
 
 # esbuild arrives transitively (tsdown → rolldown toolchain) and needs its
 # postinstall to fetch the platform binary.
+#
+# msw's postinstall rewrites `mockServiceWorker.js` in the Storybook example's
+# public directory whenever msw moves. The worker is a committed file that must
+# match the installed version exactly — msw refuses to start against a stale one
+# — so leaving this off would make every msw bump a silent break of the example.
 onlyBuiltDependencies:
   - esbuild
+  - msw

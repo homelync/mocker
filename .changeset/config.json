@@ -12,6 +12,12 @@
   "commit": true,
   "ignore": [],
   "fixed": [],
-  "linked": [["@magicspon/mocker", "@magicspon/mocker-next"]],
+  "linked": [
+    [
+      "@magicspon/mocker",
+      "@magicspon/mocker-next",
+      "@magicspon/mocker-storybook"
+    ]
+  ],
   "updateInternalDependencies": "patch"
 }

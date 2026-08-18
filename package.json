@@ -15,6 +15,8 @@
     "format": "oxfmt && oxlint --fix",
     "check": "oxfmt --check && oxlint",
     "typecheck": "tsc --noEmit && pnpm -r typecheck",
+    "storybook": "pnpm --filter @magicspon/storybook-example dev",
+    "storybook:build": "pnpm --filter @magicspon/storybook-example build",
     "release": "changeset publish",
     "publish:local": "pnpm build && node scripts/yalc-publish.mjs",
     "publish:local:push": "pnpm build && node scripts/yalc-publish.mjs --push",

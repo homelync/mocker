@@ -1,0 +1,74 @@
+{
+  "name": "@magicspon/mocker-storybook",
+  "version": "0.1.0",
+  "description": "Storybook adapter for @magicspon/mocker — MSW handlers from a mock registry",
+  "keywords": [
+    "zod",
+    "mock",
+    "faker",
+    "storybook",
+    "msw",
+    "fixtures",
+    "fixtures-on-disk"
+  ],
+  "license": "MIT",
+  "author": "magicspon",
+  "homepage": "https://github.com/magicspon/mocker/tree/main/packages/mocker-storybook#readme",
+  "bugs": "https://github.com/magicspon/mocker/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/magicspon/mocker.git",
+    "directory": "packages/mocker-storybook"
+  },
+  "type": "module",
+  "sideEffects": false,
+  "engines": {
+    "node": ">=24.19.0"
+  },
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": "./src/index.ts",
+    "./vite": "./src/vite.ts",
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "access": "public",
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "./vite": {
+        "types": "./dist/vite.d.ts",
+        "default": "./dist/vite.js"
+      },
+      "./package.json": "./package.json"
+    }
+  },
+  "scripts": {
+    "build": "tsdown",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@magicspon/mocker": "workspace:^"
+  },
+  "peerDependencies": {
+    "msw": "^2.15.0",
+    "zod": "^4.4.3",
+    "vite": "^7.0.0 || ^8.0.0"
+  },
+  "devDependencies": {
+    "msw": "^2.15.0",
+    "tsdown": "^0.22.14",
+    "typescript": "^7.0.2",
+    "zod": "^4.4.3",
+    "vite": "^8.2.1"
+  },
+  "peerDependenciesMeta": {
+    "vite": {
+      "optional": true
+    }
+  }
+}

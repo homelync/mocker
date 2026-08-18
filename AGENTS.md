@@ -1,12 +1,13 @@
 # mocker
 
-A pnpm monorepo publishing two packages: a library that generates fake data from zod schemas and
-serves it over HTTP, and a Next.js App Router adapter for it.
+A pnpm monorepo publishing three packages: a library that generates fake data from zod schemas and
+serves it over HTTP, and two adapters over it — Next.js App Router, and Storybook via MSW.
 
-| Package                  | Directory              | Entries                           |
-| ------------------------ | ---------------------- | --------------------------------- |
-| `@magicspon/mocker`      | `packages/mocker`      | `.` · `./core` · `./config`       |
-| `@magicspon/mocker-next` | `packages/mocker-next` | `.` · `./config` · `./production` |
+| Package                       | Directory                   | Entries                           |
+| ----------------------------- | --------------------------- | --------------------------------- |
+| `@magicspon/mocker`           | `packages/mocker`           | `.` · `./core` · `./config`       |
+| `@magicspon/mocker-next`      | `packages/mocker-next`      | `.` · `./config` · `./production` |
+| `@magicspon/mocker-storybook` | `packages/mocker-storybook` | `.` · `./vite`                    |
 
 ## The constraint everything else follows from
 
@@ -34,19 +35,66 @@ is the argument for keeping them as tests. A test travels with the code it const
 may not reach `registry/`, `flag.ts` or `log.ts`. It must stay usable as a plain fixture factory in a
 runtime with no `process` and no console.
 
+`mocker-storybook` has no `./config` entry and no production stub, because that constraint does not
+reach it: a preview _is_ the mock, so there is no build a mock must be absent from. It has a
+different split instead, and `packages/mocker-storybook/src/package-boundary.test.ts` carries three
+claims about it, all of which fail silently if broken:
+
+- **Nothing reachable from `index.ts` may import a node builtin, and it may not reach `vite.ts`.**
+  Storybook bundles `index.ts` into the preview. Vite resolves a `node:` import happily and the
+  preview dies on load, in a consumer's app.
+- **Nothing reachable from `vite.ts` may import anything but node and Vite.** This is the fixture
+  store for `{ fixed: true }` (below), and `.storybook/main.ts` imports it unbundled — the same
+  position `next.config.ts` is in. Reaching `@magicspon/mocker` from there loads zod and faker on
+  every `storybook dev`.
+- **Nothing in the package may import `storybook` — tests included.** These are plain MSW handlers,
+  which is what lets the same call answer a Vitest browser test, and what keeps the package building
+  when Storybook's addon API moves. The loader reads `{ id }` structurally rather than importing
+  `StoryContext` for exactly this reason; a test that imported it would make adopting the coupling in
+  `src/` look harmless.
+
+### Fixed responses (`fixed: true`)
+
+`mockerHandlers(registry, { fixed: true })` answers from a JSON file instead of generating per
+request, writing the file from the generated data the first time it is asked for. Generation is
+already deterministic, so this is not about stability — it is about being able to **edit** the
+answer, and to commit it.
+
+Note the vocabulary: `overrides` **pins a field** and is the older meaning of "pin" throughout this
+repo and the guide. `fixed` freezes the **whole response**, as a file. Keep the two words apart.
+
+That is the only feature in the repo that needs a filesystem, and a preview is a browser, so it is
+split across the two entries: `fixed.ts` decides policy in the preview, `vite.ts` is a dumb byte
+store mounted on Storybook's dev server at `/__mocker/fixture`, and `route.ts` — which imports
+nothing at all — is the one constant they share. Sharing it through either side would breach one of
+the boundaries above.
+
+Three decisions worth not re-litigating:
+
+- **The filename is derived, never declared** (`fixture-path.ts`): `GET/api/devices/<hash>.json`,
+  from method, path, sorted query and the story's `seed`/`count`/`status`. A mirrored tree because
+  the directory listing is the interface; a hashed leaf because a query string is not a filename.
+  Not the registry key — renaming a key must not orphan the file it holds.
+- **A fixture that fails its schema is a 500 naming the file.** Regenerating would destroy the edit
+  that was the point; serving it unchecked moves the failure into the component. Same call
+  `handle()` makes about generated output.
+- **A missing plugin costs you fixtures, not Storybook.** One console warning, then generate as
+  usual — which is also what a statically-built preview gets, since it has no server to ask.
+
 ## Commands
 
 Package manager is **pnpm**. Run these from the repo root.
 
 | Task                | Command           |
 | ------------------- | ----------------- |
-| Build both packages | `pnpm build`      |
+| Build every package | `pnpm build`      |
 | Test (whole repo)   | `pnpm test`       |
 | Test in watch mode  | `pnpm test:watch` |
 | Typecheck           | `pnpm typecheck`  |
 | Lint                | `pnpm lint`       |
 | Format + autofix    | `pnpm format`     |
 | Check formatting    | `pnpm check`      |
+| Storybook example   | `pnpm storybook`  |
 
 `pnpm test` needs **no build**: the workspace `exports` point at `src/*.ts` during development, and
 `publishConfig.exports` swaps in `dist/*.js` at publish time. Keep the two maps in step — nothing in
@@ -55,6 +103,11 @@ CI executes the published one.
 `pnpm typecheck` is two passes. The root tsconfig checks only tooling files; each package checks its
 own `src/`, because the constraint that matters there (`isolatedDeclarations`) exists for declaration
 emit and nothing at the root is ever emitted.
+
+`packages/mocker-storybook` carries its own `vitest.config.ts`, which the root config's `projects`
+glob picks up. It exists for one line in `vitest.setup.ts`: MSW resolves a relative handler path
+against `location.href`, and Node has none — without a stubbed `location` every handler matches
+nothing and the whole suite passes by falling through.
 
 ## Communication
 

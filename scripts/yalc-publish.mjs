@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Publish both packages to the local yalc store, as npm would publish them.
+ * Publish every package to the local yalc store, as npm would publish them.
  *
  * `yalc publish` copies the working-tree `package.json` verbatim. That is wrong
  * here twice over, and both failures are silent:
@@ -10,8 +10,8 @@
  *   apply `publishConfig`, and `files` ships only `dist` — so a plain
  *   `yalc publish` produces a package whose every entry point resolves to a
  *   file that is not in it.
- * - `@magicspon/mocker-next` depends on `@magicspon/mocker` as `workspace:^`.
- *   npm has no idea what that means, so `npm install` in the consumer dies.
+ * - Both adapters depend on `@magicspon/mocker` as `workspace:^`. npm has no
+ *   idea what that means, so `npm install` in the consumer dies.
  *
  * `pnpm pack` performs exactly the two transforms that publishing performs, so
  * we pack, unpack, and hand yalc the result. What lands in the store is then
@@ -26,7 +26,11 @@ import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url))
-const PACKAGES = ['packages/mocker', 'packages/mocker-next']
+const PACKAGES = [
+  'packages/mocker',
+  'packages/mocker-next',
+  'packages/mocker-storybook',
+]
 
 /** Also push the new version into every project that has yalc-added it. */
 const push = process.argv.includes('--push')
