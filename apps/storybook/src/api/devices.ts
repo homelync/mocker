@@ -31,4 +31,3 @@ export const deviceListSchema = z.object({
 })
 
 export type DeviceList = z.infer<typeof deviceListSchema>
-export type Device = DeviceList['results'][number]

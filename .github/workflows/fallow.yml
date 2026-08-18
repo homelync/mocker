@@ -40,9 +40,11 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       # Pinned so a fallow release cannot change the gate under you.
-      # Bump deliberately; check `fallow --version` locally first.
+      # Bump deliberately, and re-run the audit locally at the new version
+      # first: a fallow major moves the built-in defaults, so the same config
+      # can gate on findings here that a local run no longer reports at all.
       - name: Install fallow
-        run: npm install -g fallow@2.91.0
+        run: npm install -g fallow@3.17.0
 
       - name: Run fallow audit
         id: audit

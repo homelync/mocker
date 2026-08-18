@@ -20,6 +20,9 @@
     "**/build/**",
     "**/coverage/**",
     "**/dist/**",
+    // Written by `msw init`, not by us. Every finding in it is a report about
+    // MSW's code that nobody here may act on.
+    "**/mockServiceWorker.js",
     "**/snap/**",
     "**/storybook-static/**",
     "**/vite.config.*.timestamp-*.*",
@@ -28,10 +31,13 @@
 
   "duplicates": {
     // Hide small-N clones; focus on widespread copy-paste worth refactoring.
+    "minOccurrences": 4,
+
     // The three package-boundary tests share an import-graph walker on purpose:
     // each must travel with the package it constrains, and a shared helper would
     // be exactly the repo-level thing that did not survive the last extraction.
-    "minOccurrences": 4
+    // Reported as duplication, that decision reads as an oversight every time.
+    "ignore": ["**/package-boundary.test.ts"]
   },
 
   "rules": {
