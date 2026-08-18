@@ -56,6 +56,10 @@ CI executes the published one.
 own `src/`, because the constraint that matters there (`isolatedDeclarations`) exists for declaration
 emit and nothing at the root is ever emitted.
 
+## Communication
+
+Always respond to the user in plain language using ISO 24495-1:2023
+
 ## Conventions
 
 - **`isolatedDeclarations` is on.** tsdown emits `.d.ts` with oxc rather than a typechecker, which is
