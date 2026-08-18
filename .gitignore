@@ -15,3 +15,11 @@ todos.json
 *storybook.log
 storybook-static
 .fallow/
+
+# Playwright's own run artefacts. The fixture store under `apps/e2e/tests/mocks`
+# is deliberately *not* here: those files are the answer the tests assert on, and
+# a fixture nobody can review is the failure this package exists to prevent.
+test-results
+playwright-report
+blob-report
+.playwright

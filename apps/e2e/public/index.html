@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8" />
+    <title>Devices</title>
+  </head>
+  <body>
+    <!--
+      The smallest app that makes the two requests the adapter has to intercept:
+      one with a dynamic segment, one with a query constraint. No framework,
+      because what is under test is the interception, and a fetch is a fetch.
+    -->
+    <h1 id="reference">…</h1>
+    <p id="address"></p>
+
+    <ul id="devices"></ul>
+    <p id="empty" hidden>No devices</p>
+    <p id="error" hidden>Something went wrong</p>
+
+    <script type="module">
+      const reference = 'ABC123'
+
+      async function load() {
+        const [property, devices] = await Promise.all([
+          fetch(`/api/property/${reference}`),
+          fetch(`/api/devices?propertyReference=${reference}`),
+        ])
+
+        if (!property.ok || !devices.ok) {
+          document.getElementById('error').hidden = false
+          return
+        }
+
+        const { address } = await property.json()
+        document.getElementById('reference').textContent = reference
+        document.getElementById('address').textContent = address.postcode
+
+        const { results } = await devices.json()
+        document.getElementById('empty').hidden = results.length > 0
+
+        const list = document.getElementById('devices')
+        for (const device of results) {
+          const item = document.createElement('li')
+          item.dataset.status = device.statusId
+          item.textContent = `${device.room}: ${device.serialNumber}`
+          list.append(item)
+        }
+      }
+
+      // Reported on the page rather than only in the console, so a test that
+      // goes red says what the app saw.
+      load().catch(() => {
+        document.getElementById('error').hidden = false
+      })
+    </script>
+  </body>
+</html>

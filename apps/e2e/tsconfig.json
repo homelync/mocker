@@ -1,0 +1,17 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "include": ["src/**/*.ts", "tests/**/*.ts", "playwright.config.ts"],
+  "compilerOptions": {
+    "types": ["node"],
+
+    /**
+     * Off here, on in the packages — the same call `apps/storybook` makes.
+     * `isolatedDeclarations` exists so tsdown can emit `.d.ts` with oxc instead
+     * of a typechecker; nothing in this app is published, and requiring an
+     * annotation on every test would say something about using this library that
+     * is not true.
+     */
+    "isolatedDeclarations": false,
+    "declaration": false
+  }
+}
