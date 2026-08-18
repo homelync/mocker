@@ -1,0 +1,17 @@
+{
+  "propertyReference": "ABC123",
+  "results": [
+    {
+      "id": "16aA3eC5",
+      "serialNumber": "YH091UUO00K2",
+      "statusId": "GOOD",
+      "room": "attero turba sperno",
+      "installedAt": "2024-08-03T13:26:31.032Z",
+      "lastSeenAt": "2025-09-05T02:10:32.383Z"
+    }
+  ],
+  "count": 1,
+  "page": 1,
+  "limit": 1,
+  "totalPages": 1
+}

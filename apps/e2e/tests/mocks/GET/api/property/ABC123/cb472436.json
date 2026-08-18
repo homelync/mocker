@@ -1,0 +1,13 @@
+{
+  "reference": "ABC123",
+  "address": {
+    "line1": "Hillside",
+    "city": "Ziemestone",
+    "county": "Durham",
+    "postcode": "SR3 8DP"
+  },
+  "bedrooms": 5,
+  "tenure": "freehold",
+  "epcRating": "F",
+  "createdAt": "2023-04-22T02:01:54.800Z"
+}

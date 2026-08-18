@@ -1,0 +1,169 @@
+{
+  "propertyReference": "ABC123",
+  "results": [
+    {
+      "id": "16aA3eC5",
+      "serialNumber": "YH091UUO00K2",
+      "statusId": "FAULT",
+      "room": "Kitchen",
+      "installedAt": "2024-08-03T13:26:31.032Z",
+      "lastSeenAt": "2025-09-05T02:10:32.383Z"
+    },
+    {
+      "id": "F49b8247",
+      "serialNumber": "FEGN84B20041",
+      "statusId": "WARNING",
+      "room": "calcar supplanto quae",
+      "installedAt": "2025-02-24T16:44:28.002Z",
+      "lastSeenAt": "2023-10-24T02:31:37.003Z"
+    },
+    {
+      "id": "C3e09Fa8",
+      "serialNumber": "GJXNIDV76ZOB",
+      "statusId": "OFFLINE",
+      "room": "adicio",
+      "installedAt": "2024-11-27T21:08:17.207Z",
+      "lastSeenAt": "2023-03-11T21:22:22.117Z"
+    },
+    {
+      "id": "eDcf4Da7",
+      "serialNumber": "WX3T2CEKWPC9",
+      "statusId": "GOOD",
+      "room": "magni",
+      "installedAt": "2024-09-21T05:15:25.927Z",
+      "lastSeenAt": "2023-07-28T13:56:52.110Z"
+    },
+    {
+      "id": "525aF73a",
+      "serialNumber": "QJG9ZCW4SF9T",
+      "statusId": "WARNING",
+      "room": "audentia",
+      "installedAt": "2024-04-28T01:56:22.581Z",
+      "lastSeenAt": "2024-08-19T04:19:02.998Z"
+    },
+    {
+      "id": "DD5CB780",
+      "serialNumber": "PVK4KKM34G6G",
+      "statusId": "OFFLINE",
+      "room": "curiositas suggero",
+      "installedAt": "2024-04-07T03:30:37.449Z",
+      "lastSeenAt": "2026-04-15T22:39:08.027Z"
+    },
+    {
+      "id": "d03423ce",
+      "serialNumber": "1EEMDPXU3PHQ",
+      "statusId": "OFFLINE",
+      "room": "quae",
+      "installedAt": "2024-11-25T15:28:42.896Z",
+      "lastSeenAt": "2025-06-15T00:08:02.180Z"
+    },
+    {
+      "id": "A0cEa9bF",
+      "serialNumber": "DT45TIIX7AJX",
+      "statusId": "GOOD",
+      "room": "vapulus",
+      "installedAt": "2025-10-21T23:02:31.366Z",
+      "lastSeenAt": "2025-08-15T00:06:21.261Z"
+    },
+    {
+      "id": "e20F80eC",
+      "serialNumber": "6IP4V60JXHWR",
+      "statusId": "WARNING",
+      "room": "sodalitas urbs comis",
+      "installedAt": "2025-05-29T04:45:13.680Z",
+      "lastSeenAt": "2023-04-12T12:00:46.521Z"
+    },
+    {
+      "id": "5a0ec363",
+      "serialNumber": "ULHX7ZD9FD2S",
+      "statusId": "WARNING",
+      "room": "sursum vulariter curiositas",
+      "installedAt": "2024-07-09T14:37:58.950Z",
+      "lastSeenAt": "2025-04-26T07:40:18.841Z"
+    },
+    {
+      "id": "DFFC6B49",
+      "serialNumber": "CBC8E8RWK8W5",
+      "statusId": "FAULT",
+      "room": "est",
+      "installedAt": "2024-04-23T00:31:58.831Z",
+      "lastSeenAt": "2026-02-17T11:45:00.304Z"
+    },
+    {
+      "id": "c1aB7d0D",
+      "serialNumber": "H2ZBYG8BWX9M",
+      "statusId": "WARNING",
+      "room": "vinco",
+      "installedAt": "2025-06-25T18:22:22.563Z",
+      "lastSeenAt": "2023-05-12T10:23:18.255Z"
+    },
+    {
+      "id": "1BeaFA8a",
+      "serialNumber": "SCMBURTE9J2D",
+      "statusId": "OFFLINE",
+      "room": "delibero amaritudo ipsa",
+      "installedAt": "2024-06-12T07:17:58.853Z",
+      "lastSeenAt": "2024-07-31T15:28:41.617Z"
+    },
+    {
+      "id": "D81A64b8",
+      "serialNumber": "IELI776ZA9WU",
+      "statusId": "GOOD",
+      "room": "surgo",
+      "installedAt": "2024-10-11T00:15:54.767Z",
+      "lastSeenAt": "2024-09-23T08:20:48.242Z"
+    },
+    {
+      "id": "d727d79D",
+      "serialNumber": "30IFYERK8WZD",
+      "statusId": "FAULT",
+      "room": "confugo a virtus",
+      "installedAt": "2025-04-28T00:02:20.624Z",
+      "lastSeenAt": "2026-02-12T16:58:40.749Z"
+    },
+    {
+      "id": "F2eeA52E",
+      "serialNumber": "14S28WATTO1X",
+      "statusId": "FAULT",
+      "room": "tabernus caecus vindico",
+      "installedAt": "2024-04-30T15:50:29.497Z",
+      "lastSeenAt": "2024-11-09T09:04:25.791Z"
+    },
+    {
+      "id": "a8110fAE",
+      "serialNumber": "GY7T70G5N95G",
+      "statusId": "FAULT",
+      "room": "tabgo accendo",
+      "installedAt": "2024-04-11T19:35:53.224Z",
+      "lastSeenAt": "2024-08-14T19:29:36.053Z"
+    },
+    {
+      "id": "Cb8d2d2a",
+      "serialNumber": "86VWE656R5Z3",
+      "statusId": "FAULT",
+      "room": "viriliter",
+      "installedAt": "2025-08-31T04:59:11.339Z",
+      "lastSeenAt": "2026-03-19T02:39:34.606Z"
+    },
+    {
+      "id": "6e8EAaDa",
+      "serialNumber": "5WDZY2LWD6KS",
+      "statusId": "WARNING",
+      "room": "vos",
+      "installedAt": "2025-12-20T23:06:49.603Z",
+      "lastSeenAt": "2025-02-28T02:40:23.928Z"
+    },
+    {
+      "id": "a0e33E78",
+      "serialNumber": "8JYCT916BSXR",
+      "statusId": "FAULT",
+      "room": "veniam armarium",
+      "installedAt": "2025-05-11T05:52:01.595Z",
+      "lastSeenAt": "2023-04-13T09:02:41.650Z"
+    }
+  ],
+  "count": 105,
+  "page": 1,
+  "limit": 20,
+  "totalPages": 6
+}
