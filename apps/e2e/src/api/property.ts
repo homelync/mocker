@@ -23,4 +23,4 @@ export const propertySchema = z.object({
   createdAt: z.string(),
 })
 
-export type Property = z.infer<typeof propertySchema>
+// export type Property = z.infer<typeof propertySchema>

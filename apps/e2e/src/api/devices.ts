@@ -30,4 +30,4 @@ export const deviceListSchema = z.object({
   totalPages: z.number().int(),
 })
 
-export type DeviceList = z.infer<typeof deviceListSchema>
+// export type DeviceList = z.infer<typeof deviceListSchema>
