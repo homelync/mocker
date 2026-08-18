@@ -37,4 +37,11 @@ export const deviceListSchema = z.object({
   totalPages: z.number().int(),
 })
 
+/**
+ * Exported for the reader, not for a caller: the example's point is that one
+ * schema gives you both the mock and the type, and nothing in a mocked app
+ * imports the type from here.
+ *
+ * @expected-unused
+ */
 export type DeviceList = z.infer<typeof deviceListSchema>

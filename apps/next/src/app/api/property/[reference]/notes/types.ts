@@ -12,4 +12,9 @@ export const noteSchema = z.object({
   createdAt: z.string(),
 })
 
+/**
+ * Exported for the reader; see the note in `api/devices/types.ts`.
+ *
+ * @expected-unused
+ */
 export type Note = z.infer<typeof noteSchema>

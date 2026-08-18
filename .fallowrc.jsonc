@@ -21,6 +21,11 @@
     "scripts/renovate-changeset.mjs"
   ],
 
+  // Read by a tool rather than imported by anything. `commitlint.config.js` has
+  // a fallow plugin that knows to look for it; nano-staged does not, so without
+  // this line the pre-commit config reads as a dead file.
+  "dynamicallyLoaded": ["nano-staged.js"],
+
   "ignorePatterns": [
     "**/.next/**",
     "**/build/**",

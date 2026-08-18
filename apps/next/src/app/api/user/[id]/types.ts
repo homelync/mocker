@@ -16,4 +16,9 @@ export const userSchema = z.object({
   lastLoginAt: z.string().nullish(),
 })
 
+/**
+ * Exported for the reader; see the note in `api/devices/types.ts`.
+ *
+ * @expected-unused
+ */
 export type User = z.infer<typeof userSchema>

@@ -25,4 +25,11 @@ export const timelineSchema = z.object({
   ),
 })
 
+/**
+ * Exported for the reader; see the note in `api/devices/types.ts`. On a planned
+ * route it is the whole deliverable — the front end is written against this
+ * before the endpoint exists.
+ *
+ * @expected-unused
+ */
 export type Timeline = z.infer<typeof timelineSchema>
