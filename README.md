@@ -1,4 +1,4 @@
-# mocker
+# mocker.
 
 Fake data from your zod schemas, served over HTTP — so an app can be run,
 demoed and tested against nothing at all.
