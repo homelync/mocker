@@ -8,7 +8,8 @@
     "faker",
     "storybook",
     "msw",
-    "fixtures"
+    "fixtures",
+    "fixtures-on-disk"
   ],
   "license": "MIT",
   "author": "magicspon",
@@ -29,6 +30,7 @@
   ],
   "exports": {
     ".": "./src/index.ts",
+    "./vite": "./src/vite.ts",
     "./package.json": "./package.json"
   },
   "publishConfig": {
@@ -37,6 +39,10 @@
       ".": {
         "types": "./dist/index.d.ts",
         "default": "./dist/index.js"
+      },
+      "./vite": {
+        "types": "./dist/vite.d.ts",
+        "default": "./dist/vite.js"
       },
       "./package.json": "./package.json"
     }
@@ -50,12 +56,19 @@
   },
   "peerDependencies": {
     "msw": "^2.15.0",
-    "zod": "^4.4.3"
+    "zod": "^4.4.3",
+    "vite": "^7.0.0 || ^8.0.0"
   },
   "devDependencies": {
     "msw": "^2.15.0",
     "tsdown": "^0.22.14",
     "typescript": "^7.0.2",
-    "zod": "^4.4.3"
+    "zod": "^4.4.3",
+    "vite": "^8.2.1"
+  },
+  "peerDependenciesMeta": {
+    "vite": {
+      "optional": true
+    }
   }
 }

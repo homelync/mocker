@@ -65,27 +65,6 @@ Two things to know before you start:
   generated data. The auth routes are deliberately left un-mocked — see
   [Adding a mock to a route](#adding-a-mock-to-a-route).
 
-## What is mocked today
-
-**Every BFF route that declares a response schema**, all of them from the
-endpoint registry in `src/mocks/registry.ts`. Read that file for the current
-list; the shape of it is:
-
-| Area                                           | Routes | Schema                                                |
-| ---------------------------------------------- | ------ | ----------------------------------------------------- |
-| `GET /api/portfolio/overview/*`                | 7      | per-widget, from each route's `types`                 |
-| `GET /api/portfolio/reports/*`                 | 5      | `devicesResponseSchema` and friends                   |
-| `GET /api/portfolio/reports/lookup/*`          | 12     | `lookupItemSchema.array()`                            |
-| `GET /api/property/*`                          | 6      | `propertyDetailSchema` and friends                    |
-| `/api/timeline/*` (`GET`/`POST`/`PUT`)         | 3      | `timelineDetailResponseSchema`, `eventIdentitySchema` |
-| `GET /api/property/[reference]/energy-history` | 1      | `energyHistorySchema` — **planned**                   |
-
-The last one has no `route.ts` at all. It is a sketch of an endpoint nobody has
-built yet, which is the one thing the `withMock` wrapper cannot do.
-
-Everything else is an auth route or the health probe.
-`src/mocks/verify/next-routes.test.ts` holds that list with a reason against
-each, and fails if a route is neither registered nor excused.
 `verify/repo-schemas.test.ts` drives itself off the registry, so every entry is
 proved to generate and re-parse across 40 seeds — there is no second list to
 keep in step.
@@ -541,10 +520,11 @@ the only symptom is a page that looks subtly wrong.
 
 ### Response headers
 
-| Header        | Meaning                                           |
-| ------------- | ------------------------------------------------- |
-| `x-mock`      | Always `1`. Present only on fabricated responses. |
-| `x-mock-seed` | The seed this body came from, for reproducing it. |
+| Header           | Meaning                                                   |
+| ---------------- | --------------------------------------------------------- |
+| `x-mock`         | Always `1`. Present only on fabricated responses.         |
+| `x-mock-seed`    | The seed this body came from, for reproducing it.         |
+| `x-mock-fixture` | The file this body was read from. Storybook `fixed` only. |
 
 ## Troubleshooting
 

@@ -16,13 +16,16 @@ mock, so the handlers are always installed.
 | ----------------------------------------- | --------------------------------------------------------- |
 | `src/mocks/registry.ts`                   | the endpoint table — the same one the Next example writes |
 | `.storybook/preview.ts`                   | the whole setup: one `msw.use(...mockerHandlers(...))`    |
-| `src/components/DeviceTable.stories.tsx`  | a fetching component, in six states, with no fixtures     |
+| `.storybook/main.ts`                      | the one line `fixed: true` needs — the fixture store      |
+| `src/components/DeviceTable.stories.tsx`  | a fetching component, in every state it has               |
 | `src/components/PropertyCard.stories.tsx` | a props component, filled by `mockLoader`                 |
 
 `DeviceTable` fetches for itself and parses the response with the very schema
 the mock generated it from — so the preview is a real check on the contract,
 not a picture of some data. Its stories cover the empty state, a held loading
-state, a 500 and a pinned field, none of which required touching the component.
+state, a 500 and one pinned field, none of which required touching the
+component — and a last one, `Fixed`, answered from a JSON file on disk that you
+can edit and commit.
 
 ## The point of the registry
 

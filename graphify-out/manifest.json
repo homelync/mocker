@@ -5,8 +5,8 @@
     "semantic_hash": ""
   },
   "package.json": {
-    "mtime": 1787045921.7320757,
-    "ast_hash": "cd0d5a2f7a248e59e88bd39fa143ffc6",
+    "mtime": 1787047932.088341,
+    "ast_hash": "e5c420b7937771de76e7d2109e5fbe2a",
     "semantic_hash": ""
   },
   "tsconfig.json": {
@@ -15,8 +15,8 @@
     "semantic_hash": ""
   },
   "AGENTS.md": {
-    "mtime": 1787047780.8412673,
-    "ast_hash": "321e3ef51af2078db96443cb0cd4bec6",
+    "mtime": 1787050697.6098151,
+    "ast_hash": "51cc34220aa6133c74d43b8c6eac7351",
     "semantic_hash": ""
   },
   "pnpm-workspace.yaml": {
@@ -25,8 +25,8 @@
     "semantic_hash": ""
   },
   ".claude/settings.local.json": {
-    "mtime": 1787047851.723926,
-    "ast_hash": "8cd314df8397c9a48ef0cd2983ac48ae",
+    "mtime": 1787049842.3262382,
+    "ast_hash": "74e240d76f5cc3f62a4b61293a68d1e5",
     "semantic_hash": ""
   },
   ".oxfmtrc.json": {
@@ -50,82 +50,82 @@
     "semantic_hash": ""
   },
   ".husky/_/applypatch-msg": {
-    "mtime": 1787047385.8302376,
+    "mtime": 1787049715.0901906,
     "ast_hash": "0b71c2e7d39daa010985d529f1320b37",
     "semantic_hash": "0b71c2e7d39daa010985d529f1320b37"
   },
   ".husky/_/commit-msg": {
-    "mtime": 1787047385.830098,
+    "mtime": 1787049715.090029,
     "ast_hash": "0b71c2e7d39daa010985d529f1320b37",
     "semantic_hash": "0b71c2e7d39daa010985d529f1320b37"
   },
   ".husky/_/h": {
-    "mtime": 1787047385.8296514,
+    "mtime": 1787049715.089373,
     "ast_hash": "15239a01c5554e56ff745570fb583a91",
     "semantic_hash": "15239a01c5554e56ff745570fb583a91"
   },
   ".husky/_/husky.sh": {
-    "mtime": 1787047385.831009,
+    "mtime": 1787049715.090862,
     "ast_hash": "13871d2ab13e8423790ecb2c01c78c18",
     "semantic_hash": "13871d2ab13e8423790ecb2c01c78c18"
   },
   ".husky/_/post-applypatch": {
-    "mtime": 1787047385.8304033,
+    "mtime": 1787049715.0903478,
     "ast_hash": "0b71c2e7d39daa010985d529f1320b37",
     "semantic_hash": "0b71c2e7d39daa010985d529f1320b37"
   },
   ".husky/_/post-checkout": {
-    "mtime": 1787047385.8306792,
+    "mtime": 1787049715.0905802,
     "ast_hash": "0b71c2e7d39daa010985d529f1320b37",
     "semantic_hash": "0b71c2e7d39daa010985d529f1320b37"
   },
   ".husky/_/post-commit": {
-    "mtime": 1787047385.830171,
+    "mtime": 1787049715.090111,
     "ast_hash": "0b71c2e7d39daa010985d529f1320b37",
     "semantic_hash": "0b71c2e7d39daa010985d529f1320b37"
   },
   ".husky/_/post-merge": {
-    "mtime": 1787047385.830786,
+    "mtime": 1787049715.0906413,
     "ast_hash": "0b71c2e7d39daa010985d529f1320b37",
     "semantic_hash": "0b71c2e7d39daa010985d529f1320b37"
   },
   ".husky/_/post-rewrite": {
-    "mtime": 1787047385.8305633,
+    "mtime": 1787049715.0905154,
     "ast_hash": "0b71c2e7d39daa010985d529f1320b37",
     "semantic_hash": "0b71c2e7d39daa010985d529f1320b37"
   },
   ".husky/_/pre-applypatch": {
-    "mtime": 1787047385.8303134,
+    "mtime": 1787049715.0902717,
     "ast_hash": "0b71c2e7d39daa010985d529f1320b37",
     "semantic_hash": "0b71c2e7d39daa010985d529f1320b37"
   },
   ".husky/_/pre-auto-gc": {
-    "mtime": 1787047385.8309262,
+    "mtime": 1787049715.090774,
     "ast_hash": "0b71c2e7d39daa010985d529f1320b37",
     "semantic_hash": "0b71c2e7d39daa010985d529f1320b37"
   },
   ".husky/_/pre-commit": {
-    "mtime": 1787047385.8297942,
+    "mtime": 1787049715.089498,
     "ast_hash": "0b71c2e7d39daa010985d529f1320b37",
     "semantic_hash": "0b71c2e7d39daa010985d529f1320b37"
   },
   ".husky/_/pre-merge-commit": {
-    "mtime": 1787047385.8299143,
+    "mtime": 1787049715.0895784,
     "ast_hash": "0b71c2e7d39daa010985d529f1320b37",
     "semantic_hash": "0b71c2e7d39daa010985d529f1320b37"
   },
   ".husky/_/pre-push": {
-    "mtime": 1787047385.830859,
+    "mtime": 1787049715.090708,
     "ast_hash": "0b71c2e7d39daa010985d529f1320b37",
     "semantic_hash": "0b71c2e7d39daa010985d529f1320b37"
   },
   ".husky/_/pre-rebase": {
-    "mtime": 1787047385.830487,
+    "mtime": 1787049715.0904238,
     "ast_hash": "0b71c2e7d39daa010985d529f1320b37",
     "semantic_hash": "0b71c2e7d39daa010985d529f1320b37"
   },
   ".husky/_/prepare-commit-msg": {
-    "mtime": 1787047385.8300111,
+    "mtime": 1787049715.0896742,
     "ast_hash": "0b71c2e7d39daa010985d529f1320b37",
     "semantic_hash": "0b71c2e7d39daa010985d529f1320b37"
   },
@@ -425,8 +425,8 @@
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1787047685.1471524,
-    "ast_hash": "5e3775c22d56b9af57a89770d60a52df",
+    "mtime": 1787050663.0121932,
+    "ast_hash": "17416aca9f9bdaf85d04b657935f3da0",
     "semantic_hash": ""
   },
   "apps/next/AGENTS.md": {
@@ -445,8 +445,8 @@
     "semantic_hash": ""
   },
   "docs/mocking-guide.md": {
-    "mtime": 1786890542.5084274,
-    "ast_hash": "35ec285a2766d9da21f923ff85068eeb",
+    "mtime": 1787050706.8909686,
+    "ast_hash": "5de742c7ee2500edab2a27df01eef028",
     "semantic_hash": ""
   },
   "packages/mocker-next/README.md": {
@@ -595,8 +595,8 @@
     "semantic_hash": ""
   },
   "apps/storybook/.storybook/main.ts": {
-    "mtime": 1787047324.1468189,
-    "ast_hash": "1ea1e9d915db674659e2b7686932c4e8",
+    "mtime": 1787050715.8319807,
+    "ast_hash": "4a9c5e91df542e77a12d9805b03b8b1e",
     "semantic_hash": ""
   },
   "apps/storybook/.storybook/preview.ts": {
@@ -625,8 +625,8 @@
     "semantic_hash": ""
   },
   "apps/storybook/src/components/DeviceTable.stories.tsx": {
-    "mtime": 1787047341.8801699,
-    "ast_hash": "dceee6e1337d48c6cff6bde9061a7885",
+    "mtime": 1787050719.8956327,
+    "ast_hash": "219c1b40fed99045011381c8caf38a2b",
     "semantic_hash": ""
   },
   "apps/storybook/src/components/DeviceTable.tsx": {
@@ -655,8 +655,8 @@
     "semantic_hash": ""
   },
   "packages/mocker-storybook/package.json": {
-    "mtime": 1787046518.0875416,
-    "ast_hash": "b801397c6205809e65e5e9274b273f40",
+    "mtime": 1787049595.2233436,
+    "ast_hash": "74652a7e7602b316400a94349079bceb",
     "semantic_hash": ""
   },
   "packages/mocker-storybook/src/handlers.test.ts": {
@@ -665,13 +665,13 @@
     "semantic_hash": ""
   },
   "packages/mocker-storybook/src/handlers.ts": {
-    "mtime": 1787046950.7811759,
-    "ast_hash": "5ad809d79efa9e1b275678862f9ee708",
+    "mtime": 1787050617.6095464,
+    "ast_hash": "ba877d8415b262554375442b7e27d81c",
     "semantic_hash": ""
   },
   "packages/mocker-storybook/src/index.ts": {
-    "mtime": 1787046950.7811036,
-    "ast_hash": "b25ebad1bdfb57af155ca03a017dffa6",
+    "mtime": 1787050601.816903,
+    "ast_hash": "1e5cdd832aaed1db6c60a4ead48d3e5c",
     "semantic_hash": ""
   },
   "packages/mocker-storybook/src/loader.test.ts": {
@@ -685,8 +685,8 @@
     "semantic_hash": ""
   },
   "packages/mocker-storybook/src/package-boundary.test.ts": {
-    "mtime": 1787046926.7351475,
-    "ast_hash": "51020c0d9ae1d66e8d0eef1fff60fcd0",
+    "mtime": 1787049617.0030015,
+    "ast_hash": "e1291c4843672dcdfb4a9055b288ca58",
     "semantic_hash": ""
   },
   "packages/mocker-storybook/src/pattern.test.ts": {
@@ -705,8 +705,8 @@
     "semantic_hash": ""
   },
   "packages/mocker-storybook/tsdown.config.ts": {
-    "mtime": 1787046518.1248488,
-    "ast_hash": "8ef09d7eac703ffbd12e9f6dcd367b64",
+    "mtime": 1787049589.7116253,
+    "ast_hash": "cb9be064197a3f0608725132383ea632",
     "semantic_hash": ""
   },
   "packages/mocker-storybook/vitest.config.ts": {
@@ -730,13 +730,68 @@
     "semantic_hash": ""
   },
   "apps/storybook/README.md": {
-    "mtime": 1787047780.812468,
-    "ast_hash": "ea1bbdaae735cbb8142a4333955d72c0",
+    "mtime": 1787050747.2913413,
+    "ast_hash": "ba58251d4fd2ad84eb4f86bd3dbfba54",
     "semantic_hash": ""
   },
   "packages/mocker-storybook/README.md": {
-    "mtime": 1787047796.9156554,
-    "ast_hash": "41ec5fa63449031c731182fe5c363a1c",
+    "mtime": 1787050734.4303854,
+    "ast_hash": "eb8e6b9f4bedc571efded866fdba69f3",
+    "semantic_hash": ""
+  },
+  "packages/mocker-storybook/src/fixture-path.test.ts": {
+    "mtime": 1787050643.3344748,
+    "ast_hash": "214b4f5039de505d186ee653c9516f92",
+    "semantic_hash": ""
+  },
+  "packages/mocker-storybook/src/fixture-path.ts": {
+    "mtime": 1787050637.7813425,
+    "ast_hash": "d5426e36f523c3669292f6003ba766d0",
+    "semantic_hash": ""
+  },
+  "packages/mocker-storybook/src/fixtures.test.ts": {
+    "mtime": 1787050617.6099079,
+    "ast_hash": "bd5f0c35196ffcd44d29e51b6247294d",
+    "semantic_hash": ""
+  },
+  "packages/mocker-storybook/src/fixtures.ts": {
+    "mtime": 1787050637.7810037,
+    "ast_hash": "e1419c80f98849b09c2ae3fc1e607801",
+    "semantic_hash": ""
+  },
+  "packages/mocker-storybook/src/route.ts": {
+    "mtime": 1787049421.968608,
+    "ast_hash": "710faf4d597becb18d1b310472d01dff",
+    "semantic_hash": ""
+  },
+  "packages/mocker-storybook/src/vite.test.ts": {
+    "mtime": 1787049842.3273194,
+    "ast_hash": "1d4af800a5230b61bf96497286f7b467",
+    "semantic_hash": ""
+  },
+  "packages/mocker-storybook/src/vite.ts": {
+    "mtime": 1787050637.78121,
+    "ast_hash": "545b6b6df4070798ccecda6451d9e6e7",
+    "semantic_hash": ""
+  },
+  ".changeset/eight-poets-shave.md": {
+    "mtime": 1787050720.1341264,
+    "ast_hash": "fadc40addff2ec9f16d2d9c053b6d904",
+    "semantic_hash": ""
+  },
+  "apps/storybook/mocks/GET/api/devices/f62b1377.json": {
+    "mtime": 1787050675.8189106,
+    "ast_hash": "02bb24a42b6859d198aa5f83e524efbd",
+    "semantic_hash": ""
+  },
+  "packages/mocker-storybook/src/fixed.test.ts": {
+    "mtime": 1787050643.334284,
+    "ast_hash": "b81eb8c4f970d49350e8b5b65bb37acf",
+    "semantic_hash": ""
+  },
+  "packages/mocker-storybook/src/fixed.ts": {
+    "mtime": 1787050617.6092298,
+    "ast_hash": "fbc7af9f55436ab1318080229ccec515",
     "semantic_hash": ""
   }
 }

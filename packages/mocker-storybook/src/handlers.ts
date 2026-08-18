@@ -20,6 +20,7 @@ import type {
   MockRegistryEntry,
 } from '@magicspon/mocker'
 import { toHandlerPath, toRegistryPath } from './pattern'
+import { serveFixed } from './fixed'
 
 /**
  * The Storybook adapter: a registry in, MSW handlers out.
@@ -60,6 +61,26 @@ export interface MockerHandlerOptions {
   readonly delayMs?: number
   /** Respond with this status instead of the endpoint's own, for error states. */
   readonly status?: number
+  /**
+   * Answer from a JSON file on disk instead of generating per request, writing
+   * the file from the generated data the first time it is asked for.
+   *
+   * The generator is already deterministic, so this is not about stability — it
+   * is about being able to *edit* the answer. A fixture is a plain file that can
+   * be corrected to say the thing the story is actually about, and committed, so
+   * the same rows appear for everyone. It also survives a schema gaining a field,
+   * which would otherwise change every generated response at once.
+   *
+   * The filename is derived from the request — method, path, query and the
+   * controls above — so it is the same on every machine and does not move when a
+   * registry key is renamed. See `mocks/GET/api/devices/…` once a story has run.
+   *
+   * **Needs the Vite plugin.** A preview has no filesystem; the store lives on
+   * Storybook's dev server. Add `mockerFixtures()` from
+   * `@magicspon/mocker-storybook/vite` to `viteFinal` in `.storybook/main.ts`.
+   * Without it the console says so once and responses are generated as usual.
+   */
+  readonly fixed?: boolean
 }
 
 /** {@link MockerHandlerOptions}, plus what only a single endpoint can be told. */
@@ -148,16 +169,20 @@ function asDeclared(request: Request, options: MockerHandlerOptions): Request {
  * not answer" and carries on down the list, so a request whose query failed one
  * key's constraints can still be served by another, and a consumer's own
  * handler for the same path is not shadowed by ours.
+ *
+ * `fixed` branches to `fixed.ts`, which is the same seam plus a filesystem —
+ * kept separate because a filesystem is the one thing this library is otherwise
+ * built to do without.
  */
 function resolver(
   registry: MockRegistry,
   options: MockerHandlerOptions,
 ): HttpResponseResolver {
   return async ({ request }) => {
-    const result = await serveFromRegistry(
-      asDeclared(request, options),
-      registry,
-    )
+    const declared = asDeclared(request, options)
+    if (options.fixed === true) return serveFixed(declared, registry)
+
+    const result = await serveFromRegistry(declared, registry)
     if (isRegistryMiss(result)) return undefined
 
     return result

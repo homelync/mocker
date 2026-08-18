@@ -3,15 +3,22 @@ import path from 'node:path'
 import { describe, expect, it } from 'vitest'
 
 /**
- * The two claims this adapter makes that nothing else can check.
+ * The claims this adapter makes that nothing else can check.
  *
- * 1. **It runs in a browser.** Storybook bundles this into the preview, which
- *    has no `node:fs` and no `process`. A node builtin acquired here does not
- *    fail a build — Vite resolves it and the preview dies on load, in a
+ * 1. **`index.ts` runs in a browser.** Storybook bundles it into the preview,
+ *    which has no `node:fs` and no `process`. A node builtin acquired there does
+ *    not fail a build — Vite resolves it and the preview dies on load, in a
  *    consumer's app, with a stack trace pointing at a dependency.
  *
- * 2. **It does not depend on Storybook.** These are plain MSW handlers, which
- *    is what lets the same call answer a Vitest browser test or a bare
+ * 2. **`vite.ts` is the other side of that line, and stays cheap.** It is the
+ *    fixture store, so it *must* reach `node:fs`, and it is loaded by
+ *    `.storybook/main.ts` — unbundled, before any build graph exists, exactly
+ *    like the `next.config.ts` the sibling packages are shaped around. So it may
+ *    import node and Vite, and nothing else: reaching `@magicspon/mocker` from
+ *    there would load zod and faker on every `storybook dev`, silently.
+ *
+ * 3. **Nothing depends on Storybook.** These are plain MSW handlers, which is
+ *    what lets the same call answer a Vitest browser test or a bare
  *    `setupWorker`, and what keeps this package still building when Storybook's
  *    addon API moves. The loader reads `{ id }` structurally rather than
  *    importing `StoryContext` for exactly this reason — a single convenience
@@ -146,6 +153,36 @@ describe("the Storybook adapter's boundaries", () => {
     // type-only, so it never reaches this list.
     const allowed = new Set(['msw', '@magicspon/mocker'])
     const closure = runtimeClosure(path.join(root, 'index.ts'))
+
+    const offenders = [...closure].flatMap(([file, references]) =>
+      references
+        .filter(({ runtime }) => runtime)
+        .filter(({ specifier }) => !specifier.startsWith('.'))
+        .filter(({ specifier }) => !allowed.has(specifier))
+        .map(({ specifier }) => `${path.relative(root, file)} → ${specifier}`),
+    )
+
+    expect(offenders).toEqual([])
+  })
+
+  it('keeps the fixture store out of the preview bundle', () => {
+    // The narrower statement behind the assertion above: `vite.ts` is where the
+    // node builtins are, so the browser entry must not reach it *at all*. Stated
+    // separately because the general check would also pass if someone moved the
+    // `node:fs` import into a helper the preview happens to load.
+    const closure = runtimeClosure(path.join(root, 'index.ts'))
+    const reached = [...closure.keys()].map((file) => path.relative(root, file))
+
+    expect(reached).not.toContain('vite.ts')
+  })
+
+  it('keeps the Storybook config load free of the generator', () => {
+    // `.storybook/main.ts` imports `./vite`, unbundled. Anything reachable from
+    // it is loaded on every `storybook dev` — and `@magicspon/mocker` pulls zod
+    // and faker, which is precisely the cost the sibling packages' `./config`
+    // entries exist to avoid paying.
+    const allowed = new Set(['node:fs/promises', 'node:path', 'vite'])
+    const closure = runtimeClosure(path.join(root, 'vite.ts'))
 
     const offenders = [...closure].flatMap(([file, references]) =>
       references

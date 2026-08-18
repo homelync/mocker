@@ -77,6 +77,36 @@ export const AllOffline = meta.story({
 export const AnotherProperty = meta.story({
   args: { reference: 'ZZ9000' },
   beforeEach({ msw }) {
-    msw.use(mockerHandler(mockRegistry, DEVICES, { seed: 'another-property' }))
+    msw.use(
+      mockerHandler(mockRegistry, DEVICES, {
+        seed: 'another-property',
+        fixed: true,
+      }),
+    )
+  },
+})
+
+/**
+ * Answered from a file, so the data can be edited rather than only generated.
+ *
+ * The first run writes `mocks/GET/api/devices/<hash>.json` from whatever the
+ * generator produced; every run after it serves that file. Open it, change a
+ * device to the one the story is actually about, commit it, and everybody sees
+ * the same table.
+ *
+ * Not the same thing as the `overrides` in {@link AllOffline}, which pins one
+ * field and leaves the rest generated. This freezes the whole response.
+ *
+ * The name is derived from the request — method, path, query and the controls
+ * above — so it is the same on every machine and does not move when the registry
+ * key is renamed. Editing the file into something the schema rejects is a 500
+ * naming the file, rather than a component that renders the wrong thing.
+ *
+ * Needs `mockerFixtures()` in `.storybook/main.ts`; without it the console says
+ * so once and the story generates as usual.
+ */
+export const Fixed = meta.story({
+  beforeEach({ msw }) {
+    msw.use(mockerHandler(mockRegistry, DEVICES, { count: 3, fixed: true }))
   },
 })

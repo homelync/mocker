@@ -10,7 +10,9 @@ npm install --save-dev @magicspon/mocker-storybook msw msw-storybook-addon
 npx msw init public --save
 ```
 
-`@magicspon/mocker` comes with it. `msw` (v2) and `zod` (v4) are peers. ESM only.
+`@magicspon/mocker` comes with it. `msw` (v2) and `zod` (v4) are peers. `vite` is
+an optional peer, needed only for [fixed responses](#fixed-responses-from-a-file-on-disk).
+ESM only.
 
 **No Storybook dependency of its own** — these are plain MSW handlers, so the
 same call works in a Vitest browser test or a bare `setupWorker`, and nothing
@@ -108,6 +110,7 @@ export const ServerError = meta.story({
 | `status`  | answers with this status instead of the endpoint's own            |
 | `seed`    | different data for the same request, so two stories are not one   |
 | `baseUrl` | where the API is mounted, when it is not the preview's own origin |
+| `fixed`   | answers from a JSON file on disk — see below                      |
 
 `generate` takes the same options a registry entry takes, checked against **this
 entry's** schema — so a canonical path is a completion, and a path the schema
@@ -125,6 +128,91 @@ export const AllOffline = meta.story({
   },
 })
 ```
+
+## Fixed responses, from a file on disk
+
+`fixed: true` answers from a JSON file instead of generating per request, and
+writes the file from the generated data the first time it is asked for.
+
+Generation is already deterministic, so this is not about stability. It is about
+being able to **edit** the answer: the generator gives you plausible data, and a
+fixture gives you the specific data — the device name the story is actually
+about, the one address the screenshot is meant to show — reviewable in a diff
+and the same for everybody who checks the repo out.
+
+> Not to be confused with an `overrides` entry, which pins one **field** while
+> the rest of the response is still generated. `fixed` freezes the **whole
+> response**, and does it as a file rather than as code.
+
+A preview is a browser and has no disk, so the store lives on Storybook's dev
+server. One line in `.storybook/main.ts`:
+
+```ts
+import { mockerFixtures } from '@magicspon/mocker-storybook/vite'
+
+export default defineMain({
+  framework: '@storybook/react-vite',
+  stories: ['../src/**/*.stories.@(ts|tsx)'],
+  addons: ['msw-storybook-addon'],
+  viteFinal: (config) => ({
+    ...config,
+    plugins: [...(config.plugins ?? []), mockerFixtures()],
+  }),
+})
+```
+
+Then ask for it, per story or preview-wide:
+
+```ts
+// one story
+export const Fixed = meta.story({
+  beforeEach({ msw }) {
+    msw.use(mockerHandler(registry, DEVICES, { count: 3, fixed: true }))
+  },
+})
+
+// or every endpoint, in .storybook/preview.ts
+msw.use(...mockerHandlers(registry, { fixed: true }))
+```
+
+Run the story once and the file appears:
+
+```
+mocks/
+  GET/
+    api/
+      devices/
+        3f9a1c2d.json        ← ?propertyReference=ABC123
+        b71e04aa.json        ← the same endpoint, count: 3
+```
+
+Open it, change what the story is actually about, commit it. The next run serves
+your edit.
+
+The name is derived from the request — method, path, sorted query, and the
+`seed` / `count` / `status` the story set — so it is the same on every machine,
+does not move when a registry key is renamed, and gives two stories of one
+endpoint two files rather than one they fight over. `mockerFixtures({ dir })`
+puts them somewhere other than `mocks`.
+
+| Situation                         | What happens                                 |
+| --------------------------------- | -------------------------------------------- |
+| No file yet                       | generate, answer, write the file             |
+| File exists                       | serve it verbatim — your formatting survives |
+| File no longer matches the schema | **500 naming the file**, with the zod issues |
+| `status: 500` and other failures  | never written; served as usual               |
+| Plugin missing, or a static build | one console warning, then generate as usual  |
+
+The two that are decisions rather than mechanics:
+
+- **A stale file is a 500, not a silent regeneration.** Regenerating would
+  destroy the edit that was the whole point, and serving it unchecked would move
+  the failure into the component, where it looks like a bug in the component.
+- **A requested failure is never stored.** One story wanting a 500 must not make
+  the error that endpoint's permanent answer for every other story.
+
+Responses carry `x-mock-fixture: GET/api/devices/3f9a1c2d.json`, so devtools
+tells you which file answered.
 
 ## Components that take props
 
