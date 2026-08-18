@@ -20,6 +20,10 @@ export {
 export { collectLeafKinds, collectPaths, findArrayPaths } from './paths'
 export { requestSignature, shapeRequest } from './shape'
 export { hashSeed } from './hash'
+// Where a fixed response lives on disk, and how it is written. Here rather than
+// in an adapter because both adapters that have a filesystem must agree on the
+// answer — see `fixture.ts`.
+export { fixturePath, serializeFixture } from './fixture'
 export { LEAF_KINDS } from './types'
 export type { HandleContext, MockEndpoint } from './handle'
 export type { MockControls } from './controls'

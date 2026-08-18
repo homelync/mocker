@@ -1,0 +1,72 @@
+{
+  "name": "@magicspon/mocker-playwright",
+  "version": "0.1.0",
+  "description": "Playwright adapter for @magicspon/mocker — browser route mocks from a mock registry, backed by editable fixture files",
+  "keywords": [
+    "zod",
+    "mock",
+    "faker",
+    "playwright",
+    "e2e",
+    "fixtures",
+    "fixtures-on-disk"
+  ],
+  "license": "MIT",
+  "author": "magicspon",
+  "homepage": "https://github.com/magicspon/mocker/tree/main/packages/mocker-playwright#readme",
+  "bugs": "https://github.com/magicspon/mocker/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/magicspon/mocker.git",
+    "directory": "packages/mocker-playwright"
+  },
+  "type": "module",
+  "sideEffects": false,
+  "engines": {
+    "node": ">=24.19.0"
+  },
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": "./src/index.ts",
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "access": "public",
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "./package.json": "./package.json"
+    }
+  },
+  "scripts": {
+    "build": "tsdown",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@magicspon/mocker": "workspace:^"
+  },
+  "peerDependencies": {
+    "zod": "^4.4.3",
+    "@playwright/test": "^1.50.0",
+    "playwright-core": "^1.50.0"
+  },
+  "peerDependenciesMeta": {
+    "@playwright/test": {
+      "optional": true
+    },
+    "playwright-core": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.62.1",
+    "playwright-core": "^1.62.1",
+    "tsdown": "^0.22.14",
+    "typescript": "^7.0.2",
+    "zod": "^4.4.3"
+  }
+}

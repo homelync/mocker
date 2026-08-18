@@ -268,6 +268,28 @@ const server = setupServer(
 )
 ```
 
+### Under Playwright
+
+If your app can start a worker itself, these handlers mock it there too, and
+Playwright needs no adapter at all:
+
+```ts
+// the app's own entry, behind a flag
+setupWorker(...mockerHandlers(registry)).start()
+```
+
+Note that this is `setupWorker`, in the browser — **not** `setupServer` in the
+test process. Under Playwright the browser is a separate process, and almost
+nothing it fetches goes through Node's http stack, so `setupServer` would see
+none of it.
+
+The trade is that `mockServiceWorker.js` has to be served by the app under test
+and registered before the first navigation, and that every test sees the same
+data. When either of those is a problem — a built app, a cross-origin API, or one
+test needing an empty list while the next needs three rows —
+[`@magicspon/mocker-playwright`](https://github.com/magicspon/mocker/tree/main/packages/mocker-playwright)
+intercepts at the browser context instead, from the same registry.
+
 ## Further reading
 
 Recipes, the control headers, the registry design and the reasoning behind each

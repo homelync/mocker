@@ -472,6 +472,50 @@ fake placeholder data (`999`, lorem) rather than realistic values, so a story's
 fetched areas should _not_ be filled from this. Realistic-looking generated data
 belongs in unit tests, Playwright and the running app.
 
+## Under Playwright
+
+[`@magicspon/mocker-playwright`](../packages/mocker-playwright/README.md) serves
+the same registry to a browser context, so an e2e suite asserts on the same bytes
+`next dev` and Storybook show.
+
+```ts
+// tests/fixtures.ts
+export const test = base.extend(mockerTest({ registry }))
+
+// tests/devices.spec.ts
+test('empty state', async ({ page, mocker }) => {
+  mocker.use('GET /api/devices', { count: 0 }) // before goto
+  await page.goto('/devices')
+})
+```
+
+Two of its defaults are the **opposite** of the Storybook adapter's, and the
+asymmetry is deliberate: a story is looked at, a test asserts.
+
+- **Responses come from files** (`fixed: true`). A request with no fixture gets
+  one generated and written — and **fails the test**, exactly as `toMatchSnapshot`
+  does about a missing baseline. Without the failure, CI generates a fixture,
+  serves it, goes green, and throws the file away: the reviewer sees a test
+  asserting on faker output with nothing saying so.
+- **An undeclared request fails the test** (`unmatched: 'error'`). Scoped by
+  `resourceType`, so only `fetch` and `xhr` are strict and a test that loads a
+  font is unaffected. Passthrough would let an undeclared call reach a real
+  backend, and a `POST` write to a real database.
+
+To regenerate a fixture, delete it. `--update-snapshots` will not do it for you:
+`none` is honoured, `all` and `changed` are ignored, because accepting a
+screenshot change must not rewrite every hand-edited fixture in the repo.
+
+The filename derivation is shared with Storybook's fixed responses, in
+`@magicspon/mocker/core` — so the same request lands on the same file from either
+runtime, and one store can serve both if you point them at one directory.
+
+If the app under test can start an MSW **worker** itself, you may need no adapter
+at all: `mockerHandlers()` works in a bare `setupWorker`. What it cannot do is
+vary the data per test, which is the main reason this package exists.
+
+`apps/e2e` is a working suite with its fixtures committed.
+
 ## Reference
 
 ### `MOCK_API`
@@ -815,8 +859,10 @@ only 404, with no rewrite pointing at it.
 
 ## Not yet built
 
-- **Adapters for Playwright, MSW and Nest.** `handle` is already the right
-  shape; each is a dozen lines when someone needs it.
+- **An adapter for Nest.** `handle` is already the right shape; it is a dozen
+  lines when someone needs it. (Playwright and MSW are built: see
+  [`packages/mocker-playwright`](../packages/mocker-playwright/README.md) and
+  [`packages/mocker-storybook`](../packages/mocker-storybook/README.md).)
 - **A bare request to a query-constrained route.** `/api/property/devices` with
   no `propertyReference` should reach the real handler and get its 400. It does
   not: the key's `has` condition correctly declines the request, but the

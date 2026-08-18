@@ -12,6 +12,12 @@
     "packages/mocker-next/src/config.ts",
     "packages/mocker-next/src/index.prod.ts",
     "packages/mocker-storybook/src/index.ts",
+    // The Vite plugin half of the Storybook fixture store. A second entry in its
+    // package.json, and loaded by `.storybook/main.ts` rather than imported from
+    // anywhere in `src/` — so without this line it and everything it reaches
+    // read as dead.
+    "packages/mocker-storybook/src/vite.ts",
+    "packages/mocker-playwright/src/index.ts",
     "scripts/renovate-changeset.mjs"
   ],
 
@@ -33,7 +39,7 @@
     // Hide small-N clones; focus on widespread copy-paste worth refactoring.
     "minOccurrences": 4,
 
-    // The three package-boundary tests share an import-graph walker on purpose:
+    // The four package-boundary tests share an import-graph walker on purpose:
     // each must travel with the package it constrains, and a shared helper would
     // be exactly the repo-level thing that did not survive the last extraction.
     // Reported as duplication, that decision reads as an oversight every time.

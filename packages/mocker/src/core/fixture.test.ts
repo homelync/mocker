@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
-import type { MockControls } from '@magicspon/mocker'
-import { fixturePath } from './fixture-path'
+import type { MockControls } from './controls'
+import { fixturePath, serializeFixture } from './fixture'
 
 /**
  * The one property a fixture store has no way to recover from getting wrong.
@@ -99,5 +99,24 @@ describe('a path segment that is not a filename', () => {
 
   it('leaves an ordinary dot alone', () => {
     expect(path('/api/v1.2/devices')).toContain('/v1.2/')
+  })
+})
+
+describe('the bytes a fixture is written as', () => {
+  it('indents by two and ends with a newline', () => {
+    // Both adapters write this store. A formatting difference between them would
+    // churn a whitespace diff on every alternate run, in files whose entire
+    // purpose is to be read in a review.
+    expect(serializeFixture('{"a":1}')).toBe('{\n  "a": 1\n}\n')
+  })
+
+  it('canonicalises whatever the generator produced', () => {
+    expect(serializeFixture('{\n"a":   1\n}')).toBe(serializeFixture('{"a":1}'))
+  })
+
+  it('refuses a body that is not JSON', () => {
+    // Thrown rather than passed through: a store holds one kind of file, and the
+    // caller is the only layer that knows what a bad body means.
+    expect(() => serializeFixture('<!doctype html>')).toThrow()
   })
 })

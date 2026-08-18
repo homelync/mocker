@@ -1,11 +1,11 @@
 # Graph Report - mocker  (2026-08-18)
 
 ## Corpus Check
-- 148 files · ~67,262 words
+- 149 files · ~67,914 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 946 nodes · 1267 edges · 135 communities (67 shown, 68 thin omitted)
+- 946 nodes · 1267 edges · 134 communities (66 shown, 68 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 9 edges (avg confidence: 0.79)
 - Token cost: 0 input · 0 output
 
@@ -129,7 +129,6 @@
 - [[_COMMUNITY_Strict TypeScript settings (noUnusedLocals, verbatimModuleSyntax, erasableSyntaxOnly)|Strict TypeScript settings (noUnusedLocals, verbatimModuleSyntax, erasableSyntaxOnly)]]
 - [[_COMMUNITY_TypeScript compiler configuration|TypeScript compiler configuration]]
 - [[_COMMUNITY_Community 125|Community 125]]
-- [[_COMMUNITY_Community 126|Community 126]]
 - [[_COMMUNITY_Community 127|Community 127]]
 - [[_COMMUNITY_Community 128|Community 128]]
 - [[_COMMUNITY_Community 129|Community 129]]
@@ -165,11 +164,11 @@
 ## Import Cycles
 - None detected.
 
-## Communities (135 total, 68 thin omitted)
+## Communities (134 total, 68 thin omitted)
 
 ### Community 0 - "Schema-Driven Data Generation"
-Cohesion: 0.15
-Nodes (27): bindingNames(), compareSpecificity(), describeConstraint(), dynamicSegments(), findMatch(), InvalidRegistryKeyError, isPathRegistered(), matchPattern() (+19 more)
+Cohesion: 0.16
+Nodes (25): bindingNames(), compareSpecificity(), describeConstraint(), dynamicSegments(), findMatch(), InvalidRegistryKeyError, isPathRegistered(), matchPattern() (+17 more)
 
 ### Community 1 - "Next.js Adapter and Mock Flag"
 Cohesion: 0.05
@@ -196,12 +195,12 @@ Cohesion: 0.33
 Nodes (6): A note on dependencies, How it works, Layout, Not yet built, Supported zod surface, Why the registry, and why it won
 
 ### Community 8 - "TypeScript Compiler Options"
-Cohesion: 0.12
-Nodes (21): handler(), isRegistryMiss(), ENABLE_ALL, environment(), isMockConfigured(), isMockEnabledFor(), DISABLED, environment() (+13 more)
+Cohesion: 0.07
+Nodes (40): handler(), ENABLE_ALL, environment(), isMockConfigured(), isMockEnabledFor(), DISABLED, environment(), formatMockLog() (+32 more)
 
 ### Community 9 - "shadcn/ui Component Config"
 Cohesion: 0.17
-Nodes (12): Commands, Comments, Communication, Conventions, fallow, graphify, Linking into a consumer, mocker (+4 more)
+Nodes (12): Commands, Comments, Communication, Conventions, fallow, Fixed responses (`fixed: true`), graphify, Linking into a consumer (+4 more)
 
 ### Community 10 - "CLI Package Manifest"
 Cohesion: 0.10
@@ -212,8 +211,8 @@ Cohesion: 0.14
 Nodes (24): assertOverridePathsExist(), clampNumber(), clampString(), context(), DEFAULT_NESTED_ARRAY_LENGTH, FORMAT_GENERATORS, generateNumber(), generateString() (+16 more)
 
 ### Community 12 - "Mock Package Manifest"
-Cohesion: 0.13
-Nodes (20): mockRewrites(), requireApiPath(), Rewrite, RewriteHas, ruleSignature(), detailSchema, toRewriteConditions(), toRewriteDestination() (+12 more)
+Cohesion: 0.31
+Nodes (8): decode(), fixturePath(), RELATIVE, safeSegment(), signature(), none, path(), post()
 
 ### Community 13 - "Renovate Update Policy"
 Cohesion: 0.12
@@ -256,8 +255,8 @@ Cohesion: 0.15
 Nodes (13): InvalidControlError, readControls(), readInt(), generate(), BODILESS_STATUSES, handle(), HandleContext, messageOf() (+5 more)
 
 ### Community 24 - "Community 24"
-Cohesion: 0.08
-Nodes (29): applyControls(), asDeclared(), EntryOutput, MockerEndpointOptions, mockerHandler(), MockerHandlerOptions, mockerHandlers(), resolver() (+21 more)
+Cohesion: 0.05
+Nodes (49): Property, propertySchema, PropertyCard(), AnotherProperty, Default, FullyPopulated, meta, isRegistryMiss() (+41 more)
 
 ### Community 25 - "Community 25"
 Cohesion: 0.29
@@ -301,7 +300,7 @@ Nodes (3): suggest(), UnknownOverridePathError, UnsupportedSchemaError
 
 ### Community 36 - "Community 36"
 Cohesion: 0.22
-Nodes (8): Components that take props, Further reading, @magicspon/mocker-storybook, One story, one endpoint, different behaviour, Outside Storybook, Pinning the data to a file, Quickstart, What the handlers do
+Nodes (8): Components that take props, Fixed responses, from a file on disk, Further reading, @magicspon/mocker-storybook, One story, one endpoint, different behaviour, Outside Storybook, Quickstart, What the handlers do
 
 ### Community 37 - "Community 37"
 Cohesion: 0.39
@@ -348,12 +347,8 @@ Cohesion: 0.40
 Nodes (4): Storybook example, The point of the registry, The service worker, What to look at
 
 ### Community 125 - "Community 125"
-Cohesion: 0.09
-Nodes (27): decode(), fixturePath(), RELATIVE, safeSegment(), signature(), none, path(), post() (+19 more)
-
-### Community 126 - "Community 126"
-Cohesion: 0.29
-Nodes (7): Property, propertySchema, PropertyCard(), AnotherProperty, Default, FullyPopulated, meta
+Cohesion: 0.17
+Nodes (9): mockerFixtures(), MockerFixturesOptions, readBody(), RELATIVE, send(), serveFixture(), storeFixture(), fixture() (+1 more)
 
 ### Community 127 - "Community 127"
 Cohesion: 0.20
@@ -399,13 +394,13 @@ _Questions this graph is uniquely positioned to answer:_
   _Edge tagged AMBIGUOUS (relation: shares_data_with) - confidence is low._
 - **Why does `GenerateOptions` connect `Oxfmt Formatting Config` to `Schema-Driven Data Generation`, `Next Adapter Manifest`, `Directory Fuzzy Search`, `Vitest Type Shims`, `Community 24`, `Community 29`?**
   _High betweenness centrality (0.018) - this node is a cross-community bridge._
-- **Why does `mockRewrites()` connect `Mock Package Manifest` to `Schema-Driven Data Generation`, `TypeScript Compiler Options`?**
+- **Why does `mockRewrites()` connect `TypeScript Compiler Options` to `Schema-Driven Data Generation`?**
   _High betweenness centrality (0.014) - this node is a cross-community bridge._
-- **Why does `parseKey()` connect `Schema-Driven Data Generation` to `Community 24`, `Mock Package Manifest`?**
+- **Why does `parseKey()` connect `Schema-Driven Data Generation` to `Community 24`, `TypeScript Compiler Options`?**
   _High betweenness centrality (0.011) - this node is a cross-community bridge._
 - **What connects `$schema`, `baseBranch`, `access` to the rest of the system?**
   _487 weakly-connected nodes found - possible documentation gaps or missing edges._
-- **Should `Schema-Driven Data Generation` be split into smaller, more focused modules?**
-  _Cohesion score 0.1495798319327731 - nodes in this community are weakly interconnected._
 - **Should `Next.js Adapter and Mock Flag` be split into smaller, more focused modules?**
   _Cohesion score 0.049682875264270614 - nodes in this community are weakly interconnected._
+- **Should `Agent Instructions and Toolchain Policy` be split into smaller, more focused modules?**
+  _Cohesion score 0.125 - nodes in this community are weakly interconnected._

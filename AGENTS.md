@@ -1,13 +1,15 @@
 # mocker
 
-A pnpm monorepo publishing three packages: a library that generates fake data from zod schemas and
-serves it over HTTP, and two adapters over it — Next.js App Router, and Storybook via MSW.
+A pnpm monorepo publishing four packages: a library that generates fake data from zod schemas and
+serves it over HTTP, and three adapters over it — Next.js App Router, Storybook via MSW, and
+Playwright via `context.route`.
 
-| Package                       | Directory                   | Entries                           |
-| ----------------------------- | --------------------------- | --------------------------------- |
-| `@magicspon/mocker`           | `packages/mocker`           | `.` · `./core` · `./config`       |
-| `@magicspon/mocker-next`      | `packages/mocker-next`      | `.` · `./config` · `./production` |
-| `@magicspon/mocker-storybook` | `packages/mocker-storybook` | `.` · `./vite`                    |
+| Package                        | Directory                    | Entries                           |
+| ------------------------------ | ---------------------------- | --------------------------------- |
+| `@magicspon/mocker`            | `packages/mocker`            | `.` · `./core` · `./config`       |
+| `@magicspon/mocker-next`       | `packages/mocker-next`       | `.` · `./config` · `./production` |
+| `@magicspon/mocker-storybook`  | `packages/mocker-storybook`  | `.` · `./vite`                    |
+| `@magicspon/mocker-playwright` | `packages/mocker-playwright` | `.`                               |
 
 ## The constraint everything else follows from
 
@@ -53,6 +55,19 @@ claims about it, all of which fail silently if broken:
   `StoryContext` for exactly this reason; a test that imported it would make adopting the coupling in
   `src/` look harmless.
 
+`mocker-playwright` has one entry and no split at all, because Playwright is node from top to
+bottom: no config file is evaluated unbundled, no preview needs a browser bundle, and the fixture
+store is `readFile` and `rename` in the test process. `packages/mocker-playwright/src/package-boundary.test.ts`
+carries the one claim that is left, and it is the analogue of the no-`storybook` rule:
+
+- **Nothing in the package may import Playwright at a runtime edge — tests included.** Every
+  reference is `import type`, which is what keeps both peers optional. A single runtime
+  `import { test } from "@playwright/test"` in the imperative core gives anyone driving
+  `playwright-core` from a script either a resolution failure or a second copy of Playwright's
+  fixture registry, where the fixtures register against one copy and the runner reads the other —
+  nothing throws and no mock is installed. The unit tests drive a stub `{ route, request }` instead,
+  which is also what keeps them running in plain Vitest with no browser.
+
 ### Fixed responses (`fixed: true`)
 
 `mockerHandlers(registry, { fixed: true })` answers from a JSON file instead of generating per
@@ -63,18 +78,29 @@ answer, and to commit it.
 Note the vocabulary: `overrides` **pins a field** and is the older meaning of "pin" throughout this
 repo and the guide. `fixed` freezes the **whole response**, as a file. Keep the two words apart.
 
-That is the only feature in the repo that needs a filesystem, and a preview is a browser, so it is
-split across the two entries: `fixed.ts` decides policy in the preview, `vite.ts` is a dumb byte
-store mounted on Storybook's dev server at `/__mocker/fixture`, and `route.ts` — which imports
-nothing at all — is the one constant they share. Sharing it through either side would breach one of
-the boundaries above.
+That is the only feature in the repo that needs a filesystem, and a preview is a browser, so in
+Storybook it is split across the two entries: `fixed.ts` decides policy in the preview, `vite.ts` is
+a dumb byte store mounted on Storybook's dev server at `/__mocker/fixture`, and `route.ts` — which
+imports nothing at all — is the one constant they share. Sharing it through either side would breach
+one of the boundaries above. Under Playwright the same split collapses into
+`mocker-playwright/src/store.ts`, because a test process has the disk in its own hands.
+
+**The two adapters answer a missing fixture differently, and the asymmetry is the point.** Storybook
+writes one and carries on; Playwright writes one and **fails the test**, the same call
+`toMatchSnapshot` makes about a missing baseline. A story is looked at, so plausible data is enough;
+a test asserts, and a fixture CI generated inside a container and threw away is a test asserting on
+faker output with nothing saying so. `fixed` defaults to `false` there and `true` here for the same
+reason.
 
 Three decisions worth not re-litigating:
 
-- **The filename is derived, never declared** (`fixture-path.ts`): `GET/api/devices/<hash>.json`,
-  from method, path, sorted query and the story's `seed`/`count`/`status`. A mirrored tree because
-  the directory listing is the interface; a hashed leaf because a query string is not a filename.
-  Not the registry key — renaming a key must not orphan the file it holds.
+- **The filename is derived, never declared** (`packages/mocker/src/core/fixture.ts`):
+  `GET/api/devices/<hash>.json`, from method, path, sorted query and the story's
+  `seed`/`count`/`status`. A mirrored tree because the directory listing is the interface; a hashed
+  leaf because a query string is not a filename. Not the registry key — renaming a key must not
+  orphan the file it holds. It lives in `core/` alongside `serializeFixture`, the two-space
+  formatter, because the Playwright adapter writes the same store: two copies of either would churn
+  a diff or split one request across two files.
 - **A fixture that fails its schema is a 500 naming the file.** Regenerating would destroy the edit
   that was the point; serving it unchecked moves the failure into the component. Same call
   `handle()` makes about generated output.
@@ -95,6 +121,7 @@ Package manager is **pnpm**. Run these from the repo root.
 | Format + autofix    | `pnpm format`     |
 | Check formatting    | `pnpm check`      |
 | Storybook example   | `pnpm storybook`  |
+| E2E (Playwright)    | `pnpm e2e`        |
 
 `pnpm test` needs **no build**: the workspace `exports` point at `src/*.ts` during development, and
 `publishConfig.exports` swaps in `dist/*.js` at publish time. Keep the two maps in step — nothing in
@@ -108,6 +135,12 @@ emit and nothing at the root is ever emitted.
 glob picks up. It exists for one line in `vitest.setup.ts`: MSW resolves a relative handler path
 against `location.href`, and Node has none — without a stubbed `location` every handler matches
 nothing and the whole suite passes by falling through.
+
+`pnpm e2e` is **not** part of `pnpm test`: it needs a browser binary and a running app, and it is
+the only thing in the repo that does. It drives `apps/e2e` — one HTML file and a `node:http` server,
+deliberately not `apps/next`, which makes no client-side requests at all and would intercept
+nothing. Its `tests/mocks/` directory is committed, and must be: the suite asserts on those bytes,
+and a missing fixture fails the run by design. CI installs Chromium and runs it after `Build`.
 
 ## Communication
 
@@ -211,7 +244,7 @@ FILE:EXPORT`. Fallow is syntactic; an export can be imported-but-unreferenced an
 ## Comments
 
 - Always comment your code (unless it's very obvious).
-- Explain **why**, not what. The code shows what.
+- Explain **why**, not what. Keep comments _short_ and _consise_.
 - `// TODO(WP-xxx):` for known incomplete work.
 - JSDoc on all exported functions and types.
 - Keep comments short; a single paragraph is usually enough.

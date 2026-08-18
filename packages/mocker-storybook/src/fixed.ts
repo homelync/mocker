@@ -1,12 +1,13 @@
 import {
   findMatch,
+  fixturePath,
   isRegistryMiss,
   MOCK_MARKER_HEADER,
   readControls,
+  serializeFixture,
   serveFromRegistry,
 } from '@magicspon/mocker'
 import type { MockControls, MockRegistry } from '@magicspon/mocker'
-import { fixturePath } from './fixture-path'
 import { readFixture, writeFixture } from './fixtures'
 
 /**
@@ -32,9 +33,6 @@ import { readFixture, writeFixture } from './fixtures'
 
 /** Names the fixture a response was replayed from, so devtools shows the file. */
 export const MOCK_FIXTURE_HEADER = 'x-mock-fixture'
-
-/** Two spaces and a trailing newline: these files are read and edited by hand. */
-const INDENT = 2
 
 const OK = 200
 const CLIENT_ERROR = 400
@@ -175,10 +173,7 @@ export async function serveFixed(
   // A bodiless success — 204, 304 — has nothing to pin, and an empty file would
   // fail its schema on the next request.
   if (body !== '') {
-    await writeFixture(
-      name,
-      `${JSON.stringify(JSON.parse(body), null, INDENT)}\n`,
-    )
+    await writeFixture(name, serializeFixture(body))
   }
 
   return response

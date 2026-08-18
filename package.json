@@ -17,6 +17,7 @@
     "typecheck": "tsc --noEmit && pnpm -r typecheck",
     "storybook": "pnpm --filter @magicspon/storybook-example dev",
     "storybook:build": "pnpm --filter @magicspon/storybook-example build",
+    "e2e": "pnpm --filter @magicspon/e2e-example test",
     "release": "changeset publish",
     "publish:local": "pnpm build && node scripts/yalc-publish.mjs",
     "publish:local:push": "pnpm build && node scripts/yalc-publish.mjs --push",

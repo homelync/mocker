@@ -1,0 +1,21 @@
+{
+  "name": "@magicspon/e2e-example",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "playwright test",
+    "serve": "node server.mjs",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@magicspon/mocker": "workspace:*",
+    "@magicspon/mocker-playwright": "workspace:*",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.62.1",
+    "@types/node": "^24.13.3",
+    "typescript": "^7"
+  }
+}
