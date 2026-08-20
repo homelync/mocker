@@ -23,6 +23,11 @@ import type { QueryConstraint } from '@magicspon/mocker'
  * it is the only evidence — and reusing it means the URL in the filename reads
  * like the URLs the app actually requests.
  *
+ * A rule is only ever a guess, though, and `mocker.config.json`'s `params` is
+ * how a repository replaces one with a fact: a reference its seeded database
+ * actually holds beats a plausible-looking eight characters that matches
+ * nothing.
+ *
  * Deterministic, and seeded off the endpoint's **identity** rather than its full
  * key. Two runs on two machines must agree or the fixtures churn on every commit;
  * seeding off `"GET /api/property/[reference]"` and not the whole key means
@@ -61,12 +66,29 @@ function fakerFor(seed: string): Faker {
 }
 
 /**
- * A value for one binding, from the generator's own name rules.
+ * A value for one binding: the caller's, if they named one, else the
+ * generator's own name rules.
+ *
+ * A named value wins outright, and is not held to {@link SEGMENT_SAFE} — the
+ * rules exist to keep a *guess* readable, and a value somebody typed is not a
+ * guess. It is percent-encoded like any other, so it stays one path segment
+ * whatever it contains.
  *
  * @param name the binding, e.g. `reference` from `[reference]`
  * @param identity the endpoint the binding belongs to, `"GET /api/property/[reference]"`
+ * @param params fixed values by binding name, from `mocker.config.json`
  */
-export function bindingValue(name: string, identity: string): string {
+export function bindingValue(
+  name: string,
+  identity: string,
+  params: Readonly<Record<string, string>> = {},
+): string {
+  // An empty value would produce a segment no key matches, so it is treated as
+  // no value at all. The config reader rejects one outright; a library caller
+  // gets the guess rather than a fixture nothing reads.
+  const fixed = params[name]
+  if (fixed !== undefined && fixed !== '') return fixed
+
   const faker = fakerFor(`${identity}|${name}`)
   const rule = DEFAULT_RULES.find(
     (candidate) =>
@@ -83,7 +105,11 @@ export function bindingValue(name: string, identity: string): string {
 }
 
 /** The pattern with every `[binding]` replaced by a value. */
-function fillPattern(pattern: string, identity: string): string {
+function fillPattern(
+  pattern: string,
+  identity: string,
+  params: Readonly<Record<string, string>>,
+): string {
   return pattern
     .split('/')
     .map((segment) => {
@@ -92,7 +118,7 @@ function fillPattern(pattern: string, identity: string): string {
 
       // Non-null: the capture group is not optional, so it participates in
       // every match `exec` returned.
-      const value = bindingValue(dynamic[1]!, identity)
+      const value = bindingValue(dynamic[1]!, identity, params)
       // `matchPattern` decodes each segment before comparing, and `fixturePath`
       // decodes before re-encoding, so encoding here round-trips exactly.
       return encodeURIComponent(value)
@@ -111,6 +137,7 @@ function fillPattern(pattern: string, identity: string): string {
 function fillQuery(
   constraints: readonly QueryConstraint[],
   identity: string,
+  params: Readonly<Record<string, string>>,
 ): string {
   const query = new URLSearchParams()
 
@@ -121,7 +148,7 @@ function fillQuery(
     query.set(
       constraint.name,
       constraint.value ??
-        bindingValue(constraint.param ?? constraint.name, identity),
+        bindingValue(constraint.param ?? constraint.name, identity, params),
     )
   }
 
@@ -134,15 +161,17 @@ function fillQuery(
  *
  * @param key a registry key, `"GET /api/property/[reference]"`
  * @param headers mock control headers to send, e.g. a pinned seed or count
+ * @param params fixed values by binding name, from `mocker.config.json`
  * @throws {InvalidRegistryKeyError} for a key that does not parse
  */
 export function declaredRequest(
   key: string,
   headers: Readonly<Record<string, string>> = {},
+  params: Readonly<Record<string, string>> = {},
 ): Request {
   const { method, pattern, query } = parseKey(key)
   const identity = `${method} ${pattern}`
-  const url = `${ORIGIN}${fillPattern(pattern, identity)}${fillQuery(query, identity)}`
+  const url = `${ORIGIN}${fillPattern(pattern, identity, params)}${fillQuery(query, identity, params)}`
 
   return new Request(url, { method, headers })
 }

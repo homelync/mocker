@@ -20,12 +20,20 @@ export class UsageError extends Error {
   }
 }
 
-/** What a run needs, once the flags are resolved. */
-export interface CliOptions {
+/**
+ * What the command line said, before `mocker.config.json` has a turn.
+ *
+ * `registry` and `out` are optional *here* and required in `CliOptions`,
+ * because a config file may state either: whether the line is complete is a
+ * question this module cannot answer, so it does not try. `resolveOptions` does.
+ */
+export interface CliArgs {
   /** Module holding the registry table. */
-  readonly registry: string
+  readonly registry?: string
   /** Directory the fixture tree is rooted at. */
-  readonly out: string
+  readonly out?: string
+  /** Config file to read instead of the conventional one. */
+  readonly config?: string
   /** Export to read the table from; auto-detected when absent. */
   readonly exportName?: string
   /** `x-mock-seed` sent with every request. */
@@ -41,7 +49,7 @@ export interface CliOptions {
 
 /** Parsed arguments: a run, or one of the two commands that only print. */
 export type ParsedArgs =
-  | { readonly kind: 'run'; readonly options: CliOptions }
+  | { readonly kind: 'run'; readonly args: CliArgs }
   | { readonly kind: 'help' }
   | { readonly kind: 'version' }
 
@@ -50,6 +58,7 @@ export const USAGE: string = `mocker — write every endpoint in a mock registry
 Usage
   mocker <registry> <out> [options]
   mocker <registry> --out <dir> [options]
+  mocker [options]                     with a mocker.config.json
 
 Arguments
   <registry>  module exporting the registry table, e.g. ./src/mocks/registry.ts
@@ -57,6 +66,7 @@ Arguments
 
 Options
   -o, --out <dir>       output directory, if not given as the second argument
+      --config <file>   config file to read (default: ./mocker.config.json)
   -e, --export <name>   export holding the table (default: mockRegistry, registry, default)
   -s, --seed <value>    pin x-mock-seed on every request
   -c, --count <n>       pin x-mock-count, sizing every primary collection
@@ -68,6 +78,16 @@ Options
   -v, --version         print the version
 
 Notes
+  mocker.config.json, in the working directory, may state the registry, the
+  output directory, and fixed values for bindings:
+
+    { "registry": "./src/mocks/registry.ts",
+      "out": "./tests/mocks",
+      "params": { "reference": "lorem999" } }
+
+  An argument on the command line wins over the file. Paths in the file are
+  relative to the file.
+
   Existing fixtures are kept, because they are committed files somebody may have
   edited by hand. Pass --force to regenerate them.
 
@@ -105,6 +125,7 @@ export function parseCliArgs(argv: readonly string[]): ParsedArgs {
       allowPositionals: true,
       options: {
         out: { type: 'string', short: 'o' },
+        config: { type: 'string' },
         export: { type: 'string', short: 'e' },
         seed: { type: 'string', short: 's' },
         count: { type: 'string', short: 'c' },
@@ -127,25 +148,18 @@ export function parseCliArgs(argv: readonly string[]): ParsedArgs {
   if (values.version === true) return { kind: 'version' }
 
   const [registry, positionalOut, ...extra] = positionals
-  if (registry === undefined) {
-    throw new UsageError('Missing <registry>: the module exporting the table.')
-  }
   if (extra.length > 0) {
     throw new UsageError(`Unexpected argument "${extra[0] ?? ''}".`)
   }
 
-  // The flag wins over the positional, which is the way round that lets a
-  // wrapper script append `--out` to a command line it did not write.
-  const out = values.out ?? positionalOut
-  if (out === undefined) {
-    throw new UsageError('Missing <out>: the directory to write fixtures into.')
-  }
-
   return {
     kind: 'run',
-    options: {
+    args: {
       registry,
-      out,
+      // The flag wins over the positional, which is the way round that lets a
+      // wrapper script append `--out` to a command line it did not write.
+      out: values.out ?? positionalOut,
+      config: values.config,
       exportName: values.export,
       seed: values.seed,
       count:

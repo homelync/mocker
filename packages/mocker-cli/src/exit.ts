@@ -1,5 +1,6 @@
 import { InvalidControlError } from '@magicspon/mocker'
 import { UsageError } from './args'
+import { ConfigError } from './config'
 import { RegistryLoadError } from './load'
 
 /**
@@ -32,7 +33,7 @@ export interface Failure {
 /**
  * Which exit code an escaped error deserves, and what to say about it.
  *
- * Only the three named kinds are the *caller's* fault, and each already carries
+ * Only the four named kinds are the *caller's* fault, and each already carries
  * a message naming what it choked on. Anything else is a bug here, so it keeps
  * the failure code, says where the fault lies, and hands back the stack that
  * makes it fixable.
@@ -49,9 +50,11 @@ export function describeFailure(error: unknown): Failure {
   }
 
   // A malformed `--seed` / `--count`: the library's own message already names
-  // the header and the range it wanted.
+  // the header and the range it wanted. A bad config file is the same kind of
+  // fault as a bad flag — the invocation, not the registry.
   if (
     error instanceof RegistryLoadError ||
+    error instanceof ConfigError ||
     error instanceof InvalidControlError
   ) {
     return { code: MISUSED, message: error.message }

@@ -1,20 +1,24 @@
 import { describe, expect, it } from 'vitest'
 import { parseCliArgs, UsageError } from './args'
-import type { CliOptions } from './args'
+import type { CliArgs } from './args'
 
 /**
  * Every mistake in argument parsing is silent — a flag that lands in the wrong
  * field does the wrong thing without complaining — so this is the one part of a
  * command worth asserting line by line.
+ *
+ * What is *not* here is a missing registry or output directory. A config file
+ * may state either, so whether a line is complete is `resolveOptions`' question
+ * and `options.test.ts` asks it.
  */
 
-/** The options a run parses to, or a failure naming what came back instead. */
-function options(...argv: string[]): CliOptions {
+/** The arguments a run parses to, or a failure naming what came back instead. */
+function options(...argv: string[]): CliArgs {
   const parsed = parseCliArgs(argv)
   if (parsed.kind !== 'run') {
     throw new Error(`Expected a run, got "${parsed.kind}"`)
   }
-  return parsed.options
+  return parsed.args
 }
 
 describe('parseCliArgs', () => {
@@ -47,6 +51,17 @@ describe('parseCliArgs', () => {
       exportName: undefined,
       seed: undefined,
       count: undefined,
+      config: undefined,
+    })
+  })
+
+  it('leaves both paths unset when the line gives neither', () => {
+    expect(options()).toMatchObject({ registry: undefined, out: undefined })
+  })
+
+  it('reads the config file', () => {
+    expect(options('--config', './mocks/mocker.config.json')).toMatchObject({
+      config: './mocks/mocker.config.json',
     })
   })
 
@@ -102,15 +117,6 @@ describe('parseCliArgs', () => {
 })
 
 describe('refusals', () => {
-  it('refuses a line with no registry', () => {
-    expect(() => parseCliArgs([])).toThrow(UsageError)
-    expect(() => parseCliArgs([])).toThrow(/Missing <registry>/)
-  })
-
-  it('refuses a line with no output directory', () => {
-    expect(() => parseCliArgs(['./registry.ts'])).toThrow(/Missing <out>/)
-  })
-
   it('refuses a third positional', () => {
     expect(() => parseCliArgs(['./r.ts', './mocks', './extra'])).toThrow(
       /Unexpected argument "\.\/extra"/,

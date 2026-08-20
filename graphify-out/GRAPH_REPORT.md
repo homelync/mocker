@@ -1,16 +1,16 @@
 # Graph Report - mocker  (2026-08-20)
 
 ## Corpus Check
-- 203 files · ~94,882 words
+- 210 files · ~99,784 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1268 nodes · 1858 edges · 153 communities (84 shown, 69 thin omitted)
-- Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 20 edges (avg confidence: 0.8)
+- 1314 nodes · 1969 edges · 154 communities (85 shown, 69 thin omitted)
+- Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 21 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `dff1c434`
+- Built from commit: `d81fd18b`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -159,9 +159,9 @@
 5. `compilerOptions` - 16 edges
 6. `scripts` - 16 edges
 7. `emitOne()` - 15 edges
-8. `isRegistryMiss()` - 14 edges
-9. `readControls()` - 13 edges
-10. `fixturePath()` - 13 edges
+8. `answer()` - 14 edges
+9. `isRegistryMiss()` - 14 edges
+10. `readControls()` - 13 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `minimumReleaseAgeExclude escape hatch` --semantically_similar_to--> `Renovate package groups (TanStack Start, React, Vite, Vitest, Storybook)`  [INFERRED] [semantically similar]
@@ -178,11 +178,11 @@
 ## Import Cycles
 - None detected.
 
-## Communities (153 total, 69 thin omitted)
+## Communities (154 total, 69 thin omitted)
 
 ### Community 0 - "Schema-Driven Data Generation"
-Cohesion: 0.12
-Nodes (32): fixtureError(), replay(), serveFixed(), sleep(), bindingNames(), compareSpecificity(), describeConstraint(), dynamicSegments() (+24 more)
+Cohesion: 0.10
+Nodes (39): serializeFixture(), fixtureError(), replay(), serveFixed(), sleep(), fixtureError(), replay(), serveFixed() (+31 more)
 
 ### Community 1 - "Next.js Adapter and Mock Flag"
 Cohesion: 0.05
@@ -222,11 +222,11 @@ Nodes (20): compilerOptions, declaration, erasableSyntaxOnly, isolatedDeclaratio
 
 ### Community 11 - "Next Adapter Manifest"
 Cohesion: 0.14
-Nodes (24): assertOverridePathsExist(), clampNumber(), clampString(), context(), DEFAULT_NESTED_ARRAY_LENGTH, FORMAT_GENERATORS, generate(), generateNumber() (+16 more)
+Nodes (19): collectPaths(), elementPath(), findArrayPaths(), envelope, Visited, walkSchema(), LeafKind, AnySchema (+11 more)
 
 ### Community 12 - "Mock Package Manifest"
 Cohesion: 0.07
-Nodes (53): MockRegistry, answer(), bend(), fulfillError(), fulfillWith(), handleRoute(), HandlerState, inScope() (+45 more)
+Nodes (54): answer(), bend(), fulfillError(), fulfillWith(), handleRoute(), HandlerState, inScope(), InterceptedRequest (+46 more)
 
 ### Community 13 - "Renovate Update Policy"
 Cohesion: 0.12
@@ -245,12 +245,12 @@ Cohesion: 0.08
 Nodes (27): //, dependencies, @magicspon/mocker, @magicspon/mocker-storybook, react, react-dom, zod, devDependencies (+19 more)
 
 ### Community 17 - "Directory Fuzzy Search"
-Cohesion: 0.13
-Nodes (23): MockControls, readInt(), decode(), fixturePath(), RELATIVE, safeSegment(), signature(), none (+15 more)
+Cohesion: 0.14
+Nodes (24): MockControls, decode(), fixturePath(), RELATIVE, safeSegment(), signature(), none, path() (+16 more)
 
 ### Community 18 - "Oxfmt Formatting Config"
-Cohesion: 0.12
-Nodes (26): MockEndpoint, ArrayPath, CheckedCounts, CheckedOverrides, Descend, Join, MaxDepth, Opaque (+18 more)
+Cohesion: 0.11
+Nodes (26): ArrayPath, CheckedCounts, CheckedOverrides, Descend, Join, MaxDepth, Opaque, PathCounts (+18 more)
 
 ### Community 19 - "Claude Permission Settings"
 Cohesion: 0.29
@@ -265,8 +265,8 @@ Cohesion: 0.22
 Nodes (8): ignorePatterns, overrides, printWidth, $schema, semi, singleQuote, sortPackageJson, trailingComma
 
 ### Community 23 - "Vitest Type Shims"
-Cohesion: 0.20
-Nodes (10): BODILESS_STATUSES, handle(), HandleContext, messageOf(), mockResponse(), sleep(), detailSchema, listSchema (+2 more)
+Cohesion: 0.19
+Nodes (10): BODILESS_STATUSES, handle(), HandleContext, messageOf(), MockEndpoint, mockResponse(), sleep(), detailSchema (+2 more)
 
 ### Community 24 - "Community 24"
 Cohesion: 0.06
@@ -309,8 +309,8 @@ Cohesion: 0.42
 Nodes (8): activeClientIds, getResponse(), handleRequest(), IS_MOCKED_RESPONSE, resolveMainClient(), respondWithMock(), sendToClient(), serializeRequest()
 
 ### Community 35 - "Community 35"
-Cohesion: 0.43
-Nodes (3): suggest(), UnknownOverridePathError, UnsupportedSchemaError
+Cohesion: 0.14
+Nodes (20): suggest(), UnknownOverridePathError, UnsupportedSchemaError, absentValue(), assertOverridePathsExist(), DEFAULT_NESTED_ARRAY_LENGTH, generate(), isAbsent() (+12 more)
 
 ### Community 36 - "Community 36"
 Cohesion: 0.20
@@ -365,8 +365,8 @@ Cohesion: 0.05
 Nodes (38): author, bin, mocker, bugs, default, dependencies, @faker-js/faker, @magicspon/mocker (+30 more)
 
 ### Community 125 - "Community 125"
-Cohesion: 0.12
-Nodes (20): serializeFixture(), fixtureError(), replay(), serveFixed(), sleep(), generate(), FixtureLookup, fixtureUrl() (+12 more)
+Cohesion: 0.14
+Nodes (14): FixtureLookup, fixtureUrl(), readFixture(), warnUnavailable(), writeFixture(), mockerFixtures(), MockerFixturesOptions, readBody() (+6 more)
 
 ### Community 126 - "Community 126"
 Cohesion: 0.10
@@ -405,12 +405,12 @@ Cohesion: 0.14
 Nodes (13): 1. Responses come from files (`fixed: true`), 2. An undeclared request fails the test (`unmatched: 'error'`), Alongside `@magicspon/mocker-next`, Further reading, If your app can start MSW itself, @magicspon/mocker-playwright, Options, Quickstart (+5 more)
 
 ### Community 136 - "Community 136"
-Cohesion: 0.07
-Nodes (48): InvalidControlError, readControls(), CliOptions, integer(), parseCliArgs(), ParsedArgs, options(), UsageError (+40 more)
+Cohesion: 0.05
+Nodes (62): InvalidControlError, readControls(), readInt(), CliArgs, integer(), parseCliArgs(), ParsedArgs, options() (+54 more)
 
 ### Community 137 - "Community 137"
-Cohesion: 0.33
-Nodes (3): CONTEXT, envelope, GenContext
+Cohesion: 0.42
+Nodes (8): pathKey(), clampNumber(), clampString(), FORMAT_GENERATORS, genContext(), generateNumber(), generateString(), matchRule()
 
 ### Community 138 - "Community 138"
 Cohesion: 0.31
@@ -429,8 +429,8 @@ Cohesion: 0.50
 Nodes (3): PORT, root, server
 
 ### Community 142 - "Community 142"
-Cohesion: 0.20
-Nodes (9): As a library, Existing files are kept, Licence, @magicspon/mocker-cli, Quickstart, Reading a TypeScript registry, Usage, What it fills in, and what it cannot (+1 more)
+Cohesion: 0.17
+Nodes (11): As a library, Existing files are kept, Licence, @magicspon/mocker-cli, mocker.config.json, `params`: the binding values your app actually sends, Quickstart, Reading a TypeScript registry (+3 more)
 
 ### Community 145 - "Community 145"
 Cohesion: 0.31
@@ -449,7 +449,7 @@ Nodes (3): MockOptions, DeviceList, deviceListSchema
   .github/workflows/ci.yaml · relation: shares_data_with
 
 ## Knowledge Gaps
-- **600 isolated node(s):** `$schema`, `baseBranch`, `access`, `format`, `changelog` (+595 more)
+- **607 isolated node(s):** `$schema`, `baseBranch`, `access`, `format`, `changelog` (+602 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **69 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -458,15 +458,15 @@ _Questions this graph is uniquely positioned to answer:_
 
 - **What is the exact relationship between `mocker root package manifest` and `CI workflow (lint, typecheck, build, tests)`?**
   _Edge tagged AMBIGUOUS (relation: shares_data_with) - confidence is low._
-- **Why does `GenerateOptions` connect `Oxfmt Formatting Config` to `Schema-Driven Data Generation`, `Community 137`, `Next Adapter Manifest`, `Mock Package Manifest`, `Directory Fuzzy Search`, `Vitest Type Shims`, `Community 24`?**
-  _High betweenness centrality (0.022) - this node is a cross-community bridge._
-- **Why does `MockRegistry` connect `Mock Package Manifest` to `Schema-Driven Data Generation`, `Community 136`, `TypeScript Compiler Options`, `Community 24`, `Community 125`?**
-  _High betweenness centrality (0.016) - this node is a cross-community bridge._
-- **Why does `serveFromRegistry()` connect `Schema-Driven Data Generation` to `Community 136`, `TypeScript Compiler Options`, `Mock Package Manifest`, `Vitest Type Shims`, `Community 24`, `Community 125`?**
-  _High betweenness centrality (0.012) - this node is a cross-community bridge._
+- **Why does `GenerateOptions` connect `Oxfmt Formatting Config` to `Schema-Driven Data Generation`, `Community 35`, `Mock Package Manifest`, `Directory Fuzzy Search`, `Vitest Type Shims`, `Community 24`?**
+  _High betweenness centrality (0.024) - this node is a cross-community bridge._
+- **Why does `MockRegistry` connect `Schema-Driven Data Generation` to `Community 136`, `Community 24`, `Mock Package Manifest`, `TypeScript Compiler Options`?**
+  _High betweenness centrality (0.020) - this node is a cross-community bridge._
+- **Why does `serveFromRegistry()` connect `Schema-Driven Data Generation` to `Community 136`, `TypeScript Compiler Options`, `Mock Package Manifest`, `Vitest Type Shims`, `Community 24`?**
+  _High betweenness centrality (0.013) - this node is a cross-community bridge._
 - **What connects `$schema`, `baseBranch`, `access` to the rest of the system?**
-  _618 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _625 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Schema-Driven Data Generation` be split into smaller, more focused modules?**
-  _Cohesion score 0.1184939091915836 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.10352941176470588 - nodes in this community are weakly interconnected._
 - **Should `Next.js Adapter and Mock Flag` be split into smaller, more focused modules?**
   _Cohesion score 0.049682875264270614 - nodes in this community are weakly interconnected._

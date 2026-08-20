@@ -1,6 +1,6 @@
 import type { LeafKind } from './types'
 import { classify } from './zod-def'
-import type { AnySchema } from './zod-def'
+import type { AnySchema, SchemaNode } from './zod-def'
 
 /**
  * Canonical paths address a *position* in a schema, not a position in the
@@ -36,46 +36,62 @@ export function pathKey(path: string): string {
 }
 
 /**
- * Every canonical path the generator could visit.
- *
- * Used to reject override paths that match nothing. This is a separate walk
- * from generation on purpose: marking overrides "used" during generation would
- * wrongly report a typo whenever the real cause was an array that happened to
- * generate zero elements, or an optional branch that happened to be dropped.
- *
- * Unions contribute the paths of every branch, since any of them may be chosen.
+ * Recursion limit. Bounded purely as a guard against a self-referential schema
+ * reaching here: recursive types are unsupported and throw during generation,
+ * but these walks run first and must not hang.
  */
-export function collectPaths(schema: AnySchema): string[] {
-  const paths: string[] = []
-  const seen = new Set<string>()
+const MAX_DEPTH = 20
 
-  const visit = (node: AnySchema, path: string, depth: number): void => {
-    // Depth is bounded purely as a guard against a self-referential schema
-    // reaching here; recursive types are unsupported and throw during
-    // generation, but collectPaths runs first and must not hang.
-    if (depth > 20) return
+/** One node of a schema walk, with the path that addresses it. */
+interface Visited {
+  readonly node: SchemaNode
+  readonly path: string
+  /**
+   * Nesting depth in object fields and array elements. Wrappers and union
+   * branches do not deepen a path, so they do not deepen this either.
+   */
+  readonly depth: number
+}
 
-    if (!seen.has(path)) {
-      seen.add(path)
-      paths.push(path)
-    }
+/**
+ * Walk every node of a schema in declaration order, calling `visit` on each.
+ *
+ * The one traversal behind all three collectors below — they differ only in
+ * what they record. Unions descend into every branch, since any of them may be
+ * chosen; wrappers descend into their inner type at the same path.
+ */
+function walkSchema(
+  schema: AnySchema,
+  visit: (visited: Visited) => void,
+): void {
+  // `guard` counts every recursion, `depth` only the structural ones, so a
+  // wrapper or union cycle still terminates.
+  const step = (
+    schema: AnySchema,
+    path: string,
+    depth: number,
+    guard: number,
+  ): void => {
+    if (guard > MAX_DEPTH) return
 
-    const classified = classify(node)
-    switch (classified.kind) {
+    const node = classify(schema)
+    visit({ node, path, depth })
+
+    switch (node.kind) {
       case 'wrapper':
-        visit(classified.inner, path, depth + 1)
+        step(node.inner, path, depth, guard + 1)
         return
       case 'object':
-        for (const [key, child] of Object.entries(classified.shape)) {
-          visit(child, childPath(path, key), depth + 1)
+        for (const [key, child] of Object.entries(node.shape)) {
+          step(child, childPath(path, key), depth + 1, guard + 1)
         }
         return
       case 'array':
-        visit(classified.element, elementPath(path), depth + 1)
+        step(node.element, elementPath(path), depth + 1, guard + 1)
         return
       case 'union':
-        for (const option of classified.options) {
-          visit(option, path, depth + 1)
+        for (const option of node.options) {
+          step(option, path, depth, guard + 1)
         }
         return
       default:
@@ -83,7 +99,27 @@ export function collectPaths(schema: AnySchema): string[] {
     }
   }
 
-  visit(schema, '', 0)
+  step(schema, '', 0, 0)
+}
+
+/**
+ * Every canonical path the generator could visit.
+ *
+ * Used to reject override paths that match nothing. This is a separate walk
+ * from generation on purpose: marking overrides "used" during generation would
+ * wrongly report a typo whenever the real cause was an array that happened to
+ * generate zero elements, or an optional branch that happened to be dropped.
+ */
+export function collectPaths(schema: AnySchema): string[] {
+  const paths: string[] = []
+  const seen = new Set<string>()
+
+  walkSchema(schema, ({ path }) => {
+    if (seen.has(path)) return
+    seen.add(path)
+    paths.push(path)
+  })
+
   return paths
 }
 
@@ -102,39 +138,17 @@ export function collectPaths(schema: AnySchema): string[] {
 export function collectLeafKinds(schema: AnySchema): Map<string, LeafKind> {
   const kinds = new Map<string, LeafKind>()
 
-  const visit = (node: AnySchema, path: string, depth: number): void => {
-    if (depth > 20) return
+  walkSchema(schema, ({ node, path }) => {
+    if (!isLeafKind(node.kind) || kinds.has(path)) return
+    kinds.set(path, node.kind)
+  })
 
-    const classified = classify(node)
-    switch (classified.kind) {
-      case 'wrapper':
-        visit(classified.inner, path, depth + 1)
-        return
-      case 'object':
-        for (const [key, child] of Object.entries(classified.shape)) {
-          visit(child, childPath(path, key), depth + 1)
-        }
-        return
-      case 'array':
-        visit(classified.element, elementPath(path), depth + 1)
-        return
-      case 'union':
-        for (const option of classified.options) {
-          visit(option, path, depth + 1)
-        }
-        return
-      case 'string':
-      case 'number':
-      case 'boolean':
-        if (!kinds.has(path)) kinds.set(path, classified.kind)
-        return
-      default:
-        return
-    }
-  }
-
-  visit(schema, '', 0)
   return kinds
+}
+
+/** Narrows a node's kind to the scalar kinds a value may be pinned at. */
+function isLeafKind(kind: SchemaNode['kind']): kind is LeafKind {
+  return kind === 'string' || kind === 'number' || kind === 'boolean'
 }
 
 /**
@@ -147,36 +161,11 @@ export function collectLeafKinds(schema: AnySchema): Map<string, LeafKind> {
  */
 export function findArrayPaths(schema: AnySchema): string[] {
   const found: { path: string; depth: number; order: number }[] = []
-  let order = 0
 
-  const visit = (node: AnySchema, path: string, depth: number): void => {
-    if (depth > 20) return
-
-    const classified = classify(node)
-    switch (classified.kind) {
-      case 'wrapper':
-        visit(classified.inner, path, depth)
-        return
-      case 'array':
-        found.push({ path, depth, order: order++ })
-        visit(classified.element, elementPath(path), depth + 1)
-        return
-      case 'object':
-        for (const [key, child] of Object.entries(classified.shape)) {
-          visit(child, childPath(path, key), depth + 1)
-        }
-        return
-      case 'union':
-        for (const option of classified.options) {
-          visit(option, path, depth)
-        }
-        return
-      default:
-        return
-    }
-  }
-
-  visit(schema, '', 0)
+  walkSchema(schema, ({ node, path, depth }) => {
+    if (node.kind !== 'array') return
+    found.push({ path, depth, order: found.length })
+  })
 
   return found
     .sort((a, b) => a.depth - b.depth || a.order - b.order)
