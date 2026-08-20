@@ -57,6 +57,12 @@ export interface EmitResult {
 export interface EmitOptions {
   /** Directory the fixture tree is rooted at. Created as needed. */
   readonly out: string
+  /**
+   * Fixed values for bindings, by name: `{ reference: "lorem999" }` puts
+   * `lorem999` wherever `[reference]` appears. Anything unnamed is guessed from
+   * the generator's name rules, as before.
+   */
+  readonly params?: Readonly<Record<string, string>>
   /** `x-mock-seed`, if the fixtures should pin one. */
   readonly seed?: string
   /** `x-mock-count`, sizing every primary collection. */
@@ -173,7 +179,7 @@ async function emitOne(
   const early = declined(key, registry[key], options)
   if (early !== undefined) return early
 
-  const request = declaredRequest(key, controlHeaders(options))
+  const request = declaredRequest(key, controlHeaders(options), options.params)
   const described = describeRequest(request)
 
   const name = fixturePath(request, readControls(request.headers))

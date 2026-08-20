@@ -2,19 +2,21 @@
 import { createRequire } from 'node:module'
 import path from 'node:path'
 import { parseCliArgs, USAGE } from './args'
-import type { CliOptions } from './args'
+import { loadConfig } from './config'
 import { generateFixtures } from './emit'
 import { describeFailure, FAILED } from './exit'
 import { loadRegistry } from './load'
+import { resolveOptions } from './options'
+import type { CliOptions } from './options'
 import { formatJsonReport, formatReport, summarise } from './report'
 
 /**
  * The executable: argv in, files on disk, a report and an exit code out.
  *
  * Thin on purpose. Everything decidable lives in a module that returns a value —
- * `parseCliArgs`, `loadRegistry`, `generateFixtures`, `formatReport`,
- * `describeFailure` — and this file owns only what a process owns: streams and
- * exit codes.
+ * `parseCliArgs`, `loadConfig`, `resolveOptions`, `loadRegistry`,
+ * `generateFixtures`, `formatReport`, `describeFailure` — and this file owns
+ * only what a process owns: streams, the working directory and exit codes.
  *
  * The exit codes split "your registry has a problem" from "your command line
  * had a problem", because the two want different reactions in CI: a `1` is a
@@ -56,7 +58,17 @@ async function main(argv: readonly string[]): Promise<number> {
     return 0
   }
 
-  return run(parsed.options)
+  const loaded = await loadConfig(parsed.args.config)
+  const options = resolveOptions(parsed.args, loaded)
+
+  // Which config applied is not obvious from a command line that names none,
+  // and it decides where the files land. Never on stdout under `--json`, where
+  // stdout is a document a script parses.
+  if (loaded !== undefined && !options.json) {
+    console.log(`Reading ${path.relative(process.cwd(), loaded.file)}`)
+  }
+
+  return run(options)
 }
 
 try {

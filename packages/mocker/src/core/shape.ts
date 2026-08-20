@@ -152,35 +152,52 @@ function shapeCollection(
   const primary = findArrayPaths(schema)[0]
   if (primary === undefined) return EMPTY_SHAPE
 
-  const requestedLimit = positiveInt(input.query.get('limit'))
-  const page = positiveInt(input.query.get('page')) ?? 1
+  return ROOT_FIELD.test(primary)
+    ? paged(primary, input, base, leafKinds)
+    : whole(primary, input, base)
+}
 
+/**
+ * A collection that is not a root-level field is not a page: lookups and search
+ * results come back whole. Size it only if the request asked.
+ */
+function whole(
+  primary: string,
+  input: MockRequestInput,
+  base: GenerateOptions,
+): CollectionShape {
+  const rows =
+    input.controls.count ?? positiveInt(input.query.get('limit')) ?? base.count
+
+  return rows === undefined
+    ? EMPTY_SHAPE
+    : { counts: { [primary]: rows }, overrides: {} }
+}
+
+/** A page of an envelope, with the envelope's tallies made to agree with it. */
+function paged(
+  primary: string,
+  input: MockRequestInput,
+  base: GenerateOptions,
+  leafKinds: ReadonlyMap<string, LeafKind>,
+): CollectionShape {
   // `x-mock-count` is a direct instruction about the collection, so it wins and
   // collapses the response to a single page — a row count that contradicted the
   // reported total would be a worse lie than the one being asked for.
-  if (input.controls.count !== undefined) {
-    const rows = input.controls.count
-    return ROOT_FIELD.test(primary)
-      ? envelope(primary, leafKinds, {
-          rows,
-          total: rows,
-          page: 1,
-          totalPages: 1,
-          limit: rows,
-        })
-      : { counts: { [primary]: rows }, overrides: {} }
+  const forced = input.controls.count
+  if (forced !== undefined) {
+    return envelope(primary, leafKinds, {
+      rows: forced,
+      total: forced,
+      page: 1,
+      totalPages: 1,
+      limit: forced,
+    })
   }
 
-  // A collection that is not a root-level field is not a page: lookups and
-  // search results come back whole. Size it only if the request asked.
-  if (!ROOT_FIELD.test(primary)) {
-    const rows = requestedLimit ?? base.count
-    return rows === undefined
-      ? EMPTY_SHAPE
-      : { counts: { [primary]: rows }, overrides: {} }
-  }
-
-  const limit = requestedLimit ?? base.count ?? DEFAULT_PAGE_SIZE
+  const limit =
+    positiveInt(input.query.get('limit')) ?? base.count ?? DEFAULT_PAGE_SIZE
+  const page = positiveInt(input.query.get('page')) ?? 1
   const total = poolSize(input)
   const totalPages = Math.max(1, Math.ceil(total / limit))
   // A page past the end is empty rather than clamped, because that is what the
