@@ -1,0 +1,63 @@
+{
+  "name": "@magicspon/mocker-cli",
+  "version": "0.1.0",
+  "description": "Write every endpoint in a mock registry to disk, as fixture files the Playwright and Storybook adapters replay",
+  "keywords": [
+    "zod",
+    "mock",
+    "faker",
+    "fixtures",
+    "cli",
+    "codegen"
+  ],
+  "license": "MIT",
+  "author": "magicspon",
+  "homepage": "https://github.com/magicspon/mocker/tree/main/packages/mocker-cli#readme",
+  "bugs": "https://github.com/magicspon/mocker/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/magicspon/mocker.git",
+    "directory": "packages/mocker-cli"
+  },
+  "type": "module",
+  "sideEffects": false,
+  "engines": {
+    "node": ">=24.19.0"
+  },
+  "files": [
+    "dist"
+  ],
+  "bin": {
+    "mocker": "./dist/cli.js"
+  },
+  "exports": {
+    ".": "./src/index.ts",
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "access": "public",
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "./package.json": "./package.json"
+    }
+  },
+  "scripts": {
+    "build": "tsdown",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@faker-js/faker": "^10.6.0",
+    "@magicspon/mocker": "workspace:^"
+  },
+  "peerDependencies": {
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "tsdown": "^0.22.14",
+    "typescript": "^7.0.2",
+    "zod": "^4.4.3"
+  }
+}

@@ -3355,7 +3355,7 @@
       "label": "version()",
       "file_type": "code",
       "source_file": "packages/mocker-cli/src/cli.ts",
-      "source_location": "L25",
+      "source_location": "L31",
       "_origin": "ast",
       "id": "src_cli_version",
       "community": 136,
@@ -3365,7 +3365,7 @@
       "label": "run()",
       "file_type": "code",
       "source_file": "packages/mocker-cli/src/cli.ts",
-      "source_location": "L34",
+      "source_location": "L40",
       "_origin": "ast",
       "id": "src_cli_run",
       "community": 136,
@@ -3375,11 +3375,21 @@
       "label": "main()",
       "file_type": "code",
       "source_file": "packages/mocker-cli/src/cli.ts",
-      "source_location": "L47",
+      "source_location": "L53",
       "_origin": "ast",
       "id": "src_cli_main",
       "community": 136,
       "norm_label": "main()"
+    },
+    {
+      "label": "report()",
+      "file_type": "code",
+      "source_file": "packages/mocker-cli/src/cli.ts",
+      "source_location": "L76",
+      "_origin": "ast",
+      "id": "src_cli_report",
+      "community": 136,
+      "norm_label": "report()"
     },
     {
       "label": "emit.test.ts",
@@ -3388,7 +3398,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_emit_test",
-      "community": 136,
+      "community": 0,
       "norm_label": "emit.test.ts"
     },
     {
@@ -3398,7 +3408,7 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "src_emit_test_propertyschema",
-      "community": 136,
+      "community": 0,
       "norm_label": "propertyschema"
     },
     {
@@ -3408,7 +3418,7 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "src_emit_test_devicelistschema",
-      "community": 136,
+      "community": 0,
       "norm_label": "devicelistschema"
     },
     {
@@ -3418,7 +3428,7 @@
       "source_location": "L29",
       "_origin": "ast",
       "id": "src_emit_test_registry",
-      "community": 136,
+      "community": 0,
       "norm_label": "registry"
     },
     {
@@ -3428,7 +3438,7 @@
       "source_location": "L49",
       "_origin": "ast",
       "id": "src_emit_test_resultfor",
-      "community": 136,
+      "community": 0,
       "norm_label": "resultfor()"
     },
     {
@@ -3438,7 +3448,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_emit",
-      "community": 136,
+      "community": 0,
       "norm_label": "emit.ts"
     },
     {
@@ -3468,7 +3478,7 @@
       "source_location": "L57",
       "_origin": "ast",
       "id": "src_emit_emitoptions",
-      "community": 136,
+      "community": 0,
       "norm_label": "emitoptions"
     },
     {
@@ -3478,7 +3488,7 @@
       "source_location": "L75",
       "_origin": "ast",
       "id": "src_emit_controlheaders",
-      "community": 136,
+      "community": 0,
       "norm_label": "controlheaders()"
     },
     {
@@ -3488,7 +3498,7 @@
       "source_location": "L92",
       "_origin": "ast",
       "id": "src_emit_writefixture",
-      "community": 136,
+      "community": 0,
       "norm_label": "writefixture()"
     },
     {
@@ -3498,7 +3508,7 @@
       "source_location": "L108",
       "_origin": "ast",
       "id": "src_emit_exists",
-      "community": 136,
+      "community": 0,
       "norm_label": "exists()"
     },
     {
@@ -3508,7 +3518,7 @@
       "source_location": "L119",
       "_origin": "ast",
       "id": "src_emit_errorfrom",
-      "community": 136,
+      "community": 0,
       "norm_label": "errorfrom()"
     },
     {
@@ -3518,78 +3528,28 @@
       "source_location": "L136",
       "_origin": "ast",
       "id": "src_emit_failure",
-      "community": 136,
+      "community": 0,
       "norm_label": "failure()"
-    },
-    {
-      "label": "declined()",
-      "file_type": "code",
-      "source_file": "packages/mocker-cli/src/emit.ts",
-      "source_location": "L147",
-      "_origin": "ast",
-      "id": "src_emit_declined",
-      "community": 136,
-      "norm_label": "declined()"
     },
     {
       "label": "emitOne()",
       "file_type": "code",
       "source_file": "packages/mocker-cli/src/emit.ts",
-      "source_location": "L167",
+      "source_location": "L141",
       "_origin": "ast",
       "id": "src_emit_emitone",
-      "community": 136,
+      "community": 0,
       "norm_label": "emitone()"
     },
     {
       "label": "generateFixtures()",
       "file_type": "code",
       "source_file": "packages/mocker-cli/src/emit.ts",
-      "source_location": "L235",
+      "source_location": "L218",
       "_origin": "ast",
       "id": "src_emit_generatefixtures",
-      "community": 136,
+      "community": 0,
       "norm_label": "generatefixtures()"
-    },
-    {
-      "label": "exit.test.ts",
-      "file_type": "code",
-      "source_file": "packages/mocker-cli/src/exit.test.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_exit_test",
-      "community": 136,
-      "norm_label": "exit.test.ts"
-    },
-    {
-      "label": "exit.ts",
-      "file_type": "code",
-      "source_file": "packages/mocker-cli/src/exit.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_exit",
-      "community": 136,
-      "norm_label": "exit.ts"
-    },
-    {
-      "label": "Failure",
-      "file_type": "code",
-      "source_file": "packages/mocker-cli/src/exit.ts",
-      "source_location": "L23",
-      "_origin": "ast",
-      "id": "src_exit_failure",
-      "community": 136,
-      "norm_label": "failure"
-    },
-    {
-      "label": "describeFailure()",
-      "file_type": "code",
-      "source_file": "packages/mocker-cli/src/exit.ts",
-      "source_location": "L43",
-      "_origin": "ast",
-      "id": "src_exit_describefailure",
-      "community": 136,
-      "norm_label": "describefailure()"
     },
     {
       "label": "index.ts",
@@ -3908,7 +3868,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_requests_test",
-      "community": 136,
+      "community": 0,
       "norm_label": "requests.test.ts"
     },
     {
@@ -3918,7 +3878,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "src_requests_test_keys",
-      "community": 136,
+      "community": 0,
       "norm_label": "keys"
     },
     {
@@ -3928,7 +3888,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_requests",
-      "community": 136,
+      "community": 0,
       "norm_label": "requests.ts"
     },
     {
@@ -3938,7 +3898,7 @@
       "source_location": "L57",
       "_origin": "ast",
       "id": "src_requests_fakerfor",
-      "community": 136,
+      "community": 0,
       "norm_label": "fakerfor()"
     },
     {
@@ -3948,7 +3908,7 @@
       "source_location": "L69",
       "_origin": "ast",
       "id": "src_requests_bindingvalue",
-      "community": 136,
+      "community": 0,
       "norm_label": "bindingvalue()"
     },
     {
@@ -3958,7 +3918,7 @@
       "source_location": "L86",
       "_origin": "ast",
       "id": "src_requests_fillpattern",
-      "community": 136,
+      "community": 0,
       "norm_label": "fillpattern()"
     },
     {
@@ -3968,7 +3928,7 @@
       "source_location": "L111",
       "_origin": "ast",
       "id": "src_requests_fillquery",
-      "community": 136,
+      "community": 0,
       "norm_label": "fillquery()"
     },
     {
@@ -3978,7 +3938,7 @@
       "source_location": "L139",
       "_origin": "ast",
       "id": "src_requests_declaredrequest",
-      "community": 136,
+      "community": 0,
       "norm_label": "declaredrequest()"
     },
     {
@@ -3988,7 +3948,7 @@
       "source_location": "L151",
       "_origin": "ast",
       "id": "src_requests_describerequest",
-      "community": 136,
+      "community": 0,
       "norm_label": "describerequest()"
     },
     {
@@ -7038,7 +6998,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "packages_mocker_storybook_src_fixed_ts_src_fixed",
-      "community": 125,
+      "community": 0,
       "norm_label": "fixed.ts"
     },
     {
@@ -7048,7 +7008,7 @@
       "source_location": "L41",
       "_origin": "ast",
       "id": "packages_mocker_storybook_src_fixed_ts_src_fixed_sleep",
-      "community": 125,
+      "community": 0,
       "norm_label": "sleep()"
     },
     {
@@ -7058,7 +7018,7 @@
       "source_location": "L45",
       "_origin": "ast",
       "id": "src_fixed_generate",
-      "community": 125,
+      "community": 0,
       "norm_label": "generate()"
     },
     {
@@ -7068,7 +7028,7 @@
       "source_location": "L53",
       "_origin": "ast",
       "id": "packages_mocker_storybook_src_fixed_ts_src_fixed_fixtureerror",
-      "community": 125,
+      "community": 0,
       "norm_label": "fixtureerror()"
     },
     {
@@ -7078,7 +7038,7 @@
       "source_location": "L84",
       "_origin": "ast",
       "id": "packages_mocker_storybook_src_fixed_ts_src_fixed_replay",
-      "community": 125,
+      "community": 0,
       "norm_label": "replay()"
     },
     {
@@ -7088,7 +7048,7 @@
       "source_location": "L141",
       "_origin": "ast",
       "id": "packages_mocker_storybook_src_fixed_ts_src_fixed_servefixed",
-      "community": 125,
+      "community": 0,
       "norm_label": "servefixed()"
     },
     {
@@ -7098,7 +7058,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_fixtures_test",
-      "community": 125,
+      "community": 0,
       "norm_label": "fixtures.test.ts"
     },
     {
@@ -7108,7 +7068,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_fixtures",
-      "community": 125,
+      "community": 0,
       "norm_label": "fixtures.ts"
     },
     {
@@ -7118,7 +7078,7 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "src_fixtures_fixturelookup",
-      "community": 125,
+      "community": 0,
       "norm_label": "fixturelookup"
     },
     {
@@ -7128,7 +7088,7 @@
       "source_location": "L40",
       "_origin": "ast",
       "id": "src_fixtures_warnunavailable",
-      "community": 125,
+      "community": 0,
       "norm_label": "warnunavailable()"
     },
     {
@@ -7138,7 +7098,7 @@
       "source_location": "L61",
       "_origin": "ast",
       "id": "src_fixtures_fixtureurl",
-      "community": 125,
+      "community": 0,
       "norm_label": "fixtureurl()"
     },
     {
@@ -7148,7 +7108,7 @@
       "source_location": "L79",
       "_origin": "ast",
       "id": "src_fixtures_readfixture",
-      "community": 125,
+      "community": 0,
       "norm_label": "readfixture()"
     },
     {
@@ -7158,7 +7118,7 @@
       "source_location": "L109",
       "_origin": "ast",
       "id": "src_fixtures_writefixture",
-      "community": 125,
+      "community": 0,
       "norm_label": "writefixture()"
     },
     {
@@ -8228,7 +8188,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "core_controls_test",
-      "community": 136,
+      "community": 0,
       "norm_label": "controls.test.ts"
     },
     {
@@ -8238,7 +8198,7 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "core_controls_test_headers",
-      "community": 136,
+      "community": 0,
       "norm_label": "headers()"
     },
     {
@@ -8248,7 +8208,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "core_controls",
-      "community": 17,
+      "community": 0,
       "norm_label": "controls.ts"
     },
     {
@@ -8268,7 +8228,7 @@
       "source_location": "L45",
       "_origin": "ast",
       "id": "core_controls_invalidcontrolerror",
-      "community": 136,
+      "community": 0,
       "norm_label": "invalidcontrolerror"
     },
     {
@@ -8278,7 +8238,7 @@
       "source_location": "L48",
       "_origin": "ast",
       "id": "core_controls_invalidcontrolerror_constructor",
-      "community": 136,
+      "community": 0,
       "norm_label": ".constructor()"
     },
     {
@@ -8288,7 +8248,7 @@
       "source_location": "L55",
       "_origin": "ast",
       "id": "core_controls_readint",
-      "community": 17,
+      "community": 0,
       "norm_label": "readint()"
     },
     {
@@ -8298,7 +8258,7 @@
       "source_location": "L76",
       "_origin": "ast",
       "id": "core_controls_readcontrols",
-      "community": 136,
+      "community": 0,
       "norm_label": "readcontrols()"
     },
     {
@@ -8378,7 +8338,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "core_fixture_test",
-      "community": 17,
+      "community": 0,
       "norm_label": "fixture.test.ts"
     },
     {
@@ -8388,7 +8348,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "core_fixture_test_none",
-      "community": 17,
+      "community": 0,
       "norm_label": "none"
     },
     {
@@ -8398,7 +8358,7 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "core_fixture_test_path",
-      "community": 17,
+      "community": 0,
       "norm_label": "path()"
     },
     {
@@ -8408,7 +8368,7 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "core_fixture_test_post",
-      "community": 17,
+      "community": 0,
       "norm_label": "post()"
     },
     {
@@ -8468,7 +8428,7 @@
       "source_location": "L122",
       "_origin": "ast",
       "id": "core_fixture_fixturepath",
-      "community": 17,
+      "community": 0,
       "norm_label": "fixturepath()"
     },
     {
@@ -8478,7 +8438,7 @@
       "source_location": "L152",
       "_origin": "ast",
       "id": "core_fixture_serializefixture",
-      "community": 125,
+      "community": 0,
       "norm_label": "serializefixture()"
     },
     {
@@ -8518,7 +8478,7 @@
       "source_location": "L56",
       "_origin": "ast",
       "id": "core_generate_generate",
-      "community": 11,
+      "community": 23,
       "norm_label": "generate()"
     },
     {
@@ -8608,7 +8568,7 @@
       "source_location": "L331",
       "_origin": "ast",
       "id": "core_generate_assertoverridepathsexist",
-      "community": 11,
+      "community": 23,
       "norm_label": "assertoverridepathsexist()"
     },
     {
@@ -8698,7 +8658,7 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "core_handle_mockendpoint",
-      "community": 18,
+      "community": 23,
       "norm_label": "mockendpoint"
     },
     {
@@ -8938,7 +8898,7 @@
       "source_location": "L132",
       "_origin": "ast",
       "id": "core_path_types_pathoverrides",
-      "community": 18,
+      "community": 137,
       "norm_label": "pathoverrides"
     },
     {
@@ -8948,7 +8908,7 @@
       "source_location": "L148",
       "_origin": "ast",
       "id": "core_path_types_pathcounts",
-      "community": 18,
+      "community": 137,
       "norm_label": "pathcounts"
     },
     {
@@ -9088,7 +9048,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "core_rules_test",
-      "community": 18,
+      "community": 137,
       "norm_label": "rules.test.ts"
     },
     {
@@ -9098,7 +9058,7 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "core_rules_test_rulenamed",
-      "community": 18,
+      "community": 137,
       "norm_label": "rulenamed()"
     },
     {
@@ -9108,7 +9068,7 @@
       "source_location": "L25",
       "_origin": "ast",
       "id": "core_rules_test_seeds",
-      "community": 18,
+      "community": 137,
       "norm_label": "seeds"
     },
     {
@@ -9118,7 +9078,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "core_rules",
-      "community": 18,
+      "community": 137,
       "norm_label": "rules.ts"
     },
     {
@@ -9128,7 +9088,7 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "core_rules_default_rules",
-      "community": 18,
+      "community": 137,
       "norm_label": "default_rules"
     },
     {
@@ -9308,7 +9268,7 @@
       "source_location": "L242",
       "_origin": "ast",
       "id": "core_shape_shaperequest",
-      "community": 23,
+      "community": 17,
       "norm_label": "shaperequest()"
     },
     {
@@ -9318,7 +9278,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "core_types",
-      "community": 18,
+      "community": 137,
       "norm_label": "types.ts"
     },
     {
@@ -9328,7 +9288,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "core_types_leaf_kinds",
-      "community": 18,
+      "community": 137,
       "norm_label": "leaf_kinds"
     },
     {
@@ -9338,7 +9298,7 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "core_types_leafkind",
-      "community": 18,
+      "community": 11,
       "norm_label": "leafkind"
     },
     {
@@ -9368,7 +9328,7 @@
       "source_location": "L47",
       "_origin": "ast",
       "id": "core_types_namerule",
-      "community": 18,
+      "community": 137,
       "norm_label": "namerule"
     },
     {
@@ -9378,7 +9338,7 @@
       "source_location": "L66",
       "_origin": "ast",
       "id": "core_types_generateoptions",
-      "community": 18,
+      "community": 137,
       "norm_label": "generateoptions"
     },
     {
@@ -9388,7 +9348,7 @@
       "source_location": "L135",
       "_origin": "ast",
       "id": "core_types_mockoptions",
-      "community": 150,
+      "community": 137,
       "norm_label": "mockoptions"
     },
     {
@@ -9988,7 +9948,7 @@
       "source_location": "L67",
       "_origin": "ast",
       "id": "registry_types_mockregistry",
-      "community": 12,
+      "community": 0,
       "norm_label": "mockregistry"
     },
     {
@@ -13365,9 +13325,9 @@
       "source_file": "apps/e2e/package.json",
       "source_location": "L10",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "e2e_package_scripts",
-      "target": "e2e_package_scripts_mocks"
+      "target": "e2e_package_scripts_mocks",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -13415,9 +13375,9 @@
       "source_file": "apps/e2e/package.json",
       "source_location": "L14",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "e2e_package_dependencies",
-      "target": "e2e_package_dependencies_magicspon_mocker_cli"
+      "target": "e2e_package_dependencies_magicspon_mocker_cli",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -13455,9 +13415,9 @@
       "source_file": "apps/e2e/package.json",
       "source_location": "L21",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "e2e_package_devdependencies",
-      "target": "e2e_package_devdependencies_tsx"
+      "target": "e2e_package_devdependencies_tsx",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -15021,9 +14981,9 @@
       "source_file": "apps/storybook/src/api/devices.ts",
       "source_location": "L33",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "apps_storybook_src_api_devices_ts_api_devices",
-      "target": "api_devices_devicelist"
+      "target": "api_devices_devicelist",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -15042,9 +15002,9 @@
       "source_file": "apps/storybook/src/components/DeviceTable.tsx",
       "source_location": "L3",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "components_devicetable",
-      "target": "api_devices_devicelist"
+      "target": "api_devices_devicelist",
+      "confidence_score": 1.0
     },
     {
       "relation": "references",
@@ -15053,9 +15013,9 @@
       "source_file": "apps/storybook/src/components/DeviceTable.tsx",
       "source_location": "L19",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "components_devicetable_state",
-      "target": "api_devices_devicelist"
+      "target": "api_devices_devicelist",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -15063,9 +15023,9 @@
       "source_file": "apps/storybook/src/api/property.ts",
       "source_location": "L26",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "apps_storybook_src_api_property_ts_api_property",
-      "target": "api_property_property"
+      "target": "api_property_property",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -15084,9 +15044,9 @@
       "source_file": "apps/storybook/src/components/PropertyCard.tsx",
       "source_location": "L1",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "components_propertycard",
-      "target": "api_property_property"
+      "target": "api_property_property",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -15604,9 +15564,9 @@
       "source_file": "package.json",
       "source_location": "L21",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "package_json_package_scripts",
-      "target": "package_scripts_mocks"
+      "target": "package_scripts_mocks",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -15734,9 +15694,9 @@
       "source_file": "package.json",
       "source_location": "L32",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "package_json_package_devdependencies",
-      "target": "package_devdependencies_commitlint_types"
+      "target": "package_devdependencies_commitlint_types",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -15794,9 +15754,9 @@
       "source_file": "package.json",
       "source_location": "L40",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "package_json_package_devdependencies",
-      "target": "package_devdependencies_tsx"
+      "target": "package_devdependencies_tsx",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -15844,9 +15804,9 @@
       "source_file": "packages/mocker-cli/package.json",
       "source_location": "L14",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "mocker_cli_package",
-      "target": "mocker_cli_package_author"
+      "target": "mocker_cli_package_author",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -15854,9 +15814,9 @@
       "source_file": "packages/mocker-cli/package.json",
       "source_location": "L30",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "mocker_cli_package",
-      "target": "mocker_cli_package_bin"
+      "target": "mocker_cli_package_bin",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -15864,9 +15824,9 @@
       "source_file": "packages/mocker-cli/package.json",
       "source_location": "L16",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "mocker_cli_package",
-      "target": "mocker_cli_package_bugs"
+      "target": "mocker_cli_package_bugs",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -15874,9 +15834,9 @@
       "source_file": "packages/mocker-cli/package.json",
       "source_location": "L51",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "mocker_cli_package",
-      "target": "mocker_cli_package_dependencies"
+      "target": "mocker_cli_package_dependencies",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -15884,9 +15844,9 @@
       "source_file": "packages/mocker-cli/package.json",
       "source_location": "L4",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "mocker_cli_package",
-      "target": "mocker_cli_package_description"
+      "target": "mocker_cli_package_description",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -15894,9 +15854,9 @@
       "source_file": "packages/mocker-cli/package.json",
       "source_location": "L58",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "mocker_cli_package",
-      "target": "mocker_cli_package_devdependencies"
+      "target": "mocker_cli_package_devdependencies",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -15904,9 +15864,9 @@
       "source_file": "packages/mocker-cli/package.json",
       "source_location": "L24",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "mocker_cli_package",
-      "target": "mocker_cli_package_engines"
+      "target": "mocker_cli_package_engines",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -15914,9 +15874,9 @@
       "source_file": "packages/mocker-cli/package.json",
       "source_location": "L33",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "mocker_cli_package",
-      "target": "mocker_cli_package_exports"
+      "target": "mocker_cli_package_exports",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -15924,9 +15884,9 @@
       "source_file": "packages/mocker-cli/package.json",
       "source_location": "L27",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "mocker_cli_package",
-      "target": "mocker_cli_package_files"
+      "target": "mocker_cli_package_files",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -15934,9 +15894,9 @@
       "source_file": "packages/mocker-cli/package.json",
       "source_location": "L15",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "mocker_cli_package",
-      "target": "mocker_cli_package_homepage"
+      "target": "mocker_cli_package_homepage",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -15944,9 +15904,9 @@
       "source_file": "packages/mocker-cli/package.json",
       "source_location": "L5",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "mocker_cli_package",
-      "target": "mocker_cli_package_keywords"
+      "target": "mocker_cli_package_keywords",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -15954,9 +15914,9 @@
       "source_file": "packages/mocker-cli/package.json",
       "source_location": "L13",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "mocker_cli_package",
-      "target": "mocker_cli_package_license"
+      "target": "mocker_cli_package_license",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -15964,9 +15924,9 @@
       "source_file": "packages/mocker-cli/package.json",
       "source_location": "L2",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "mocker_cli_package",
-      "target": "mocker_cli_package_name"
+      "target": "mocker_cli_package_name",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -15974,9 +15934,9 @@
       "source_file": "packages/mocker-cli/package.json",
       "source_location": "L55",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "mocker_cli_package",
-      "target": "mocker_cli_package_peerdependencies"
+      "target": "mocker_cli_package_peerdependencies",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -15984,9 +15944,9 @@
       "source_file": "packages/mocker-cli/package.json",
       "source_location": "L37",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "mocker_cli_package",
-      "target": "mocker_cli_package_publishconfig"
+      "target": "mocker_cli_package_publishconfig",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -15994,9 +15954,9 @@
       "source_file": "packages/mocker-cli/package.json",
       "source_location": "L17",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "mocker_cli_package",
-      "target": "mocker_cli_package_repository"
+      "target": "mocker_cli_package_repository",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -16004,9 +15964,9 @@
       "source_file": "packages/mocker-cli/package.json",
       "source_location": "L47",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "mocker_cli_package",
-      "target": "mocker_cli_package_scripts"
+      "target": "mocker_cli_package_scripts",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -16014,9 +15974,9 @@
       "source_file": "packages/mocker-cli/package.json",
       "source_location": "L23",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "mocker_cli_package",
-      "target": "mocker_cli_package_sideeffects"
+      "target": "mocker_cli_package_sideeffects",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -16024,9 +15984,9 @@
       "source_file": "packages/mocker-cli/package.json",
       "source_location": "L22",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "mocker_cli_package",
-      "target": "mocker_cli_package_type"
+      "target": "mocker_cli_package_type",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -16034,9 +15994,9 @@
       "source_file": "packages/mocker-cli/package.json",
       "source_location": "L3",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "mocker_cli_package",
-      "target": "mocker_cli_package_version"
+      "target": "mocker_cli_package_version",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -16044,9 +16004,9 @@
       "source_file": "packages/mocker-cli/package.json",
       "source_location": "L20",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "mocker_cli_package_repository",
-      "target": "mocker_cli_package_repository_directory"
+      "target": "mocker_cli_package_repository_directory",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -16054,9 +16014,9 @@
       "source_file": "packages/mocker-cli/package.json",
       "source_location": "L18",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "mocker_cli_package_repository",
-      "target": "mocker_cli_package_repository_type"
+      "target": "mocker_cli_package_repository_type",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -16064,9 +16024,9 @@
       "source_file": "packages/mocker-cli/package.json",
       "source_location": "L19",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "mocker_cli_package_repository",
-      "target": "mocker_cli_package_repository_url"
+      "target": "mocker_cli_package_repository_url",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -16074,9 +16034,9 @@
       "source_file": "packages/mocker-cli/package.json",
       "source_location": "L25",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "mocker_cli_package_engines",
-      "target": "mocker_cli_package_engines_node"
+      "target": "mocker_cli_package_engines_node",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -16084,9 +16044,9 @@
       "source_file": "packages/mocker-cli/package.json",
       "source_location": "L31",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "mocker_cli_package_bin",
-      "target": "mocker_cli_package_bin_mocker"
+      "target": "mocker_cli_package_bin_mocker",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -16094,9 +16054,9 @@
       "source_file": "packages/mocker-cli/package.json",
       "source_location": "L42",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "mocker_cli_package_exports",
-      "target": "mocker_cli_package_default"
+      "target": "mocker_cli_package_default",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -16104,9 +16064,9 @@
       "source_file": "packages/mocker-cli/package.json",
       "source_location": "L35",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "mocker_cli_package_exports",
-      "target": "mocker_cli_package_exports_package_json"
+      "target": "mocker_cli_package_exports_package_json",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -16114,9 +16074,9 @@
       "source_file": "packages/mocker-cli/package.json",
       "source_location": "L41",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "mocker_cli_package_exports",
-      "target": "mocker_cli_package_types"
+      "target": "mocker_cli_package_types",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -16124,9 +16084,9 @@
       "source_file": "packages/mocker-cli/package.json",
       "source_location": "L40",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "mocker_cli_package_publishconfig_exports",
-      "target": "mocker_cli_package_exports"
+      "target": "mocker_cli_package_exports",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -16134,9 +16094,9 @@
       "source_file": "packages/mocker-cli/package.json",
       "source_location": "L44",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "mocker_cli_package_publishconfig_exports",
-      "target": "mocker_cli_package_exports_package_json"
+      "target": "mocker_cli_package_exports_package_json",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -16144,9 +16104,9 @@
       "source_file": "packages/mocker-cli/package.json",
       "source_location": "L38",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "mocker_cli_package_publishconfig",
-      "target": "mocker_cli_package_publishconfig_access"
+      "target": "mocker_cli_package_publishconfig_access",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -16154,9 +16114,9 @@
       "source_file": "packages/mocker-cli/package.json",
       "source_location": "L39",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "mocker_cli_package_publishconfig",
-      "target": "mocker_cli_package_publishconfig_exports"
+      "target": "mocker_cli_package_publishconfig_exports",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -16164,9 +16124,9 @@
       "source_file": "packages/mocker-cli/package.json",
       "source_location": "L48",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "mocker_cli_package_scripts",
-      "target": "mocker_cli_package_scripts_build"
+      "target": "mocker_cli_package_scripts_build",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -16174,9 +16134,9 @@
       "source_file": "packages/mocker-cli/package.json",
       "source_location": "L49",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "mocker_cli_package_scripts",
-      "target": "mocker_cli_package_scripts_typecheck"
+      "target": "mocker_cli_package_scripts_typecheck",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -16184,9 +16144,9 @@
       "source_file": "packages/mocker-cli/package.json",
       "source_location": "L52",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "mocker_cli_package_dependencies",
-      "target": "mocker_cli_package_dependencies_faker_js_faker"
+      "target": "mocker_cli_package_dependencies_faker_js_faker",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -16194,9 +16154,9 @@
       "source_file": "packages/mocker-cli/package.json",
       "source_location": "L53",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "mocker_cli_package_dependencies",
-      "target": "mocker_cli_package_dependencies_magicspon_mocker"
+      "target": "mocker_cli_package_dependencies_magicspon_mocker",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -16204,9 +16164,9 @@
       "source_file": "packages/mocker-cli/package.json",
       "source_location": "L56",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "mocker_cli_package_peerdependencies",
-      "target": "mocker_cli_package_peerdependencies_zod"
+      "target": "mocker_cli_package_peerdependencies_zod",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -16214,9 +16174,9 @@
       "source_file": "packages/mocker-cli/package.json",
       "source_location": "L59",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "mocker_cli_package_devdependencies",
-      "target": "mocker_cli_package_devdependencies_tsdown"
+      "target": "mocker_cli_package_devdependencies_tsdown",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -16224,9 +16184,9 @@
       "source_file": "packages/mocker-cli/package.json",
       "source_location": "L60",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "mocker_cli_package_devdependencies",
-      "target": "mocker_cli_package_devdependencies_typescript"
+      "target": "mocker_cli_package_devdependencies_typescript",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -16234,9 +16194,9 @@
       "source_file": "packages/mocker-cli/package.json",
       "source_location": "L61",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "mocker_cli_package_devdependencies",
-      "target": "mocker_cli_package_devdependencies_zod"
+      "target": "mocker_cli_package_devdependencies_zod",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -16245,9 +16205,9 @@
       "source_file": "packages/mocker-cli/src/args.test.ts",
       "source_location": "L3",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_args_test",
-      "target": "src_args"
+      "target": "src_args",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -16256,9 +16216,9 @@
       "source_file": "packages/mocker-cli/src/args.test.ts",
       "source_location": "L3",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_args_test",
-      "target": "src_args_clioptions"
+      "target": "src_args_clioptions",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -16267,9 +16227,9 @@
       "source_file": "packages/mocker-cli/src/args.test.ts",
       "source_location": "L2",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_args_test",
-      "target": "src_args_parsecliargs"
+      "target": "src_args_parsecliargs",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -16277,9 +16237,9 @@
       "source_file": "packages/mocker-cli/src/args.test.ts",
       "source_location": "L12",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_args_test",
-      "target": "src_args_test_options"
+      "target": "src_args_test_options",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -16288,9 +16248,9 @@
       "source_file": "packages/mocker-cli/src/args.test.ts",
       "source_location": "L2",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_args_test",
-      "target": "src_args_usageerror"
+      "target": "src_args_usageerror",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -16299,9 +16259,9 @@
       "source_file": "packages/mocker-cli/src/args.test.ts",
       "source_location": "L13",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_args_test_options",
-      "target": "src_args_parsecliargs"
+      "target": "src_args_parsecliargs",
+      "confidence_score": 1.0
     },
     {
       "relation": "re_exports",
@@ -16310,9 +16270,9 @@
       "source_file": "packages/mocker-cli/src/index.ts",
       "source_location": "L32",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "packages_mocker_cli_src_index_ts_src_index",
-      "target": "src_args"
+      "target": "src_args",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -16320,9 +16280,9 @@
       "source_file": "packages/mocker-cli/src/args.ts",
       "source_location": "L24",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_args",
-      "target": "src_args_clioptions"
+      "target": "src_args_clioptions",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -16330,9 +16290,9 @@
       "source_file": "packages/mocker-cli/src/args.ts",
       "source_location": "L86",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_args",
-      "target": "src_args_integer"
+      "target": "src_args_integer",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -16340,9 +16300,9 @@
       "source_file": "packages/mocker-cli/src/args.ts",
       "source_location": "L100",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_args",
-      "target": "src_args_parsecliargs"
+      "target": "src_args_parsecliargs",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -16350,9 +16310,9 @@
       "source_file": "packages/mocker-cli/src/args.ts",
       "source_location": "L43",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_args",
-      "target": "src_args_parsedargs"
+      "target": "src_args_parsedargs",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -16360,9 +16320,9 @@
       "source_file": "packages/mocker-cli/src/args.ts",
       "source_location": "L16",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_args",
-      "target": "src_args_usageerror"
+      "target": "src_args_usageerror",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -16371,29 +16331,7 @@
       "source_file": "packages/mocker-cli/src/cli.ts",
       "source_location": "L6",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_cli",
-      "target": "src_args"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/mocker-cli/src/exit.ts",
-      "source_location": "L2",
-      "weight": 1.0,
-      "source": "src_exit",
-      "target": "src_args",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/mocker-cli/src/exit.test.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "source": "src_exit_test",
       "target": "src_args",
       "confidence_score": 1.0
     },
@@ -16404,9 +16342,9 @@
       "source_file": "packages/mocker-cli/src/index.ts",
       "source_location": "L32",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "packages_mocker_cli_src_index_ts_src_index",
-      "target": "src_args_usageerror"
+      "target": "src_args_usageerror",
+      "confidence_score": 1.0
     },
     {
       "relation": "method",
@@ -16414,9 +16352,9 @@
       "source_file": "packages/mocker-cli/src/args.ts",
       "source_location": "L17",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_args_usageerror",
-      "target": "src_args_usageerror_constructor"
+      "target": "src_args_usageerror_constructor",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -16425,29 +16363,7 @@
       "source_file": "packages/mocker-cli/src/cli.ts",
       "source_location": "L5",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_cli",
-      "target": "src_args_usageerror"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/mocker-cli/src/exit.ts",
-      "source_location": "L2",
-      "weight": 1.0,
-      "source": "src_exit",
-      "target": "src_args_usageerror",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/mocker-cli/src/exit.test.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "source": "src_exit_test",
       "target": "src_args_usageerror",
       "confidence_score": 1.0
     },
@@ -16458,9 +16374,9 @@
       "source_file": "packages/mocker-cli/src/index.ts",
       "source_location": "L33",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "packages_mocker_cli_src_index_ts_src_index",
-      "target": "src_args_clioptions"
+      "target": "src_args_clioptions",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -16469,9 +16385,9 @@
       "source_file": "packages/mocker-cli/src/cli.ts",
       "source_location": "L6",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_cli",
-      "target": "src_args_clioptions"
+      "target": "src_args_clioptions",
+      "confidence_score": 1.0
     },
     {
       "relation": "re_exports",
@@ -16480,9 +16396,9 @@
       "source_file": "packages/mocker-cli/src/index.ts",
       "source_location": "L33",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "packages_mocker_cli_src_index_ts_src_index",
-      "target": "src_args_parsedargs"
+      "target": "src_args_parsedargs",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -16491,9 +16407,9 @@
       "source_file": "packages/mocker-cli/src/args.ts",
       "source_location": "L152",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_args_parsecliargs",
-      "target": "src_args_integer"
+      "target": "src_args_integer",
+      "confidence_score": 1.0
     },
     {
       "relation": "re_exports",
@@ -16502,9 +16418,9 @@
       "source_file": "packages/mocker-cli/src/index.ts",
       "source_location": "L32",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "packages_mocker_cli_src_index_ts_src_index",
-      "target": "src_args_parsecliargs"
+      "target": "src_args_parsecliargs",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -16513,9 +16429,9 @@
       "source_file": "packages/mocker-cli/src/cli.ts",
       "source_location": "L5",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_cli",
-      "target": "src_args_parsecliargs"
+      "target": "src_args_parsecliargs",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -16524,9 +16440,9 @@
       "source_file": "packages/mocker-cli/src/cli.ts",
       "source_location": "L54",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_cli_main",
-      "target": "src_args_parsecliargs"
+      "target": "src_args_parsecliargs",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -16535,9 +16451,9 @@
       "source_file": "packages/mocker-cli/src/cli.ts",
       "source_location": "L4",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_cli",
-      "target": "core_controls_invalidcontrolerror"
+      "target": "core_controls_invalidcontrolerror",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -16545,9 +16461,19 @@
       "source_file": "packages/mocker-cli/src/cli.ts",
       "source_location": "L53",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_cli",
-      "target": "src_cli_main"
+      "target": "src_cli_main",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/mocker-cli/src/cli.ts",
+      "source_location": "L76",
+      "weight": 1.0,
+      "source": "src_cli",
+      "target": "src_cli_report",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -16555,9 +16481,9 @@
       "source_file": "packages/mocker-cli/src/cli.ts",
       "source_location": "L40",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_cli",
-      "target": "src_cli_run"
+      "target": "src_cli_run",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -16565,31 +16491,9 @@
       "source_file": "packages/mocker-cli/src/cli.ts",
       "source_location": "L31",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_cli",
-      "target": "src_cli_version"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/mocker-cli/src/cli.ts",
-      "source_location": "L7",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_cli",
-      "target": "src_emit"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/mocker-cli/src/cli.ts",
-      "source_location": "L7",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_cli",
-      "target": "src_emit_generatefixtures"
+      "target": "src_cli_version",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -16599,7 +16503,7 @@
       "source_location": "L7",
       "weight": 1.0,
       "source": "src_cli",
-      "target": "src_exit",
+      "target": "src_emit",
       "confidence_score": 1.0
     },
     {
@@ -16610,7 +16514,7 @@
       "source_location": "L7",
       "weight": 1.0,
       "source": "src_cli",
-      "target": "src_exit_describefailure",
+      "target": "src_emit_generatefixtures",
       "confidence_score": 1.0
     },
     {
@@ -16620,9 +16524,9 @@
       "source_file": "packages/mocker-cli/src/cli.ts",
       "source_location": "L8",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_cli",
-      "target": "src_load"
+      "target": "src_load",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -16631,9 +16535,9 @@
       "source_file": "packages/mocker-cli/src/cli.ts",
       "source_location": "L8",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_cli",
-      "target": "src_load_loadregistry"
+      "target": "src_load_loadregistry",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -16642,9 +16546,9 @@
       "source_file": "packages/mocker-cli/src/cli.ts",
       "source_location": "L8",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_cli",
-      "target": "src_load_registryloaderror"
+      "target": "src_load_registryloaderror",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -16653,9 +16557,9 @@
       "source_file": "packages/mocker-cli/src/cli.ts",
       "source_location": "L9",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_cli",
-      "target": "src_report"
+      "target": "src_report",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -16664,9 +16568,9 @@
       "source_file": "packages/mocker-cli/src/cli.ts",
       "source_location": "L9",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_cli",
-      "target": "src_report_formatjsonreport"
+      "target": "src_report_formatjsonreport",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -16675,9 +16579,9 @@
       "source_file": "packages/mocker-cli/src/cli.ts",
       "source_location": "L9",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_cli",
-      "target": "src_report_formatreport"
+      "target": "src_report_formatreport",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -16686,9 +16590,9 @@
       "source_file": "packages/mocker-cli/src/cli.ts",
       "source_location": "L9",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_cli",
-      "target": "src_report_summarise"
+      "target": "src_report_summarise",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -16697,9 +16601,9 @@
       "source_file": "packages/mocker-cli/src/cli.ts",
       "source_location": "L61",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_cli_main",
-      "target": "src_cli_version"
+      "target": "src_cli_version",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -16708,9 +16612,9 @@
       "source_file": "packages/mocker-cli/src/cli.ts",
       "source_location": "L65",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_cli_main",
-      "target": "src_cli_run"
+      "target": "src_cli_run",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -16719,9 +16623,9 @@
       "source_file": "packages/mocker-cli/src/cli.ts",
       "source_location": "L42",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_cli_run",
-      "target": "src_emit_generatefixtures"
+      "target": "src_emit_generatefixtures",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -16730,9 +16634,9 @@
       "source_file": "packages/mocker-cli/src/cli.ts",
       "source_location": "L41",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_cli_run",
-      "target": "src_load_loadregistry"
+      "target": "src_load_loadregistry",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -16741,9 +16645,9 @@
       "source_file": "packages/mocker-cli/src/cli.ts",
       "source_location": "L46",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_cli_run",
-      "target": "src_report_formatjsonreport"
+      "target": "src_report_formatjsonreport",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -16752,9 +16656,9 @@
       "source_file": "packages/mocker-cli/src/cli.ts",
       "source_location": "L47",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_cli_run",
-      "target": "src_report_formatreport"
+      "target": "src_report_formatreport",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -16763,9 +16667,9 @@
       "source_file": "packages/mocker-cli/src/cli.ts",
       "source_location": "L50",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_cli_run",
-      "target": "src_report_summarise"
+      "target": "src_report_summarise",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -16774,9 +16678,9 @@
       "source_file": "packages/mocker-cli/src/emit.test.ts",
       "source_location": "L4",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_emit_test",
-      "target": "core_controls_invalidcontrolerror"
+      "target": "core_controls_invalidcontrolerror",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -16785,9 +16689,9 @@
       "source_file": "packages/mocker-cli/src/emit.test.ts",
       "source_location": "L5",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_emit_test",
-      "target": "registry_types_mockregistry"
+      "target": "registry_types_mockregistry",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -16796,9 +16700,9 @@
       "source_file": "packages/mocker-cli/src/emit.test.ts",
       "source_location": "L9",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_emit_test",
-      "target": "src_emit"
+      "target": "src_emit",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -16807,9 +16711,9 @@
       "source_file": "packages/mocker-cli/src/emit.test.ts",
       "source_location": "L9",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_emit_test",
-      "target": "src_emit_emitresult"
+      "target": "src_emit_emitresult",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -16818,9 +16722,9 @@
       "source_file": "packages/mocker-cli/src/emit.test.ts",
       "source_location": "L8",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_emit_test",
-      "target": "src_emit_generatefixtures"
+      "target": "src_emit_generatefixtures",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -16828,9 +16732,9 @@
       "source_file": "packages/mocker-cli/src/emit.test.ts",
       "source_location": "L24",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_emit_test",
-      "target": "src_emit_test_devicelistschema"
+      "target": "src_emit_test_devicelistschema",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -16838,9 +16742,9 @@
       "source_file": "packages/mocker-cli/src/emit.test.ts",
       "source_location": "L19",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_emit_test",
-      "target": "src_emit_test_propertyschema"
+      "target": "src_emit_test_propertyschema",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -16848,9 +16752,9 @@
       "source_file": "packages/mocker-cli/src/emit.test.ts",
       "source_location": "L29",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_emit_test",
-      "target": "src_emit_test_registry"
+      "target": "src_emit_test_registry",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -16858,9 +16762,9 @@
       "source_file": "packages/mocker-cli/src/emit.test.ts",
       "source_location": "L49",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_emit_test",
-      "target": "src_emit_test_resultfor"
+      "target": "src_emit_test_resultfor",
+      "confidence_score": 1.0
     },
     {
       "relation": "re_exports",
@@ -16869,9 +16773,9 @@
       "source_file": "packages/mocker-cli/src/index.ts",
       "source_location": "L19",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "packages_mocker_cli_src_index_ts_src_index",
-      "target": "src_emit"
+      "target": "src_emit",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -16880,9 +16784,9 @@
       "source_file": "packages/mocker-cli/src/emit.ts",
       "source_location": "L3",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_emit",
-      "target": "core_controls_readcontrols"
+      "target": "core_controls_readcontrols",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -16891,9 +16795,9 @@
       "source_file": "packages/mocker-cli/src/emit.ts",
       "source_location": "L3",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_emit",
-      "target": "core_fixture_fixturepath"
+      "target": "core_fixture_fixturepath",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -16902,9 +16806,9 @@
       "source_file": "packages/mocker-cli/src/emit.ts",
       "source_location": "L3",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_emit",
-      "target": "core_fixture_serializefixture"
+      "target": "core_fixture_serializefixture",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -16913,9 +16817,9 @@
       "source_file": "packages/mocker-cli/src/emit.ts",
       "source_location": "L3",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_emit",
-      "target": "registry_serve_isregistrymiss"
+      "target": "registry_serve_isregistrymiss",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -16924,20 +16828,9 @@
       "source_file": "packages/mocker-cli/src/emit.ts",
       "source_location": "L3",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_emit",
-      "target": "registry_serve_servefromregistry"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/mocker-cli/src/emit.ts",
-      "source_location": "L12",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_emit",
-      "target": "registry_types_mockregistry"
+      "target": "registry_serve_servefromregistry",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -16947,7 +16840,7 @@
       "source_location": "L12",
       "weight": 1.0,
       "source": "src_emit",
-      "target": "registry_types_mockregistryentry",
+      "target": "registry_types_mockregistry",
       "confidence_score": 1.0
     },
     {
@@ -16956,18 +16849,8 @@
       "source_file": "packages/mocker-cli/src/emit.ts",
       "source_location": "L75",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_emit",
-      "target": "src_emit_controlheaders"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/mocker-cli/src/emit.ts",
-      "source_location": "L147",
-      "weight": 1.0,
-      "source": "src_emit",
-      "target": "src_emit_declined",
+      "target": "src_emit_controlheaders",
       "confidence_score": 1.0
     },
     {
@@ -16976,9 +16859,9 @@
       "source_file": "packages/mocker-cli/src/emit.ts",
       "source_location": "L141",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_emit",
-      "target": "src_emit_emitone"
+      "target": "src_emit_emitone",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -16986,9 +16869,9 @@
       "source_file": "packages/mocker-cli/src/emit.ts",
       "source_location": "L57",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_emit",
-      "target": "src_emit_emitoptions"
+      "target": "src_emit_emitoptions",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -16996,9 +16879,9 @@
       "source_file": "packages/mocker-cli/src/emit.ts",
       "source_location": "L40",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_emit",
-      "target": "src_emit_emitresult"
+      "target": "src_emit_emitresult",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -17006,9 +16889,9 @@
       "source_file": "packages/mocker-cli/src/emit.ts",
       "source_location": "L37",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_emit",
-      "target": "src_emit_emitstatus"
+      "target": "src_emit_emitstatus",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -17016,9 +16899,9 @@
       "source_file": "packages/mocker-cli/src/emit.ts",
       "source_location": "L119",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_emit",
-      "target": "src_emit_errorfrom"
+      "target": "src_emit_errorfrom",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -17026,9 +16909,9 @@
       "source_file": "packages/mocker-cli/src/emit.ts",
       "source_location": "L108",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_emit",
-      "target": "src_emit_exists"
+      "target": "src_emit_exists",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -17036,9 +16919,9 @@
       "source_file": "packages/mocker-cli/src/emit.ts",
       "source_location": "L136",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_emit",
-      "target": "src_emit_failure"
+      "target": "src_emit_failure",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -17046,9 +16929,9 @@
       "source_file": "packages/mocker-cli/src/emit.ts",
       "source_location": "L218",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_emit",
-      "target": "src_emit_generatefixtures"
+      "target": "src_emit_generatefixtures",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -17056,9 +16939,9 @@
       "source_file": "packages/mocker-cli/src/emit.ts",
       "source_location": "L92",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_emit",
-      "target": "src_emit_writefixture"
+      "target": "src_emit_writefixture",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -17067,9 +16950,9 @@
       "source_file": "packages/mocker-cli/src/emit.ts",
       "source_location": "L13",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_emit",
-      "target": "src_requests"
+      "target": "src_requests",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -17078,9 +16961,9 @@
       "source_file": "packages/mocker-cli/src/emit.ts",
       "source_location": "L13",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_emit",
-      "target": "src_requests_declaredrequest"
+      "target": "src_requests_declaredrequest",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -17089,9 +16972,9 @@
       "source_file": "packages/mocker-cli/src/emit.ts",
       "source_location": "L13",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_emit",
-      "target": "src_requests_describerequest"
+      "target": "src_requests_describerequest",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -17100,9 +16983,9 @@
       "source_file": "packages/mocker-cli/src/report.ts",
       "source_location": "L2",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_report",
-      "target": "src_emit"
+      "target": "src_emit",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -17111,9 +16994,9 @@
       "source_file": "packages/mocker-cli/src/report.test.ts",
       "source_location": "L3",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_report_test",
-      "target": "src_emit"
+      "target": "src_emit",
+      "confidence_score": 1.0
     },
     {
       "relation": "re_exports",
@@ -17122,9 +17005,9 @@
       "source_file": "packages/mocker-cli/src/index.ts",
       "source_location": "L20",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "packages_mocker_cli_src_index_ts_src_index",
-      "target": "src_emit_emitstatus"
+      "target": "src_emit_emitstatus",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -17133,9 +17016,9 @@
       "source_file": "packages/mocker-cli/src/report.ts",
       "source_location": "L2",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_report",
-      "target": "src_emit_emitstatus"
+      "target": "src_emit_emitstatus",
+      "confidence_score": 1.0
     },
     {
       "relation": "re_exports",
@@ -17144,9 +17027,9 @@
       "source_file": "packages/mocker-cli/src/index.ts",
       "source_location": "L20",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "packages_mocker_cli_src_index_ts_src_index",
-      "target": "src_emit_emitresult"
+      "target": "src_emit_emitresult",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -17155,9 +17038,9 @@
       "source_file": "packages/mocker-cli/src/report.ts",
       "source_location": "L2",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_report",
-      "target": "src_emit_emitresult"
+      "target": "src_emit_emitresult",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -17166,9 +17049,9 @@
       "source_file": "packages/mocker-cli/src/report.test.ts",
       "source_location": "L3",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_report_test",
-      "target": "src_emit_emitresult"
+      "target": "src_emit_emitresult",
+      "confidence_score": 1.0
     },
     {
       "relation": "re_exports",
@@ -17177,9 +17060,9 @@
       "source_file": "packages/mocker-cli/src/index.ts",
       "source_location": "L20",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "packages_mocker_cli_src_index_ts_src_index",
-      "target": "src_emit_emitoptions"
+      "target": "src_emit_emitoptions",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -17188,9 +17071,9 @@
       "source_file": "packages/mocker-cli/src/emit.ts",
       "source_location": "L159",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_emit_emitone",
-      "target": "src_emit_controlheaders"
+      "target": "src_emit_controlheaders",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -17199,9 +17082,9 @@
       "source_file": "packages/mocker-cli/src/emit.ts",
       "source_location": "L225",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_emit_generatefixtures",
-      "target": "src_emit_controlheaders"
+      "target": "src_emit_controlheaders",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -17210,9 +17093,9 @@
       "source_file": "packages/mocker-cli/src/emit.ts",
       "source_location": "L197",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_emit_emitone",
-      "target": "src_emit_writefixture"
+      "target": "src_emit_writefixture",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -17221,9 +17104,9 @@
       "source_file": "packages/mocker-cli/src/emit.ts",
       "source_location": "L165",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_emit_emitone",
-      "target": "src_emit_exists"
+      "target": "src_emit_exists",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -17232,19 +17115,8 @@
       "source_file": "packages/mocker-cli/src/emit.ts",
       "source_location": "L178",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_emit_emitone",
-      "target": "src_emit_errorfrom"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/mocker-cli/src/emit.ts",
-      "source_location": "L152",
-      "weight": 1.0,
-      "source": "src_emit_declined",
-      "target": "src_emit_failure",
+      "target": "src_emit_errorfrom",
       "confidence_score": 1.0
     },
     {
@@ -17254,9 +17126,9 @@
       "source_file": "packages/mocker-cli/src/emit.ts",
       "source_location": "L148",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_emit_emitone",
-      "target": "src_emit_failure"
+      "target": "src_emit_failure",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -17265,19 +17137,8 @@
       "source_file": "packages/mocker-cli/src/emit.ts",
       "source_location": "L235",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_emit_generatefixtures",
-      "target": "src_emit_failure"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/mocker-cli/src/emit.ts",
-      "source_location": "L173",
-      "weight": 1.0,
-      "source": "src_emit_emitone",
-      "target": "src_emit_declined",
+      "target": "src_emit_failure",
       "confidence_score": 1.0
     },
     {
@@ -17287,9 +17148,9 @@
       "source_file": "packages/mocker-cli/src/emit.ts",
       "source_location": "L162",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_emit_emitone",
-      "target": "core_controls_readcontrols"
+      "target": "core_controls_readcontrols",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -17298,9 +17159,9 @@
       "source_file": "packages/mocker-cli/src/emit.ts",
       "source_location": "L162",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_emit_emitone",
-      "target": "core_fixture_fixturepath"
+      "target": "core_fixture_fixturepath",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -17309,9 +17170,9 @@
       "source_file": "packages/mocker-cli/src/emit.ts",
       "source_location": "L197",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_emit_emitone",
-      "target": "core_fixture_serializefixture"
+      "target": "core_fixture_serializefixture",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -17320,9 +17181,9 @@
       "source_file": "packages/mocker-cli/src/emit.ts",
       "source_location": "L174",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_emit_emitone",
-      "target": "registry_serve_isregistrymiss"
+      "target": "registry_serve_isregistrymiss",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -17331,9 +17192,9 @@
       "source_file": "packages/mocker-cli/src/emit.ts",
       "source_location": "L169",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_emit_emitone",
-      "target": "registry_serve_servefromregistry"
+      "target": "registry_serve_servefromregistry",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -17342,9 +17203,9 @@
       "source_file": "packages/mocker-cli/src/emit.ts",
       "source_location": "L159",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_emit_emitone",
-      "target": "src_requests_declaredrequest"
+      "target": "src_requests_declaredrequest",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -17353,9 +17214,9 @@
       "source_file": "packages/mocker-cli/src/emit.ts",
       "source_location": "L160",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_emit_emitone",
-      "target": "src_requests_describerequest"
+      "target": "src_requests_describerequest",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -17364,9 +17225,9 @@
       "source_file": "packages/mocker-cli/src/emit.ts",
       "source_location": "L232",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_emit_generatefixtures",
-      "target": "src_emit_emitone"
+      "target": "src_emit_emitone",
+      "confidence_score": 1.0
     },
     {
       "relation": "re_exports",
@@ -17375,9 +17236,9 @@
       "source_file": "packages/mocker-cli/src/index.ts",
       "source_location": "L19",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "packages_mocker_cli_src_index_ts_src_index",
-      "target": "src_emit_generatefixtures"
+      "target": "src_emit_generatefixtures",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -17391,110 +17252,35 @@
       "target": "core_controls_readcontrols"
     },
     {
-      "relation": "imports",
-      "context": "import",
+      "relation": "re_exports",
+      "context": "export",
       "confidence": "EXTRACTED",
-      "source_file": "packages/mocker-cli/src/exit.test.ts",
-      "source_location": "L1",
+      "source_file": "packages/mocker-cli/src/index.ts",
+      "source_location": "L22",
       "weight": 1.0,
-      "source": "src_exit_test",
-      "target": "core_controls_invalidcontrolerror",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/mocker-cli/src/exit.test.ts",
-      "source_location": "L4",
-      "weight": 1.0,
-      "source": "src_exit_test",
-      "target": "src_exit",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/mocker-cli/src/exit.test.ts",
-      "source_location": "L4",
-      "weight": 1.0,
-      "source": "src_exit_test",
-      "target": "src_exit_describefailure",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/mocker-cli/src/exit.test.ts",
-      "source_location": "L5",
-      "weight": 1.0,
-      "source": "src_exit_test",
+      "source": "packages_mocker_cli_src_index_ts_src_index",
       "target": "src_load",
       "confidence_score": 1.0
     },
     {
-      "relation": "imports",
-      "context": "import",
+      "relation": "re_exports",
+      "context": "re-export",
       "confidence": "EXTRACTED",
-      "source_file": "packages/mocker-cli/src/exit.test.ts",
-      "source_location": "L5",
+      "source_file": "packages/mocker-cli/src/index.ts",
+      "source_location": "L22",
       "weight": 1.0,
-      "source": "src_exit_test",
-      "target": "src_load_registryloaderror",
+      "source": "packages_mocker_cli_src_index_ts_src_index",
+      "target": "src_load_loadregistry",
       "confidence_score": 1.0
     },
     {
-      "relation": "imports",
-      "context": "import",
+      "relation": "re_exports",
+      "context": "re-export",
       "confidence": "EXTRACTED",
-      "source_file": "packages/mocker-cli/src/exit.ts",
-      "source_location": "L1",
+      "source_file": "packages/mocker-cli/src/index.ts",
+      "source_location": "L22",
       "weight": 1.0,
-      "source": "src_exit",
-      "target": "core_controls_invalidcontrolerror",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/mocker-cli/src/exit.ts",
-      "source_location": "L43",
-      "weight": 1.0,
-      "source": "src_exit",
-      "target": "src_exit_describefailure",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/mocker-cli/src/exit.ts",
-      "source_location": "L23",
-      "weight": 1.0,
-      "source": "src_exit",
-      "target": "src_exit_failure",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/mocker-cli/src/exit.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "source": "src_exit",
-      "target": "src_load",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/mocker-cli/src/exit.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "source": "src_exit",
+      "source": "packages_mocker_cli_src_index_ts_src_index",
       "target": "src_load_registryloaderror",
       "confidence_score": 1.0
     },
@@ -17503,44 +17289,11 @@
       "context": "export",
       "confidence": "EXTRACTED",
       "source_file": "packages/mocker-cli/src/index.ts",
-      "source_location": "L22",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "packages_mocker_cli_src_index_ts_src_index",
-      "target": "src_load"
-    },
-    {
-      "relation": "re_exports",
-      "context": "re-export",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/mocker-cli/src/index.ts",
-      "source_location": "L22",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "packages_mocker_cli_src_index_ts_src_index",
-      "target": "src_load_loadregistry"
-    },
-    {
-      "relation": "re_exports",
-      "context": "re-export",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/mocker-cli/src/index.ts",
-      "source_location": "L22",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "packages_mocker_cli_src_index_ts_src_index",
-      "target": "src_load_registryloaderror"
-    },
-    {
-      "relation": "re_exports",
-      "context": "export",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/mocker-cli/src/index.ts",
       "source_location": "L29",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "packages_mocker_cli_src_index_ts_src_index",
-      "target": "src_report"
+      "target": "src_report",
+      "confidence_score": 1.0
     },
     {
       "relation": "re_exports",
@@ -17549,9 +17302,9 @@
       "source_file": "packages/mocker-cli/src/index.ts",
       "source_location": "L29",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "packages_mocker_cli_src_index_ts_src_index",
-      "target": "src_report_formatjsonreport"
+      "target": "src_report_formatjsonreport",
+      "confidence_score": 1.0
     },
     {
       "relation": "re_exports",
@@ -17560,9 +17313,9 @@
       "source_file": "packages/mocker-cli/src/index.ts",
       "source_location": "L29",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "packages_mocker_cli_src_index_ts_src_index",
-      "target": "src_report_formatreport"
+      "target": "src_report_formatreport",
+      "confidence_score": 1.0
     },
     {
       "relation": "re_exports",
@@ -17571,9 +17324,9 @@
       "source_file": "packages/mocker-cli/src/index.ts",
       "source_location": "L30",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "packages_mocker_cli_src_index_ts_src_index",
-      "target": "src_report_reportcontext"
+      "target": "src_report_reportcontext",
+      "confidence_score": 1.0
     },
     {
       "relation": "re_exports",
@@ -17582,9 +17335,9 @@
       "source_file": "packages/mocker-cli/src/index.ts",
       "source_location": "L29",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "packages_mocker_cli_src_index_ts_src_index",
-      "target": "src_report_summarise"
+      "target": "src_report_summarise",
+      "confidence_score": 1.0
     },
     {
       "relation": "re_exports",
@@ -17593,9 +17346,9 @@
       "source_file": "packages/mocker-cli/src/index.ts",
       "source_location": "L30",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "packages_mocker_cli_src_index_ts_src_index",
-      "target": "src_report_summary"
+      "target": "src_report_summary",
+      "confidence_score": 1.0
     },
     {
       "relation": "re_exports",
@@ -17604,9 +17357,9 @@
       "source_file": "packages/mocker-cli/src/index.ts",
       "source_location": "L27",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "packages_mocker_cli_src_index_ts_src_index",
-      "target": "src_requests"
+      "target": "src_requests",
+      "confidence_score": 1.0
     },
     {
       "relation": "re_exports",
@@ -17615,9 +17368,9 @@
       "source_file": "packages/mocker-cli/src/index.ts",
       "source_location": "L27",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "packages_mocker_cli_src_index_ts_src_index",
-      "target": "src_requests_bindingvalue"
+      "target": "src_requests_bindingvalue",
+      "confidence_score": 1.0
     },
     {
       "relation": "re_exports",
@@ -17626,9 +17379,9 @@
       "source_file": "packages/mocker-cli/src/index.ts",
       "source_location": "L27",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "packages_mocker_cli_src_index_ts_src_index",
-      "target": "src_requests_declaredrequest"
+      "target": "src_requests_declaredrequest",
+      "confidence_score": 1.0
     },
     {
       "relation": "re_exports",
@@ -17637,9 +17390,9 @@
       "source_file": "packages/mocker-cli/src/index.ts",
       "source_location": "L27",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "packages_mocker_cli_src_index_ts_src_index",
-      "target": "src_requests_describerequest"
+      "target": "src_requests_describerequest",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -17648,9 +17401,9 @@
       "source_file": "packages/mocker-cli/src/load.test.ts",
       "source_location": "L5",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_load_test",
-      "target": "src_load"
+      "target": "src_load",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -17659,9 +17412,9 @@
       "source_file": "packages/mocker-cli/src/load.test.ts",
       "source_location": "L5",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_load_test",
-      "target": "src_load_loadregistry"
+      "target": "src_load_loadregistry",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -17670,9 +17423,9 @@
       "source_file": "packages/mocker-cli/src/load.test.ts",
       "source_location": "L5",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_load_test",
-      "target": "src_load_registryloaderror"
+      "target": "src_load_registryloaderror",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -17680,9 +17433,9 @@
       "source_file": "packages/mocker-cli/src/load.test.ts",
       "source_location": "L30",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_load_test",
-      "target": "src_load_test_module"
+      "target": "src_load_test_module",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -17691,9 +17444,9 @@
       "source_file": "packages/mocker-cli/src/load.ts",
       "source_location": "L3",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_load",
-      "target": "registry_types_mockregistry"
+      "target": "registry_types_mockregistry",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -17701,9 +17454,9 @@
       "source_file": "packages/mocker-cli/src/load.ts",
       "source_location": "L31",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_load",
-      "target": "src_load_conventional"
+      "target": "src_load_conventional",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -17711,9 +17464,9 @@
       "source_file": "packages/mocker-cli/src/load.ts",
       "source_location": "L66",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_load",
-      "target": "src_load_importmodule"
+      "target": "src_load_importmodule",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -17721,9 +17474,9 @@
       "source_file": "packages/mocker-cli/src/load.ts",
       "source_location": "L49",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_load",
-      "target": "src_load_isregistry"
+      "target": "src_load_isregistry",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -17731,9 +17484,9 @@
       "source_file": "packages/mocker-cli/src/load.ts",
       "source_location": "L108",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_load",
-      "target": "src_load_loadregistry"
+      "target": "src_load_loadregistry",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -17741,9 +17494,9 @@
       "source_file": "packages/mocker-cli/src/load.ts",
       "source_location": "L34",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_load",
-      "target": "src_load_registryloaderror"
+      "target": "src_load_registryloaderror",
+      "confidence_score": 1.0
     },
     {
       "relation": "method",
@@ -17751,9 +17504,9 @@
       "source_file": "packages/mocker-cli/src/load.ts",
       "source_location": "L35",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_load_registryloaderror",
-      "target": "src_load_registryloaderror_constructor"
+      "target": "src_load_registryloaderror_constructor",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -17762,9 +17515,9 @@
       "source_file": "packages/mocker-cli/src/load.ts",
       "source_location": "L121",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_load_loadregistry",
-      "target": "src_load_isregistry"
+      "target": "src_load_isregistry",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -17773,9 +17526,9 @@
       "source_file": "packages/mocker-cli/src/load.ts",
       "source_location": "L112",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_load_loadregistry",
-      "target": "src_load_importmodule"
+      "target": "src_load_importmodule",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -17783,9 +17536,9 @@
       "source_file": "packages/mocker-cli/src/package-boundary.test.ts",
       "source_location": "L33",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "packages_mocker_cli_src_package_boundary_test_ts_src_package_boundary_test",
-      "target": "packages_mocker_cli_src_package_boundary_test_ts_src_package_boundary_test_code"
+      "target": "packages_mocker_cli_src_package_boundary_test_ts_src_package_boundary_test_code",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -17793,9 +17546,9 @@
       "source_file": "packages/mocker-cli/src/package-boundary.test.ts",
       "source_location": "L88",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "packages_mocker_cli_src_package_boundary_test_ts_src_package_boundary_test",
-      "target": "packages_mocker_cli_src_package_boundary_test_ts_src_package_boundary_test_escapespackage"
+      "target": "packages_mocker_cli_src_package_boundary_test_ts_src_package_boundary_test_escapespackage",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -17803,9 +17556,9 @@
       "source_file": "packages/mocker-cli/src/package-boundary.test.ts",
       "source_location": "L44",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "packages_mocker_cli_src_package_boundary_test_ts_src_package_boundary_test",
-      "target": "packages_mocker_cli_src_package_boundary_test_ts_src_package_boundary_test_reference"
+      "target": "packages_mocker_cli_src_package_boundary_test_ts_src_package_boundary_test_reference",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -17813,9 +17566,9 @@
       "source_file": "packages/mocker-cli/src/package-boundary.test.ts",
       "source_location": "L54",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "packages_mocker_cli_src_package_boundary_test_ts_src_package_boundary_test",
-      "target": "packages_mocker_cli_src_package_boundary_test_ts_src_package_boundary_test_referencesin"
+      "target": "packages_mocker_cli_src_package_boundary_test_ts_src_package_boundary_test_referencesin",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -17823,9 +17576,9 @@
       "source_file": "packages/mocker-cli/src/package-boundary.test.ts",
       "source_location": "L97",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "packages_mocker_cli_src_package_boundary_test_ts_src_package_boundary_test",
-      "target": "packages_mocker_cli_src_package_boundary_test_ts_src_package_boundary_test_resolvelocal"
+      "target": "packages_mocker_cli_src_package_boundary_test_ts_src_package_boundary_test_resolvelocal",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -17833,9 +17586,9 @@
       "source_file": "packages/mocker-cli/src/package-boundary.test.ts",
       "source_location": "L108",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "packages_mocker_cli_src_package_boundary_test_ts_src_package_boundary_test",
-      "target": "packages_mocker_cli_src_package_boundary_test_ts_src_package_boundary_test_runtimeclosure"
+      "target": "packages_mocker_cli_src_package_boundary_test_ts_src_package_boundary_test_runtimeclosure",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -17843,9 +17596,9 @@
       "source_file": "packages/mocker-cli/src/package-boundary.test.ts",
       "source_location": "L75",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "packages_mocker_cli_src_package_boundary_test_ts_src_package_boundary_test",
-      "target": "packages_mocker_cli_src_package_boundary_test_ts_src_package_boundary_test_sources"
+      "target": "packages_mocker_cli_src_package_boundary_test_ts_src_package_boundary_test_sources",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -17853,9 +17606,9 @@
       "source_file": "packages/mocker-cli/src/package-boundary.test.ts",
       "source_location": "L130",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "packages_mocker_cli_src_package_boundary_test_ts_src_package_boundary_test",
-      "target": "src_package_boundary_test_isadapter"
+      "target": "src_package_boundary_test_isadapter",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -17864,9 +17617,9 @@
       "source_file": "packages/mocker-cli/src/package-boundary.test.ts",
       "source_location": "L55",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "packages_mocker_cli_src_package_boundary_test_ts_src_package_boundary_test_referencesin",
-      "target": "packages_mocker_cli_src_package_boundary_test_ts_src_package_boundary_test_code"
+      "target": "packages_mocker_cli_src_package_boundary_test_ts_src_package_boundary_test_code",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -17875,9 +17628,9 @@
       "source_file": "packages/mocker-cli/src/package-boundary.test.ts",
       "source_location": "L116",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "packages_mocker_cli_src_package_boundary_test_ts_src_package_boundary_test_runtimeclosure",
-      "target": "packages_mocker_cli_src_package_boundary_test_ts_src_package_boundary_test_referencesin"
+      "target": "packages_mocker_cli_src_package_boundary_test_ts_src_package_boundary_test_referencesin",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -17886,9 +17639,9 @@
       "source_file": "packages/mocker-cli/src/package-boundary.test.ts",
       "source_location": "L121",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "packages_mocker_cli_src_package_boundary_test_ts_src_package_boundary_test_runtimeclosure",
-      "target": "packages_mocker_cli_src_package_boundary_test_ts_src_package_boundary_test_resolvelocal"
+      "target": "packages_mocker_cli_src_package_boundary_test_ts_src_package_boundary_test_resolvelocal",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -17897,9 +17650,9 @@
       "source_file": "packages/mocker-cli/src/report.test.ts",
       "source_location": "L4",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_report_test",
-      "target": "src_report"
+      "target": "src_report",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -17908,9 +17661,9 @@
       "source_file": "packages/mocker-cli/src/report.test.ts",
       "source_location": "L4",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_report_test",
-      "target": "src_report_formatjsonreport"
+      "target": "src_report_formatjsonreport",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -17919,9 +17672,9 @@
       "source_file": "packages/mocker-cli/src/report.test.ts",
       "source_location": "L4",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_report_test",
-      "target": "src_report_formatreport"
+      "target": "src_report_formatreport",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -17930,9 +17683,9 @@
       "source_file": "packages/mocker-cli/src/report.test.ts",
       "source_location": "L4",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_report_test",
-      "target": "src_report_summarise"
+      "target": "src_report_summarise",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -17940,9 +17693,9 @@
       "source_file": "packages/mocker-cli/src/report.test.ts",
       "source_location": "L35",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_report_test",
-      "target": "src_report_test_context"
+      "target": "src_report_test_context",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -17950,9 +17703,9 @@
       "source_file": "packages/mocker-cli/src/report.test.ts",
       "source_location": "L8",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_report_test",
-      "target": "src_report_test_results"
+      "target": "src_report_test_results",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -17960,9 +17713,9 @@
       "source_file": "packages/mocker-cli/src/report.test.ts",
       "source_location": "L6",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_report_test",
-      "target": "src_report_test_root"
+      "target": "src_report_test_root",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -17970,9 +17723,9 @@
       "source_file": "packages/mocker-cli/src/report.ts",
       "source_location": "L87",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_report",
-      "target": "src_report_formatjsonreport"
+      "target": "src_report_formatjsonreport",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -17980,9 +17733,9 @@
       "source_file": "packages/mocker-cli/src/report.ts",
       "source_location": "L68",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_report",
-      "target": "src_report_formatreport"
+      "target": "src_report_formatreport",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -17990,9 +17743,9 @@
       "source_file": "packages/mocker-cli/src/report.ts",
       "source_location": "L36",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_report",
-      "target": "src_report_line"
+      "target": "src_report_line",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -18000,9 +17753,9 @@
       "source_file": "packages/mocker-cli/src/report.ts",
       "source_location": "L60",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_report",
-      "target": "src_report_reportcontext"
+      "target": "src_report_reportcontext",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -18010,9 +17763,9 @@
       "source_file": "packages/mocker-cli/src/report.ts",
       "source_location": "L20",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_report",
-      "target": "src_report_summarise"
+      "target": "src_report_summarise",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -18020,9 +17773,9 @@
       "source_file": "packages/mocker-cli/src/report.ts",
       "source_location": "L17",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_report",
-      "target": "src_report_summary"
+      "target": "src_report_summary",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -18030,9 +17783,9 @@
       "source_file": "packages/mocker-cli/src/report.ts",
       "source_location": "L50",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_report",
-      "target": "src_report_tally"
+      "target": "src_report_tally",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -18041,9 +17794,9 @@
       "source_file": "packages/mocker-cli/src/report.ts",
       "source_location": "L95",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_report_formatjsonreport",
-      "target": "src_report_summarise"
+      "target": "src_report_summarise",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -18052,9 +17805,9 @@
       "source_file": "packages/mocker-cli/src/report.ts",
       "source_location": "L72",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_report_formatreport",
-      "target": "src_report_summarise"
+      "target": "src_report_summarise",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -18063,9 +17816,9 @@
       "source_file": "packages/mocker-cli/src/report.ts",
       "source_location": "L82",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_report_formatreport",
-      "target": "src_report_tally"
+      "target": "src_report_tally",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -18074,9 +17827,9 @@
       "source_file": "packages/mocker-cli/src/requests.test.ts",
       "source_location": "L1",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_requests_test",
-      "target": "registry_match_findmatch"
+      "target": "registry_match_findmatch",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -18085,9 +17838,9 @@
       "source_file": "packages/mocker-cli/src/requests.test.ts",
       "source_location": "L1",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_requests_test",
-      "target": "registry_match_parsekey"
+      "target": "registry_match_parsekey",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -18096,9 +17849,9 @@
       "source_file": "packages/mocker-cli/src/requests.test.ts",
       "source_location": "L3",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_requests_test",
-      "target": "src_requests"
+      "target": "src_requests",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -18107,9 +17860,9 @@
       "source_file": "packages/mocker-cli/src/requests.test.ts",
       "source_location": "L3",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_requests_test",
-      "target": "src_requests_bindingvalue"
+      "target": "src_requests_bindingvalue",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -18118,9 +17871,9 @@
       "source_file": "packages/mocker-cli/src/requests.test.ts",
       "source_location": "L3",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_requests_test",
-      "target": "src_requests_declaredrequest"
+      "target": "src_requests_declaredrequest",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -18129,9 +17882,9 @@
       "source_file": "packages/mocker-cli/src/requests.test.ts",
       "source_location": "L3",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_requests_test",
-      "target": "src_requests_describerequest"
+      "target": "src_requests_describerequest",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -18139,9 +17892,9 @@
       "source_file": "packages/mocker-cli/src/requests.test.ts",
       "source_location": "L13",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_requests_test",
-      "target": "src_requests_test_keys"
+      "target": "src_requests_test_keys",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -18150,9 +17903,9 @@
       "source_file": "packages/mocker-cli/src/requests.ts",
       "source_location": "L2",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_requests",
-      "target": "core_hash_hashseed"
+      "target": "core_hash_hashseed",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -18161,9 +17914,9 @@
       "source_file": "packages/mocker-cli/src/requests.ts",
       "source_location": "L2",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_requests",
-      "target": "core_rules_default_rules"
+      "target": "core_rules_default_rules",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -18172,9 +17925,9 @@
       "source_file": "packages/mocker-cli/src/requests.ts",
       "source_location": "L2",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_requests",
-      "target": "registry_match_parsekey"
+      "target": "registry_match_parsekey",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -18183,9 +17936,9 @@
       "source_file": "packages/mocker-cli/src/requests.ts",
       "source_location": "L8",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_requests",
-      "target": "registry_match_queryconstraint"
+      "target": "registry_match_queryconstraint",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -18193,9 +17946,9 @@
       "source_file": "packages/mocker-cli/src/requests.ts",
       "source_location": "L69",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_requests",
-      "target": "src_requests_bindingvalue"
+      "target": "src_requests_bindingvalue",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -18203,9 +17956,9 @@
       "source_file": "packages/mocker-cli/src/requests.ts",
       "source_location": "L139",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_requests",
-      "target": "src_requests_declaredrequest"
+      "target": "src_requests_declaredrequest",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -18213,9 +17966,9 @@
       "source_file": "packages/mocker-cli/src/requests.ts",
       "source_location": "L151",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_requests",
-      "target": "src_requests_describerequest"
+      "target": "src_requests_describerequest",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -18223,9 +17976,9 @@
       "source_file": "packages/mocker-cli/src/requests.ts",
       "source_location": "L57",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_requests",
-      "target": "src_requests_fakerfor"
+      "target": "src_requests_fakerfor",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -18233,9 +17986,9 @@
       "source_file": "packages/mocker-cli/src/requests.ts",
       "source_location": "L86",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_requests",
-      "target": "src_requests_fillpattern"
+      "target": "src_requests_fillpattern",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -18243,9 +17996,9 @@
       "source_file": "packages/mocker-cli/src/requests.ts",
       "source_location": "L111",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_requests",
-      "target": "src_requests_fillquery"
+      "target": "src_requests_fillquery",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -18254,9 +18007,9 @@
       "source_file": "packages/mocker-cli/src/requests.ts",
       "source_location": "L70",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_requests_bindingvalue",
-      "target": "src_requests_fakerfor"
+      "target": "src_requests_fakerfor",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -18265,9 +18018,9 @@
       "source_file": "packages/mocker-cli/src/requests.ts",
       "source_location": "L59",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_requests_fakerfor",
-      "target": "core_hash_hashseed"
+      "target": "core_hash_hashseed",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -18276,9 +18029,9 @@
       "source_file": "packages/mocker-cli/src/requests.ts",
       "source_location": "L124",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_requests_fillquery",
-      "target": "src_requests_bindingvalue"
+      "target": "src_requests_bindingvalue",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -18287,9 +18040,9 @@
       "source_file": "packages/mocker-cli/src/requests.ts",
       "source_location": "L145",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_requests_declaredrequest",
-      "target": "src_requests_fillpattern"
+      "target": "src_requests_fillpattern",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -18298,9 +18051,9 @@
       "source_file": "packages/mocker-cli/src/requests.ts",
       "source_location": "L145",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_requests_declaredrequest",
-      "target": "src_requests_fillquery"
+      "target": "src_requests_fillquery",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -18319,9 +18072,9 @@
       "source_file": "packages/mocker-cli/tsconfig.json",
       "source_location": "L4",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "mocker_cli_tsconfig",
-      "target": "mocker_cli_tsconfig_compileroptions"
+      "target": "mocker_cli_tsconfig_compileroptions",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -18329,9 +18082,9 @@
       "source_file": "packages/mocker-cli/tsconfig.json",
       "source_location": "L2",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "mocker_cli_tsconfig",
-      "target": "mocker_cli_tsconfig_extends"
+      "target": "mocker_cli_tsconfig_extends",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -18339,9 +18092,9 @@
       "source_file": "packages/mocker-cli/tsconfig.json",
       "source_location": "L3",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "mocker_cli_tsconfig",
-      "target": "mocker_cli_tsconfig_include"
+      "target": "mocker_cli_tsconfig_include",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -18349,9 +18102,9 @@
       "source_file": "packages/mocker-cli/tsconfig.json",
       "source_location": "L5",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "mocker_cli_tsconfig_compileroptions",
-      "target": "mocker_cli_tsconfig_compileroptions_types"
+      "target": "mocker_cli_tsconfig_compileroptions_types",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -31676,9 +31429,9 @@
       "source_file": "packages/mocker-cli/README.md",
       "source_location": "L1",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "mocker_cli_readme",
-      "target": "mocker_cli_readme_magicspon_mocker_cli"
+      "target": "mocker_cli_readme_magicspon_mocker_cli",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -31686,9 +31439,9 @@
       "source_file": "packages/mocker-cli/README.md",
       "source_location": "L122",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "mocker_cli_readme_magicspon_mocker_cli",
-      "target": "mocker_cli_readme_as_a_library"
+      "target": "mocker_cli_readme_as_a_library",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -31696,9 +31449,9 @@
       "source_file": "packages/mocker-cli/README.md",
       "source_location": "L140",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "mocker_cli_readme_magicspon_mocker_cli",
-      "target": "mocker_cli_readme_licence"
+      "target": "mocker_cli_readme_licence",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -31706,9 +31459,9 @@
       "source_file": "packages/mocker-cli/README.md",
       "source_location": "L14",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "mocker_cli_readme_magicspon_mocker_cli",
-      "target": "mocker_cli_readme_quickstart"
+      "target": "mocker_cli_readme_quickstart",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -31716,9 +31469,9 @@
       "source_file": "packages/mocker-cli/README.md",
       "source_location": "L49",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "mocker_cli_readme_magicspon_mocker_cli",
-      "target": "mocker_cli_readme_usage"
+      "target": "mocker_cli_readme_usage",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -31726,9 +31479,9 @@
       "source_file": "packages/mocker-cli/README.md",
       "source_location": "L88",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "mocker_cli_readme_magicspon_mocker_cli",
-      "target": "mocker_cli_readme_what_it_fills_in_and_what_it_cannot"
+      "target": "mocker_cli_readme_what_it_fills_in_and_what_it_cannot",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -31736,9 +31489,9 @@
       "source_file": "packages/mocker-cli/README.md",
       "source_location": "L32",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "mocker_cli_readme_magicspon_mocker_cli",
-      "target": "mocker_cli_readme_why"
+      "target": "mocker_cli_readme_why",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -31746,9 +31499,9 @@
       "source_file": "packages/mocker-cli/README.md",
       "source_location": "L70",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "mocker_cli_readme_usage",
-      "target": "mocker_cli_readme_existing_files_are_kept"
+      "target": "mocker_cli_readme_existing_files_are_kept",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -31756,9 +31509,9 @@
       "source_file": "packages/mocker-cli/README.md",
       "source_location": "L107",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "mocker_cli_readme_what_it_fills_in_and_what_it_cannot",
-      "target": "mocker_cli_readme_reading_a_typescript_registry"
+      "target": "mocker_cli_readme_reading_a_typescript_registry",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
