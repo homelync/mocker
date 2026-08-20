@@ -6,16 +6,19 @@
   "scripts": {
     "test": "playwright test",
     "serve": "node server.mjs",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "mocks": "NODE_OPTIONS=--import=tsx mocker ./src/mocks/registry.ts ./tests/mocks"
   },
   "dependencies": {
     "@magicspon/mocker": "workspace:*",
+    "@magicspon/mocker-cli": "workspace:*",
     "@magicspon/mocker-playwright": "workspace:*",
     "zod": "^4.4.3"
   },
   "devDependencies": {
     "@playwright/test": "^1.62.1",
     "@types/node": "^24.13.3",
+    "tsx": "^4.23.12",
     "typescript": "^7"
   }
 }

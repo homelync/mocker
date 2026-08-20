@@ -18,6 +18,11 @@
     // read as dead.
     "packages/mocker-storybook/src/vite.ts",
     "packages/mocker-playwright/src/index.ts",
+    "packages/mocker-cli/src/index.ts",
+    // The executable half of the CLI. A `bin`, not an export, so nothing in the
+    // repo imports it and without this line it and everything it reaches — the
+    // argument parser, the loader, the report — read as dead.
+    "packages/mocker-cli/src/cli.ts",
     "scripts/renovate-changeset.mjs"
   ],
 
@@ -44,7 +49,7 @@
     // Hide small-N clones; focus on widespread copy-paste worth refactoring.
     "minOccurrences": 4,
 
-    // The four package-boundary tests share an import-graph walker on purpose:
+    // The five package-boundary tests share an import-graph walker on purpose:
     // each must travel with the package it constrains, and a shared helper would
     // be exactly the repo-level thing that did not survive the last extraction.
     // Reported as duplication, that decision reads as an oversight every time.

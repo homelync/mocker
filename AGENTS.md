@@ -1,8 +1,9 @@
 # mocker
 
-A pnpm monorepo publishing four packages: a library that generates fake data from zod schemas and
-serves it over HTTP, and three adapters over it — Next.js App Router, Storybook via MSW, and
-Playwright via `context.route`
+A pnpm monorepo publishing five packages: a library that generates fake data from zod schemas and
+serves it over HTTP, three adapters over it — Next.js App Router, Storybook via MSW, and Playwright
+via `context.route` — and a `mocker` command that writes a whole registry to disk as the fixture
+files those adapters replay.
 
 ## Commands
 
@@ -19,6 +20,7 @@ Package manager is **pnpm**. Run these from the repo root.
 | Check formatting    | `pnpm check`      |
 | Storybook example   | `pnpm storybook`  |
 | E2E (Playwright)    | `pnpm e2e`        |
+| Seed e2e fixtures   | `pnpm mocks`      |
 
 ## Communication
 

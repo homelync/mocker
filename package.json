@@ -18,6 +18,7 @@
     "storybook": "pnpm --filter @magicspon/storybook-example dev",
     "storybook:build": "pnpm --filter @magicspon/storybook-example build",
     "e2e": "pnpm --filter @magicspon/e2e-example test",
+    "mocks": "pnpm --filter @magicspon/e2e-example mocks",
     "release": "changeset publish",
     "publish:local": "pnpm build && node scripts/yalc-publish.mjs",
     "publish:local:push": "pnpm build && node scripts/yalc-publish.mjs --push",
@@ -36,6 +37,7 @@
     "oxlint": "^1.78.0",
     "oxlint-tsgolint": "^7.0.2001",
     "tsdown": "^0.22.14",
+    "tsx": "^4.23.12",
     "typescript": "^7.0.2",
     "vitest": "^4.1.10"
   }
