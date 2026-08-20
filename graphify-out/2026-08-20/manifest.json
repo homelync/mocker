@@ -985,8 +985,8 @@
     "semantic_hash": ""
   },
   "packages/mocker-cli/src/cli.ts": {
-    "mtime": 1787214162.6426446,
-    "ast_hash": "f824214ce9823e6ccdf6b25905f2c203",
+    "mtime": 1787216270.782083,
+    "ast_hash": "6340fa747ec992257d26c96ae25b476b",
     "semantic_hash": ""
   },
   "packages/mocker-cli/src/emit.test.ts": {
@@ -995,8 +995,8 @@
     "semantic_hash": ""
   },
   "packages/mocker-cli/src/emit.ts": {
-    "mtime": 1787213162.049026,
-    "ast_hash": "4027f0926e8b1c7128fadccb116d2ccf",
+    "mtime": 1787216231.9949126,
+    "ast_hash": "c8b2f8f712f418ef6777529703805226",
     "semantic_hash": ""
   },
   "packages/mocker-cli/src/index.ts": {
@@ -1057,6 +1057,16 @@
   "packages/mocker-cli/README.md": {
     "mtime": 1787214162.727877,
     "ast_hash": "f045517c39f879630c8e8c1257adc0b2",
+    "semantic_hash": ""
+  },
+  "packages/mocker-cli/src/exit.test.ts": {
+    "mtime": 1787216292.1367707,
+    "ast_hash": "c5ae8bad33d3f9695c3394ae2c6e945e",
+    "semantic_hash": ""
+  },
+  "packages/mocker-cli/src/exit.ts": {
+    "mtime": 1787216254.2246258,
+    "ast_hash": "a4c57e40663d34a8a19710dbab76eb70",
     "semantic_hash": ""
   }
 }
