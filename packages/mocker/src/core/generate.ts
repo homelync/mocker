@@ -2,23 +2,12 @@ import { Faker, en, en_GB } from '@faker-js/faker'
 import type { z } from 'zod'
 import { UnknownOverridePathError, UnsupportedSchemaError } from './errors'
 import { hashSeed } from './hash'
-import {
-  childPath,
-  collectPaths,
-  elementPath,
-  findArrayPaths,
-  pathKey,
-} from './paths'
+import { childPath, collectPaths, elementPath, findArrayPaths } from './paths'
 import { DEFAULT_RULES } from './rules'
-import type {
-  GenContext,
-  GenerateOptions,
-  Generator,
-  LeafKind,
-  NameRule,
-} from './types'
+import type { GenerateOptions, Generator, NameRule } from './types'
+import { generateNumber, generateString, genContext } from './values'
 import { classify } from './zod-def'
-import type { AnySchema, Bounds } from './zod-def'
+import type { AnySchema, SchemaNode } from './zod-def'
 
 /** Absent-value probability for `.optional()` / `.nullable()` fields. */
 const DEFAULT_NULLISH_RATE = 0.3
@@ -31,6 +20,22 @@ const DEFAULT_PRIMARY_COUNT = 10
 
 /** Guards against a self-referential schema; recursion is not supported. */
 const MAX_DEPTH = 20
+
+/** Everything the walk needs that does not change from node to node. */
+interface WalkContext {
+  readonly faker: Faker
+  readonly rules: readonly NameRule[]
+  readonly nullishRate: number
+  readonly overrides: ReadonlyMap<string, Generator>
+  readonly arrayLength: (path: string) => number
+}
+
+/** A wrapper node, and the scalar leaves, as separate halves of the union. */
+type WrapperNode = Extract<SchemaNode, { kind: 'wrapper' }>
+type LeafNode = Exclude<
+  SchemaNode,
+  { kind: 'wrapper' | 'object' | 'array' | 'union' }
+>
 
 /**
  * Generate fake data satisfying a zod schema.
@@ -96,110 +101,148 @@ export function generate<T extends z.ZodType>(
     return faker.number.int({ min, max })
   }
 
-  const walk = (node: AnySchema, path: string, depth: number): unknown => {
-    if (depth > MAX_DEPTH) {
-      throw new UnsupportedSchemaError('recursive schema', path)
-    }
-
-    const override = overrideEntries.get(path)
-    if (override) return override(context(path, faker))
-
-    const classified = classify(node)
-
-    switch (classified.kind) {
-      case 'wrapper': {
-        // `.default()` means the value may legitimately be omitted, but a
-        // response that carries it is always valid and always more useful.
-        const droppable = classified.optional || classified.nullable
-        if (
-          droppable &&
-          !classified.hasDefault &&
-          faker.number.float() < nullishRate
-        ) {
-          return absentValue(classified.optional, classified.nullable, faker)
-        }
-        return walk(classified.inner, path, depth + 1)
-      }
-
-      case 'object': {
-        const result: Record<string, unknown> = {}
-        for (const [key, child] of Object.entries(classified.shape)) {
-          const value = walk(child, childPath(path, key), depth + 1)
-          // `undefined` models an omitted key, which is materially different
-          // from `null` once the payload is serialised. Both occur in real
-          // upstream responses, so both must be reachable here.
-          if (value !== undefined) result[key] = value
-        }
-        return result
-      }
-
-      case 'array': {
-        const length = arrayLength(path)
-        return Array.from({ length }, () =>
-          walk(classified.element, elementPath(path), depth + 1),
-        )
-      }
-
-      case 'union': {
-        if (classified.options.length === 0) {
-          throw new UnsupportedSchemaError('union(no options)', path)
-        }
-        // Resolve the branch before any rule runs, so a name rule is matched
-        // against the concrete leaf kind it will have to satisfy. This is what
-        // keeps `uprn: union([number, string])` type-safe.
-        // Non-null: the empty case throws above, and faker is asked for an
-        // index inside that non-empty range.
-        const branch =
-          classified.options[
-            faker.number.int({ min: 0, max: classified.options.length - 1 })
-          ]!
-        return walk(branch, path, depth + 1)
-      }
-
-      case 'literal': {
-        if (classified.values.length === 0) {
-          throw new UnsupportedSchemaError('literal(no values)', path)
-        }
-        return classified.values[
-          faker.number.int({ min: 0, max: classified.values.length - 1 })
-        ]
-      }
-
-      case 'enum': {
-        if (classified.values.length === 0) {
-          throw new UnsupportedSchemaError('enum(no values)', path)
-        }
-        return classified.values[
-          faker.number.int({ min: 0, max: classified.values.length - 1 })
-        ]
-      }
-
-      case 'string':
-        return generateString(
-          classified.format,
-          classified.bounds,
-          path,
-          faker,
-          rules,
-        )
-
-      case 'number':
-        return generateNumber(classified.bounds, path, faker, rules)
-
-      case 'boolean':
-        return faker.datatype.boolean()
-
-      case 'unknown':
-        // Nothing can be inferred, and inventing a shape would be a lie. `null`
-        // is the one value every `z.unknown()` accepts.
-        return null
-
-      case 'unsupported':
-        throw new UnsupportedSchemaError(classified.type, path)
-    }
+  const ctx: WalkContext = {
+    faker,
+    rules,
+    nullishRate,
+    overrides: overrideEntries,
+    arrayLength,
   }
 
-  return walk(schema, '', 0) as z.infer<T>
+  return walk(ctx, schema, '', 0) as z.infer<T>
+}
+
+/** One node's value: an override if the caller pinned this path, else the schema's. */
+function walk(
+  ctx: WalkContext,
+  schema: AnySchema,
+  path: string,
+  depth: number,
+): unknown {
+  if (depth > MAX_DEPTH) {
+    throw new UnsupportedSchemaError('recursive schema', path)
+  }
+
+  const override = ctx.overrides.get(path)
+  if (override) return override(genContext(path, ctx.faker))
+
+  return valueFor(ctx, classify(schema), path, depth)
+}
+
+/** Dispatch on the node's kind; the composite kinds recurse, the leaves do not. */
+function valueFor(
+  ctx: WalkContext,
+  node: SchemaNode,
+  path: string,
+  depth: number,
+): unknown {
+  switch (node.kind) {
+    case 'wrapper':
+      return isAbsent(ctx, node)
+        ? absentValue(node.optional, node.nullable, ctx.faker)
+        : walk(ctx, node.inner, path, depth + 1)
+
+    case 'object':
+      return walkObject(ctx, node.shape, path, depth)
+
+    case 'array':
+      return Array.from({ length: ctx.arrayLength(path) }, () =>
+        walk(ctx, node.element, elementPath(path), depth + 1),
+      )
+
+    case 'union':
+      // Resolve the branch before any rule runs, so a name rule is matched
+      // against the concrete leaf kind it will have to satisfy. This is what
+      // keeps `uprn: union([number, string])` type-safe.
+      return walk(
+        ctx,
+        pickOne(ctx.faker, node.options, 'union(no options)', path),
+        path,
+        depth + 1,
+      )
+
+    default:
+      return leafValue(ctx, node, path)
+  }
+}
+
+function walkObject(
+  ctx: WalkContext,
+  shape: Record<string, AnySchema>,
+  path: string,
+  depth: number,
+): Record<string, unknown> {
+  const result: Record<string, unknown> = {}
+
+  for (const [key, child] of Object.entries(shape)) {
+    const value = walk(ctx, child, childPath(path, key), depth + 1)
+    // `undefined` models an omitted key, which is materially different from
+    // `null` once the payload is serialised. Both occur in real upstream
+    // responses, so both must be reachable here.
+    if (value !== undefined) result[key] = value
+  }
+
+  return result
+}
+
+/** A scalar leaf's value. */
+function leafValue(ctx: WalkContext, node: LeafNode, path: string): unknown {
+  switch (node.kind) {
+    case 'literal':
+      return pickOne(ctx.faker, node.values, 'literal(no values)', path)
+
+    case 'enum':
+      return pickOne(ctx.faker, node.values, 'enum(no values)', path)
+
+    case 'string':
+      return generateString(
+        node.format,
+        node.bounds,
+        path,
+        ctx.faker,
+        ctx.rules,
+      )
+
+    case 'number':
+      return generateNumber(node.bounds, path, ctx.faker, ctx.rules)
+
+    case 'boolean':
+      return ctx.faker.datatype.boolean()
+
+    case 'unknown':
+      // Nothing can be inferred, and inventing a shape would be a lie. `null`
+      // is the one value every `z.unknown()` accepts.
+      return null
+
+    case 'unsupported':
+      throw new UnsupportedSchemaError(node.type, path)
+  }
+}
+
+/**
+ * A uniformly chosen member of a closed set.
+ *
+ * @throws {UnsupportedSchemaError} when the set is empty — a union, literal or
+ * enum with nothing in it has no value this walker could invent.
+ */
+function pickOne<T>(
+  faker: Faker,
+  values: readonly T[],
+  label: string,
+  path: string,
+): T {
+  if (values.length === 0) throw new UnsupportedSchemaError(label, path)
+  // Non-null: the empty case throws above, and the index is drawn from inside
+  // that non-empty range.
+  return values[faker.number.int({ min: 0, max: values.length - 1 })]!
+}
+
+/** Whether this roll drops a droppable field's value. */
+function isAbsent(ctx: WalkContext, node: WrapperNode): boolean {
+  // `.default()` means the value may legitimately be omitted, but a response
+  // that carries it is always valid and always more useful.
+  if (node.hasDefault || !(node.optional || node.nullable)) return false
+  return ctx.faker.number.float() < ctx.nullishRate
 }
 
 /** A field's absence, as either an omitted key or an explicit null. */
@@ -214,111 +257,6 @@ function absentValue(
     return faker.datatype.boolean() ? undefined : null
   }
   return optional ? undefined : null
-}
-
-function context(path: string, faker: Faker): GenContext {
-  return { path, key: pathKey(path), faker }
-}
-
-/** First rule matching both the field name and the leaf's kind. */
-function matchRule(
-  rules: readonly NameRule[],
-  key: string,
-  kind: LeafKind,
-): NameRule | undefined {
-  return rules.find((rule) => rule.types.includes(kind) && rule.match.test(key))
-}
-
-/**
- * Faker generators for zod's declared string formats. Consulted before name
- * rules: `z.email()` is a stated fact about the value, whereas a field called
- * `email` is only a strong hint.
- */
-const FORMAT_GENERATORS: Readonly<Record<string, Generator>> = {
-  email: ({ faker }) => faker.internet.email(),
-  url: ({ faker }) => faker.internet.url(),
-  uuid: ({ faker }) => faker.string.uuid(),
-  guid: ({ faker }) => faker.string.uuid(),
-  datetime: ({ faker }) => faker.date.recent().toISOString(),
-  date: ({ faker }) => faker.date.recent().toISOString().slice(0, 10),
-  time: ({ faker }) => faker.date.recent().toISOString().slice(11, 19),
-  duration: () => 'PT1H',
-  ipv4: ({ faker }) => faker.internet.ipv4(),
-  ipv6: ({ faker }) => faker.internet.ipv6(),
-  emoji: () => '🏠',
-  cuid: ({ faker }) => faker.string.nanoid(),
-  cuid2: ({ faker }) => faker.string.nanoid(),
-  ulid: ({ faker }) => faker.string.nanoid(26),
-  nanoid: ({ faker }) => faker.string.nanoid(),
-}
-
-function generateString(
-  format: string | undefined,
-  bounds: Bounds,
-  path: string,
-  faker: Faker,
-  rules: readonly NameRule[],
-): string {
-  const ctx = context(path, faker)
-
-  const byFormat = format ? FORMAT_GENERATORS[format] : undefined
-  if (byFormat) return clampString(String(byFormat(ctx)), bounds, faker)
-
-  const rule = matchRule(rules, ctx.key, 'string')
-  if (rule) return clampString(String(rule.gen(ctx)), bounds, faker)
-
-  return clampString(faker.lorem.words({ min: 1, max: 3 }), bounds, faker)
-}
-
-/**
- * Bring a generated string within the schema's length bounds.
- *
- * Padding rather than regenerating keeps the value recognisable — a truncated
- * ISO date is still obviously a date — and keeps faker consumption stable,
- * which determinism depends on.
- */
-function clampString(value: string, bounds: Bounds, faker: Faker): string {
-  if (bounds.exact !== undefined) {
-    return value.length >= bounds.exact
-      ? value.slice(0, bounds.exact)
-      : value.padEnd(bounds.exact, faker.string.alpha(1))
-  }
-  let result = value
-  if (bounds.min !== undefined && result.length < bounds.min) {
-    result = result.padEnd(bounds.min, 'x')
-  }
-  if (bounds.max !== undefined && result.length > bounds.max) {
-    result = result.slice(0, bounds.max)
-  }
-  return result
-}
-
-function generateNumber(
-  bounds: Bounds,
-  path: string,
-  faker: Faker,
-  rules: readonly NameRule[],
-): number {
-  const ctx = context(path, faker)
-  const rule = matchRule(rules, ctx.key, 'number')
-
-  if (rule) {
-    const value = Number(rule.gen(ctx))
-    return clampNumber(value, bounds)
-  }
-
-  const min = bounds.min ?? 0
-  const max = bounds.max ?? 1000
-  return bounds.int === false
-    ? faker.number.float({ min, max, fractionDigits: 2 })
-    : faker.number.int({ min, max })
-}
-
-function clampNumber(value: number, bounds: Bounds): number {
-  let result = value
-  if (bounds.min !== undefined) result = Math.max(result, bounds.min)
-  if (bounds.max !== undefined) result = Math.min(result, bounds.max)
-  return bounds.int ? Math.round(result) : result
 }
 
 /**

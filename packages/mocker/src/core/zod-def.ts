@@ -81,121 +81,133 @@ function rawDef(schema: AnySchema): RawDef {
   return (schema as unknown as { _zod: { def: RawDef } })._zod.def
 }
 
+/** {@link Bounds} while it is still being filled in. */
+type MutableBounds = {
+  min?: number
+  max?: number
+  exact?: number
+  int?: boolean
+}
+
+/**
+ * What each zod check contributes to a node's bounds, keyed by `check.check`.
+ *
+ * A table rather than a switch so a new check is one entry, and so an
+ * unrecognised one needs no branch at all.
+ */
+const BOUNDS_WRITERS: Readonly<
+  Record<string, (check: RawCheck, bounds: MutableBounds) => void>
+> = {
+  greater_than: (check, bounds) => {
+    // `.positive()` is exclusive; nudge so the generated value satisfies it.
+    bounds.min = check.inclusive ? check.value : (check.value ?? 0) + 1
+  },
+  less_than: (check, bounds) => {
+    bounds.max = check.inclusive ? check.value : (check.value ?? 0) - 1
+  },
+  min_length: (check, bounds) => {
+    bounds.min = check.minimum
+  },
+  max_length: (check, bounds) => {
+    bounds.max = check.maximum
+  },
+  length_equals: (check, bounds) => {
+    bounds.exact = check.length
+  },
+  number_format: (check, bounds) => {
+    bounds.int = check.format?.includes('int') ?? false
+  },
+}
+
 function boundsOf(def: RawDef): Bounds {
-  const bounds: {
-    min?: number
-    max?: number
-    exact?: number
-    int?: boolean
-  } = {}
+  const bounds: MutableBounds = {}
 
   for (const wrapper of def.checks ?? []) {
     const check = wrapper._zod.def
-    switch (check.check) {
-      case 'greater_than':
-        // `.positive()` is exclusive; nudge so the generated value satisfies it.
-        bounds.min = check.inclusive ? check.value : (check.value ?? 0) + 1
-        break
-      case 'less_than':
-        bounds.max = check.inclusive ? check.value : (check.value ?? 0) - 1
-        break
-      case 'min_length':
-        bounds.min = check.minimum
-        break
-      case 'max_length':
-        bounds.max = check.maximum
-        break
-      case 'length_equals':
-        bounds.exact = check.length
-        break
-      case 'number_format':
-        bounds.int = check.format?.includes('int') ?? false
-        break
-      default:
-        // An unrecognised check only risks a value that fails validation, which
-        // the caller's output parse catches loudly. Better than refusing to
-        // generate at all for a check that may not constrain the value.
-        break
-    }
+    // An unrecognised check only risks a value that fails validation, which the
+    // caller's output parse catches loudly. Better than refusing to generate at
+    // all for a check that may not constrain the value.
+    BOUNDS_WRITERS[check.check]?.(check, bounds)
   }
 
   return bounds
 }
 
+/** The wrapper flag each wrapping `def.type` sets. */
+const WRAPPER_FLAGS: Readonly<
+  Record<string, 'optional' | 'nullable' | 'hasDefault'>
+> = {
+  optional: 'optional',
+  nullable: 'nullable',
+  default: 'hasDefault',
+}
+
 /**
- * Classify a zod schema into the tagged node the walker understands.
+ * Collapse an optional/nullable/default chain, however it was composed.
  *
  * `.nullish()` is `optional(nullable(x))`, and `.default()` may wrap either, so
- * wrapper chains are collapsed in one pass. Rolling absence once against the
+ * the whole chain is flattened in one pass. Rolling absence once against the
  * collapsed flags is what keeps `nullishRate` meaning what it says — rolling at
  * each layer would compound two 30% chances into 51%.
  */
-export function classify(schema: AnySchema): SchemaNode {
-  let current = schema
-  let optional = false
-  let nullable = false
-  let hasDefault = false
+function unwrap(schema: AnySchema): {
+  inner: AnySchema
+  wrapped: boolean
+  optional: boolean
+  nullable: boolean
+  hasDefault: boolean
+} {
+  const flags = { optional: false, nullable: false, hasDefault: false }
+  let inner = schema
   let wrapped = false
 
-  // Collapse optional/nullable/default chains, however they were composed.
   for (;;) {
-    const def = rawDef(current)
-    if (def.type === 'optional' && def.innerType) {
-      optional = true
-      wrapped = true
-      current = def.innerType
-      continue
-    }
-    if (def.type === 'nullable' && def.innerType) {
-      nullable = true
-      wrapped = true
-      current = def.innerType
-      continue
-    }
-    if (def.type === 'default' && def.innerType) {
-      hasDefault = true
-      wrapped = true
-      current = def.innerType
-      continue
-    }
-    break
+    const def = rawDef(inner)
+    const flag = WRAPPER_FLAGS[def.type]
+    if (flag === undefined || !def.innerType) break
+    flags[flag] = true
+    wrapped = true
+    inner = def.innerType
   }
 
-  if (wrapped) {
-    return { kind: 'wrapper', inner: current, optional, nullable, hasDefault }
-  }
+  return { inner, wrapped, ...flags }
+}
 
-  const def = rawDef(current)
+/**
+ * How each supported zod type becomes a {@link SchemaNode}, keyed by `def.type`.
+ *
+ * A table rather than a switch: an unlisted type falls through to `unsupported`
+ * without a branch, which is exactly the intent.
+ */
+const NODE_BUILDERS: Readonly<Record<string, (def: RawDef) => SchemaNode>> = {
+  string: (def) => ({
+    kind: 'string',
+    format: def.format ?? undefined,
+    bounds: boundsOf(def),
+  }),
+  number: (def) => ({ kind: 'number', bounds: boundsOf(def) }),
+  boolean: () => ({ kind: 'boolean' }),
+  unknown: () => ({ kind: 'unknown' }),
+  any: () => ({ kind: 'unknown' }),
+  literal: (def) => ({ kind: 'literal', values: def.values ?? [] }),
+  enum: (def) => ({ kind: 'enum', values: Object.values(def.entries ?? {}) }),
+  // An array without an element schema cannot be walked; treat as unsupported
+  // rather than silently emitting [].
+  array: (def) =>
+    def.element
+      ? { kind: 'array', element: def.element }
+      : { kind: 'unsupported', type: 'array(no element)' },
+  object: (def) => ({ kind: 'object', shape: def.shape ?? {} }),
+  union: (def) => ({ kind: 'union', options: def.options ?? [] }),
+}
 
-  switch (def.type) {
-    case 'string':
-      return {
-        kind: 'string',
-        format: def.format ?? undefined,
-        bounds: boundsOf(def),
-      }
-    case 'number':
-      return { kind: 'number', bounds: boundsOf(def) }
-    case 'boolean':
-      return { kind: 'boolean' }
-    case 'unknown':
-    case 'any':
-      return { kind: 'unknown' }
-    case 'literal':
-      return { kind: 'literal', values: def.values ?? [] }
-    case 'enum':
-      return { kind: 'enum', values: Object.values(def.entries ?? {}) }
-    case 'array':
-      // An array without an element schema cannot be walked; treat as
-      // unsupported rather than silently emitting [].
-      return def.element
-        ? { kind: 'array', element: def.element }
-        : { kind: 'unsupported', type: 'array(no element)' }
-    case 'object':
-      return { kind: 'object', shape: def.shape ?? {} }
-    case 'union':
-      return { kind: 'union', options: def.options ?? [] }
-    default:
-      return { kind: 'unsupported', type: def.type }
-  }
+/** Classify a zod schema into the tagged node the walker understands. */
+export function classify(schema: AnySchema): SchemaNode {
+  const { inner, wrapped, ...flags } = unwrap(schema)
+  if (wrapped) return { kind: 'wrapper', inner, ...flags }
+
+  const def = rawDef(inner)
+  return (
+    NODE_BUILDERS[def.type]?.(def) ?? { kind: 'unsupported', type: def.type }
+  )
 }

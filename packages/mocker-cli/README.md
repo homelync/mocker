@@ -51,11 +51,13 @@ files. Seeding a store is what this command _is_.
 ```
 mocker <registry> <out> [options]
 mocker <registry> --out <dir> [options]
+mocker [options]                        # with a mocker.config.json
 ```
 
 | Option                | Effect                                                                    |
 | --------------------- | ------------------------------------------------------------------------- |
 | `-o, --out <dir>`     | Output directory, if not given as the second argument                     |
+| `--config <file>`     | Config file to read (default: `./mocker.config.json`)                     |
 | `-e, --export <name>` | Export holding the table (default: `mockRegistry`, `registry`, `default`) |
 | `-s, --seed <value>`  | Pin `x-mock-seed` on every request                                        |
 | `-c, --count <n>`     | Pin `x-mock-count`, sizing every primary collection                       |
@@ -85,6 +87,54 @@ the gaps and leaves everything else alone.
 }
 ```
 
+## mocker.config.json
+
+Where the registry is, where the fixtures go, and what to put in a binding are
+facts about the _repository_ rather than about a run. State them once:
+
+```json
+{
+  "registry": "./src/mocks/registry.ts",
+  "out": "./tests/mocks",
+  "params": { "reference": "ABC123" }
+}
+```
+
+```sh
+mocker            # both paths come from the file
+mocker --dry-run  # the flags still work as they did
+```
+
+The file is looked for in the working directory, and `--config <file>` names a
+different one. Paths in it are relative to _the file_, so `pnpm mocks` means the
+same thing from a package as from the repo root. An argument on the command line
+wins over the file — the file is the default, the argument is what somebody typed
+this time.
+
+| Key        | Effect                                                   |
+| ---------- | -------------------------------------------------------- |
+| `registry` | The module exporting the table, in place of `<registry>` |
+| `out`      | The fixture tree's root, in place of `<out>`             |
+| `params`   | Fixed values for bindings, by name                       |
+
+### `params`: the binding values your app actually sends
+
+Everything else the command does is derived; `params` is the one thing it cannot
+work out. `GET /api/property/[reference]` is filled with a plausible reference —
+`3BX6S9AC` — and if the app under test asks for `/api/property/ABC123`, the
+fixture is written under a name nothing ever reads.
+
+Naming the value fixes that:
+
+```json
+{ "params": { "reference": "ABC123" } }
+```
+
+Now `[reference]` is `ABC123` everywhere it appears — in a path, in a
+`?propertyReference=[reference]` query, and in the response field of that name —
+so the tree the command writes is the tree the suite asks for. A binding the file
+does not name is guessed as before.
+
 ## What it fills in, and what it cannot
 
 A registry key names a _shape_, not a URL. `GET /api/property/[reference]` has to
@@ -92,7 +142,9 @@ become a request before it can become a file, so every binding — `[reference]`
 a path, `?ref=[reference]` in a query — is filled from the same name rules the
 generator applies to field names. `[reference]` comes out as `3BX6S9AC`,
 `[deviceId]` as a hex handle, and the value is echoed into the response field of
-its own name, exactly as a real request's would be.
+its own name, exactly as a real request's would be. A rule is only ever a guess:
+`params` in `mocker.config.json` is how you replace one with the value your app
+actually sends.
 
 The values are derived from the endpoint's method and path, so two machines
 produce identical trees and a rerun changes nothing. Adding a query constraint to
@@ -136,6 +188,34 @@ if (failed.length > 0) throw new Error(failed[0].reason)
 
 `generateFixtures` never throws for a bad entry — the failure lands in that
 entry's result, so one broken schema does not cost the others their fixtures.
+
+`loadConfig` reads the same `mocker.config.json` the command does, for a setup
+step that would rather honour the repository's settings than restate them:
+
+```ts
+import path from 'node:path'
+import {
+  generateFixtures,
+  loadConfig,
+  loadRegistry,
+} from '@magicspon/mocker-cli'
+
+const loaded = await loadConfig()
+// `dir` is the config file's own directory: what its relative paths mean.
+const from = (value: string) =>
+  path.resolve(loaded?.dir ?? process.cwd(), value)
+
+const registry = await loadRegistry(
+  from(loaded?.config.registry ?? './src/mocks/registry.ts'),
+)
+await generateFixtures(registry, {
+  out: from(loaded?.config.out ?? './tests/mocks'),
+  params: loaded?.config.params,
+})
+```
+
+It returns `undefined` when there is no config file, and throws a `ConfigError`
+for one that will not parse or states an option this command does not have.
 
 ## Licence
 

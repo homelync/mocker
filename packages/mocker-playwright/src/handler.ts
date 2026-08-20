@@ -154,6 +154,57 @@ async function fulfillError(
   })
 }
 
+/**
+ * The registry and options this request is answered against.
+ *
+ * A `use()` override replaces the matched entry and bends the controls; without
+ * one, both are the route's own.
+ */
+function resolve(
+  request: InterceptedRequest,
+  state: HandlerState,
+): { registry: MockRegistry; options: ResolvedOptions } {
+  const url = new URL(request.url())
+  const registryUrl = new URL(
+    `${toRegistryPath(url.pathname, state.options.baseUrl)}${url.search}`,
+    url.origin,
+  )
+
+  const override = findOverride(state.overrides, request.method(), registryUrl)
+
+  return {
+    registry:
+      override === null
+        ? state.registry
+        : overrideRegistry(state.registry, override),
+    options: bend(state.options, override?.options ?? null),
+  }
+}
+
+/**
+ * Record what serving from the store did to the working tree.
+ *
+ * A written or refused fixture is a miss even though the request was answered:
+ * both are things the run must fail on, since a fixture nobody reviewed is a
+ * test asserting on faker output.
+ */
+function recordFixtureMisses(
+  state: HandlerState,
+  request: InterceptedRequest,
+  outcome: { wrote?: string; absent?: string },
+): void {
+  const where = { method: request.method(), url: request.url() }
+
+  if (outcome.wrote !== undefined) {
+    const file = state.store.file(outcome.wrote)
+    state.misses.push({ kind: 'fixture-written', ...where, file })
+  }
+  if (outcome.absent !== undefined) {
+    const file = state.store.file(outcome.absent)
+    state.misses.push({ kind: 'fixture-missing', ...where, file })
+  }
+}
+
 async function answer(
   route: InterceptedRoute,
   state: HandlerState,
@@ -163,18 +214,7 @@ async function answer(
   if (!inScope(request, state.scope)) return route.fallback()
   if (!STRICT_TYPES.has(request.resourceType())) return route.fallback()
 
-  const url = new URL(request.url())
-  const registryUrl = new URL(
-    `${toRegistryPath(url.pathname, state.options.baseUrl)}${url.search}`,
-    url.origin,
-  )
-
-  const override = findOverride(state.overrides, request.method(), registryUrl)
-  const options = bend(state.options, override?.options ?? null)
-  const registry =
-    override === null
-      ? state.registry
-      : overrideRegistry(state.registry, override)
+  const { registry, options } = resolve(request, state)
 
   const declared = asDeclared(
     {
@@ -189,22 +229,7 @@ async function answer(
     ? await serveFixed(declared, registry, state.store, state.options.write)
     : { result: await serveFromRegistry(declared, registry) }
 
-  if (outcome.wrote !== undefined) {
-    state.misses.push({
-      kind: 'fixture-written',
-      method: request.method(),
-      url: request.url(),
-      file: state.store.file(outcome.wrote),
-    })
-  }
-  if (outcome.absent !== undefined) {
-    state.misses.push({
-      kind: 'fixture-missing',
-      method: request.method(),
-      url: request.url(),
-      file: state.store.file(outcome.absent),
-    })
-  }
+  recordFixtureMisses(state, request, outcome)
 
   if (!isRegistryMiss(outcome.result)) {
     return fulfillWith(route, outcome.result)

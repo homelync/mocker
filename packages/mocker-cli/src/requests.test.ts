@@ -129,6 +129,94 @@ describe('bindingValue', () => {
   })
 })
 
+/**
+ * A named value is a fact about the host's data; a generated one is a guess. So
+ * the value wins outright — including over the segment-safety rule, which exists
+ * to keep a guess readable and has no business overruling somebody's own
+ * reference.
+ */
+describe('configured params', () => {
+  it('uses the value given for a binding', () => {
+    expect(
+      bindingValue('reference', 'GET /api/property/[reference]', {
+        reference: 'lorem999',
+      }),
+    ).toBe('lorem999')
+  })
+
+  it('still generates a binding the params do not name', () => {
+    expect(
+      bindingValue('deviceId', 'GET /api/devices/[deviceId]', {
+        reference: 'lorem999',
+      }),
+    ).toMatch(/^[0-9a-fA-F]{8}$/)
+  })
+
+  it('puts the value in the path', () => {
+    const request = declaredRequest(
+      'GET /api/property/[reference]',
+      {},
+      { reference: 'lorem999' },
+    )
+
+    expect(describeRequest(request)).toBe('GET /api/property/lorem999')
+  })
+
+  it('puts the value in a query binding', () => {
+    const request = declaredRequest(
+      'GET /api/devices?propertyReference=[reference]',
+      {},
+      { reference: 'lorem999' },
+    )
+
+    expect(new URL(request.url).searchParams.get('propertyReference')).toBe(
+      'lorem999',
+    )
+  })
+
+  /** A bare condition names no binding, so the parameter's own name is the hint. */
+  it('uses the value for a bare query condition of that name', () => {
+    const request = declaredRequest(
+      'GET /api/devices?propertyReference',
+      {},
+      { propertyReference: 'lorem999' },
+    )
+
+    expect(new URL(request.url).searchParams.get('propertyReference')).toBe(
+      'lorem999',
+    )
+  })
+
+  /** The key states the value; a config that disagreed would break the match. */
+  it('leaves a literal query condition alone', () => {
+    const request = declaredRequest(
+      'GET /api/devices?mode=summary',
+      {},
+      { mode: 'lorem999' },
+    )
+
+    expect(new URL(request.url).searchParams.get('mode')).toBe('summary')
+  })
+
+  it('keeps the request matching its key', () => {
+    const key = 'GET /api/property/[reference]/devices/[deviceId]'
+    const request = declaredRequest(key, {}, { reference: 'lorem 999/x' })
+    const url = new URL(request.url)
+
+    expect(
+      findMatch([key], request.method, url.pathname, url.searchParams),
+    ).not.toBeNull()
+  })
+
+  it('ignores an empty value rather than writing an empty segment', () => {
+    expect(
+      bindingValue('reference', 'GET /api/property/[reference]', {
+        reference: '',
+      }),
+    ).toMatch(/^[A-Z0-9]{8}$/)
+  })
+})
+
 describe('key coverage', () => {
   /** Every binding a key declares must appear in the request it produces. */
   it.each(KEYS)('binds every parameter in %s', (key) => {

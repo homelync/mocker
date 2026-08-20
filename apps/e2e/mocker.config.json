@@ -1,0 +1,5 @@
+{
+  "registry": "./src/mocks/registry.ts",
+  "out": "./tests/mocks",
+  "params": { "reference": "ABC123" }
+}

@@ -21,6 +21,12 @@ export type { EmitOptions, EmitResult, EmitStatus } from './emit'
 
 export { loadRegistry, RegistryLoadError } from './load'
 
+// `mocker.config.json`, for a caller that wants the repository's own settings
+// rather than its own: a `globalSetup` reading the same file the command does
+// writes its fixtures where the command would have.
+export { CONFIG_FILE, ConfigError, loadConfig } from './config'
+export type { LoadedConfig, MockerConfig } from './config'
+
 // Filling a key's bindings, exported because it is the only *guess* this package
 // makes: a caller who wants to know which URL an endpoint was recorded under —
 // to request it, or to reproduce it — has to be able to ask.

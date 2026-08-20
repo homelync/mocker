@@ -94,6 +94,26 @@ describe('generateFixtures', () => {
     })
   })
 
+  /**
+   * The end of the config file's `params`: a value stated once in
+   * `mocker.config.json` decides the URL, the filename and the echoed field, so
+   * a fixture tree can hold the references the host's seeded data actually has.
+   */
+  it('writes a configured param into the URL and the response', async () => {
+    const results = await generateFixtures(registry, {
+      out,
+      params: { reference: 'lorem999' },
+    })
+    const result = resultFor(results, 'GET /api/property/[reference]')
+    const body: unknown = JSON.parse(await readFile(result.file ?? '', 'utf8'))
+
+    expect(result.request).toBe('GET /api/property/lorem999')
+    expect(path.relative(out, result.file ?? '')).toMatch(
+      /^GET\/api\/property\/lorem999\/[0-9a-f]{8}\.json$/,
+    )
+    expect(body).toMatchObject({ reference: 'lorem999' })
+  })
+
   it('produces byte-identical output on a second machine', async () => {
     const first = await generateFixtures(registry, { out })
     const elsewhere = await mkdtemp(path.join(tmpdir(), 'mocker-cli-'))

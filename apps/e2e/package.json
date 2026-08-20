@@ -7,7 +7,7 @@
     "test": "playwright test",
     "serve": "node server.mjs",
     "typecheck": "tsc --noEmit",
-    "mocks": "NODE_OPTIONS=--import=tsx mocker ./src/mocks/registry.ts ./tests/mocks"
+    "mocks": "NODE_OPTIONS=--import=tsx mocker"
   },
   "dependencies": {
     "@magicspon/mocker": "workspace:*",
