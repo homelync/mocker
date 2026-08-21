@@ -90,6 +90,40 @@ without touching any code:
 Every mocked response carries `x-mock: 1` and the `x-mock-seed` it used, so a
 screenshot can be turned back into the exact request that produced it.
 
+## Shaping what comes back
+
+Generated values are plausible but arbitrary. Two options bend them, and they
+answer different questions:
+
+```ts
+import { DEFAULT_RULES, generate } from '@magicspon/mocker/core'
+
+generate(deviceListSchema, {
+  // This field, in this schema. Keyed by canonical path, `[]` covering every
+  // element, and checked against the schema it pins.
+  overrides: {
+    'results[].statusId': ({ faker }): string =>
+      faker.helpers.arrayElement(['GOOD', 'WARNING', 'FAULT', 'OFFLINE']),
+  },
+  // Every field with this name, of this leaf kind. Replaces the shipped set,
+  // so spread it back in to extend rather than replace.
+  rules: [
+    {
+      name: 'occurred-at',
+      match: /^occurredAt$/,
+      types: ['string'],
+      gen: ({ faker }): string => faker.date.recent().toISOString(),
+    },
+    ...DEFAULT_RULES,
+  ],
+})
+```
+
+A registry entry takes the same options under `options`, where they apply to
+every request to that endpoint. The full guide — precedence, type checking, and
+what each mechanism cannot reach — is
+[`docs/overrides-and-rules.md`](https://github.com/magicspon/mocker/blob/main/docs/overrides-and-rules.md).
+
 ## The `MOCK_API` flag
 
 `isMockConfigured()` and `isMockEnabledFor(path)` read one environment variable
@@ -110,5 +144,7 @@ of it out of the production build.
 The long-form guide — recipes, the registry design, the supported zod surface,
 and why each decision went the way it did — is
 [`docs/mocking-guide.md`](https://github.com/magicspon/mocker/blob/main/docs/mocking-guide.md).
+[`docs/overrides-and-rules.md`](https://github.com/magicspon/mocker/blob/main/docs/overrides-and-rules.md)
+covers shaping a registry entry's data on its own.
 
 MIT.

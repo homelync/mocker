@@ -9,18 +9,24 @@ files those adapters replay.
 
 Package manager is **pnpm**. Run these from the repo root.
 
-| Task                | Command           |
-| ------------------- | ----------------- |
-| Build every package | `pnpm build`      |
-| Test (whole repo)   | `pnpm test`       |
-| Test in watch mode  | `pnpm test:watch` |
-| Typecheck           | `pnpm typecheck`  |
-| Lint                | `pnpm lint`       |
-| Format + autofix    | `pnpm format`     |
-| Check formatting    | `pnpm check`      |
-| Storybook example   | `pnpm storybook`  |
-| E2E (Playwright)    | `pnpm e2e`        |
-| Seed e2e fixtures   | `pnpm mocks`      |
+| Task                | Command              |
+| ------------------- | -------------------- |
+| Build every package | `pnpm build`         |
+| Test (whole repo)   | `pnpm test`          |
+| Test in watch mode  | `pnpm test:watch`    |
+| Typecheck           | `pnpm typecheck`     |
+| Lint                | `pnpm lint`          |
+| Format + autofix    | `pnpm format`        |
+| Check formatting    | `pnpm check`         |
+| Storybook example   | `pnpm storybook`     |
+| E2E (Playwright)    | `pnpm e2e`           |
+| Seed e2e fixtures   | `pnpm mocks`         |
+| Publish to yalc     | `pnpm publish:local` |
+
+Nothing is published to npm yet, so another project consumes these through the local yalc store.
+`pnpm publish:local` packs first and publishes the packed result — never `yalc publish`, which
+copies the development `exports` map and produces a package whose entry points resolve to files it
+does not ship. See [`docs/yalc.md`](docs/yalc.md).
 
 ## Communication
 

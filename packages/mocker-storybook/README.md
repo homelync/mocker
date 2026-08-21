@@ -295,5 +295,7 @@ intercepts at the browser context instead, from the same registry.
 Recipes, the control headers, the registry design and the reasoning behind each
 decision are in
 [`docs/mocking-guide.md`](https://github.com/magicspon/mocker/blob/main/docs/mocking-guide.md).
+Pinning a field by path, and teaching the generator what a field name means, are
+in [`docs/overrides-and-rules.md`](https://github.com/magicspon/mocker/blob/main/docs/overrides-and-rules.md).
 
 MIT.

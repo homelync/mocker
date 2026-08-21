@@ -293,4 +293,5 @@ and registered before the first navigation, and a test cannot vary its data.
 
 - [`@magicspon/mocker`](https://github.com/magicspon/mocker/tree/main/packages/mocker) — the generator, the registry, the controls
 - [`docs/mocking-guide.md`](https://github.com/magicspon/mocker/blob/main/docs/mocking-guide.md) — the long version
+- [`docs/overrides-and-rules.md`](https://github.com/magicspon/mocker/blob/main/docs/overrides-and-rules.md) — pinning a field, and name rules
 - `apps/e2e` — a working suite, fixtures committed

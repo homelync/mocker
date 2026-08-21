@@ -11,6 +11,27 @@ demoed and tested against nothing at all.
 | [`@magicspon/mocker-playwright`](packages/mocker-playwright) | the Playwright adapter, over `context.route`          |
 | [`@magicspon/mocker-cli`](packages/mocker-cli)               | the `mocker` command, writing the whole table to disk |
 
+Nothing is on npm yet, so install them from a local yalc store — build here, add
+there:
+
+```sh
+# in this repo
+npm install -g yalc
+pnpm install && pnpm build
+pnpm publish:local
+
+# in the consuming project
+yalc add @magicspon/mocker @magicspon/mocker-next
+npm install
+```
+
+Add `@magicspon/mocker` alongside whichever adapter you want: the adapters depend
+on it by a version no registry has. pnpm consumers need one override, and the
+whole workflow — the update loop, the peers, what to ignore — is in
+[`docs/yalc.md`](docs/yalc.md).
+
+Once they are published, it is the usual thing:
+
 ```sh
 npm install --save-dev @magicspon/mocker-next        # Next.js
 npm install --save-dev @magicspon/mocker-storybook   # Storybook
@@ -35,7 +56,10 @@ rather than invented on a CI runner.
 
 Start with the package README you need. The long-form guide — recipes, the
 registry design, the supported zod surface and the reasoning behind each
-decision — is [`docs/mocking-guide.md`](docs/mocking-guide.md).
+decision — is [`docs/mocking-guide.md`](docs/mocking-guide.md), and
+[`docs/overrides-and-rules.md`](docs/overrides-and-rules.md) covers bending an
+endpoint's data: pinning a field by path, and teaching the generator what a field
+name means.
 
 ## Working in this repo
 
@@ -50,6 +74,13 @@ pnpm workspace; run everything from the root.
 | Build packages   | `pnpm build`     |
 | Storybook        | `pnpm storybook` |
 | E2E (Playwright) | `pnpm e2e`       |
+
+| Publish locally                     | Command                   |
+| ----------------------------------- | ------------------------- |
+| Build and publish to the yalc store | `pnpm publish:local`      |
+| …and push to every project using it | `pnpm publish:local:push` |
+
+See [`docs/yalc.md`](docs/yalc.md) for both halves of that loop.
 
 [`AGENTS.md`](AGENTS.md) documents the constraint the layout follows from: a
 bundler config is evaluated unbundled, before tree-shaking can help, so nothing

@@ -439,6 +439,10 @@ The full option set is [`GenerateOptions`](core/types.ts): `seed`, `count`,
 Request-derived options (seed, pagination, echo) sit underneath these, so
 anything an entry states explicitly wins.
 
+[`overrides-and-rules.md`](overrides-and-rules.md) covers `overrides` and `rules`
+on their own: the full precedence ladder, how the two are type-checked, and what
+each of them cannot reach.
+
 ## Using the generator directly
 
 `generate` is independent of the HTTP layer, so it also works as a fixture
@@ -779,6 +783,10 @@ Extend rather than replace:
 ```ts
 generate(schema, { rules: [...myRules, ...DEFAULT_RULES] })
 ```
+
+Note that this **replaces** the defaults rather than adding to them, and that
+only string and number leaves consult rules at all — see
+[`overrides-and-rules.md`](overrides-and-rules.md).
 
 The shipped set is in [`core/rules.ts`](core/rules.ts): ISO dates, postcodes,
 emails, phone numbers, URLs, person names, streets, cities, counties, countries,
