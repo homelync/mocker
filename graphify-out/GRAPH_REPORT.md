@@ -1,16 +1,16 @@
-# Graph Report - mocker  (2026-08-20)
+# Graph Report - mocker  (2026-08-21)
 
 ## Corpus Check
-- 210 files · ~99,405 words
+- 210 files · ~99,331 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1360 nodes · 2166 edges · 166 communities (83 shown, 83 thin omitted)
+- 1360 nodes · 2164 edges · 166 communities (83 shown, 83 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 29 edges (avg confidence: 0.79)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `cda9eea8`
+- Built from commit: `64e71faa`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -383,7 +383,7 @@ Cohesion: 0.39
 Nodes (6): code(), exportedNames(), Reference, referencesIn(), resolveLocal(), runtimeClosure()
 
 ### Community 52 - "pre-merge-commit"
-Cohesion: 0.25
+Cohesion: 0.22
 Nodes (8): Controls, per request, Entry points, Further reading, @magicspon/mocker, Quickstart, The `MOCK_API` flag, The rule the layout exists for, With Next.js
 
 ### Community 53 - "pre-push"

@@ -87,8 +87,8 @@ export interface GenerateOptions<Output = unknown> {
   readonly counts?: PathCounts<Output>
   /**
    * Probability that an `.optional()` / `.nullable()` / `.nullish()` field is
-   * absent. Defaults to 0.3, roughly matching how sparse real Sensorium
-   * payloads are. Set to 0 for a fully populated response.
+   * absent. Defaults to 0.3, roughly matching how sparse real API payloads
+   * are. Set to 0 for a fully populated response.
    */
   readonly nullishRate?: number
   /**

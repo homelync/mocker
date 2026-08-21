@@ -345,8 +345,8 @@
     "semantic_hash": ""
   },
   "packages/mocker/src/core/types.ts": {
-    "mtime": 1786892020.5041935,
-    "ast_hash": "6244caa06b035fdc8e5aac669a300a52",
+    "mtime": 1787312732.5867043,
+    "ast_hash": "8c9dcae197b4286a3671322515a1db63",
     "semantic_hash": ""
   },
   "packages/mocker/src/core/zod-def.ts": {
@@ -445,8 +445,8 @@
     "semantic_hash": ""
   },
   "docs/mocking-guide.md": {
-    "mtime": 1787070112.8639803,
-    "ast_hash": "e180ebc138db84bf2fccfd89034eb4a8",
+    "mtime": 1787312749.9651299,
+    "ast_hash": "34b9ae65709aaffc7c4a3b630b4c12ef",
     "semantic_hash": ""
   },
   "packages/mocker-next/README.md": {

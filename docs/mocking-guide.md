@@ -1,15 +1,5 @@
 # Schema-driven mock data
 
-> **Written in the application this library was extracted from**, and kept as it
-> was because the reasoning is worth more than the tidying. Paths (`src/mocks/`,
-> `src/app/api/`), the port (`4400`) and the endpoint names belong to that app,
-> not to yours; `@mock/...` specifiers are today's `@magicspon/mocker` and
-> `@magicspon/mocker-next`. Everything about _how the thing works_ is current.
->
-> For the package surfaces, start at
-> [`packages/mocker`](../packages/mocker/README.md) and
-> [`packages/mocker-next`](../packages/mocker-next/README.md).
-
 A library for generating fake data from zod schemas and serving it over HTTP,
 trialled in this repo and intended to also serve Playwright, Nest, Storybook and
 other runtimes.
@@ -35,8 +25,8 @@ package a `git mv` rather than an untangling exercise, and it is enforced by
 MOCK_API=1 npm run dev
 ```
 
-Every registered BFF route now answers from its own zod schema — no Sensorium,
-no Lightspeed, no network. Check it:
+Every registered BFF route now answers from its own zod schema — no upstream
+services, no network. Check it:
 
 ```sh
 curl -s 'localhost:4400/api/portfolio/reports/devices?page=1&limit=3' | jq
@@ -183,7 +173,7 @@ The route file is not involved. Everything happens in `src/mocks/registry.ts`.
 
 1. **Export the response schema** from the route's `types.ts` if it is not
    exported already. Export the shape the _browser_ receives, which is often not
-   the shape the fetcher parses — a route that reduces a Lightspeed module list
+   the shape the fetcher parses — a route that reduces an upstream module list
    to `{ hasActiveRiskModule }` needs a schema for the second, not the first.
 
 2. **Add a key**, written exactly as the path reads on disk:
