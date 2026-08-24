@@ -36,6 +36,6 @@
     "msw-storybook-addon": "^3.0.0",
     "storybook": "^10.5.9",
     "typescript": "^7",
-    "vite": "^8.2.1"
+    "vite": "^8.2.2"
   }
 }
