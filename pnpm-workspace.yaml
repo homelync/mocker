@@ -9,10 +9,16 @@ allowBuilds:
   esbuild: true
   msw: true
 
-# Written by pnpm, not by hand. A release younger than the store's minimum age
-# is held back until it appears here; these were the Storybook packages current
-# on the day the example app was added. Renovate's bumps will rewrite the list.
+# 3 days
+minimumReleaseAge: 4320
+# A release younger than the store's minimum age is held back until it appears
+# here. Normally pnpm writes this list and Renovate's bumps rewrite it; the
+# Storybook pins were the versions current on the day the example app was added.
+# The cspell dictionary is a hand-added exception — it shipped inside the
+# three-day window while spell-checking was being set up. Drop it once a later
+# release ages past the cutoff.
 minimumReleaseAgeExclude:
+  - '@cspell/dict-npm@5.2.47'
   - '@storybook/builder-vite@10.5.9'
   - '@storybook/csf-plugin@10.5.9'
   - '@storybook/react-dom-shim@10.5.9'

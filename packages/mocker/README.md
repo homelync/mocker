@@ -18,17 +18,17 @@ generator relies on.
 ## Quickstart
 
 ```ts
-import { z } from "zod";
-import { generate } from "@homelync/mocker/core";
+import { z } from 'zod'
+import { generate } from '@homelync/mocker/core'
 
 const property = z.object({
   reference: z.string(),
   city: z.string(),
   bedrooms: z.number().int(),
   createdAt: z.string(),
-});
+})
 
-generate(property, { seed: 1 });
+generate(property, { seed: 1 })
 // { reference: "FP0A536C", city: "Old Doyle", bedrooms: 878,
 //   createdAt: "2023-02-04T03:39:21.201Z" }
 ```
@@ -39,11 +39,11 @@ snapshot to update, and a bug you saw is a bug you can reproduce.
 Serving it is one more call:
 
 ```ts
-import { handle } from "@homelync/mocker";
+import { handle } from '@homelync/mocker'
 
 // In any runtime with `Request`/`Response`: a route handler, an MSW resolver,
 // a test server.
-const response = await handle(request, { output: property });
+const response = await handle(request, { output: property })
 ```
 
 `handle` seeds from the request itself — method, path and sorted query — so the
@@ -96,27 +96,27 @@ Generated values are plausible but arbitrary. Two options bend them, and they
 answer different questions:
 
 ```ts
-import { DEFAULT_RULES, generate } from "@homelync/mocker/core";
+import { DEFAULT_RULES, generate } from '@homelync/mocker/core'
 
 generate(deviceListSchema, {
   // This field, in this schema. Keyed by canonical path, `[]` covering every
   // element, and checked against the schema it pins.
   overrides: {
-    "results[].statusId": ({ faker }): string =>
-      faker.helpers.arrayElement(["GOOD", "WARNING", "FAULT", "OFFLINE"]),
+    'results[].statusId': ({ faker }): string =>
+      faker.helpers.arrayElement(['GOOD', 'WARNING', 'FAULT', 'OFFLINE']),
   },
   // Every field with this name, of this leaf kind. Replaces the shipped set,
   // so spread it back in to extend rather than replace.
   rules: [
     {
-      name: "occurred-at",
+      name: 'occurred-at',
       match: /^occurredAt$/,
-      types: ["string"],
+      types: ['string'],
       gen: ({ faker }): string => faker.date.recent().toISOString(),
     },
     ...DEFAULT_RULES,
   ],
-});
+})
 ```
 
 A registry entry takes the same options under `options`, where they apply to

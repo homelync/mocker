@@ -19,43 +19,43 @@ server with `MOCK_API=1`.
 
 ```ts
 // next.config.ts
-import type { NextConfig } from "next";
-import { withMocker } from "@homelync/mocker-next/config";
-import { registry } from "./src/mocks/registry";
+import type { NextConfig } from 'next'
+import { withMocker } from '@homelync/mocker-next/config'
+import { registry } from './src/mocks/registry'
 
 const nextConfig: NextConfig = {
   // ...whatever you already had, rewrites included
-};
+}
 
-export default withMocker({ registry }, nextConfig);
+export default withMocker({ registry }, nextConfig)
 ```
 
 ```ts
 // src/mocks/registry.ts — the endpoints, keyed as the App Router reads them
-import type { MockRegistry } from "@homelync/mocker/config";
+import type { MockRegistry } from '@homelync/mocker/config'
 
 export const registry = {
-  "GET /api/property/[reference]": {
-    schema: () => import("./schemas").then((m) => m.propertySchema),
+  'GET /api/property/[reference]': {
+    schema: () => import('./schemas').then((m) => m.propertySchema),
   },
-  "GET /api/property/devices?propertyReference=[reference]": {
-    schema: () => import("./schemas").then((m) => m.deviceListSchema),
+  'GET /api/property/devices?propertyReference=[reference]': {
+    schema: () => import('./schemas').then((m) => m.deviceListSchema),
   },
-} satisfies MockRegistry;
+} satisfies MockRegistry
 ```
 
 ```ts
 // src/app/api/mock/[...path]/route.ts — one endpoint serves every mocked route
-import { serveRegistryRoute } from "@homelync/mocker-next";
-import type { NextRequest } from "next/server";
-import { registry } from "@/mocks/registry";
+import { serveRegistryRoute } from '@homelync/mocker-next'
+import type { NextRequest } from 'next/server'
+import { registry } from '@/mocks/registry'
 
 const handler = async (
   request: NextRequest,
   { params }: { params: Promise<{ path: string[] }> },
-) => serveRegistryRoute(request, (await params).path, registry);
+) => serveRegistryRoute(request, (await params).path, registry)
 
-export { handler as GET, handler as POST };
+export { handler as GET, handler as POST }
 ```
 
 ```sh
@@ -73,14 +73,14 @@ place, wrapped around whatever middleware it already has:
 
 ```ts
 // src/app/api/property/[reference]/route.ts
-import { withMock } from "@homelync/mocker-next";
+import { withMock } from '@homelync/mocker-next'
 
 export const GET = withMock(
   propertySchema,
   withAuth(async (request, ctx) => {
     // ...the real handler, untouched
   }),
-);
+)
 ```
 
 Both mechanisms end in the same `handle()` and produce the same bytes. The

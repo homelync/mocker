@@ -117,7 +117,7 @@ headers are really for curl, Bruno/Postman and Playwright:
 
 ```ts
 // e2e — every request this page makes comes back slow and empty
-await page.setExtraHTTPHeaders({ "x-mock-delay": "2000", "x-mock-count": "0" });
+await page.setExtraHTTPHeaders({ 'x-mock-delay': '2000', 'x-mock-count': '0' })
 ```
 
 To reproduce a state _in the running app_, pin it on the route instead — see
@@ -180,17 +180,17 @@ The route file is not involved. Everything happens in `src/mocks/registry.ts`.
 
    ```ts
    const registry = {
-     "GET /api/portfolio/reports/devices": {
+     'GET /api/portfolio/reports/devices': {
        schema: () =>
-         import("@/app/api/portfolio/reports/devices/types").then(
+         import('@/app/api/portfolio/reports/devices/types').then(
            (module) => module.devicesResponseSchema,
          ),
      },
-   } as const satisfies MockRegistryDraft;
+   } as const satisfies MockRegistryDraft
 
    export const mockRegistry = registry satisfies CheckedMockRegistry<
      typeof registry
-   >;
+   >
    ```
 
    The schema is a thunk so that `next.config.ts` can import the table for its
@@ -244,7 +244,7 @@ every `/api/property/*` route has an entry.
 than declaring it centrally:
 
 ```ts
-export const GET = withMock(devicesResponseSchema, withLandlordAuth(handler));
+export const GET = withMock(devicesResponseSchema, withLandlordAuth(handler))
 ```
 
 It is fully supported and no route in this repo uses it. It exists for a host
@@ -449,13 +449,13 @@ each of them cannot reach.
 factory in tests:
 
 ```ts
-import { generate } from "@mock/core";
-import { devicesResponseSchema } from "@/app/api/portfolio/reports/devices/types";
+import { generate } from '@mock/core'
+import { devicesResponseSchema } from '@/app/api/portfolio/reports/devices/types'
 
 const page = generate(devicesResponseSchema, {
-  seed: "devices-page-1",
+  seed: 'devices-page-1',
   count: 20,
-});
+})
 ```
 
 Same seed, same bytes — so a fixture can be asserted against rather than merely
@@ -474,13 +474,13 @@ the same registry to a browser context, so an e2e suite asserts on the same byte
 
 ```ts
 // tests/fixtures.ts
-export const test = base.extend(mockerTest({ registry }));
+export const test = base.extend(mockerTest({ registry }))
 
 // tests/devices.spec.ts
-test("empty state", async ({ page, mocker }) => {
-  mocker.use("GET /api/devices", { count: 0 }); // before goto
-  await page.goto("/devices");
-});
+test('empty state', async ({ page, mocker }) => {
+  mocker.use('GET /api/devices', { count: 0 }) // before goto
+  await page.goto('/devices')
+})
 ```
 
 Two of its defaults are the **opposite** of the Storybook adapter's, and the
@@ -781,7 +781,7 @@ A name-only rule would put a string into the number field.
 Extend rather than replace:
 
 ```ts
-generate(schema, { rules: [...myRules, ...DEFAULT_RULES] });
+generate(schema, { rules: [...myRules, ...DEFAULT_RULES] })
 ```
 
 Note that this **replaces** the defaults rather than adding to them, and that

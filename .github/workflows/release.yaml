@@ -72,7 +72,7 @@ jobs:
           # previous version forever. The script re-syncs it.
           version-script: pnpm run version-packages
           publish-script: pnpm run release
-          commit-message: "chore: version packages"
-          pr-title: "changeset: cut release"
+          commit-message: 'chore: version packages'
+          pr-title: 'changeset: cut release'
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
