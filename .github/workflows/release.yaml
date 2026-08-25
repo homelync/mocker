@@ -10,12 +10,35 @@ jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
 
     steps:
-      - uses: actions/checkout@v7
+      # This workflow is not `workflow_call`, so it cannot declare
+      # `secrets: required: true` the way publish-package.yaml does. An org
+      # secret that is not granted to this repo resolves to an empty string, so
+      # assert it here rather than letting the release fail four steps later.
+      - name: Check bot PAT is available
+        env:
+          PAT: ${{ secrets.HOMELINK_BOT_PACKAGES_PAT }}
+        run: |
+          if [ -z "$PAT" ]; then
+            echo "::error::HOMELINK_BOT_PACKAGES_PAT is empty. Grant the org secret to homelync/mocker."
+            exit 1
+          fi
+
+      - name: Checkout
+        uses: actions/checkout@v7
         with:
+          # Changesets needs full history to work out what has already been released.
           fetch-depth: 0
-          token: ${{ secrets.CHANGESETS_TOKEN || secrets.GITHUB_TOKEN }}
+          # A PAT (not GITHUB_TOKEN) so the version PR triggers downstream workflows
+          # — a branch pushed with GITHUB_TOKEN raises no pull_request event, so the
+          # required checks on the version PR would never start.
+          # HOMELINK_BOT_PACKAGES_PAT needs repo scope (contents + pull requests);
+          # NPM_TOKEN stays registry-only and is never handed to git.
+          token: ${{ secrets.HOMELINK_BOT_PACKAGES_PAT }}
 
       - uses: pnpm/action-setup@v6
         with:
@@ -33,8 +56,17 @@ jobs:
       - name: Build
         run: pnpm build
 
-      - uses: changesets/action@v2.1.0
+      # With pending changesets: opens/updates the version PR.
+      # With none (i.e. that PR just merged): publishes the versioned packages.
+      - name: Create release PR or publish
+        # Pinned to a commit SHA: changesets/action ships no immutable major tag,
+        # so `@v2` tracks a moving branch head. Comment records the release pinned.
+        uses: changesets/action@198f833dd7d863100ea6e28967bc9a9fdefadb0a # v2.1.0
         with:
+          # v2 reads the token from this input only — setting a GITHUB_TOKEN env
+          # var is silently ignored and the action falls back to the read-only
+          # default token, which fails on "Resource not accessible by integration".
+          github-token: ${{ secrets.HOMELINK_BOT_PACKAGES_PAT }}
           # `version-packages`, not a bare `changeset version`: changeset version
           # writes package.json only, so the lockfile would keep reporting the
           # previous version forever. The script re-syncs it.
@@ -43,5 +75,4 @@ jobs:
           commit-message: "chore: version packages"
           pr-title: "changeset: cut release"
         env:
-          GITHUB_TOKEN: ${{ secrets.HOMELINK_BOT_PACKAGES_PAT }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
