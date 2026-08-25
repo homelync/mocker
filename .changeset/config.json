@@ -9,7 +9,8 @@
       "repo": "homelync/mocker"
     }
   ],
-  "commit": true,
+  "commit": false,
+  "privatePackages": { "version": false, "tag": false },
   "ignore": [],
   "fixed": [],
   "linked": [
