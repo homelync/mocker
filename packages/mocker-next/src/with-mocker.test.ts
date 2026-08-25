@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { z } from 'zod'
-import type { MockRegistry } from '@magicspon/mocker/config'
+import type { MockRegistry } from '@homelync/mocker/config'
 import type { NextConfig } from 'next'
 import { withMocker } from './with-mocker'
 
@@ -170,7 +170,7 @@ describe('the rest of the config', () => {
       resolveExtensions: ['.ts'],
       resolveAlias: {
         foo: 'bar',
-        '@magicspon/mocker-next': '@magicspon/mocker-next/production',
+        '@homelync/mocker-next': '@homelync/mocker-next/production',
       },
     })
   })

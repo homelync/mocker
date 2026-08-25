@@ -1,8 +1,8 @@
 import type {
   CheckedMockRegistry,
   MockRegistryDraft,
-} from '@magicspon/mocker/config'
-import type { MockOptions } from '@magicspon/mocker'
+} from '@homelync/mocker/config'
+import type { MockOptions } from '@homelync/mocker'
 import type { deviceListSchema } from '../app/api/devices/types'
 import type { timelineSchema } from './planned/timeline'
 

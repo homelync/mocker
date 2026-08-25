@@ -1,7 +1,7 @@
 {
-  "name": "@magicspon/mocker-playwright",
-  "version": "0.1.0",
-  "description": "Playwright adapter for @magicspon/mocker — browser route mocks from a mock registry, backed by editable fixture files",
+  "name": "@homelync/mocker-playwright",
+  "version": "0.0.0",
+  "description": "Playwright adapter for @homelync/mocker — browser route mocks from a mock registry, backed by editable fixture files",
   "keywords": [
     "zod",
     "mock",
@@ -12,12 +12,12 @@
     "fixtures-on-disk"
   ],
   "license": "MIT",
-  "author": "magicspon",
-  "homepage": "https://github.com/magicspon/mocker/tree/main/packages/mocker-playwright#readme",
-  "bugs": "https://github.com/magicspon/mocker/issues",
+  "author": "homelync",
+  "homepage": "https://github.com/homelync/mocker/tree/main/packages/mocker-playwright#readme",
+  "bugs": "https://github.com/homelync/mocker/issues",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/magicspon/mocker.git",
+    "url": "git+https://github.com/homelync/mocker.git",
     "directory": "packages/mocker-playwright"
   },
   "type": "module",
@@ -47,7 +47,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@magicspon/mocker": "workspace:^"
+    "@homelync/mocker": "workspace:^"
   },
   "peerDependencies": {
     "zod": "^4.4.3",

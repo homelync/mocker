@@ -1,15 +1,15 @@
-# @magicspon/mocker-playwright
+# @homelync/mocker-playwright
 
 Playwright adapter for
-[`@magicspon/mocker`](https://github.com/magicspon/mocker/tree/main/packages/mocker):
+[`@homelync/mocker`](https://github.com/homelync/mocker/tree/main/packages/mocker):
 answer a browser's requests from the zod schemas your API already responds with,
 backed by JSON files you can edit and commit.
 
 ```sh
-npm install --save-dev @magicspon/mocker-playwright
+npm install --save-dev @homelync/mocker-playwright
 ```
 
-`@magicspon/mocker` comes with it. `zod` (v4) is a peer; `@playwright/test` and
+`@homelync/mocker` comes with it. `zod` (v4) is a peer; `@playwright/test` and
 `playwright-core` are **optional** peers, because every reference to Playwright
 in this package is `import type` — nothing here evaluates Playwright's own
 module. ESM only.
@@ -18,42 +18,42 @@ module. ESM only.
 
 ```ts
 // tests/fixtures.ts
-import { test as base } from '@playwright/test'
-import { mockerTest } from '@magicspon/mocker-playwright'
-import { registry } from '../src/mocks/registry'
+import { test as base } from "@playwright/test";
+import { mockerTest } from "@homelync/mocker-playwright";
+import { registry } from "../src/mocks/registry";
 
-export const test = base.extend(mockerTest({ registry }))
-export { expect } from '@playwright/test'
+export const test = base.extend(mockerTest({ registry }));
+export { expect } from "@playwright/test";
 ```
 
 ```ts
 // tests/devices.spec.ts
-import { expect, test } from './fixtures'
+import { expect, test } from "./fixtures";
 
-test('shows the devices', async ({ page }) => {
-  await page.goto('/devices')
-  await expect(page.getByRole('listitem')).toHaveCount(20)
-})
+test("shows the devices", async ({ page }) => {
+  await page.goto("/devices");
+  await expect(page.getByRole("listitem")).toHaveCount(20);
+});
 
-test('shows the empty state', async ({ page, mocker }) => {
-  mocker.use('GET /api/devices', { count: 0 }) // before goto — see below
-  await page.goto('/devices')
-  await expect(page.getByText('No devices')).toBeVisible()
-})
+test("shows the empty state", async ({ page, mocker }) => {
+  mocker.use("GET /api/devices", { count: 0 }); // before goto — see below
+  await page.goto("/devices");
+  await expect(page.getByText("No devices")).toBeVisible();
+});
 ```
 
 ```ts
 // src/mocks/registry.ts — the endpoints, keyed as a URL reads
-import type { MockRegistry } from '@magicspon/mocker'
+import type { MockRegistry } from "@homelync/mocker";
 
 export const registry = {
-  'GET /api/property/[reference]': {
-    schema: () => import('./schemas').then((m) => m.propertySchema),
+  "GET /api/property/[reference]": {
+    schema: () => import("./schemas").then((m) => m.propertySchema),
   },
-  'GET /api/devices?propertyReference=[reference]': {
-    schema: () => import('./schemas').then((m) => m.deviceListSchema),
+  "GET /api/devices?propertyReference=[reference]": {
+    schema: () => import("./schemas").then((m) => m.deviceListSchema),
   },
-} satisfies MockRegistry
+} satisfies MockRegistry;
 ```
 
 The same table the Next and Storybook adapters take, in the same dialect. A
@@ -174,7 +174,7 @@ the component.
 must not thereby rewrite every hand-edited fixture in the repo.
 
 **Sharing a store with Storybook** is available, not automatic: the derivation is
-shared in `@magicspon/mocker/core`, so the same request lands on the same
+shared in `@homelync/mocker/core`, so the same request lands on the same
 filename from either runtime — point `mockerFixtures({ dir })` and this `dir` at
 one path. It is safe because legitimate divergence separates itself: a story
 wanting three rows and a test wanting an empty state set different `count`, which
@@ -217,8 +217,8 @@ whole suite in `mockerTest({ registry, … })`, or for one endpoint in
 | `enabled`   | `true` (`test.use()` only)        | `false` for a file that wants the real API        |
 
 ```ts
-test.use({ mockerOptions: { count: 3 } }) // this file
-test.use({ mockerOptions: { enabled: false } }) // this file talks to the real API
+test.use({ mockerOptions: { count: 3 } }); // this file
+test.use({ mockerOptions: { enabled: false } }); // this file talks to the real API
 ```
 
 ## Without the test runner
@@ -228,14 +228,14 @@ driving `playwright-core`. It has no teardown, so nothing fails for you — read
 the ledger yourself:
 
 ```ts
-import { describeMisses, mockerRoutes } from '@magicspon/mocker-playwright'
+import { describeMisses, mockerRoutes } from "@homelync/mocker-playwright";
 
-const mocker = await mockerRoutes(context, registry)
-mocker.use('GET /api/devices', { count: 0 })
-await page.goto('/devices')
+const mocker = await mockerRoutes(context, registry);
+mocker.use("GET /api/devices", { count: 0 });
+await page.goto("/devices");
 
-const report = describeMisses(mocker.misses)
-if (report !== null) throw new Error(report)
+const report = describeMisses(mocker.misses);
+if (report !== null) throw new Error(report);
 ```
 
 `dir` is resolved against `process.cwd()` here rather than against `rootDir`.
@@ -257,7 +257,7 @@ a list this package owns rather than an ordering Playwright happens to apply.
   `x-mock` and `x-mock-fixture` intact, so a mocked response is inspectable and
   its fixture nameable with no work.
 
-### Alongside `@magicspon/mocker-next`
+### Alongside `@homelync/mocker-next`
 
 The two layers cover disjoint traffic by construction: `context.route` catches
 browser-originated requests before they leave the browser, and RSC fetches happen
@@ -278,12 +278,12 @@ empty list and the next seeing three rows.
 ### If your app can start MSW itself
 
 Then you may not need this package at all. `mockerHandlers()` from
-`@magicspon/mocker-storybook` is free of any Storybook import precisely so it
+`@homelync/mocker-storybook` is free of any Storybook import precisely so it
 works in a bare worker:
 
 ```ts
 // the app's own entry, behind a flag
-setupWorker(...mockerHandlers(registry)).start()
+setupWorker(...mockerHandlers(registry)).start();
 ```
 
 Playwright then intercepts nothing. The trade is that the worker has to be served
@@ -291,7 +291,7 @@ and registered before the first navigation, and a test cannot vary its data.
 
 ## Further reading
 
-- [`@magicspon/mocker`](https://github.com/magicspon/mocker/tree/main/packages/mocker) — the generator, the registry, the controls
-- [`docs/mocking-guide.md`](https://github.com/magicspon/mocker/blob/main/docs/mocking-guide.md) — the long version
-- [`docs/overrides-and-rules.md`](https://github.com/magicspon/mocker/blob/main/docs/overrides-and-rules.md) — pinning a field, and name rules
+- [`@homelync/mocker`](https://github.com/homelync/mocker/tree/main/packages/mocker) — the generator, the registry, the controls
+- [`docs/mocking-guide.md`](https://github.com/homelync/mocker/blob/main/docs/mocking-guide.md) — the long version
+- [`docs/overrides-and-rules.md`](https://github.com/homelync/mocker/blob/main/docs/overrides-and-rules.md) — pinning a field, and name rules
 - `apps/e2e` — a working suite, fixtures committed

@@ -4,7 +4,7 @@
  * Its own module, importing nothing, because the two sides of the fixture store
  * live on opposite ends of the boundary this package is shaped by: `fixtures.ts`
  * is bundled into the preview and may not reach a node builtin, `vite.ts` runs
- * in Storybook's config load and must not drag `@magicspon/mocker` — and faker
+ * in Storybook's config load and must not drag `@homelync/mocker` — and faker
  * with it — into `main.ts`. A constant shared through either of them would break
  * one or the other, so it is shared through neither.
  */

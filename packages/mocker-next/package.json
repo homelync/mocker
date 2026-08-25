@@ -1,7 +1,7 @@
 {
-  "name": "@magicspon/mocker-next",
-  "version": "0.1.0",
-  "description": "Next.js App Router adapter for @magicspon/mocker",
+  "name": "@homelync/mocker-next",
+  "version": "0.0.0",
+  "description": "Next.js App Router adapter for @homelync/mocker",
   "keywords": [
     "zod",
     "mock",
@@ -11,12 +11,12 @@
     "fixtures"
   ],
   "license": "MIT",
-  "author": "magicspon",
-  "homepage": "https://github.com/magicspon/mocker/tree/main/packages/mocker-next#readme",
-  "bugs": "https://github.com/magicspon/mocker/issues",
+  "author": "homelync",
+  "homepage": "https://github.com/homelync/mocker/tree/main/packages/mocker-next#readme",
+  "bugs": "https://github.com/homelync/mocker/issues",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/magicspon/mocker.git",
+    "url": "git+https://github.com/homelync/mocker.git",
     "directory": "packages/mocker-next"
   },
   "type": "module",
@@ -56,7 +56,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@magicspon/mocker": "workspace:^"
+    "@homelync/mocker": "workspace:^"
   },
   "peerDependencies": {
     "next": "^15.0.0 || ^16.0.0",

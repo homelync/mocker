@@ -21,7 +21,7 @@ npm install -g yalc
 Then clone, install, build and publish to the local store:
 
 ```sh
-git clone git@github.com:magicspon/mocker.git
+git clone git@github.com:homelync/mocker.git
 cd mocker
 pnpm install
 pnpm build
@@ -33,8 +33,8 @@ explicit build above is only there the first time, when you want to see it
 succeed on its own.
 
 All five packages go into the store together:
-`@magicspon/mocker`, `@magicspon/mocker-next`, `@magicspon/mocker-storybook`,
-`@magicspon/mocker-playwright`, `@magicspon/mocker-cli`.
+`@homelync/mocker`, `@homelync/mocker-next`, `@homelync/mocker-storybook`,
+`@homelync/mocker-playwright`, `@homelync/mocker-cli`.
 
 ### Why `pnpm publish:local` and not `yalc publish`
 
@@ -46,7 +46,7 @@ here twice over — silently, both times:
   `publishConfig`, and `files` ships only `dist` — so a plain `yalc publish`
   produces a package whose every entry point resolves to a file that is not in
   it.
-- Every adapter depends on `@magicspon/mocker` as `workspace:^`. npm has no idea
+- Every adapter depends on `@homelync/mocker` as `workspace:^`. npm has no idea
   what that means, so the consumer's install dies.
 
 [`scripts/yalc-publish.mjs`](../scripts/yalc-publish.mjs) runs `pnpm pack` first,
@@ -60,15 +60,15 @@ From the consuming project:
 
 ```sh
 cd ../my-app
-yalc add @magicspon/mocker @magicspon/mocker-next
+yalc add @homelync/mocker @homelync/mocker-next
 npm install
 ```
 
-**Always add `@magicspon/mocker` itself**, even when you only import an adapter.
-Each adapter depends on `@magicspon/mocker@^0.1.0`, and that version exists in no
+**Always add `@homelync/mocker` itself**, even when you only import an adapter.
+Each adapter depends on `@homelync/mocker@^0.1.0`, and that version exists in no
 registry — the top-level copy is what satisfies it.
 
-`yalc add` writes four things: a `file:.yalc/@magicspon/…` dependency in
+`yalc add` writes four things: a `file:.yalc/@homelync/…` dependency in
 `package.json`, a copy of each package under `.yalc/`, a `yalc.lock`, and a copy
 in `node_modules`. The install afterwards is what wires up their dependencies and
 bins, so do not skip it.
@@ -83,27 +83,27 @@ yalc.lock
 
 Peer dependencies are yours to install, as they would be from npm:
 
-| Package                        | Peers                                        |
-| ------------------------------ | -------------------------------------------- |
-| `@magicspon/mocker`            | `zod@^4.4.3`                                 |
-| `@magicspon/mocker-next`       | `zod`, `next@^15 \|\| ^16`                   |
-| `@magicspon/mocker-storybook`  | `zod`, `msw@^2.15`, `vite@^7 \|\| ^8`        |
-| `@magicspon/mocker-playwright` | `zod`, `@playwright/test`, `playwright-core` |
-| `@magicspon/mocker-cli`        | `zod`                                        |
+| Package                       | Peers                                        |
+| ----------------------------- | -------------------------------------------- |
+| `@homelync/mocker`            | `zod@^4.4.3`                                 |
+| `@homelync/mocker-next`       | `zod`, `next@^15 \|\| ^16`                   |
+| `@homelync/mocker-storybook`  | `zod`, `msw@^2.15`, `vite@^7 \|\| ^8`        |
+| `@homelync/mocker-playwright` | `zod`, `@playwright/test`, `playwright-core` |
+| `@homelync/mocker-cli`        | `zod`                                        |
 
-`@magicspon/mocker-cli` ships a `mocker` bin, which links into
+`@homelync/mocker-cli` ships a `mocker` bin, which links into
 `node_modules/.bin` like any other — `npx mocker <registry> <out>` works from a
 yalc install.
 
 ### pnpm consumers need one override
 
-npm and yarn dedupe the adapter's `@magicspon/mocker@^0.1.0` to the top-level
+npm and yarn dedupe the adapter's `@homelync/mocker@^0.1.0` to the top-level
 `file:` copy. pnpm resolves each package's dependencies on their own terms, hits
 the registry, and stops:
 
 ```
-[ERR_PNPM_FETCH_404] GET https://registry.npmjs.org/@magicspon%2Fmocker: Not Found - 404
-This error happened while installing the dependencies of @magicspon/mocker-next@0.1.0
+[ERR_PNPM_FETCH_404] GET https://registry.npmjs.org/@homelync%2Fmocker: Not Found - 404
+This error happened while installing the dependencies of @homelync/mocker-next@0.1.0
 ```
 
 Point the nested range at the same local copy. On pnpm 11, overrides live in
@@ -112,11 +112,11 @@ not a workspace:
 
 ```yaml
 overrides:
-  '@magicspon/mocker': file:.yalc/@magicspon/mocker
+  "@homelync/mocker": file:.yalc/@homelync/mocker
 ```
 
 On pnpm 10 and earlier, the same entry goes under `pnpm.overrides` in
-`package.json`. One entry covers every adapter, since `@magicspon/mocker` is the
+`package.json`. One entry covers every adapter, since `@homelync/mocker` is the
 only package they depend on.
 
 ## The update loop
@@ -156,11 +156,11 @@ this only when you are done with them.
 
 ## When it does not work
 
-| Symptom                                                       | Cause                                                                                         |
-| ------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| `ERR_PNPM_FETCH_404` for `@magicspon/mocker`                  | pnpm without the override above                                                               |
-| `Cannot find module '…/dist/index.js'`                        | published without building, or with `yalc publish` instead of `pnpm publish:local`            |
-| `does not provide an export named …`                          | the consumer's copies are from different builds — republish all five, then reinstall          |
-| A change does not show up                                     | the consumer never reinstalled after the push, or the dev server is still holding the old one |
-| `yalc: command not found` from `pnpm publish:local`           | yalc is global and not in this repo's dependencies — `npm install -g yalc`                    |
-| The consumer's install pulls `@magicspon/*` from the registry | the `file:` dependency was overwritten — `yalc add` the package again                         |
+| Symptom                                                      | Cause                                                                                         |
+| ------------------------------------------------------------ | --------------------------------------------------------------------------------------------- |
+| `ERR_PNPM_FETCH_404` for `@homelync/mocker`                  | pnpm without the override above                                                               |
+| `Cannot find module '…/dist/index.js'`                       | published without building, or with `yalc publish` instead of `pnpm publish:local`            |
+| `does not provide an export named …`                         | the consumer's copies are from different builds — republish all five, then reinstall          |
+| A change does not show up                                    | the consumer never reinstalled after the push, or the dev server is still holding the old one |
+| `yalc: command not found` from `pnpm publish:local`          | yalc is global and not in this repo's dependencies — `npm install -g yalc`                    |
+| The consumer's install pulls `@homelync/*` from the registry | the `file:` dependency was overwritten — `yalc add` the package again                         |

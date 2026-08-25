@@ -1,12 +1,12 @@
 /**
- * `@magicspon/mocker-cli` — every endpoint in a registry, written to disk.
+ * `@homelync/mocker-cli` — every endpoint in a registry, written to disk.
  *
  * The command is `mocker <registry> <out>`; this entry is the same work as
  * functions, for a repo that would rather call it from a `predev` script, a
  * Playwright `globalSetup` or a codegen step than shell out to a binary.
  *
  * What it produces is not a new format. It is `fixturePath`'s tree — the very
- * files `@magicspon/mocker-playwright` and `@magicspon/mocker-storybook` replay
+ * files `@homelync/mocker-playwright` and `@homelync/mocker-storybook` replay
  * — so this command *seeds a fixture store* rather than exporting a copy of one.
  * That is the whole reason it exists: a Playwright suite is strict about missing
  * fixtures, and a fixture first created by CI is one nobody reviewed.

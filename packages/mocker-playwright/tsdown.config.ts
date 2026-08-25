@@ -34,7 +34,7 @@ export default defineConfig({
   clean: true,
   treeshake: true,
   external: [
-    /^@magicspon\/mocker/,
+    /^@homelync\/mocker/,
     /^zod/,
     /^node:/,
     /^playwright/,

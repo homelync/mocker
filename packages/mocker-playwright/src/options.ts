@@ -3,8 +3,8 @@ import {
   MOCK_DELAY_HEADER,
   MOCK_SEED_HEADER,
   MOCK_STATUS_HEADER,
-} from '@magicspon/mocker'
-import type { GenerateOptions } from '@magicspon/mocker'
+} from '@homelync/mocker'
+import type { GenerateOptions } from '@homelync/mocker'
 import type { MockerScope } from './scope'
 import { toRegistryPath } from './scope'
 

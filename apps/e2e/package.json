@@ -1,6 +1,6 @@
 {
-  "name": "@magicspon/e2e-example",
-  "version": "0.1.0",
+  "name": "@homelync/e2e-example",
+  "version": "0.0.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -10,9 +10,9 @@
     "mocks": "NODE_OPTIONS=--import=tsx mocker"
   },
   "dependencies": {
-    "@magicspon/mocker": "workspace:*",
-    "@magicspon/mocker-cli": "workspace:*",
-    "@magicspon/mocker-playwright": "workspace:*",
+    "@homelync/mocker": "workspace:*",
+    "@homelync/mocker-cli": "workspace:*",
+    "@homelync/mocker-playwright": "workspace:*",
     "zod": "^4.4.3"
   },
   "devDependencies": {

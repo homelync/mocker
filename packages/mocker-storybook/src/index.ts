@@ -1,5 +1,5 @@
 /**
- * `@magicspon/mocker-storybook` — the same mock registry, served into Storybook
+ * `@homelync/mocker-storybook` — the same mock registry, served into Storybook
  * by Mock Service Worker.
  *
  * Two ways in, because a component gets its data one of two ways:
@@ -18,7 +18,7 @@
  * These are plain MSW handlers — the same call works in a Vitest browser test —
  * and `package-boundary.test.ts` asserts both.
  *
- * There is a second entry, `@magicspon/mocker-storybook/vite`, for exactly one
+ * There is a second entry, `@homelync/mocker-storybook/vite`, for exactly one
  * feature: `fixed` answers from JSON on disk, and a browser has no disk. That
  * entry is the node half, loaded by `.storybook/main.ts` and never by the
  * preview — which is why it is an entry rather than an export from this one.

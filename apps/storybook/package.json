@@ -1,6 +1,6 @@
 {
-  "name": "@magicspon/storybook-example",
-  "version": "0.1.0",
+  "name": "@homelync/storybook-example",
+  "version": "0.0.0",
   "private": true,
   "type": "module",
   "//": "CSF factories import the preview as `#.storybook/preview`; this subpath map is what resolves it.",
@@ -22,8 +22,8 @@
     ]
   },
   "dependencies": {
-    "@magicspon/mocker": "workspace:*",
-    "@magicspon/mocker-storybook": "workspace:*",
+    "@homelync/mocker": "workspace:*",
+    "@homelync/mocker-storybook": "workspace:*",
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "zod": "^4.4.3"

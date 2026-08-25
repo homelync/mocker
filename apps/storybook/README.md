@@ -1,7 +1,7 @@
 # Storybook example
 
 A Storybook that runs against no backend at all, using
-[`@magicspon/mocker-storybook`](../../packages/mocker-storybook).
+[`@homelync/mocker-storybook`](../../packages/mocker-storybook).
 
 ```sh
 pnpm storybook        # from the repo root

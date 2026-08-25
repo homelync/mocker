@@ -966,34 +966,34 @@
       "norm_label": "dependencies"
     },
     {
-      "label": "@magicspon/mocker",
+      "label": "@homelync/mocker",
       "file_type": "code",
       "source_file": "apps/e2e/package.json",
       "source_location": "L13",
       "_origin": "ast",
-      "id": "apps_e2e_package_dependencies_magicspon_mocker",
+      "id": "apps_e2e_package_dependencies_homelync_mocker",
       "community": 29,
-      "norm_label": "@magicspon/mocker"
+      "norm_label": "@homelync/mocker"
     },
     {
-      "label": "@magicspon/mocker-cli",
+      "label": "@homelync/mocker-cli",
       "file_type": "code",
       "source_file": "apps/e2e/package.json",
       "source_location": "L14",
       "_origin": "ast",
-      "id": "apps_e2e_package_dependencies_magicspon_mocker_cli",
+      "id": "apps_e2e_package_dependencies_homelync_mocker_cli",
       "community": 29,
-      "norm_label": "@magicspon/mocker-cli"
+      "norm_label": "@homelync/mocker-cli"
     },
     {
-      "label": "@magicspon/mocker-playwright",
+      "label": "@homelync/mocker-playwright",
       "file_type": "code",
       "source_file": "apps/e2e/package.json",
       "source_location": "L15",
       "_origin": "ast",
-      "id": "apps_e2e_package_dependencies_magicspon_mocker_playwright",
+      "id": "apps_e2e_package_dependencies_homelync_mocker_playwright",
       "community": 29,
-      "norm_label": "@magicspon/mocker-playwright"
+      "norm_label": "@homelync/mocker-playwright"
     },
     {
       "label": "zod",
@@ -1416,24 +1416,24 @@
       "norm_label": "dependencies"
     },
     {
-      "label": "@magicspon/mocker",
+      "label": "@homelync/mocker",
       "file_type": "code",
       "source_file": "apps/next/package.json",
       "source_location": "L14",
       "_origin": "ast",
-      "id": "apps_next_package_dependencies_magicspon_mocker",
+      "id": "apps_next_package_dependencies_homelync_mocker",
       "community": 24,
-      "norm_label": "@magicspon/mocker"
+      "norm_label": "@homelync/mocker"
     },
     {
-      "label": "@magicspon/mocker-next",
+      "label": "@homelync/mocker-next",
       "file_type": "code",
       "source_file": "apps/next/package.json",
       "source_location": "L15",
       "_origin": "ast",
-      "id": "apps_next_package_dependencies_magicspon_mocker_next",
+      "id": "apps_next_package_dependencies_homelync_mocker_next",
       "community": 24,
-      "norm_label": "@magicspon/mocker-next"
+      "norm_label": "@homelync/mocker-next"
     },
     {
       "label": "next",
@@ -2306,24 +2306,24 @@
       "norm_label": "dependencies"
     },
     {
-      "label": "@magicspon/mocker",
+      "label": "@homelync/mocker",
       "file_type": "code",
       "source_file": "apps/storybook/package.json",
       "source_location": "L25",
       "_origin": "ast",
-      "id": "apps_storybook_package_dependencies_magicspon_mocker",
+      "id": "apps_storybook_package_dependencies_homelync_mocker",
       "community": 23,
-      "norm_label": "@magicspon/mocker"
+      "norm_label": "@homelync/mocker"
     },
     {
-      "label": "@magicspon/mocker-storybook",
+      "label": "@homelync/mocker-storybook",
       "file_type": "code",
       "source_file": "apps/storybook/package.json",
       "source_location": "L26",
       "_origin": "ast",
-      "id": "apps_storybook_package_dependencies_magicspon_mocker_storybook",
+      "id": "apps_storybook_package_dependencies_homelync_mocker_storybook",
       "community": 23,
-      "norm_label": "@magicspon/mocker-storybook"
+      "norm_label": "@homelync/mocker-storybook"
     },
     {
       "label": "react",
@@ -3646,14 +3646,14 @@
       "norm_label": "@faker-js/faker"
     },
     {
-      "label": "@magicspon/mocker",
+      "label": "@homelync/mocker",
       "file_type": "code",
       "source_file": "packages/mocker-cli/package.json",
       "source_location": "L53",
       "_origin": "ast",
-      "id": "packages_mocker_cli_package_dependencies_magicspon_mocker",
+      "id": "packages_mocker_cli_package_dependencies_homelync_mocker",
       "community": 17,
-      "norm_label": "@magicspon/mocker"
+      "norm_label": "@homelync/mocker"
     },
     {
       "label": "peerDependencies",
@@ -5076,14 +5076,14 @@
       "norm_label": "dependencies"
     },
     {
-      "label": "@magicspon/mocker",
+      "label": "@homelync/mocker",
       "file_type": "code",
       "source_file": "packages/mocker-next/package.json",
       "source_location": "L59",
       "_origin": "ast",
-      "id": "packages_mocker_next_package_dependencies_magicspon_mocker",
+      "id": "packages_mocker_next_package_dependencies_homelync_mocker",
       "community": 12,
-      "norm_label": "@magicspon/mocker"
+      "norm_label": "@homelync/mocker"
     },
     {
       "label": "peerDependencies",
@@ -6076,14 +6076,14 @@
       "norm_label": "dependencies"
     },
     {
-      "label": "@magicspon/mocker",
+      "label": "@homelync/mocker",
       "file_type": "code",
       "source_file": "packages/mocker-playwright/package.json",
       "source_location": "L50",
       "_origin": "ast",
-      "id": "packages_mocker_playwright_package_dependencies_magicspon_mocker",
+      "id": "packages_mocker_playwright_package_dependencies_homelync_mocker",
       "community": 11,
-      "norm_label": "@magicspon/mocker"
+      "norm_label": "@homelync/mocker"
     },
     {
       "label": "peerDependencies",
@@ -7616,14 +7616,14 @@
       "norm_label": "dependencies"
     },
     {
-      "label": "@magicspon/mocker",
+      "label": "@homelync/mocker",
       "file_type": "code",
       "source_file": "packages/mocker-storybook/package.json",
       "source_location": "L55",
       "_origin": "ast",
-      "id": "packages_mocker_storybook_package_dependencies_magicspon_mocker",
+      "id": "packages_mocker_storybook_package_dependencies_homelync_mocker",
       "community": 8,
-      "norm_label": "@magicspon/mocker"
+      "norm_label": "@homelync/mocker"
     },
     {
       "label": "peerDependencies",
@@ -12456,14 +12456,14 @@
       "norm_label": "readme.md"
     },
     {
-      "label": "@magicspon/mocker-cli",
+      "label": "@homelync/mocker-cli",
       "file_type": "document",
       "source_file": "packages/mocker-cli/README.md",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "packages_mocker_cli_readme_magicspon_mocker_cli",
+      "id": "packages_mocker_cli_readme_homelync_mocker_cli",
       "community": 39,
-      "norm_label": "@magicspon/mocker-cli"
+      "norm_label": "@homelync/mocker-cli"
     },
     {
       "label": "Quickstart",
@@ -12576,14 +12576,14 @@
       "norm_label": "readme.md"
     },
     {
-      "label": "@magicspon/mocker-next",
+      "label": "@homelync/mocker-next",
       "file_type": "document",
       "source_file": "packages/mocker-next/README.md",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "packages_mocker_next_readme_magicspon_mocker_next",
+      "id": "packages_mocker_next_readme_homelync_mocker_next",
       "community": 46,
-      "norm_label": "@magicspon/mocker-next"
+      "norm_label": "@homelync/mocker-next"
     },
     {
       "label": "Quickstart",
@@ -12666,14 +12666,14 @@
       "norm_label": "readme.md"
     },
     {
-      "label": "@magicspon/mocker-playwright",
+      "label": "@homelync/mocker-playwright",
       "file_type": "document",
       "source_file": "packages/mocker-playwright/README.md",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "packages_mocker_playwright_readme_magicspon_mocker_playwright",
+      "id": "packages_mocker_playwright_readme_homelync_mocker_playwright",
       "community": 37,
-      "norm_label": "@magicspon/mocker-playwright"
+      "norm_label": "@homelync/mocker-playwright"
     },
     {
       "label": "Quickstart",
@@ -12766,14 +12766,14 @@
       "norm_label": "what it does, and does not"
     },
     {
-      "label": "Alongside `@magicspon/mocker-next`",
+      "label": "Alongside `@homelync/mocker-next`",
       "file_type": "document",
       "source_file": "packages/mocker-playwright/README.md",
       "source_location": "L260",
       "_origin": "ast",
-      "id": "packages_mocker_playwright_readme_alongside_magicspon_mocker_next",
+      "id": "packages_mocker_playwright_readme_alongside_homelync_mocker_next",
       "community": 37,
-      "norm_label": "alongside `@magicspon/mocker-next`"
+      "norm_label": "alongside `@homelync/mocker-next`"
     },
     {
       "label": "If your app can start MSW itself",
@@ -12806,14 +12806,14 @@
       "norm_label": "readme.md"
     },
     {
-      "label": "@magicspon/mocker-storybook",
+      "label": "@homelync/mocker-storybook",
       "file_type": "document",
       "source_file": "packages/mocker-storybook/README.md",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "packages_mocker_storybook_readme_magicspon_mocker_storybook",
+      "id": "packages_mocker_storybook_readme_homelync_mocker_storybook",
       "community": 48,
-      "norm_label": "@magicspon/mocker-storybook"
+      "norm_label": "@homelync/mocker-storybook"
     },
     {
       "label": "Quickstart",
@@ -12906,14 +12906,14 @@
       "norm_label": "readme.md"
     },
     {
-      "label": "@magicspon/mocker",
+      "label": "@homelync/mocker",
       "file_type": "document",
       "source_file": "packages/mocker/README.md",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "packages_mocker_readme_magicspon_mocker",
+      "id": "packages_mocker_readme_homelync_mocker",
       "community": 52,
-      "norm_label": "@magicspon/mocker"
+      "norm_label": "@homelync/mocker"
     },
     {
       "label": "Quickstart",
@@ -13012,7 +13012,7 @@
       "id": "_changeset_config_restricted_access_policy"
     },
     {
-      "label": "GitHub Changelog Generator (magicspon/playground)",
+      "label": "GitHub Changelog Generator (homelync/playground)",
       "file_type": "concept",
       "source_file": ".changeset/config.json",
       "source_location": null,
@@ -13021,7 +13021,7 @@
       "author": null,
       "contributor": null,
       "community": 56,
-      "norm_label": "github changelog generator (magicspon/playground)",
+      "norm_label": "github changelog generator (homelync/playground)",
       "id": "_changeset_config_github_changelog"
     },
     {
@@ -14610,7 +14610,7 @@
       "source_location": "L13",
       "weight": 1.0,
       "source": "apps_e2e_package_dependencies",
-      "target": "apps_e2e_package_dependencies_magicspon_mocker",
+      "target": "apps_e2e_package_dependencies_homelync_mocker",
       "confidence_score": 1.0
     },
     {
@@ -14620,7 +14620,7 @@
       "source_location": "L14",
       "weight": 1.0,
       "source": "apps_e2e_package_dependencies",
-      "target": "apps_e2e_package_dependencies_magicspon_mocker_cli",
+      "target": "apps_e2e_package_dependencies_homelync_mocker_cli",
       "confidence_score": 1.0
     },
     {
@@ -14630,7 +14630,7 @@
       "source_location": "L15",
       "weight": 1.0,
       "source": "apps_e2e_package_dependencies",
-      "target": "apps_e2e_package_dependencies_magicspon_mocker_playwright",
+      "target": "apps_e2e_package_dependencies_homelync_mocker_playwright",
       "confidence_score": 1.0
     },
     {
@@ -15104,7 +15104,7 @@
       "source_location": "L14",
       "weight": 1.0,
       "source": "apps_next_package_dependencies",
-      "target": "apps_next_package_dependencies_magicspon_mocker",
+      "target": "apps_next_package_dependencies_homelync_mocker",
       "confidence_score": 1.0
     },
     {
@@ -15114,7 +15114,7 @@
       "source_location": "L15",
       "weight": 1.0,
       "source": "apps_next_package_dependencies",
-      "target": "apps_next_package_dependencies_magicspon_mocker_next",
+      "target": "apps_next_package_dependencies_homelync_mocker_next",
       "confidence_score": 1.0
     },
     {
@@ -16223,7 +16223,7 @@
       "source_location": "L25",
       "weight": 1.0,
       "source": "apps_storybook_package_dependencies",
-      "target": "apps_storybook_package_dependencies_magicspon_mocker",
+      "target": "apps_storybook_package_dependencies_homelync_mocker",
       "confidence_score": 1.0
     },
     {
@@ -16233,7 +16233,7 @@
       "source_location": "L26",
       "weight": 1.0,
       "source": "apps_storybook_package_dependencies",
-      "target": "apps_storybook_package_dependencies_magicspon_mocker_storybook",
+      "target": "apps_storybook_package_dependencies_homelync_mocker_storybook",
       "confidence_score": 1.0
     },
     {
@@ -17815,7 +17815,7 @@
       "source_location": "L53",
       "weight": 1.0,
       "source": "packages_mocker_cli_package_dependencies",
-      "target": "packages_mocker_cli_package_dependencies_magicspon_mocker",
+      "target": "packages_mocker_cli_package_dependencies_homelync_mocker",
       "confidence_score": 1.0
     },
     {
@@ -21001,7 +21001,7 @@
       "source_location": "L59",
       "weight": 1.0,
       "source": "packages_mocker_next_package_dependencies",
-      "target": "packages_mocker_next_package_dependencies_magicspon_mocker",
+      "target": "packages_mocker_next_package_dependencies_homelync_mocker",
       "confidence_score": 1.0
     },
     {
@@ -22848,7 +22848,7 @@
       "source_location": "L50",
       "weight": 1.0,
       "source": "packages_mocker_playwright_package_dependencies",
-      "target": "packages_mocker_playwright_package_dependencies_magicspon_mocker",
+      "target": "packages_mocker_playwright_package_dependencies_homelync_mocker",
       "confidence_score": 1.0
     },
     {
@@ -26704,7 +26704,7 @@
       "source_location": "L55",
       "weight": 1.0,
       "source": "packages_mocker_storybook_package_dependencies",
-      "target": "packages_mocker_storybook_package_dependencies_magicspon_mocker",
+      "target": "packages_mocker_storybook_package_dependencies_homelync_mocker",
       "confidence_score": 1.0
     },
     {
@@ -35994,7 +35994,7 @@
       "source_location": "L1",
       "weight": 1.0,
       "source": "packages_mocker_cli_readme",
-      "target": "packages_mocker_cli_readme_magicspon_mocker_cli",
+      "target": "packages_mocker_cli_readme_homelync_mocker_cli",
       "confidence_score": 1.0
     },
     {
@@ -36003,7 +36003,7 @@
       "source_file": "packages/mocker-cli/README.md",
       "source_location": "L174",
       "weight": 1.0,
-      "source": "packages_mocker_cli_readme_magicspon_mocker_cli",
+      "source": "packages_mocker_cli_readme_homelync_mocker_cli",
       "target": "packages_mocker_cli_readme_as_a_library",
       "confidence_score": 1.0
     },
@@ -36013,7 +36013,7 @@
       "source_file": "packages/mocker-cli/README.md",
       "source_location": "L220",
       "weight": 1.0,
-      "source": "packages_mocker_cli_readme_magicspon_mocker_cli",
+      "source": "packages_mocker_cli_readme_homelync_mocker_cli",
       "target": "packages_mocker_cli_readme_licence",
       "confidence_score": 1.0
     },
@@ -36023,7 +36023,7 @@
       "source_file": "packages/mocker-cli/README.md",
       "source_location": "L90",
       "weight": 1.0,
-      "source": "packages_mocker_cli_readme_magicspon_mocker_cli",
+      "source": "packages_mocker_cli_readme_homelync_mocker_cli",
       "target": "packages_mocker_cli_readme_mocker_config_json",
       "confidence_score": 1.0
     },
@@ -36033,7 +36033,7 @@
       "source_file": "packages/mocker-cli/README.md",
       "source_location": "L14",
       "weight": 1.0,
-      "source": "packages_mocker_cli_readme_magicspon_mocker_cli",
+      "source": "packages_mocker_cli_readme_homelync_mocker_cli",
       "target": "packages_mocker_cli_readme_quickstart",
       "confidence_score": 1.0
     },
@@ -36043,7 +36043,7 @@
       "source_file": "packages/mocker-cli/README.md",
       "source_location": "L49",
       "weight": 1.0,
-      "source": "packages_mocker_cli_readme_magicspon_mocker_cli",
+      "source": "packages_mocker_cli_readme_homelync_mocker_cli",
       "target": "packages_mocker_cli_readme_usage",
       "confidence_score": 1.0
     },
@@ -36053,7 +36053,7 @@
       "source_file": "packages/mocker-cli/README.md",
       "source_location": "L138",
       "weight": 1.0,
-      "source": "packages_mocker_cli_readme_magicspon_mocker_cli",
+      "source": "packages_mocker_cli_readme_homelync_mocker_cli",
       "target": "packages_mocker_cli_readme_what_it_fills_in_and_what_it_cannot",
       "confidence_score": 1.0
     },
@@ -36063,7 +36063,7 @@
       "source_file": "packages/mocker-cli/README.md",
       "source_location": "L32",
       "weight": 1.0,
-      "source": "packages_mocker_cli_readme_magicspon_mocker_cli",
+      "source": "packages_mocker_cli_readme_homelync_mocker_cli",
       "target": "packages_mocker_cli_readme_why",
       "confidence_score": 1.0
     },
@@ -36104,7 +36104,7 @@
       "source_location": "L1",
       "weight": 1.0,
       "source": "packages_mocker_next_readme",
-      "target": "packages_mocker_next_readme_magicspon_mocker_next",
+      "target": "packages_mocker_next_readme_homelync_mocker_next",
       "confidence_score": 1.0
     },
     {
@@ -36113,7 +36113,7 @@
       "source_file": "packages/mocker-next/README.md",
       "source_location": "L91",
       "weight": 1.0,
-      "source": "packages_mocker_next_readme_magicspon_mocker_next",
+      "source": "packages_mocker_next_readme_homelync_mocker_next",
       "target": "packages_mocker_next_readme_entry_points",
       "confidence_score": 1.0
     },
@@ -36123,7 +36123,7 @@
       "source_file": "packages/mocker-next/README.md",
       "source_location": "L167",
       "weight": 1.0,
-      "source": "packages_mocker_next_readme_magicspon_mocker_next",
+      "source": "packages_mocker_next_readme_homelync_mocker_next",
       "target": "packages_mocker_next_readme_further_reading",
       "confidence_score": 1.0
     },
@@ -36133,7 +36133,7 @@
       "source_file": "packages/mocker-next/README.md",
       "source_location": "L15",
       "weight": 1.0,
-      "source": "packages_mocker_next_readme_magicspon_mocker_next",
+      "source": "packages_mocker_next_readme_homelync_mocker_next",
       "target": "packages_mocker_next_readme_quickstart",
       "confidence_score": 1.0
     },
@@ -36143,7 +36143,7 @@
       "source_file": "packages/mocker-next/README.md",
       "source_location": "L129",
       "weight": 1.0,
-      "source": "packages_mocker_next_readme_magicspon_mocker_next",
+      "source": "packages_mocker_next_readme_homelync_mocker_next",
       "target": "packages_mocker_next_readme_registry_keys",
       "confidence_score": 1.0
     },
@@ -36153,7 +36153,7 @@
       "source_file": "packages/mocker-next/README.md",
       "source_location": "L150",
       "weight": 1.0,
-      "source": "packages_mocker_next_readme_magicspon_mocker_next",
+      "source": "packages_mocker_next_readme_homelync_mocker_next",
       "target": "packages_mocker_next_readme_testing_with_vitest",
       "confidence_score": 1.0
     },
@@ -36163,7 +36163,7 @@
       "source_file": "packages/mocker-next/README.md",
       "source_location": "L105",
       "weight": 1.0,
-      "source": "packages_mocker_next_readme_magicspon_mocker_next",
+      "source": "packages_mocker_next_readme_homelync_mocker_next",
       "target": "packages_mocker_next_readme_what_withmocker_does",
       "confidence_score": 1.0
     },
@@ -36184,7 +36184,7 @@
       "source_location": "L1",
       "weight": 1.0,
       "source": "packages_mocker_playwright_readme",
-      "target": "packages_mocker_playwright_readme_magicspon_mocker_playwright",
+      "target": "packages_mocker_playwright_readme_homelync_mocker_playwright",
       "confidence_score": 1.0
     },
     {
@@ -36193,7 +36193,7 @@
       "source_file": "packages/mocker-playwright/README.md",
       "source_location": "L292",
       "weight": 1.0,
-      "source": "packages_mocker_playwright_readme_magicspon_mocker_playwright",
+      "source": "packages_mocker_playwright_readme_homelync_mocker_playwright",
       "target": "packages_mocker_playwright_readme_further_reading",
       "confidence_score": 1.0
     },
@@ -36203,7 +36203,7 @@
       "source_file": "packages/mocker-playwright/README.md",
       "source_location": "L198",
       "weight": 1.0,
-      "source": "packages_mocker_playwright_readme_magicspon_mocker_playwright",
+      "source": "packages_mocker_playwright_readme_homelync_mocker_playwright",
       "target": "packages_mocker_playwright_readme_options",
       "confidence_score": 1.0
     },
@@ -36213,7 +36213,7 @@
       "source_file": "packages/mocker-playwright/README.md",
       "source_location": "L17",
       "weight": 1.0,
-      "source": "packages_mocker_playwright_readme_magicspon_mocker_playwright",
+      "source": "packages_mocker_playwright_readme_homelync_mocker_playwright",
       "target": "packages_mocker_playwright_readme_quickstart",
       "confidence_score": 1.0
     },
@@ -36223,7 +36223,7 @@
       "source_file": "packages/mocker-playwright/README.md",
       "source_location": "L183",
       "weight": 1.0,
-      "source": "packages_mocker_playwright_readme_magicspon_mocker_playwright",
+      "source": "packages_mocker_playwright_readme_homelync_mocker_playwright",
       "target": "packages_mocker_playwright_readme_three_rules_a_test_has_to_keep",
       "confidence_score": 1.0
     },
@@ -36233,7 +36233,7 @@
       "source_file": "packages/mocker-playwright/README.md",
       "source_location": "L67",
       "weight": 1.0,
-      "source": "packages_mocker_playwright_readme_magicspon_mocker_playwright",
+      "source": "packages_mocker_playwright_readme_homelync_mocker_playwright",
       "target": "packages_mocker_playwright_readme_two_defaults_that_are_the_opposite_of_the_storybook_adapter_s",
       "confidence_score": 1.0
     },
@@ -36243,7 +36243,7 @@
       "source_file": "packages/mocker-playwright/README.md",
       "source_location": "L243",
       "weight": 1.0,
-      "source": "packages_mocker_playwright_readme_magicspon_mocker_playwright",
+      "source": "packages_mocker_playwright_readme_homelync_mocker_playwright",
       "target": "packages_mocker_playwright_readme_what_it_does_and_does_not",
       "confidence_score": 1.0
     },
@@ -36253,7 +36253,7 @@
       "source_file": "packages/mocker-playwright/README.md",
       "source_location": "L132",
       "weight": 1.0,
-      "source": "packages_mocker_playwright_readme_magicspon_mocker_playwright",
+      "source": "packages_mocker_playwright_readme_homelync_mocker_playwright",
       "target": "packages_mocker_playwright_readme_where_fixtures_live",
       "confidence_score": 1.0
     },
@@ -36263,7 +36263,7 @@
       "source_file": "packages/mocker-playwright/README.md",
       "source_location": "L224",
       "weight": 1.0,
-      "source": "packages_mocker_playwright_readme_magicspon_mocker_playwright",
+      "source": "packages_mocker_playwright_readme_homelync_mocker_playwright",
       "target": "packages_mocker_playwright_readme_without_the_test_runner",
       "confidence_score": 1.0
     },
@@ -36294,7 +36294,7 @@
       "source_location": "L260",
       "weight": 1.0,
       "source": "packages_mocker_playwright_readme_what_it_does_and_does_not",
-      "target": "packages_mocker_playwright_readme_alongside_magicspon_mocker_next",
+      "target": "packages_mocker_playwright_readme_alongside_homelync_mocker_next",
       "confidence_score": 1.0
     },
     {
@@ -36314,7 +36314,7 @@
       "source_location": "L1",
       "weight": 1.0,
       "source": "packages_mocker_storybook_readme",
-      "target": "packages_mocker_storybook_readme_magicspon_mocker_storybook",
+      "target": "packages_mocker_storybook_readme_homelync_mocker_storybook",
       "confidence_score": 1.0
     },
     {
@@ -36323,7 +36323,7 @@
       "source_file": "packages/mocker-storybook/README.md",
       "source_location": "L217",
       "weight": 1.0,
-      "source": "packages_mocker_storybook_readme_magicspon_mocker_storybook",
+      "source": "packages_mocker_storybook_readme_homelync_mocker_storybook",
       "target": "packages_mocker_storybook_readme_components_that_take_props",
       "confidence_score": 1.0
     },
@@ -36333,7 +36333,7 @@
       "source_file": "packages/mocker-storybook/README.md",
       "source_location": "L132",
       "weight": 1.0,
-      "source": "packages_mocker_storybook_readme_magicspon_mocker_storybook",
+      "source": "packages_mocker_storybook_readme_homelync_mocker_storybook",
       "target": "packages_mocker_storybook_readme_fixed_responses_from_a_file_on_disk",
       "confidence_score": 1.0
     },
@@ -36343,7 +36343,7 @@
       "source_file": "packages/mocker-storybook/README.md",
       "source_location": "L293",
       "weight": 1.0,
-      "source": "packages_mocker_storybook_readme_magicspon_mocker_storybook",
+      "source": "packages_mocker_storybook_readme_homelync_mocker_storybook",
       "target": "packages_mocker_storybook_readme_further_reading",
       "confidence_score": 1.0
     },
@@ -36353,7 +36353,7 @@
       "source_file": "packages/mocker-storybook/README.md",
       "source_location": "L75",
       "weight": 1.0,
-      "source": "packages_mocker_storybook_readme_magicspon_mocker_storybook",
+      "source": "packages_mocker_storybook_readme_homelync_mocker_storybook",
       "target": "packages_mocker_storybook_readme_one_story_one_endpoint_different_behaviour",
       "confidence_score": 1.0
     },
@@ -36363,7 +36363,7 @@
       "source_file": "packages/mocker-storybook/README.md",
       "source_location": "L258",
       "weight": 1.0,
-      "source": "packages_mocker_storybook_readme_magicspon_mocker_storybook",
+      "source": "packages_mocker_storybook_readme_homelync_mocker_storybook",
       "target": "packages_mocker_storybook_readme_outside_storybook",
       "confidence_score": 1.0
     },
@@ -36373,7 +36373,7 @@
       "source_file": "packages/mocker-storybook/README.md",
       "source_location": "L21",
       "weight": 1.0,
-      "source": "packages_mocker_storybook_readme_magicspon_mocker_storybook",
+      "source": "packages_mocker_storybook_readme_homelync_mocker_storybook",
       "target": "packages_mocker_storybook_readme_quickstart",
       "confidence_score": 1.0
     },
@@ -36383,7 +36383,7 @@
       "source_file": "packages/mocker-storybook/README.md",
       "source_location": "L241",
       "weight": 1.0,
-      "source": "packages_mocker_storybook_readme_magicspon_mocker_storybook",
+      "source": "packages_mocker_storybook_readme_homelync_mocker_storybook",
       "target": "packages_mocker_storybook_readme_what_the_handlers_do",
       "confidence_score": 1.0
     },
@@ -36404,7 +36404,7 @@
       "source_location": "L1",
       "weight": 1.0,
       "source": "packages_mocker_readme",
-      "target": "packages_mocker_readme_magicspon_mocker",
+      "target": "packages_mocker_readme_homelync_mocker",
       "confidence_score": 1.0
     },
     {
@@ -36413,7 +36413,7 @@
       "source_file": "packages/mocker/README.md",
       "source_location": "L78",
       "weight": 1.0,
-      "source": "packages_mocker_readme_magicspon_mocker",
+      "source": "packages_mocker_readme_homelync_mocker",
       "target": "packages_mocker_readme_controls_per_request",
       "confidence_score": 1.0
     },
@@ -36423,7 +36423,7 @@
       "source_file": "packages/mocker/README.md",
       "source_location": "L52",
       "weight": 1.0,
-      "source": "packages_mocker_readme_magicspon_mocker",
+      "source": "packages_mocker_readme_homelync_mocker",
       "target": "packages_mocker_readme_entry_points",
       "confidence_score": 1.0
     },
@@ -36433,7 +36433,7 @@
       "source_file": "packages/mocker/README.md",
       "source_location": "L108",
       "weight": 1.0,
-      "source": "packages_mocker_readme_magicspon_mocker",
+      "source": "packages_mocker_readme_homelync_mocker",
       "target": "packages_mocker_readme_further_reading",
       "confidence_score": 1.0
     },
@@ -36443,7 +36443,7 @@
       "source_file": "packages/mocker/README.md",
       "source_location": "L18",
       "weight": 1.0,
-      "source": "packages_mocker_readme_magicspon_mocker",
+      "source": "packages_mocker_readme_homelync_mocker",
       "target": "packages_mocker_readme_quickstart",
       "confidence_score": 1.0
     },
@@ -36453,7 +36453,7 @@
       "source_file": "packages/mocker/README.md",
       "source_location": "L93",
       "weight": 1.0,
-      "source": "packages_mocker_readme_magicspon_mocker",
+      "source": "packages_mocker_readme_homelync_mocker",
       "target": "packages_mocker_readme_the_mock_api_flag",
       "confidence_score": 1.0
     },
@@ -36463,7 +36463,7 @@
       "source_file": "packages/mocker/README.md",
       "source_location": "L64",
       "weight": 1.0,
-      "source": "packages_mocker_readme_magicspon_mocker",
+      "source": "packages_mocker_readme_homelync_mocker",
       "target": "packages_mocker_readme_the_rule_the_layout_exists_for",
       "confidence_score": 1.0
     },
@@ -36473,7 +36473,7 @@
       "source_file": "packages/mocker/README.md",
       "source_location": "L101",
       "weight": 1.0,
-      "source": "packages_mocker_readme_magicspon_mocker",
+      "source": "packages_mocker_readme_homelync_mocker",
       "target": "packages_mocker_readme_with_next_js",
       "confidence_score": 1.0
     },

@@ -1,4 +1,4 @@
-import { mockerHandler } from '@magicspon/mocker-storybook'
+import { mockerHandler } from '@homelync/mocker-storybook'
 import preview from '#.storybook/preview'
 import { mockRegistry } from '../mocks/registry'
 import { DeviceTable } from './DeviceTable'

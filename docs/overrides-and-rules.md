@@ -48,7 +48,7 @@ adding one key to it. Repeat the entry's pins if you still want them.
 An override pins a canonical path to a generator function:
 
 ```ts
-import type { MockOptions } from '@magicspon/mocker'
+import type { MockOptions } from '@homelync/mocker'
 import type { deviceListSchema } from '../app/api/devices/types'
 
 'GET /api/devices?propertyReference=[reference]': {
@@ -118,11 +118,11 @@ caught by the table-wide check. That check is the second statement every registr
 ends with:
 
 ```ts
-const registry = {/* ... */} as const satisfies MockRegistryDraft
+const registry = {/* ... */} as const satisfies MockRegistryDraft;
 
 export const mockRegistry = registry satisfies CheckedMockRegistry<
   typeof registry
->
+>;
 ```
 
 Two statements because the check has to name the table's own type, and a
@@ -204,10 +204,10 @@ including the ISO date rule, which is the one most schemas quietly depend on. To
 add to them:
 
 ```ts
-import { DEFAULT_RULES } from '@magicspon/mocker/core'
+import { DEFAULT_RULES } from "@homelync/mocker/core";
 
 options: {
-  rules: [...myRules, ...DEFAULT_RULES]
+  rules: [...myRules, ...DEFAULT_RULES];
 }
 ```
 

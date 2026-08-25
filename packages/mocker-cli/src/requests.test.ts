@@ -1,4 +1,4 @@
-import { findMatch, parseKey } from '@magicspon/mocker'
+import { findMatch, parseKey } from '@homelync/mocker'
 import { describe, expect, it } from 'vitest'
 import { bindingValue, declaredRequest, describeRequest } from './requests'
 
@@ -43,7 +43,9 @@ describe('declaredRequest', () => {
   })
 
   it('carries the method and the control headers through', () => {
-    const request = declaredRequest('POST /api/notes', { 'x-mock-seed': 'abc' })
+    const request = declaredRequest('POST /api/notes', {
+      'x-mock-seed': 'abc',
+    })
 
     expect(request.method).toBe('POST')
     expect(request.headers.get('x-mock-seed')).toBe('abc')

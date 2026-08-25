@@ -1,4 +1,4 @@
-import { InvalidControlError } from '@magicspon/mocker'
+import { InvalidControlError } from '@homelync/mocker'
 import { UsageError } from './args'
 import { ConfigError } from './config'
 import { RegistryLoadError } from './load'

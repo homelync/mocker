@@ -7,14 +7,14 @@
  * it, the generator and `@faker-js/faker` into config evaluation on every
  * `next dev` — and into a production build that must not contain them.
  *
- * So this module reaches only `@magicspon/mocker/config`, which carries the same
+ * So this module reaches only `@homelync/mocker/config`, which carries the same
  * guarantee one level down, and `./rewrites`, which is pure apart from the flag.
  * `package-boundary.test.ts` walks the real import graph and fails if anything
  * here acquires a runtime path to `zod` or `@faker-js/faker`.
  *
  * ```ts
  * // next.config.ts
- * import { withMocker } from "@magicspon/mocker-next/config";
+ * import { withMocker } from "@homelync/mocker-next/config";
  * import { registry } from "./src/mocks/registry";
  *
  * export default withMocker({ registry }, {

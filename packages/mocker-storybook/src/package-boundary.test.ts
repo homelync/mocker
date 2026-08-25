@@ -14,7 +14,7 @@ import { describe, expect, it } from 'vitest'
  *    fixture store, so it *must* reach `node:fs`, and it is loaded by
  *    `.storybook/main.ts` — unbundled, before any build graph exists, exactly
  *    like the `next.config.ts` the sibling packages are shaped around. So it may
- *    import node and Vite, and nothing else: reaching `@magicspon/mocker` from
+ *    import node and Vite, and nothing else: reaching `@homelync/mocker` from
  *    there would load zod and faker on every `storybook dev`, silently.
  *
  * 3. **Nothing depends on Storybook.** These are plain MSW handlers, which is
@@ -149,9 +149,9 @@ describe("the Storybook adapter's boundaries", () => {
 
   it('keeps the published entry loadable in a browser', () => {
     // Everything the preview bundle is allowed to contain. `msw` is the runtime;
-    // `@magicspon/mocker` carries the generator and the registry; `zod` appears
+    // `@homelync/mocker` carries the generator and the registry; `zod` appears
     // type-only, so it never reaches this list.
-    const allowed = new Set(['msw', '@magicspon/mocker'])
+    const allowed = new Set(['msw', '@homelync/mocker'])
     const closure = runtimeClosure(path.join(root, 'index.ts'))
 
     const offenders = [...closure].flatMap(([file, references]) =>
@@ -178,7 +178,7 @@ describe("the Storybook adapter's boundaries", () => {
 
   it('keeps the Storybook config load free of the generator', () => {
     // `.storybook/main.ts` imports `./vite`, unbundled. Anything reachable from
-    // it is loaded on every `storybook dev` — and `@magicspon/mocker` pulls zod
+    // it is loaded on every `storybook dev` — and `@homelync/mocker` pulls zod
     // and faker, which is precisely the cost the sibling packages' `./config`
     // entries exist to avoid paying.
     const allowed = new Set(['node:fs/promises', 'node:path', 'vite'])

@@ -1,6 +1,6 @@
 import path from 'node:path'
 import { pathToFileURL } from 'node:url'
-import type { MockRegistry } from '@magicspon/mocker'
+import type { MockRegistry } from '@homelync/mocker'
 
 /**
  * Getting a host's registry out of a file and into this process.

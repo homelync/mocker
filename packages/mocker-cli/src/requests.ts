@@ -4,8 +4,8 @@ import {
   DYNAMIC_SEGMENT,
   hashSeed,
   parseKey,
-} from '@magicspon/mocker'
-import type { QueryConstraint } from '@magicspon/mocker'
+} from '@homelync/mocker'
+import type { QueryConstraint } from '@homelync/mocker'
 
 /**
  * A registry key, as a request somebody could plausibly have made.

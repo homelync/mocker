@@ -10,15 +10,15 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 # Example app
 
-A Next.js App Router app that consumes `@magicspon/mocker` and
-`@magicspon/mocker-next` from the workspace, the way a real consumer would. It
+A Next.js App Router app that consumes `@homelync/mocker` and
+`@homelync/mocker-next` from the workspace, the way a real consumer would. It
 is not published, and nothing in `packages/` depends on it.
 
 There is **no backend**. Every real handler answers 501; the interesting path is
 the mocked one.
 
 ```sh
-pnpm --filter @magicspon/next-example dev:mock   # MOCK_API=1 next dev
+pnpm --filter @homelync/next-example dev:mock   # MOCK_API=1 next dev
 ```
 
 Then:
@@ -27,7 +27,7 @@ Then:
 curl -s localhost:3000/api/property/ABC123 | jq
 ```
 
-Without `MOCK_API`, `pnpm --filter @magicspon/next-example dev` runs the same
+Without `MOCK_API`, `pnpm --filter @homelync/next-example dev` runs the same
 app with no mock anywhere in it — the rewrites are empty and `withMock` returns
 the handler it was given.
 
@@ -79,7 +79,7 @@ curl -s $BASE/api/devices | jq
 curl -s $BASE/api/user/u-42 | jq
 
 # Only the devices endpoint, everything else real:
-#   MOCK_API=devices pnpm --filter @magicspon/next-example dev
+#   MOCK_API=devices pnpm --filter @homelync/next-example dev
 ```
 
 Every mocked response carries `x-mock: 1` and an `x-mock-seed` naming the exact
@@ -89,13 +89,13 @@ input that produced it. The full set of controls is in
 ## The production guarantee, checked
 
 `withMocker()` points `turbopack.resolveAlias` at
-`@magicspon/mocker-next/production` when `NODE_ENV=production`, so a production
+`@homelync/mocker-next/production` when `NODE_ENV=production`, so a production
 build never reads the real adapter and cannot emit the generator or faker into a
 chunk. This app checks that rather than believing it:
 
 ```sh
-pnpm --filter @magicspon/next-example build
-pnpm --filter @magicspon/next-example verify:no-mock-in-build
+pnpm --filter @homelync/next-example build
+pnpm --filter @homelync/next-example verify:no-mock-in-build
 # ✓ no mock or faker references across 63 server chunks
 ```
 
@@ -104,7 +104,7 @@ how you know it is looking in the right place.
 
 ## Notes for anyone copying this
 
-- `next.config.ts` imports `@magicspon/mocker-next/config`, never the package
+- `next.config.ts` imports `@homelync/mocker-next/config`, never the package
   root. Next evaluates its config unbundled, before any build graph exists, so
   importing the root there would load faker on every `next dev`.
 - `src/mocks/registry.ts` is imported _by that config_, so it declares schemas as

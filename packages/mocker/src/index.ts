@@ -1,5 +1,5 @@
 /**
- * `@magicspon/mocker` — schema-driven fake data, and the HTTP seam that serves
+ * `@homelync/mocker` — schema-driven fake data, and the HTTP seam that serves
  * it.
  *
  * Two halves, both re-exported here: a **generator** that turns a zod schema
@@ -9,11 +9,11 @@
  *
  * Three entry points, and the split is load-bearing rather than cosmetic:
  *
- * - `@magicspon/mocker` — this module. Everything a *runtime* needs.
- * - `@magicspon/mocker/core` — the generator alone, depending on nothing but
+ * - `@homelync/mocker` — this module. Everything a *runtime* needs.
+ * - `@homelync/mocker/core` — the generator alone, depending on nothing but
  *   `zod` and `@faker-js/faker`. For a Storybook decorator, an MSW worker or a
  *   test's fixture factory: no `process.env`, no HTTP, no registry.
- * - `@magicspon/mocker/config` — the faker-free surface, for a bundler config
+ * - `@homelync/mocker/config` — the faker-free surface, for a bundler config
  *   that must not load the generator. See `config.ts` for why that matters.
  *
  * Importing the root from a `next.config.ts` is the one mistake this layout

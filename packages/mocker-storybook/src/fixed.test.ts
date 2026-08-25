@@ -10,7 +10,7 @@ import {
   vi,
 } from 'vitest'
 import { z } from 'zod'
-import type { CheckedMockRegistry, MockRegistryDraft } from '@magicspon/mocker'
+import type { CheckedMockRegistry, MockRegistryDraft } from '@homelync/mocker'
 import { mockerHandlers } from './handlers'
 
 /**
@@ -187,7 +187,10 @@ describe('a fixture that no longer matches its schema', () => {
     store.set(name, JSON.stringify({ results: 'not an array' }))
 
     const response = await get('/api/devices')
-    const body = (await response.json()) as { error: string; issues: unknown[] }
+    const body = (await response.json()) as {
+      error: string
+      issues: unknown[]
+    }
 
     expect(response.status).toBe(500)
     expect(body.error).toContain(name)

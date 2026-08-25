@@ -16,7 +16,7 @@ import { FIXTURE_ROUTE } from './route'
  * Deliberately dumb. It does not know what a registry is, what zod is, or what a
  * fixture contains — it reads bytes at a path and writes bytes at a path. That
  * is what keeps `main.ts` cheap to evaluate: nothing reachable from this file
- * imports `@magicspon/mocker`, so adding fixtures to a project does not pull the
+ * imports `@homelync/mocker`, so adding fixtures to a project does not pull the
  * generator, and faker with it, into Storybook's config load.
  * `package-boundary.test.ts` asserts it.
  */
@@ -179,7 +179,7 @@ async function storeFixture(
  *
  * ```ts
  * // .storybook/main.ts
- * import { mockerFixtures } from "@magicspon/mocker-storybook/vite";
+ * import { mockerFixtures } from "@homelync/mocker-storybook/vite";
  *
  * export default defineMain({
  *   framework: "@storybook/react-vite",

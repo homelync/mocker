@@ -41,7 +41,7 @@ function warnUnavailable(): void {
   if (warned) return
   warned = true
   console.warn(
-    `[mocker] Fixed mocks asked for ${FIXTURE_ROUTE} and nothing answered, so responses are being generated instead of fixed. Add mockerFixtures() from "@magicspon/mocker-storybook/vite" to viteFinal in .storybook/main.ts.`,
+    `[mocker] Fixed mocks asked for ${FIXTURE_ROUTE} and nothing answered, so responses are being generated instead of fixed. Add mockerFixtures() from "@homelync/mocker-storybook/vite" to viteFinal in .storybook/main.ts.`,
   )
 }
 

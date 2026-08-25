@@ -1,4 +1,4 @@
-import { DYNAMIC_SEGMENT } from '@magicspon/mocker'
+import { DYNAMIC_SEGMENT } from '@homelync/mocker'
 
 /**
  * Registry keys, in the dialect MSW matches on.
