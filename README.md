@@ -1,3 +1,5 @@
+[![CI](https://github.com/homelync/mocker/actions/workflows/ci.yaml/badge.svg)](https://github.com/homelync/mocker/actions/workflows/ci.yaml) [![Fallow](https://github.com/homelync/mocker/actions/workflows/fallow.yml/badge.svg)](https://github.com/homelync/mocker/actions/workflows/fallow.yml) [![Release](https://github.com/homelync/mocker/actions/workflows/release.yaml/badge.svg)](https://github.com/homelync/mocker/actions/workflows/release.yaml) [![Renovate](https://github.com/homelync/mocker/actions/workflows/renovate.yaml/badge.svg)](https://github.com/homelync/mocker/actions/workflows/renovate.yaml)
+
 # mocker.
 
 Fake data from your zod schemas, served over HTTP — so an app can be run,
