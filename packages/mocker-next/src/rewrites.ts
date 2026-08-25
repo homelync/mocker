@@ -8,8 +8,8 @@ import {
   isMockConfigured,
   isMockEnabledFor,
   parseKey,
-} from '@magicspon/mocker/config'
-import type { MockRegistry, QueryConstraint } from '@magicspon/mocker/config'
+} from '@homelync/mocker/config'
+import type { MockRegistry, QueryConstraint } from '@homelync/mocker/config'
 
 /**
  * Everything the App Router needs to send a registered route to the mock, and

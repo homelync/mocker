@@ -1,7 +1,7 @@
 {
-  "name": "@magicspon/mocker-storybook",
+  "name": "@homelync/mocker-storybook",
   "version": "0.1.0",
-  "description": "Storybook adapter for @magicspon/mocker — MSW handlers from a mock registry",
+  "description": "Storybook adapter for @homelync/mocker — MSW handlers from a mock registry",
   "keywords": [
     "zod",
     "mock",
@@ -12,12 +12,12 @@
     "fixtures-on-disk"
   ],
   "license": "MIT",
-  "author": "magicspon",
-  "homepage": "https://github.com/magicspon/mocker/tree/main/packages/mocker-storybook#readme",
-  "bugs": "https://github.com/magicspon/mocker/issues",
+  "author": "homelync",
+  "homepage": "https://github.com/homelync/mocker/tree/main/packages/mocker-storybook#readme",
+  "bugs": "https://github.com/homelync/mocker/issues",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/magicspon/mocker.git",
+    "url": "git+https://github.com/homelync/mocker.git",
     "directory": "packages/mocker-storybook"
   },
   "type": "module",
@@ -52,7 +52,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@magicspon/mocker": "workspace:^"
+    "@homelync/mocker": "workspace:^"
   },
   "peerDependencies": {
     "msw": "^2.15.0",

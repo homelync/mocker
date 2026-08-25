@@ -1,9 +1,9 @@
-import { findMatch } from '@magicspon/mocker'
+import { findMatch } from '@homelync/mocker'
 import type {
   GenerateOptions,
   MockRegistry,
   MockRegistryEntry,
-} from '@magicspon/mocker'
+} from '@homelync/mocker'
 import type { MockerEndpointOptions } from './options'
 
 /**

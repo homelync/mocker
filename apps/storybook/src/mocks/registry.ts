@@ -2,7 +2,7 @@ import type {
   CheckedMockRegistry,
   MockOptions,
   MockRegistryDraft,
-} from '@magicspon/mocker'
+} from '@homelync/mocker'
 import type { deviceListSchema } from '../api/devices'
 
 /**

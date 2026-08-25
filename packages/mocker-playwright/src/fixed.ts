@@ -6,12 +6,8 @@ import {
   readControls,
   serializeFixture,
   serveFromRegistry,
-} from '@magicspon/mocker'
-import type {
-  MockControls,
-  MockRegistry,
-  RegistryMiss,
-} from '@magicspon/mocker'
+} from '@homelync/mocker'
+import type { MockControls, MockRegistry, RegistryMiss } from '@homelync/mocker'
 import type { FixtureStore } from './store'
 
 /**
@@ -20,7 +16,7 @@ import type { FixtureStore } from './store'
  *
  * The policy is inherited nearly whole from `mocker-storybook/src/fixed.ts`. The
  * derivation of the filename and of the bytes is literally shared, in
- * `@magicspon/mocker/core`, so a store can be pointed at by both. Two things
+ * `@homelync/mocker/core`, so a store can be pointed at by both. Two things
  * differ, and both follow from a test being asserted on rather than looked at:
  *
  * 1. **A missing fixture is a failure.** Storybook writes one and carries on,

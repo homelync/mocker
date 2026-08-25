@@ -1,6 +1,6 @@
 import type { z } from 'zod'
-import { generate } from '@magicspon/mocker'
-import type { GenerateOptions } from '@magicspon/mocker'
+import { generate } from '@homelync/mocker'
+import type { GenerateOptions } from '@homelync/mocker'
 
 /**
  * Fake data for a story's props, for the components that never touch the

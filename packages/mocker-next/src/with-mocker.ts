@@ -3,7 +3,7 @@
 // imports and nothing else. `package-boundary.test.ts` walks the graph and
 // fails if that stops being true.
 import type { NextConfig } from 'next'
-import type { MockRegistry } from '@magicspon/mocker/config'
+import type { MockRegistry } from '@homelync/mocker/config'
 import { mockRewrites } from './rewrites'
 
 /**
@@ -15,7 +15,7 @@ import { mockRewrites } from './rewrites'
  * - **Rewrites.** `mockRewrites(registry)` is merged into `beforeFiles`, so a
  *   registered route is intercepted before its `route.ts` is matched.
  * - **Resolution.** In a production build, `turbopack.resolveAlias` points
- *   `@magicspon/mocker-next` at `@magicspon/mocker-next/production`, so every
+ *   `@homelync/mocker-next` at `@homelync/mocker-next/production`, so every
  *   route file that imports the adapter resolves to the stub instead. The
  *   generator — and `@faker-js/faker` behind it — cannot be emitted into a
  *   chunk, because the bundler never reads the module that imports it.
@@ -26,8 +26,8 @@ import { mockRewrites } from './rewrites'
  */
 
 /** The specifier a route file imports, and the one it resolves to instead. */
-const ADAPTER_PACKAGE = '@magicspon/mocker-next'
-const PRODUCTION_ENTRY = '@magicspon/mocker-next/production'
+const ADAPTER_PACKAGE = '@homelync/mocker-next'
+const PRODUCTION_ENTRY = '@homelync/mocker-next/production'
 
 /** Options for {@link withMocker}. */
 export interface WithMockerOptions {
@@ -73,7 +73,11 @@ interface RewriteGroups {
 async function resolveGroups(
   rewrites: RewritesOption | undefined,
 ): Promise<RewriteGroups> {
-  const empty: RewriteGroups = { beforeFiles: [], afterFiles: [], fallback: [] }
+  const empty: RewriteGroups = {
+    beforeFiles: [],
+    afterFiles: [],
+    fallback: [],
+  }
   if (rewrites === undefined) return empty
 
   const value = typeof rewrites === 'function' ? await rewrites() : rewrites
@@ -118,7 +122,7 @@ function withProductionAlias(config: NextConfig): NextConfig {
  *
  * ```ts
  * // next.config.ts
- * import { withMocker } from "@magicspon/mocker-next/config";
+ * import { withMocker } from "@homelync/mocker-next/config";
  * import { registry } from "./src/mocks/registry";
  *
  * export default withMocker({ registry }, {

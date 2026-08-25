@@ -1,4 +1,4 @@
-import { serveRegistryRoute } from '@magicspon/mocker-next'
+import { serveRegistryRoute } from '@homelync/mocker-next'
 import type { NextRequest, NextResponse } from 'next/server'
 import { mockRegistry } from '@/mocks/registry'
 

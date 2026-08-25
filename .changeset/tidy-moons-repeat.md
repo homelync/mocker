@@ -1,19 +1,19 @@
 ---
-'@magicspon/mocker-playwright': minor
-'@magicspon/mocker-storybook': patch
-'@magicspon/mocker': minor
+"@homelync/mocker-playwright": minor
+"@homelync/mocker-storybook": patch
+"@homelync/mocker": minor
 ---
 
-Add `@magicspon/mocker-playwright`: the same endpoint registry, served to a
+Add `@homelync/mocker-playwright`: the same endpoint registry, served to a
 Playwright browser context, backed by JSON fixtures you can edit and commit.
 
 ```ts
-export const test = base.extend(mockerTest({ registry }))
+export const test = base.extend(mockerTest({ registry }));
 
-test('empty state', async ({ page, mocker }) => {
-  mocker.use('GET /api/devices', { count: 0 })
-  await page.goto('/devices')
-})
+test("empty state", async ({ page, mocker }) => {
+  mocker.use("GET /api/devices", { count: 0 });
+  await page.goto("/devices");
+});
 ```
 
 One route is registered on the context rather than one per registry key, so
@@ -35,8 +35,8 @@ is looked at and a test asserts:
 `--update-snapshots` deliberately will not regenerate fixtures: `none` is
 honoured, `all` and `changed` are ignored. To regenerate one, delete it.
 
-`@magicspon/mocker` gains `fixturePath` and `serializeFixture` on `./core`, which
+`@homelync/mocker` gains `fixturePath` and `serializeFixture` on `./core`, which
 is where the derivation of a fixture's name and bytes now lives so that both
 adapters agree on it — the same request lands on the same file, formatted the
-same way, from either runtime. `@magicspon/mocker-storybook` uses them instead
+same way, from either runtime. `@homelync/mocker-storybook` uses them instead
 of its own copy; nothing it exported has changed.

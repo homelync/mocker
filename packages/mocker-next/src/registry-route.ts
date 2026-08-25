@@ -5,8 +5,8 @@ import {
   isRegistryMiss,
   logMock,
   serveFromRegistry,
-} from '@magicspon/mocker'
-import type { MockRegistry } from '@magicspon/mocker'
+} from '@homelync/mocker'
+import type { MockRegistry } from '@homelync/mocker'
 import { originalPathname } from './rewrites'
 
 /**

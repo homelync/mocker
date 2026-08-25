@@ -12,8 +12,8 @@ import { describe, expect, it } from 'vitest'
  *    build that must not contain it.
  *
  *    This test proves only the *local* half: that nothing reachable from
- *    `config.ts` imports `zod`, `@faker-js/faker`, or any `@magicspon/mocker`
- *    entry other than `/config`. The other half — that `@magicspon/mocker/config`
+ *    `config.ts` imports `zod`, `@faker-js/faker`, or any `@homelync/mocker`
+ *    entry other than `/config`. The other half — that `@homelync/mocker/config`
  *    is itself pure — is asserted by that package's own boundary test. Composed,
  *    the two give the whole guarantee, and each travels with the code it
  *    constrains.
@@ -148,10 +148,10 @@ describe("the Next adapter's boundaries", () => {
   })
 
   it('keeps the config entry away from the generator', () => {
-    // Anything the config surface may touch. `@magicspon/mocker/config` carries
+    // Anything the config surface may touch. `@homelync/mocker/config` carries
     // the same guarantee one level down; the bare package root does not, which
     // is the entire reason the `/config` entry exists.
-    const allowed = new Set(['@magicspon/mocker/config'])
+    const allowed = new Set(['@homelync/mocker/config'])
     const closure = runtimeClosure(path.join(root, 'config.ts'))
 
     const offenders = [...closure].flatMap(([file, references]) =>

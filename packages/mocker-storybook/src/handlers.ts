@@ -1,7 +1,7 @@
 import { http } from 'msw'
 import type { HttpHandler, HttpResponseResolver } from 'msw'
 import type { z } from 'zod'
-// One import source rather than two. `@magicspon/mocker/core` would give the
+// One import source rather than two. `@homelync/mocker/core` would give the
 // generator alone, but the root re-exports it and this module needs
 // `serveFromRegistry` from the root regardless — importing both would ship two
 // copies of the matcher and the generator into the preview bundle.
@@ -13,12 +13,12 @@ import {
   MOCK_STATUS_HEADER,
   parseKey,
   serveFromRegistry,
-} from '@magicspon/mocker'
+} from '@homelync/mocker'
 import type {
   GenerateOptions,
   MockRegistry,
   MockRegistryEntry,
-} from '@magicspon/mocker'
+} from '@homelync/mocker'
 import { toHandlerPath, toRegistryPath } from './pattern'
 import { serveFixed } from './fixed'
 
@@ -77,7 +77,7 @@ export interface MockerHandlerOptions {
    *
    * **Needs the Vite plugin.** A preview has no filesystem; the store lives on
    * Storybook's dev server. Add `mockerFixtures()` from
-   * `@magicspon/mocker-storybook/vite` to `viteFinal` in `.storybook/main.ts`.
+   * `@homelync/mocker-storybook/vite` to `viteFinal` in `.storybook/main.ts`.
    * Without it the console says so once and responses are generated as usual.
    */
   readonly fixed?: boolean

@@ -2,7 +2,7 @@ import { http, HttpResponse } from 'msw'
 import { setupServer } from 'msw/node'
 import { afterAll, afterEach, beforeAll, describe, expect, it } from 'vitest'
 import { z } from 'zod'
-import type { CheckedMockRegistry, MockRegistryDraft } from '@magicspon/mocker'
+import type { CheckedMockRegistry, MockRegistryDraft } from '@homelync/mocker'
 import { mockerHandler, mockerHandlers } from './handlers'
 
 /**
@@ -268,7 +268,9 @@ describe('mockerHandler', () => {
 
     // No `propertyReference`, so the override's own key does not match either —
     // and nothing else declares this path, so it reaches the fallback.
-    expect(await (await get('/api/devices')).json()).toEqual({ fallback: true })
+    expect(await (await get('/api/devices')).json()).toEqual({
+      fallback: true,
+    })
   })
 
   it('refuses a key the registry does not carry', () => {

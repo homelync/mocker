@@ -8,8 +8,8 @@ import {
   readControls,
   serializeFixture,
   serveFromRegistry,
-} from '@magicspon/mocker'
-import type { MockRegistry, MockRegistryEntry } from '@magicspon/mocker'
+} from '@homelync/mocker'
+import type { MockRegistry, MockRegistryEntry } from '@homelync/mocker'
 import { declaredRequest, describeRequest } from './requests'
 
 /**

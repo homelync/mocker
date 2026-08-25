@@ -174,7 +174,7 @@ describe("the Playwright adapter's boundaries", () => {
     // The narrower statement behind the assertion above, over the published
     // entry's closure alone: both peers are declared optional, so a consumer
     // driving `playwright-core` from a script may have neither installed.
-    const allowed = new Set(['@magicspon/mocker'])
+    const allowed = new Set(['@homelync/mocker'])
     const closure = runtimeClosure(path.join(root, 'index.ts'))
 
     const offenders = [...closure].flatMap(([file, references]) =>

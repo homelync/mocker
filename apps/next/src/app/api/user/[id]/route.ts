@@ -1,4 +1,4 @@
-import { withMock } from '@magicspon/mocker-next'
+import { withMock } from '@homelync/mocker-next'
 import type { NextRequest, NextResponse } from 'next/server'
 import { withApiKey } from '@/lib/auth'
 import { noUpstream } from '@/lib/upstream'
@@ -17,7 +17,7 @@ import { userSchema } from './types'
  * the route it would have been anyway.
  *
  * In a production build it is not even that: `withMocker()` points Turbopack at
- * `@magicspon/mocker-next/production`, so the import above resolves to a stub
+ * `@homelync/mocker-next/production`, so the import above resolves to a stub
  * and neither the generator nor faker can reach a chunk.
  */
 export const GET = withMock(

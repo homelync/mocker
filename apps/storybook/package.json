@@ -1,5 +1,5 @@
 {
-  "name": "@magicspon/storybook-example",
+  "name": "@homelync/storybook-example",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -22,8 +22,8 @@
     ]
   },
   "dependencies": {
-    "@magicspon/mocker": "workspace:*",
-    "@magicspon/mocker-storybook": "workspace:*",
+    "@homelync/mocker": "workspace:*",
+    "@homelync/mocker-storybook": "workspace:*",
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "zod": "^4.4.3"

@@ -1,5 +1,5 @@
 import path from 'node:path'
-import type { MockRegistry } from '@magicspon/mocker'
+import type { MockRegistry } from '@homelync/mocker'
 import type {
   Fixtures,
   PlaywrightTestArgs,
@@ -79,7 +79,7 @@ function disabled<Registry extends MockRegistry>(): MockerController<Registry> {
  * ```ts
  * // tests/fixtures.ts
  * import { test as base } from '@playwright/test'
- * import { mockerTest } from '@magicspon/mocker-playwright'
+ * import { mockerTest } from '@homelync/mocker-playwright'
  * import { registry } from '../src/mocks/registry'
  *
  * export const test = base.extend(mockerTest({ registry }))

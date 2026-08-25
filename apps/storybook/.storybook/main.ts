@@ -1,5 +1,5 @@
 import { defineMain } from '@storybook/react-vite/node'
-import { mockerFixtures } from '@magicspon/mocker-storybook/vite'
+import { mockerFixtures } from '@homelync/mocker-storybook/vite'
 
 /**
  * Interception is still entirely the preview's business. This file knows about

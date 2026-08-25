@@ -1,8 +1,8 @@
 import { NextRequest } from 'next/server'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { z } from 'zod'
-import { parseKey } from '@magicspon/mocker/config'
-import type { MockRegistry } from '@magicspon/mocker/config'
+import { parseKey } from '@homelync/mocker/config'
+import type { MockRegistry } from '@homelync/mocker/config'
 import { serveRegistryRoute } from './registry-route'
 import {
   mockRewrites,

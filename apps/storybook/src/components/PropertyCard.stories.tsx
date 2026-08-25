@@ -1,4 +1,4 @@
-import { mockLoader } from '@magicspon/mocker-storybook'
+import { mockLoader } from '@homelync/mocker-storybook'
 import preview from '#.storybook/preview'
 import { propertySchema } from '../api/property'
 import { PropertyCard } from './PropertyCard'

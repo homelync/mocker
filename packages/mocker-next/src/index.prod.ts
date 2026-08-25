@@ -2,10 +2,10 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
 /**
- * The production stand-in for `@magicspon/mocker-next`.
+ * The production stand-in for `@homelync/mocker-next`.
  *
  * `withMocker()` points `turbopack.resolveAlias` at this module — published as
- * `@magicspon/mocker-next/production` — when `NODE_ENV === "production"`, so
+ * `@homelync/mocker-next/production` — when `NODE_ENV === "production"`, so
  * every route file that imports the adapter resolves *here* instead. Turbopack
  * never reads the real adapter, so neither the generator nor faker can be
  * emitted into a chunk: the mock is absent from the build by resolution, not by

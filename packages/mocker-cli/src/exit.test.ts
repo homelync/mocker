@@ -1,4 +1,4 @@
-import { InvalidControlError } from '@magicspon/mocker'
+import { InvalidControlError } from '@homelync/mocker'
 import { describe, expect, it } from 'vitest'
 import { UsageError } from './args'
 import { describeFailure, FAILED } from './exit'

@@ -3,13 +3,13 @@
 Fake data from your zod schemas, served over HTTP — so an app can be run,
 demoed and tested against nothing at all.
 
-| Package                                                      | What it is                                            |
-| ------------------------------------------------------------ | ----------------------------------------------------- |
-| [`@magicspon/mocker`](packages/mocker)                       | the generator and the `Request` → `Response` handler  |
-| [`@magicspon/mocker-next`](packages/mocker-next)             | the Next.js App Router adapter                        |
-| [`@magicspon/mocker-storybook`](packages/mocker-storybook)   | the Storybook adapter, over Mock Service Worker       |
-| [`@magicspon/mocker-playwright`](packages/mocker-playwright) | the Playwright adapter, over `context.route`          |
-| [`@magicspon/mocker-cli`](packages/mocker-cli)               | the `mocker` command, writing the whole table to disk |
+| Package                                                     | What it is                                            |
+| ----------------------------------------------------------- | ----------------------------------------------------- |
+| [`@homelync/mocker`](packages/mocker)                       | the generator and the `Request` → `Response` handler  |
+| [`@homelync/mocker-next`](packages/mocker-next)             | the Next.js App Router adapter                        |
+| [`@homelync/mocker-storybook`](packages/mocker-storybook)   | the Storybook adapter, over Mock Service Worker       |
+| [`@homelync/mocker-playwright`](packages/mocker-playwright) | the Playwright adapter, over `context.route`          |
+| [`@homelync/mocker-cli`](packages/mocker-cli)               | the `mocker` command, writing the whole table to disk |
 
 Nothing is on npm yet, so install them from a local yalc store — build here, add
 there:
@@ -21,11 +21,11 @@ pnpm install && pnpm build
 pnpm publish:local
 
 # in the consuming project
-yalc add @magicspon/mocker @magicspon/mocker-next
+yalc add @homelync/mocker @homelync/mocker-next
 npm install
 ```
 
-Add `@magicspon/mocker` alongside whichever adapter you want: the adapters depend
+Add `@homelync/mocker` alongside whichever adapter you want: the adapters depend
 on it by a version no registry has. pnpm consumers need one override, and the
 whole workflow — the update loop, the peers, what to ignore — is in
 [`docs/yalc.md`](docs/yalc.md).
@@ -33,11 +33,11 @@ whole workflow — the update loop, the peers, what to ignore — is in
 Once they are published, it is the usual thing:
 
 ```sh
-npm install --save-dev @magicspon/mocker-next        # Next.js
-npm install --save-dev @magicspon/mocker-storybook   # Storybook
-npm install --save-dev @magicspon/mocker-playwright  # Playwright
-npm install --save-dev @magicspon/mocker-cli         # seed the fixtures up front
-npm install --save-dev @magicspon/mocker zod         # anywhere else
+npm install --save-dev @homelync/mocker-next        # Next.js
+npm install --save-dev @homelync/mocker-storybook   # Storybook
+npm install --save-dev @homelync/mocker-playwright  # Playwright
+npm install --save-dev @homelync/mocker-cli         # seed the fixtures up front
+npm install --save-dev @homelync/mocker zod         # anywhere else
 ```
 
 One endpoint table serves every adapter, so a component sees identical bytes in

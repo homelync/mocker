@@ -6,8 +6,8 @@ import {
   isMockConfigured,
   isMockEnabledFor,
   logMock,
-} from '@magicspon/mocker'
-import type { MockEndpoint } from '@magicspon/mocker'
+} from '@homelync/mocker'
+import type { MockEndpoint } from '@homelync/mocker'
 
 /**
  * The Next.js adapter: wrap a route handler so it answers from its own schema.
@@ -30,7 +30,7 @@ import type { MockEndpoint } from '@magicspon/mocker'
  * nothing.
  *
  * In a production build this module is never read at all: `withMocker()` points
- * `turbopack.resolveAlias` at `@magicspon/mocker-next/production`, a stub that
+ * `turbopack.resolveAlias` at `@homelync/mocker-next/production`, a stub that
  * returns the handler. The route sources are identical either way.
  *
  * The endpoint registry is the second way to declare a mock, for a route that

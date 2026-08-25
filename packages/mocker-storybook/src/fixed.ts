@@ -6,8 +6,8 @@ import {
   readControls,
   serializeFixture,
   serveFromRegistry,
-} from '@magicspon/mocker'
-import type { MockControls, MockRegistry } from '@magicspon/mocker'
+} from '@homelync/mocker'
+import type { MockControls, MockRegistry } from '@homelync/mocker'
 import { readFixture, writeFixture } from './fixtures'
 
 /**

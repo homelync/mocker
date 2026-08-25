@@ -1,5 +1,5 @@
 ---
-'@magicspon/mocker-cli': minor
+"@homelync/mocker-cli": minor
 ---
 
 Read `mocker.config.json`, so a repository states its arguments once.

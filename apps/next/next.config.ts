@@ -1,9 +1,9 @@
-import { withMocker } from '@magicspon/mocker-next/config'
+import { withMocker } from '@homelync/mocker-next/config'
 import type { NextConfig } from 'next'
 import { mockRegistry } from './src/mocks/registry'
 
 /**
- * `@magicspon/mocker-next/config`, never the package root: Next evaluates this
+ * `@homelync/mocker-next/config`, never the package root: Next evaluates this
  * file with its own loader, unbundled, before any build graph exists, so
  * tree-shaking cannot protect it. Importing the root here would load
  * `@faker-js/faker` on every `next dev`.
@@ -13,7 +13,7 @@ const nextConfig: NextConfig = {
   // development (`exports` points at `src/*.ts`; `publishConfig.exports` swaps
   // in `dist/*.js` at publish time), so Next has to compile them. A consumer
   // installing from npm needs neither of these lines.
-  transpilePackages: ['@magicspon/mocker', '@magicspon/mocker-next'],
+  transpilePackages: ['@homelync/mocker', '@homelync/mocker-next'],
 }
 
 /**

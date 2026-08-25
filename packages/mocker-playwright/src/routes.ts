@@ -1,5 +1,5 @@
 import path from 'node:path'
-import type { MockRegistry } from '@magicspon/mocker'
+import type { MockRegistry } from '@homelync/mocker'
 import type { BrowserContext } from 'playwright-core'
 import type { z } from 'zod'
 import { handleRoute } from './handler'
@@ -25,7 +25,7 @@ import { fixtureStore } from './store'
  *
  * The other half of that decision is written down in the README: if the app under
  * test can start an MSW *worker* itself, `mockerHandlers()` from
- * `@magicspon/mocker-storybook` already works there unchanged, and Playwright
+ * `@homelync/mocker-storybook` already works there unchanged, and Playwright
  * needs to intercept nothing. What this package is for is the case where it
  * cannot — a built app, a cross-origin API — and the case that no worker can
  * serve at all: **per-test variation**, where one test needs an empty list and

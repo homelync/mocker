@@ -7,7 +7,7 @@ import type {
   CheckedMockRegistry,
   MockRegistry,
   MockRegistryDraft,
-} from '@magicspon/mocker'
+} from '@homelync/mocker'
 import { handleRoute } from './handler'
 import type { HandlerState, InterceptedRoute } from './handler'
 import type { MockerMiss } from './miss'

@@ -1,8 +1,8 @@
 ---
-'@magicspon/mocker-cli': minor
+"@homelync/mocker-cli": minor
 ---
 
-Add `@magicspon/mocker-cli`: a `mocker` command that writes every endpoint in a
+Add `@homelync/mocker-cli`: a `mocker` command that writes every endpoint in a
 registry to disk in one go.
 
 ```sh
@@ -10,8 +10,8 @@ npx mocker ./src/mocks/registry.ts ./tests/mocks
 ```
 
 The tree it produces is not a new format — it is `fixturePath`'s, unchanged — so
-these are the very files `@magicspon/mocker-playwright` and
-`@magicspon/mocker-storybook` already replay. Seeding a fixture store is what the
+these are the very files `@homelync/mocker-playwright` and
+`@homelync/mocker-storybook` already replay. Seeding a fixture store is what the
 command is for.
 
 It exists because of the gap the Playwright adapter's strictness leaves. Failing

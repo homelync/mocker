@@ -2,8 +2,8 @@ import {
   isRegistryMiss,
   MOCK_MARKER_HEADER,
   serveFromRegistry,
-} from '@magicspon/mocker'
-import type { MockRegistry } from '@magicspon/mocker'
+} from '@homelync/mocker'
+import type { MockRegistry } from '@homelync/mocker'
 import { serveFixed } from './fixed'
 import type { MockerMiss } from './miss'
 import { asDeclared } from './options'

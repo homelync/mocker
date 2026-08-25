@@ -1,5 +1,5 @@
 /**
- * `@magicspon/mocker-playwright` — a mock registry, served to a browser context.
+ * `@homelync/mocker-playwright` — a mock registry, served to a browser context.
  *
  * One entry, and no sibling to it. The other adapters split themselves around a
  * config file evaluated unbundled (`next.config.ts`, `.storybook/main.ts`) or a

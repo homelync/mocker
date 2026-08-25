@@ -1,6 +1,6 @@
 import { definePreview } from '@storybook/react-vite'
 import addonMsw from 'msw-storybook-addon'
-import { mockerHandlers } from '@magicspon/mocker-storybook'
+import { mockerHandlers } from '@homelync/mocker-storybook'
 import { mockRegistry } from '../src/mocks/registry'
 
 /**

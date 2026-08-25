@@ -30,5 +30,5 @@ export default defineConfig({
   dts: { oxc: true },
   clean: true,
   treeshake: true,
-  external: [/^@magicspon\/mocker/, /^@faker-js\/faker/, /^zod/, /^node:/],
+  external: [/^@homelync\/mocker/, /^@faker-js\/faker/, /^zod/, /^node:/],
 })

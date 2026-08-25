@@ -129,9 +129,9 @@ function runtimeClosure(entry: string): Map<string, Reference[]> {
 /** Whether a specifier names one of the runtime adapters. */
 function isAdapter(specifier: string): boolean {
   return (
-    specifier.startsWith('@magicspon/mocker-next') ||
-    specifier.startsWith('@magicspon/mocker-storybook') ||
-    specifier.startsWith('@magicspon/mocker-playwright')
+    specifier.startsWith('@homelync/mocker-next') ||
+    specifier.startsWith('@homelync/mocker-storybook') ||
+    specifier.startsWith('@homelync/mocker-playwright')
   )
 }
 
@@ -167,7 +167,7 @@ describe("the CLI's boundaries", () => {
   it.each(['index.ts', 'cli.ts'])(
     '%s reaches only the library, faker and node',
     (entry) => {
-      const allowed = new Set(['@magicspon/mocker', '@faker-js/faker'])
+      const allowed = new Set(['@homelync/mocker', '@faker-js/faker'])
       const closure = runtimeClosure(path.join(root, entry))
 
       const offenders = [...closure].flatMap(([file, references]) =>

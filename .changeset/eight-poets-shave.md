@@ -1,5 +1,5 @@
 ---
-'@magicspon/mocker-storybook': minor
+"@homelync/mocker-storybook": minor
 ---
 
 Add fixed responses: `mockerHandlers(registry, { fixed: true })` answers from a JSON
@@ -22,11 +22,11 @@ Distinct from an `overrides` entry, which pins one _field_ while the rest is
 still generated; `fixed` freezes the whole response, as a file.
 
 A preview is a browser and has no disk, so this adds a second entry,
-`@magicspon/mocker-storybook/vite`, holding the store itself:
+`@homelync/mocker-storybook/vite`, holding the store itself:
 
 ```ts
 // .storybook/main.ts
-import { mockerFixtures } from '@magicspon/mocker-storybook/vite'
+import { mockerFixtures } from "@homelync/mocker-storybook/vite";
 
 export default defineMain({
   // …
@@ -34,7 +34,7 @@ export default defineMain({
     ...config,
     plugins: [...(config.plugins ?? []), mockerFixtures()],
   }),
-})
+});
 ```
 
 `vite` is a new **optional** peer dependency, needed only for this. Without the

@@ -6,7 +6,7 @@
   "changelog": [
     "@changesets/changelog-github",
     {
-      "repo": "magicspon/mocker"
+      "repo": "homelync/mocker"
     }
   ],
   "commit": true,
@@ -14,11 +14,11 @@
   "fixed": [],
   "linked": [
     [
-      "@magicspon/mocker",
-      "@magicspon/mocker-next",
-      "@magicspon/mocker-storybook",
-      "@magicspon/mocker-playwright",
-      "@magicspon/mocker-cli"
+      "@homelync/mocker",
+      "@homelync/mocker-next",
+      "@homelync/mocker-storybook",
+      "@homelync/mocker-playwright",
+      "@homelync/mocker-cli"
     ]
   ],
   "updateInternalDependencies": "patch"

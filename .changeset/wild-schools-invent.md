@@ -1,8 +1,8 @@
 ---
-'@magicspon/mocker-storybook': minor
+"@homelync/mocker-storybook": minor
 ---
 
-Add `@magicspon/mocker-storybook`: the Storybook adapter, over Mock Service
+Add `@homelync/mocker-storybook`: the Storybook adapter, over Mock Service
 Worker.
 
 `mockerHandlers(registry)` turns the same endpoint table the Next adapter takes

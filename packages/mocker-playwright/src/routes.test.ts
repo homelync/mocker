@@ -1,7 +1,7 @@
 import path from 'node:path'
 import { describe, expect, it } from 'vitest'
 import { z } from 'zod'
-import type { CheckedMockRegistry, MockRegistryDraft } from '@magicspon/mocker'
+import type { CheckedMockRegistry, MockRegistryDraft } from '@homelync/mocker'
 import type { BrowserContext } from 'playwright-core'
 import { mockerRoutes, resolveOptions } from './routes'
 

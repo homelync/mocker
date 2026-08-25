@@ -1,5 +1,5 @@
 {
-  "name": "@magicspon/next-example",
+  "name": "@homelync/next-example",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -11,8 +11,8 @@
     "verify:no-mock-in-build": "node scripts/verify-no-mock-in-build.mjs"
   },
   "dependencies": {
-    "@magicspon/mocker": "workspace:*",
-    "@magicspon/mocker-next": "workspace:*",
+    "@homelync/mocker": "workspace:*",
+    "@homelync/mocker-next": "workspace:*",
     "next": "16.3.1",
     "react": "19.2.8",
     "react-dom": "19.2.8",

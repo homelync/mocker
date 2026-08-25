@@ -1,5 +1,5 @@
 import { test as base } from '@playwright/test'
-import { mockerTest } from '@magicspon/mocker-playwright'
+import { mockerTest } from '@homelync/mocker-playwright'
 import { mockRegistry } from '../src/mocks/registry'
 
 /**
