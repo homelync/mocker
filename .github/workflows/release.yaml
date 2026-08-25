@@ -38,10 +38,10 @@ jobs:
           # `version-packages`, not a bare `changeset version`: changeset version
           # writes package.json only, so the lockfile would keep reporting the
           # previous version forever. The script re-syncs it.
-          version: npm run version-packages
-          publish: npx changeset publish
-          commit: "chore: version packages"
-          title: "changeset: cut release"
+          version-script: npm run version-packages
+          publish-script: npx changeset publish
+          commit-mesage: "chore: version packages"
+          pr-title: "changeset: cut release"
         env:
           GITHUB_TOKEN: ${{ secrets.HOMELINK_BOT_PACKAGES_PAT }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
