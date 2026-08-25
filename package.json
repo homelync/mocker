@@ -20,6 +20,7 @@
     "e2e": "pnpm --filter @homelync/e2e-example test",
     "mocks": "pnpm --filter @homelync/e2e-example mocks",
     "release": "changeset publish",
+    "version-packages": "changeset version && pnpm install --lockfile-only",
     "publish:local": "pnpm build && node scripts/yalc-publish.mjs",
     "publish:local:push": "pnpm build && node scripts/yalc-publish.mjs --push",
     "prepare": "husky"
