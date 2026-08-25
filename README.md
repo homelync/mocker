@@ -13,26 +13,7 @@ demoed and tested against nothing at all.
 | [`@homelync/mocker-playwright`](packages/mocker-playwright) | the Playwright adapter, over `context.route`          |
 | [`@homelync/mocker-cli`](packages/mocker-cli)               | the `mocker` command, writing the whole table to disk |
 
-Nothing is on npm yet, so install them from a local yalc store — build here, add
-there:
-
-```sh
-# in this repo
-npm install -g yalc
-pnpm install && pnpm build
-pnpm publish:local
-
-# in the consuming project
-yalc add @homelync/mocker @homelync/mocker-next
-npm install
-```
-
-Add `@homelync/mocker` alongside whichever adapter you want: the adapters depend
-on it by a version no registry has. pnpm consumers need one override, and the
-whole workflow — the update loop, the peers, what to ignore — is in
-[`docs/yalc.md`](docs/yalc.md).
-
-Once they are published, it is the usual thing:
+## Getting Started
 
 ```sh
 npm install --save-dev @homelync/mocker-next        # Next.js
