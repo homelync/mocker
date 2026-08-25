@@ -1,6 +1,6 @@
 {
   "name": "@homelync/mocker",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "description": "Generate fake data from zod schemas and serve it over HTTP",
   "keywords": [
     "zod",

@@ -1,6 +1,6 @@
 {
   "name": "@homelync/mocker-playwright",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "description": "Playwright adapter for @homelync/mocker — browser route mocks from a mock registry, backed by editable fixture files",
   "keywords": [
     "zod",

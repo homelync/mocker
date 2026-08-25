@@ -1,6 +1,6 @@
 {
   "name": "@homelync/mocker-next",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "description": "Next.js App Router adapter for @homelync/mocker",
   "keywords": [
     "zod",

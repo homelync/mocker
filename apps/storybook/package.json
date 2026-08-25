@@ -1,6 +1,6 @@
 {
   "name": "@homelync/storybook-example",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "private": true,
   "type": "module",
   "//": "CSF factories import the preview as `#.storybook/preview`; this subpath map is what resolves it.",
