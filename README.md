@@ -23,6 +23,19 @@ npm install --save-dev @homelync/mocker-cli         # seed the fixtures up front
 npm install --save-dev @homelync/mocker zod         # anywhere else
 ```
 
+The packages are published to GitHub Packages rather than npmjs, so a consuming
+project has to point the scope there before any of those installs resolve. In its
+`.npmrc`:
+
+```ini
+@homelync:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
+```
+
+`GITHUB_TOKEN` is a personal access token with `read:packages`. GitHub Packages
+authenticates reads as well as writes, so the token is needed even for a public
+package.
+
 One endpoint table serves every adapter, so a component sees identical bytes in
 a story, in `next dev` and in an e2e run.
 
