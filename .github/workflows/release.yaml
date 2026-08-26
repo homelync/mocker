@@ -13,6 +13,9 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
+      # Publishing to GitHub Packages. Without this the job's GITHUB_TOKEN is
+      # read-only for packages and `changeset publish` fails on 403.
+      packages: write
 
     steps:
       # This workflow is not `workflow_call`, so it cannot declare
@@ -37,7 +40,7 @@ jobs:
           # — a branch pushed with GITHUB_TOKEN raises no pull_request event, so the
           # required checks on the version PR would never start.
           # HOMELINK_BOT_WORKFLOWS_PAT needs repo scope (contents + pull requests);
-          # NPM_TOKEN stays registry-only and is never handed to git.
+          # the registry token stays registry-only and is never handed to git.
           token: ${{ secrets.HOMELINK_BOT_WORKFLOWS_PAT }}
 
       - uses: pnpm/action-setup@v6
@@ -48,7 +51,14 @@ jobs:
         with:
           node-version: 24.19.0
           cache: pnpm
-          registry-url: https://registry.npmjs.org
+          # We publish to GitHub Packages, not npmjs. This is what writes the
+          # `//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}` line, so the
+          # host here must match `publishConfig.registry` in every package or
+          # the publish goes out unauthenticated.
+          registry-url: https://npm.pkg.github.com
+          # Adds the `@homelync:registry` line as well, so installs during this
+          # job resolve the workspace scope to GitHub too.
+          scope: '@homelync'
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
@@ -75,4 +85,7 @@ jobs:
           commit-message: 'chore: version packages'
           pr-title: 'changeset: cut release'
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          # GitHub Packages accepts the job's own token, so there is no npm
+          # secret to rotate. It can only write packages owned by this repo's
+          # owner — which is why the scope (`@homelync`) has to match the org.
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
