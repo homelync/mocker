@@ -75,7 +75,7 @@ FILE:EXPORT`. Fallow is syntactic; an export can be imported-but-unreferenced an
 ## Comments
 
 - Always comment your code (unless it's very obvious).
-- Explain **why**, not what. Keep comments _short_ and _consise_.
+- Explain **why**, not what. Keep comments _short_ and _concise_.
 - `// TODO(WP-xxx):` for known incomplete work.
 - JSDoc on all exported functions and types.
 - Keep comments short; a single paragraph is usually enough.

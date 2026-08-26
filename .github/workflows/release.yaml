@@ -21,10 +21,10 @@ jobs:
       # assert it here rather than letting the release fail four steps later.
       - name: Check bot PAT is available
         env:
-          PAT: ${{ secrets.HOMELINK_BOT_PACKAGES_PAT }}
+          PAT: ${{ secrets.HOMELINK_BOT_WORKFLOWS_PAT }}
         run: |
           if [ -z "$PAT" ]; then
-            echo "::error::HOMELINK_BOT_PACKAGES_PAT is empty. Grant the org secret to homelync/mocker."
+            echo "::error::HOMELINK_BOT_WORKFLOWS_PAT is empty. Grant the org secret to homelync/mocker."
             exit 1
           fi
 
@@ -36,9 +36,9 @@ jobs:
           # A PAT (not GITHUB_TOKEN) so the version PR triggers downstream workflows
           # — a branch pushed with GITHUB_TOKEN raises no pull_request event, so the
           # required checks on the version PR would never start.
-          # HOMELINK_BOT_PACKAGES_PAT needs repo scope (contents + pull requests);
+          # HOMELINK_BOT_WORKFLOWS_PAT needs repo scope (contents + pull requests);
           # NPM_TOKEN stays registry-only and is never handed to git.
-          token: ${{ secrets.HOMELINK_BOT_PACKAGES_PAT }}
+          token: ${{ secrets.HOMELINK_BOT_WORKFLOWS_PAT }}
 
       - uses: pnpm/action-setup@v6
         with:
@@ -66,13 +66,13 @@ jobs:
           # v2 reads the token from this input only — setting a GITHUB_TOKEN env
           # var is silently ignored and the action falls back to the read-only
           # default token, which fails on "Resource not accessible by integration".
-          github-token: ${{ secrets.HOMELINK_BOT_PACKAGES_PAT }}
+          github-token: ${{ secrets.HOMELINK_BOT_WORKFLOWS_PAT }}
           # `version-packages`, not a bare `changeset version`: changeset version
           # writes package.json only, so the lockfile would keep reporting the
           # previous version forever. The script re-syncs it.
           version-script: pnpm run version-packages
           publish-script: pnpm run release
-          commit-message: "chore: version packages"
-          pr-title: "changeset: cut release"
+          commit-message: 'chore: version packages'
+          pr-title: 'changeset: cut release'
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

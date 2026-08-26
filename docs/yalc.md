@@ -112,7 +112,7 @@ not a workspace:
 
 ```yaml
 overrides:
-  "@homelync/mocker": file:.yalc/@homelync/mocker
+  '@homelync/mocker': file:.yalc/@homelync/mocker
 ```
 
 On pnpm 10 and earlier, the same entry goes under `pnpm.overrides` in

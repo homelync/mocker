@@ -25,47 +25,47 @@ Register the addon, then hand it your registry:
 ```ts
 // .storybook/main.ts
 export default {
-  framework: "@storybook/react-vite",
-  addons: ["msw-storybook-addon"],
+  framework: '@storybook/react-vite',
+  addons: ['msw-storybook-addon'],
   // MSW intercepts from a service worker; it has to be served.
-  staticDirs: ["../public"],
-};
+  staticDirs: ['../public'],
+}
 ```
 
 ```ts
 // .storybook/preview.ts
-import { definePreview } from "@storybook/react-vite";
-import addonMsw from "msw-storybook-addon";
-import { mockerHandlers } from "@homelync/mocker-storybook";
-import { registry } from "../src/mocks/registry";
+import { definePreview } from '@storybook/react-vite'
+import addonMsw from 'msw-storybook-addon'
+import { mockerHandlers } from '@homelync/mocker-storybook'
+import { registry } from '../src/mocks/registry'
 
 export default definePreview({
   addons: [addonMsw()],
   beforeEach({ msw }) {
-    msw.use(...mockerHandlers(registry));
+    msw.use(...mockerHandlers(registry))
   },
-});
+})
 ```
 
 ```ts
 // src/mocks/registry.ts — the endpoints, keyed as a URL reads
-import type { MockRegistry } from "@homelync/mocker";
+import type { MockRegistry } from '@homelync/mocker'
 
 export const registry = {
-  "GET /api/property/[reference]": {
-    schema: () => import("./schemas").then((m) => m.propertySchema),
+  'GET /api/property/[reference]': {
+    schema: () => import('./schemas').then((m) => m.propertySchema),
   },
-  "GET /api/devices?propertyReference=[reference]": {
-    schema: () => import("./schemas").then((m) => m.deviceListSchema),
+  'GET /api/devices?propertyReference=[reference]': {
+    schema: () => import('./schemas').then((m) => m.deviceListSchema),
   },
-} satisfies MockRegistry;
+} satisfies MockRegistry
 ```
 
 Every story of every component now answers from the schemas. A story that
 fetches needs no fixture, no handler and no setup of its own:
 
 ```ts
-export const Default = meta.story({});
+export const Default = meta.story({})
 ```
 
 It is the same table the Next adapter takes, in the same dialect. A component
@@ -80,27 +80,27 @@ registry — a story about an empty table does not have to describe every other
 request the page makes.
 
 ```ts
-import { mockerHandler } from "@homelync/mocker-storybook";
+import { mockerHandler } from '@homelync/mocker-storybook'
 
-const DEVICES = "GET /api/devices?propertyReference=[reference]";
+const DEVICES = 'GET /api/devices?propertyReference=[reference]'
 
 export const NoDevices = meta.story({
   beforeEach({ msw }) {
-    msw.use(mockerHandler(registry, DEVICES, { count: 0 }));
+    msw.use(mockerHandler(registry, DEVICES, { count: 0 }))
   },
-});
+})
 
 export const Loading = meta.story({
   beforeEach({ msw }) {
-    msw.use(mockerHandler(registry, DEVICES, { delayMs: 60_000 }));
+    msw.use(mockerHandler(registry, DEVICES, { delayMs: 60_000 }))
   },
-});
+})
 
 export const ServerError = meta.story({
   beforeEach({ msw }) {
-    msw.use(mockerHandler(registry, DEVICES, { status: 500 }));
+    msw.use(mockerHandler(registry, DEVICES, { status: 500 }))
   },
-});
+})
 ```
 
 | Option    | Does                                                              |
@@ -122,11 +122,11 @@ export const AllOffline = meta.story({
     msw.use(
       mockerHandler(registry, DEVICES, {
         count: 4,
-        generate: { overrides: { "results[].statusId": () => "OFFLINE" } },
+        generate: { overrides: { 'results[].statusId': () => 'OFFLINE' } },
       }),
-    );
+    )
   },
-});
+})
 ```
 
 ## Fixed responses, from a file on disk
@@ -148,17 +148,17 @@ A preview is a browser and has no disk, so the store lives on Storybook's dev
 server. One line in `.storybook/main.ts`:
 
 ```ts
-import { mockerFixtures } from "@homelync/mocker-storybook/vite";
+import { mockerFixtures } from '@homelync/mocker-storybook/vite'
 
 export default defineMain({
-  framework: "@storybook/react-vite",
-  stories: ["../src/**/*.stories.@(ts|tsx)"],
-  addons: ["msw-storybook-addon"],
+  framework: '@storybook/react-vite',
+  stories: ['../src/**/*.stories.@(ts|tsx)'],
+  addons: ['msw-storybook-addon'],
   viteFinal: (config) => ({
     ...config,
     plugins: [...(config.plugins ?? []), mockerFixtures()],
   }),
-});
+})
 ```
 
 Then ask for it, per story or preview-wide:
@@ -167,12 +167,12 @@ Then ask for it, per story or preview-wide:
 // one story
 export const Fixed = meta.story({
   beforeEach({ msw }) {
-    msw.use(mockerHandler(registry, DEVICES, { count: 3, fixed: true }));
+    msw.use(mockerHandler(registry, DEVICES, { count: 3, fixed: true }))
   },
-});
+})
 
 // or every endpoint, in .storybook/preview.ts
-msw.use(...mockerHandlers(registry, { fixed: true }));
+msw.use(...mockerHandlers(registry, { fixed: true }))
 ```
 
 Run the story once and the file appears:
@@ -222,16 +222,16 @@ is stable, and different data in every story, so two of them are not the same
 picture.
 
 ```tsx
-import { mockLoader } from "@homelync/mocker-storybook";
+import { mockLoader } from '@homelync/mocker-storybook'
 
 const meta = preview.meta({
   component: PropertyCard,
   loaders: [mockLoader({ property: propertySchema })],
   render: (_args, { loaded }) => <PropertyCard property={loaded.property} />,
-});
+})
 
-export const Default = meta.story({});
-export const AnotherProperty = meta.story({});
+export const Default = meta.story({})
+export const AnotherProperty = meta.story({})
 ```
 
 A second argument takes any generation options — `nullishRate: 0` to fill the
@@ -264,8 +264,8 @@ not have: pass `baseUrl` there, or the handlers match nothing.
 
 ```ts
 const server = setupServer(
-  ...mockerHandlers(registry, { baseUrl: "http://localhost:3000" }),
-);
+  ...mockerHandlers(registry, { baseUrl: 'http://localhost:3000' }),
+)
 ```
 
 ### Under Playwright
@@ -275,7 +275,7 @@ Playwright needs no adapter at all:
 
 ```ts
 // the app's own entry, behind a flag
-setupWorker(...mockerHandlers(registry)).start();
+setupWorker(...mockerHandlers(registry)).start()
 ```
 
 Note that this is `setupWorker`, in the browser — **not** `setupServer` in the

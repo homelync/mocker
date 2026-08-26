@@ -1,9 +1,9 @@
 ---
-"@homelync/mocker": major
-"@homelync/mocker-next": major
-"@homelync/mocker-storybook": major
-"@homelync/mocker-playwright": major
-"@homelync/mocker-cli": major
+'@homelync/mocker': major
+'@homelync/mocker-next': major
+'@homelync/mocker-storybook': major
+'@homelync/mocker-playwright': major
+'@homelync/mocker-cli': major
 ---
 
 First release. One endpoint registry of zod schemas, served four ways: Next.js

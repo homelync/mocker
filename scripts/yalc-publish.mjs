@@ -19,60 +19,60 @@
  * version of "works locally" worth having.
  */
 
-import { execFileSync } from "node:child_process";
-import { mkdtempSync, readdirSync, rmSync } from "node:fs";
-import { tmpdir } from "node:os";
-import { join } from "node:path";
-import { fileURLToPath } from "node:url";
+import { execFileSync } from 'node:child_process'
+import { mkdtempSync, readdirSync, rmSync } from 'node:fs'
+import { tmpdir } from 'node:os'
+import { join } from 'node:path'
+import { fileURLToPath } from 'node:url'
 
-const ROOT = fileURLToPath(new URL("..", import.meta.url));
+const ROOT = fileURLToPath(new URL('..', import.meta.url))
 const PACKAGES = [
-  "packages/mocker",
-  "packages/mocker-next",
-  "packages/mocker-storybook",
-  "packages/mocker-playwright",
-  "packages/mocker-cli",
-];
+  'packages/mocker',
+  'packages/mocker-next',
+  'packages/mocker-storybook',
+  'packages/mocker-playwright',
+  'packages/mocker-cli',
+]
 
 /** Also push the new version into every project that has yalc-added it. */
-const push = process.argv.includes("--push");
+const push = process.argv.includes('--push')
 
 const run = (cmd, args, cwd) =>
   execFileSync(cmd, args, {
     cwd,
-    stdio: ["ignore", "pipe", "inherit"],
-  }).toString();
+    stdio: ['ignore', 'pipe', 'inherit'],
+  }).toString()
 
 for (const pkgDir of PACKAGES) {
-  const stage = mkdtempSync(join(tmpdir(), "yalc-"));
+  const stage = mkdtempSync(join(tmpdir(), 'yalc-'))
 
   try {
     run(
-      "pnpm",
-      ["--dir", join(ROOT, pkgDir), "pack", "--pack-destination", stage],
+      'pnpm',
+      ['--dir', join(ROOT, pkgDir), 'pack', '--pack-destination', stage],
       ROOT,
-    );
+    )
 
-    const tarball = readdirSync(stage).find((f) => f.endsWith(".tgz"));
+    const tarball = readdirSync(stage).find((f) => f.endsWith('.tgz'))
     if (tarball === undefined)
-      throw new Error(`pnpm pack produced no tarball for ${pkgDir}`);
+      throw new Error(`pnpm pack produced no tarball for ${pkgDir}`)
 
     // Tarballs unpack into a directory literally named `package`.
-    run("tar", ["-xzf", tarball], stage);
-    const unpacked = join(stage, "package");
+    run('tar', ['-xzf', tarball], stage)
+    const unpacked = join(stage, 'package')
 
     // `--no-scripts`: the staged copy still carries a `build` script it has no
     // toolchain to run, and there is nothing left to build in any case.
     process.stdout.write(
       run(
-        "yalc",
+        'yalc',
         push
-          ? ["publish", "--push", "--no-scripts"]
-          : ["publish", "--no-scripts"],
+          ? ['publish', '--push', '--no-scripts']
+          : ['publish', '--no-scripts'],
         unpacked,
       ),
-    );
+    )
   } finally {
-    rmSync(stage, { recursive: true, force: true });
+    rmSync(stage, { recursive: true, force: true })
   }
 }

@@ -177,13 +177,13 @@ The same work, for a `globalSetup` or a codegen step that would rather not shell
 out:
 
 ```ts
-import { generateFixtures, loadRegistry } from "@homelync/mocker-cli";
+import { generateFixtures, loadRegistry } from '@homelync/mocker-cli'
 
-const registry = await loadRegistry("./src/mocks/registry.ts");
-const results = await generateFixtures(registry, { out: "./tests/mocks" });
+const registry = await loadRegistry('./src/mocks/registry.ts')
+const results = await generateFixtures(registry, { out: './tests/mocks' })
 
-const failed = results.filter((result) => result.status === "failed");
-if (failed.length > 0) throw new Error(failed[0].reason);
+const failed = results.filter((result) => result.status === 'failed')
+if (failed.length > 0) throw new Error(failed[0].reason)
 ```
 
 `generateFixtures` never throws for a bad entry — the failure lands in that
@@ -193,25 +193,25 @@ entry's result, so one broken schema does not cost the others their fixtures.
 step that would rather honour the repository's settings than restate them:
 
 ```ts
-import path from "node:path";
+import path from 'node:path'
 import {
   generateFixtures,
   loadConfig,
   loadRegistry,
-} from "@homelync/mocker-cli";
+} from '@homelync/mocker-cli'
 
-const loaded = await loadConfig();
+const loaded = await loadConfig()
 // `dir` is the config file's own directory: what its relative paths mean.
 const from = (value: string) =>
-  path.resolve(loaded?.dir ?? process.cwd(), value);
+  path.resolve(loaded?.dir ?? process.cwd(), value)
 
 const registry = await loadRegistry(
-  from(loaded?.config.registry ?? "./src/mocks/registry.ts"),
-);
+  from(loaded?.config.registry ?? './src/mocks/registry.ts'),
+)
 await generateFixtures(registry, {
-  out: from(loaded?.config.out ?? "./tests/mocks"),
+  out: from(loaded?.config.out ?? './tests/mocks'),
   params: loaded?.config.params,
-});
+})
 ```
 
 It returns `undefined` when there is no config file, and throws a `ConfigError`
