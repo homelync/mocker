@@ -3,6 +3,7 @@ import {
   InvalidControlError,
   MOCK_COUNT_HEADER,
   MOCK_DELAY_HEADER,
+  MOCK_LOCALE_HEADER,
   MOCK_SEED_HEADER,
   MOCK_STATUS_HEADER,
   readControls,
@@ -156,5 +157,40 @@ describe('rejecting malformed controls', () => {
         headers({ [MOCK_STATUS_HEADER]: '200', [MOCK_DELAY_HEADER]: 'slow' }),
       ),
     ).toThrow(/x-mock-delay/)
+  })
+})
+
+describe('the locale control', () => {
+  const locale = (value: string): readonly string[] | undefined =>
+    readControls(headers({ [MOCK_LOCALE_HEADER]: value })).locale
+
+  it('reads one name', () => {
+    expect(locale('de_CH')).toEqual(['de_CH'])
+  })
+
+  it('reads a chain, keeping the order it was given in', () => {
+    expect(locale('de_CH,de')).toEqual(['de_CH', 'de'])
+  })
+
+  it('tolerates whitespace around the names', () => {
+    expect(locale(' de_CH , de ')).toEqual(['de_CH', 'de'])
+  })
+
+  it('treats an empty header as no opinion', () => {
+    expect(locale('')).toBeUndefined()
+    expect(locale(' , ')).toBeUndefined()
+  })
+
+  it('rejects a name faker does not ship', () => {
+    // `de-CH` is the Accept-Language spelling, and the likeliest way to get this
+    // wrong. Ignoring it would serve English data from a request that asked for
+    // German and say nothing.
+    expect(() => locale('de-CH')).toThrow(InvalidControlError)
+  })
+
+  it('names the offending locale rather than the whole chain', () => {
+    expect(() => locale('de_CH,klingon')).toThrow(
+      /Invalid x-mock-locale: "klingon"/,
+    )
   })
 })

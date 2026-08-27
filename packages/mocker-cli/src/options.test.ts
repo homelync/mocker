@@ -122,6 +122,34 @@ describe('resolveOptions', () => {
   })
 })
 
+describe('the locale', () => {
+  const run = (line: Partial<CliArgs>, file?: LoadedConfig['config']) =>
+    resolveOptions(
+      args({ registry: './r.ts', out: './mocks', ...line }),
+      file === undefined ? undefined : config(file),
+    ).locale
+
+  it('comes from the config file when the line names none', () => {
+    expect(run({}, { locale: ['de_CH'] })).toEqual(['de_CH'])
+  })
+
+  it('comes from the command line when it names one', () => {
+    expect(run({ locale: ['fr_CH'] })).toEqual(['fr_CH'])
+  })
+
+  it('replaces the file’s chain rather than prepending to it', () => {
+    // Half a chain from each would be neither, and the result would depend on
+    // a file the person typing the flag may not have read.
+    expect(run({ locale: ['fr_CH'] }, { locale: ['de_CH', 'de'] })).toEqual([
+      'fr_CH',
+    ])
+  })
+
+  it('is absent when neither names one', () => {
+    expect(run({})).toBeUndefined()
+  })
+})
+
 describe('refusals', () => {
   it('refuses a run with no registry anywhere', () => {
     expect(() => resolveOptions(args({ out: './m' }))).toThrow(UsageError)

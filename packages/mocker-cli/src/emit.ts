@@ -4,6 +4,7 @@ import {
   fixturePath,
   isRegistryMiss,
   MOCK_COUNT_HEADER,
+  MOCK_LOCALE_HEADER,
   MOCK_SEED_HEADER,
   readControls,
   serializeFixture,
@@ -67,6 +68,12 @@ export interface EmitOptions {
   readonly seed?: string
   /** `x-mock-count`, sizing every primary collection. */
   readonly count?: number
+  /**
+   * `x-mock-locale`: faker locale names, highest priority first. Sets the
+   * language of the generated bodies *and* of the values filled into bindings,
+   * so a fixture's name reads like the data inside it.
+   */
+  readonly locale?: readonly string[]
   /** Overwrite fixtures that already exist. Off by default; see above. */
   readonly force?: boolean
   /** Produce the report and none of the files. */
@@ -83,6 +90,9 @@ function controlHeaders(options: EmitOptions): Record<string, string> {
   if (options.seed !== undefined) headers[MOCK_SEED_HEADER] = options.seed
   if (options.count !== undefined) {
     headers[MOCK_COUNT_HEADER] = String(options.count)
+  }
+  if (options.locale !== undefined && options.locale.length > 0) {
+    headers[MOCK_LOCALE_HEADER] = options.locale.join(',')
   }
   return headers
 }
@@ -179,7 +189,12 @@ async function emitOne(
   const early = declined(key, registry[key], options)
   if (early !== undefined) return early
 
-  const request = declaredRequest(key, controlHeaders(options), options.params)
+  const request = declaredRequest(
+    key,
+    controlHeaders(options),
+    options.params,
+    options.locale,
+  )
   const described = describeRequest(request)
 
   const name = fixturePath(request, readControls(request.headers))

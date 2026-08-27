@@ -113,7 +113,7 @@ describe('refusals', () => {
     const cwd = await write({ outDir: './mocks' })
 
     await expect(loadConfig(undefined, cwd)).rejects.toThrow(
-      /no option named "outDir"\. It takes: registry, out, params/,
+      /no option named "outDir"\. It takes: registry, out, locale, params/,
     )
   })
 
@@ -122,6 +122,29 @@ describe('refusals', () => {
 
     await expect(loadConfig(undefined, cwd)).rejects.toThrow(
       /must be a non-empty string/,
+    )
+  })
+
+  it('reads a single locale as a chain of one', async () => {
+    const cwd = await write({ locale: 'de_CH' })
+
+    expect((await loadConfig(undefined, cwd))?.config.locale).toEqual(['de_CH'])
+  })
+
+  it('reads a locale chain in the order it was written', async () => {
+    const cwd = await write({ locale: ['de_CH', 'de'] })
+
+    expect((await loadConfig(undefined, cwd))?.config.locale).toEqual([
+      'de_CH',
+      'de',
+    ])
+  })
+
+  it('refuses a locale faker does not ship, naming the key it is under', async () => {
+    const cwd = await write({ locale: ['de_CH', 'de-CH'] })
+
+    await expect(loadConfig(undefined, cwd)).rejects.toThrow(
+      /"locale\[1\]".*is "de-CH", which is not a faker locale name/,
     )
   })
 

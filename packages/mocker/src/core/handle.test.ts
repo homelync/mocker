@@ -1,3 +1,4 @@
+import { en } from '@faker-js/faker'
 import { describe, expect, it } from 'vitest'
 import { z } from 'zod'
 import { handle } from './handle'
@@ -283,6 +284,59 @@ describe('x-mock controls', () => {
     )
 
     expect(response.status).toBe(400)
+  })
+})
+
+describe('the locale control', () => {
+  const city = async (
+    headers: Record<string, string> = {},
+  ): Promise<string> => {
+    const response = await handle(
+      get('http://localhost/api/property', headers),
+      {
+        output: detailSchema,
+      },
+    )
+    return detailSchema.parse(await body(response)).city
+  }
+
+  it('changes the language of the data', async () => {
+    expect(await city({ 'x-mock-locale': 'de_CH' })).not.toBe(await city())
+  })
+
+  it('backs a partial locale rather than failing on a field it lacks', async () => {
+    // `de_CH` has no `lorem`, which `detailSchema.reference` falls back to.
+    const response = await handle(
+      get('http://localhost/api/property', { 'x-mock-locale': 'de_CH' }),
+      { output: detailSchema },
+    )
+
+    expect(response.status).toBe(200)
+  })
+
+  it("overrules the endpoint's own locale, as a seed does", async () => {
+    // A control exists to make *this* endpoint answer differently. One an entry
+    // could veto would do nothing on the entries most worth pointing it at.
+    const pinned = await handle(
+      get('http://localhost/api/property', { 'x-mock-locale': 'de_CH' }),
+      { output: detailSchema, options: { locale: en } },
+    )
+    const plain = await handle(
+      get('http://localhost/api/property', { 'x-mock-locale': 'de_CH' }),
+      { output: detailSchema },
+    )
+
+    expect(await plain.text()).toBe(await pinned.text())
+  })
+
+  it('reports an unknown locale rather than ignoring it', async () => {
+    const response = await handle(
+      get('http://localhost/api/property', { 'x-mock-locale': 'de-CH' }),
+      { output: detailSchema },
+    )
+
+    expect(response.status).toBe(400)
+    expect(await response.text()).toContain('x-mock-locale')
   })
 })
 

@@ -98,14 +98,22 @@ function safeSegment(segment: string): string {
  * `delayMs` is deliberately absent: it changes when the response arrives, not
  * what it says, and including it would give a story about a loading state its
  * own redundant copy of the data.
+ *
+ * `locale` is appended only when there is one, rather than as an empty field
+ * like the rest. The three above have been part of the hash since the first
+ * fixture was written; a fourth that always contributes would rename every
+ * committed file in every tree, for the benefit of trees that name no locale
+ * at all.
  */
 function signature(method: string, url: URL, controls: MockControls): string {
   const request = requestSignature(method, url.pathname, url.searchParams)
   const seed = controls.seed ?? ''
   const count = controls.count === undefined ? '' : String(controls.count)
   const status = controls.status === undefined ? '' : String(controls.status)
+  const locale =
+    controls.locale === undefined ? '' : `|locale=${controls.locale.join(',')}`
 
-  return `${request}|seed=${seed}|count=${count}|status=${status}`
+  return `${request}|seed=${seed}|count=${count}|status=${status}${locale}`
 }
 
 /**

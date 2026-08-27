@@ -443,6 +443,47 @@ anything an entry states explicitly wins.
 on their own: the full precedence ladder, how the two are type-checked, and what
 each of them cannot reach.
 
+### Choosing a locale
+
+`locale` takes a faker locale, or a chain of them highest priority first:
+
+```ts
+import { de_CH } from '@faker-js/faker'
+
+'GET /api/property/[reference]': {
+  schema: () => import('./types').then((m) => m.propertySchema),
+  options: { locale: de_CH },
+},
+```
+
+The default is `en_GB` backed by `en` — this domain being UK housing stock,
+postcodes and counties have to look British.
+
+`en` is appended to whatever you give unless it is already in the chain. Most
+faker locales define only part of the data, and faker throws rather than
+inventing a value for a category no locale in the chain covers, so a bare
+`de_CH` would otherwise fail on the first `lorem` field it met. Put `en` in the
+chain yourself to place it somewhere other than last.
+
+#### Per request, and per run
+
+`x-mock-locale` sets the locale for one request, in any adapter:
+
+```bash
+curl -s -H 'x-mock-locale: de_CH' "$BASE/api/property/ABC123" | jq
+```
+
+It takes the same chain, comma-separated — `de_CH,de` — and it **overrules an
+entry's own `locale`**, as `x-mock-seed` overrules an entry's seed: a control
+that an entry could veto would do nothing on the entries most worth pointing it
+at. A name faker does not ship is a 400 rather than a shrug, which is what
+catches `de-CH`, the `Accept-Language` spelling.
+
+For a whole fixture tree, the `mocker` command takes `--locale` and
+`mocker.config.json` takes `"locale"`; see
+[the CLI's README](../packages/mocker-cli/README.md). A fixture generated under
+a locale is named apart from one generated without, so a tree can hold both.
+
 ## Using the generator directly
 
 `generate` is independent of the HTTP layer, so it also works as a fixture
@@ -547,6 +588,7 @@ each test file, so a new test cannot forget.
 | `x-mock-delay`  | 0–30000 ms | Wait before responding.                                  |
 | `x-mock-count`  | 0–10000    | Size the collection; collapses the response to one page. |
 | `x-mock-seed`   | any string | Replace the derived seed. Changes rows, not totals.      |
+| `x-mock-locale` | `de_CH,de` | Generate the values in these locales, priority first.    |
 
 Headers rather than query parameters, because a query parameter changes the
 request signature and therefore the data — you would be looking at a _different_

@@ -231,3 +231,47 @@ describe('key coverage', () => {
     }
   })
 })
+
+/**
+ * A binding value ends up in the *filename* of a body generated in the same
+ * run, so it follows the same locale. Only the bindings whose rule reads
+ * locale data change — `street` does, `reference` is alphanumeric either way —
+ * and a value that is not a safe path segment falls back regardless, which is
+ * why a Swiss `city` is as likely to come out as a code as a city name.
+ */
+describe('a locale', () => {
+  const identity = 'GET /api/property/[street]'
+
+  it('fills a locale-sensitive binding in that language', () => {
+    expect(bindingValue('street', identity, {}, ['de_CH'])).not.toBe(
+      bindingValue('street', identity),
+    )
+  })
+
+  it('leaves a binding whose rule reads no locale data alone', () => {
+    const reference = 'GET /api/property/[reference]'
+
+    expect(bindingValue('reference', reference, {}, ['de_CH'])).toBe(
+      bindingValue('reference', reference),
+    )
+  })
+
+  it('never overrules a configured param', () => {
+    expect(
+      bindingValue('street', identity, { street: 'lorem999' }, ['de_CH']),
+    ).toBe('lorem999')
+  })
+
+  it('stays deterministic', () => {
+    expect(bindingValue('street', identity, {}, ['de_CH'])).toBe(
+      bindingValue('street', identity, {}, ['de_CH']),
+    )
+  })
+
+  it('reaches the bindings in a whole request', () => {
+    const swiss = new URL(declaredRequest(identity, {}, {}, ['de_CH']).url)
+    const british = new URL(declaredRequest(identity).url)
+
+    expect(swiss.pathname).not.toBe(british.pathname)
+  })
+})

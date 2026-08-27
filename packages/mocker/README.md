@@ -86,6 +86,7 @@ without touching any code:
 | `x-mock-delay`  | wait this many milliseconds first                      |
 | `x-mock-count`  | size the primary collection, overriding `limit`        |
 | `x-mock-seed`   | pick a different dataset for the same request          |
+| `x-mock-locale` | generate the values in `de_CH`, or in `de_CH,de`       |
 
 Every mocked response carries `x-mock: 1` and the `x-mock-seed` it used, so a
 screenshot can be turned back into the exact request that produced it.
@@ -123,6 +124,17 @@ A registry entry takes the same options under `options`, where they apply to
 every request to that endpoint. The full guide — precedence, type checking, and
 what each mechanism cannot reach — is
 [`docs/overrides-and-rules.md`](https://github.com/homelync/mocker/blob/main/docs/overrides-and-rules.md).
+
+`locale` takes a faker locale, or a chain of them highest priority first, and
+defaults to `en_GB`. `en` is appended unless you place it yourself: most locales
+define only part of the data, and faker throws on a category no locale in the
+chain covers rather than inventing a value.
+
+```ts
+import { de_CH } from '@faker-js/faker'
+
+generate(propertySchema, { locale: de_CH })
+```
 
 ## The `MOCK_API` flag
 
