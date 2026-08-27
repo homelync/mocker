@@ -126,8 +126,15 @@ function params(
   return table
 }
 
-/** Parsed JSON as a config, or a {@link ConfigError} naming what is wrong. */
-function validate(raw: unknown, file: string): MockerConfig {
+/**
+ * That the parsed JSON is an object, and that every key on it is an option.
+ *
+ * An assertion rather than a function returning a checked value, because `in`
+ * narrows a key to `unknown` only on a value the typechecker already holds as
+ * an object — which is what lets {@link validate} read the file without
+ * casting it to a shape it has not been checked against yet.
+ */
+function assertOptions(raw: unknown, file: string): asserts raw is object {
   if (typeof raw !== 'object' || raw === null || Array.isArray(raw)) {
     throw new ConfigError(`${file} must contain a JSON object.`)
   }
@@ -138,10 +145,12 @@ function validate(raw: unknown, file: string): MockerConfig {
       `${file} has no option named "${unknown[0] ?? ''}". It takes: ${KNOWN.slice(1).join(', ')}.`,
     )
   }
+}
 
-  // `in` narrows each key to `unknown` on an object-typed value, which is what
-  // lets this read the file without casting it to a shape it has not been
-  // checked against yet.
+/** Parsed JSON as a config, or a {@link ConfigError} naming what is wrong. */
+function validate(raw: unknown, file: string): MockerConfig {
+  assertOptions(raw, file)
+
   return {
     registry:
       'registry' in raw ? text(raw.registry, 'registry', file) : undefined,
