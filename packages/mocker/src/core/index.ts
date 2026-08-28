@@ -6,7 +6,7 @@
  * application. Adapters (Next, Playwright, Nest) live outside it, and are thin
  * because {@link handle} already speaks `Request`/`Response`.
  */
-export { generate } from './generate'
+export { generate, localeChain } from './generate'
 export { handle, MOCK_MARKER_HEADER, MOCK_SEED_RESPONSE_HEADER } from './handle'
 export { DEFAULT_RULES } from './rules'
 export { UnknownOverridePathError, UnsupportedSchemaError } from './errors'
@@ -14,9 +14,11 @@ export { InvalidControlError, readControls } from './controls'
 export {
   MOCK_COUNT_HEADER,
   MOCK_DELAY_HEADER,
+  MOCK_LOCALE_HEADER,
   MOCK_SEED_HEADER,
   MOCK_STATUS_HEADER,
 } from './controls'
+export { isLocaleName, LOCALE_NAMES, resolveLocales } from './locales'
 export { collectLeafKinds, collectPaths, findArrayPaths } from './paths'
 export { requestSignature, shapeRequest } from './shape'
 export { hashSeed } from './hash'

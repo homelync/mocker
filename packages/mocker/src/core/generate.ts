@@ -1,4 +1,5 @@
 import { Faker, en, en_GB } from '@faker-js/faker'
+import type { LocaleDefinition } from '@faker-js/faker'
 import type { z } from 'zod'
 import { UnknownOverridePathError, UnsupportedSchemaError } from './errors'
 import { hashSeed } from './hash'
@@ -20,6 +21,31 @@ const DEFAULT_PRIMARY_COUNT = 10
 
 /** Guards against a self-referential schema; recursion is not supported. */
 const MAX_DEPTH = 20
+
+/**
+ * The locale chain to hand faker, highest priority first.
+ *
+ * `en_GB` leads by default so postcodes, counties and street names match the
+ * domain. Whatever the chain, `en` goes last unless the caller has already
+ * placed it: most locales define only part of the data, and faker throws on a
+ * category no locale in the chain covers rather than inventing a value — so a
+ * bare `de_CH` would fail on the first field it has no data for.
+ *
+ * Exported for the callers that build a `Faker` of their own — the CLI fills a
+ * fixture's `[binding]` segments from one — so that they back a partial locale
+ * the same way rather than each rediscovering the need to.
+ *
+ * @param locale one locale, a chain highest priority first, or nothing for the
+ *   default
+ */
+export function localeChain(
+  locale: LocaleDefinition | readonly LocaleDefinition[] | undefined,
+): LocaleDefinition[] {
+  if (locale === undefined) return [en_GB, en]
+
+  const chain = Array.isArray(locale) ? [...locale] : [locale]
+  return chain.includes(en) ? chain : [...chain, en]
+}
 
 /** Everything the walk needs that does not change from node to node. */
 interface WalkContext {
@@ -83,9 +109,7 @@ export function generate<T extends z.ZodType>(
     assertOverridePathsExist(schema, overrideEntries)
   }
 
-  // `en_GB` first so postcodes, counties and street names match the domain,
-  // with `en` behind it to fill any gaps the GB locale does not define.
-  const faker = new Faker({ locale: locale ? [locale] : [en_GB, en] })
+  const faker = new Faker({ locale: localeChain(locale) })
   faker.seed(hashSeed(seed))
 
   // Only the shallowest array is the "primary collection"; everything deeper is

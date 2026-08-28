@@ -1,5 +1,6 @@
 import { readFile } from 'node:fs/promises'
 import path from 'node:path'
+import { isLocaleName } from '@homelync/mocker'
 
 /**
  * `mocker.config.json`, read off disk.
@@ -36,6 +37,14 @@ export interface MockerConfig {
   /** Directory the fixture tree is rooted at, relative to the config file. */
   readonly out?: string
   /**
+   * Faker locale names, highest priority first: `"de_CH"`, or `["de_CH", "de"]`
+   * to put a fallback behind it. Sets the language of every generated value.
+   *
+   * A repository's fixtures are generated in one language, so this belongs in
+   * the file the repository shares rather than in each developer's command.
+   */
+  readonly locale?: readonly string[]
+  /**
    * Fixed values for bindings, by name: `{ "reference": "lorem999" }` puts
    * `lorem999` wherever `[reference]` appears, in a path or in a query.
    *
@@ -56,7 +65,13 @@ export interface LoadedConfig {
 }
 
 /** Keys a config may carry; anything else is a typo worth reporting. */
-const KNOWN: readonly string[] = ['$schema', 'registry', 'out', 'params']
+const KNOWN: readonly string[] = [
+  '$schema',
+  'registry',
+  'out',
+  'locale',
+  'params',
+]
 
 /** A key's value as a non-empty string, or a {@link ConfigError} naming it. */
 function text(value: unknown, where: string, file: string): string {
@@ -66,6 +81,29 @@ function text(value: unknown, where: string, file: string): string {
     )
   }
   return value
+}
+
+/**
+ * The `locale` chain: one name, or several highest priority first.
+ *
+ * A string and an array both, because one locale is the overwhelmingly common
+ * case and `"locale": ["de_CH"]` would be a punctuation tax on it. Names are
+ * checked against the locales faker ships, here rather than at generation time,
+ * so a typo names itself and the file it is in.
+ */
+function locale(value: unknown, file: string): readonly string[] {
+  const names = Array.isArray(value) ? value : [value]
+
+  return names.map((raw, index) => {
+    const where = Array.isArray(value) ? `locale[${String(index)}]` : 'locale'
+    const name = text(raw, where, file)
+    if (!isLocaleName(name)) {
+      throw new ConfigError(
+        `"${where}" in ${file} is "${name}", which is not a faker locale name. Try one like "de_CH".`,
+      )
+    }
+    return name
+  })
 }
 
 /** The `params` table, checked value by value. */
@@ -88,8 +126,15 @@ function params(
   return table
 }
 
-/** Parsed JSON as a config, or a {@link ConfigError} naming what is wrong. */
-function validate(raw: unknown, file: string): MockerConfig {
+/**
+ * That the parsed JSON is an object, and that every key on it is an option.
+ *
+ * An assertion rather than a function returning a checked value, because `in`
+ * narrows a key to `unknown` only on a value the typechecker already holds as
+ * an object — which is what lets {@link validate} read the file without
+ * casting it to a shape it has not been checked against yet.
+ */
+function assertOptions(raw: unknown, file: string): asserts raw is object {
   if (typeof raw !== 'object' || raw === null || Array.isArray(raw)) {
     throw new ConfigError(`${file} must contain a JSON object.`)
   }
@@ -100,14 +145,17 @@ function validate(raw: unknown, file: string): MockerConfig {
       `${file} has no option named "${unknown[0] ?? ''}". It takes: ${KNOWN.slice(1).join(', ')}.`,
     )
   }
+}
 
-  // `in` narrows each key to `unknown` on an object-typed value, which is what
-  // lets this read the file without casting it to a shape it has not been
-  // checked against yet.
+/** Parsed JSON as a config, or a {@link ConfigError} naming what is wrong. */
+function validate(raw: unknown, file: string): MockerConfig {
+  assertOptions(raw, file)
+
   return {
     registry:
       'registry' in raw ? text(raw.registry, 'registry', file) : undefined,
     out: 'out' in raw ? text(raw.out, 'out', file) : undefined,
+    locale: 'locale' in raw ? locale(raw.locale, file) : undefined,
     params: 'params' in raw ? params(raw.params, file) : undefined,
   }
 }

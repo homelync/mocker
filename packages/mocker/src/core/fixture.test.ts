@@ -72,6 +72,28 @@ describe('the controls a story sets', () => {
     // would give a loading-state story a redundant copy of the same data.
     expect(path('/api/devices', { delayMs: 2000 })).toBe(path('/api/devices'))
   })
+
+  it('give a locale its own fixture', () => {
+    expect(path('/api/devices', { locale: ['de_CH'] })).not.toBe(
+      path('/api/devices'),
+    )
+  })
+
+  it('separate two locales, and two orderings of the same two', () => {
+    expect(path('/api/devices', { locale: ['de_CH'] })).not.toBe(
+      path('/api/devices', { locale: ['fr_CH'] }),
+    )
+    expect(path('/api/devices', { locale: ['de_CH', 'de'] })).not.toBe(
+      path('/api/devices', { locale: ['de', 'de_CH'] }),
+    )
+  })
+
+  it('leave the name of a fixture with no locale exactly as it was', () => {
+    // The hash predates the locale control, and every committed tree is named
+    // by it. A locale field that contributed even when empty would orphan all
+    // of them at once.
+    expect(path('/api/devices')).toBe('GET/api/devices/ab93e145.json')
+  })
 })
 
 describe('a path segment that is not a filename', () => {

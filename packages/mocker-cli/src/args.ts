@@ -1,4 +1,5 @@
 import { parseArgs } from 'node:util'
+import { isLocaleName } from '@homelync/mocker'
 
 /**
  * The command line, and nothing else.
@@ -40,6 +41,8 @@ export interface CliArgs {
   readonly seed?: string
   /** `x-mock-count` sent with every request. */
   readonly count?: number
+  /** `x-mock-locale` sent with every request: locale names, in priority order. */
+  readonly locale?: readonly string[]
   readonly force: boolean
   readonly dryRun: boolean
   readonly skipPlanned: boolean
@@ -70,6 +73,7 @@ Options
   -e, --export <name>   export holding the table (default: mockRegistry, registry, default)
   -s, --seed <value>    pin x-mock-seed on every request
   -c, --count <n>       pin x-mock-count, sizing every primary collection
+  -l, --locale <names>  pin x-mock-locale, e.g. de_CH or de_CH,de (default: en_GB)
   -f, --force           overwrite fixtures that already exist (default: keep them)
   -n, --dry-run         report what would be written, and write nothing
       --skip-planned    leave out entries carrying a \`planned\` ticket reference
@@ -79,14 +83,21 @@ Options
 
 Notes
   mocker.config.json, in the working directory, may state the registry, the
-  output directory, and fixed values for bindings:
+  output directory, the locale, and fixed values for bindings:
 
     { "registry": "./src/mocks/registry.ts",
       "out": "./tests/mocks",
+      "locale": "de_CH",
       "params": { "reference": "lorem999" } }
 
   An argument on the command line wins over the file. Paths in the file are
   relative to the file.
+
+  A locale sets the language of every generated value, and of the bindings in a
+  fixture's filename with it. "en" backs whatever is named, since most locales
+  define only part of the data. An entry that states its own locale is overruled,
+  as it is by --seed and --count. Fixtures generated under a locale are named
+  apart from the ones generated without, so a tree can hold both.
 
   Existing fixtures are kept, because they are committed files somebody may have
   edited by hand. Pass --force to regenerate them.
@@ -112,6 +123,30 @@ function integer(flag: string, raw: string): number {
 }
 
 /**
+ * The locale chain, from `--locale de_CH,de` or a repeated `--locale`.
+ *
+ * Names are checked here rather than left to the mock, because a typo would
+ * otherwise fail once per entry, twenty entries deep into a report, for a
+ * mistake that is on the command line in front of you.
+ */
+function locales(raw: readonly string[]): readonly string[] | undefined {
+  const names = raw
+    .flatMap((value) => value.split(','))
+    .map((name) => name.trim())
+    .filter((name) => name !== '')
+
+  for (const name of names) {
+    if (!isLocaleName(name)) {
+      throw new UsageError(
+        `--locale does not know "${name}". Expected a faker locale name, e.g. de_CH.`,
+      )
+    }
+  }
+
+  return names.length === 0 ? undefined : names
+}
+
+/**
  * Parse a command line.
  *
  * @param argv arguments after the executable and script, i.e. `process.argv.slice(2)`
@@ -129,6 +164,7 @@ export function parseCliArgs(argv: readonly string[]): ParsedArgs {
         export: { type: 'string', short: 'e' },
         seed: { type: 'string', short: 's' },
         count: { type: 'string', short: 'c' },
+        locale: { type: 'string', short: 'l', multiple: true },
         force: { type: 'boolean', short: 'f' },
         'dry-run': { type: 'boolean', short: 'n' },
         'skip-planned': { type: 'boolean' },
@@ -164,6 +200,7 @@ export function parseCliArgs(argv: readonly string[]): ParsedArgs {
       seed: values.seed,
       count:
         values.count === undefined ? undefined : integer('count', values.count),
+      locale: values.locale === undefined ? undefined : locales(values.locale),
       force: values.force === true,
       dryRun: values['dry-run'] === true,
       skipPlanned: values['skip-planned'] === true,

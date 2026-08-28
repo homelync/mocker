@@ -36,6 +36,8 @@ export interface CliOptions {
   readonly seed?: string
   /** `x-mock-count` sent with every request. */
   readonly count?: number
+  /** `x-mock-locale` sent with every request: locale names, in priority order. */
+  readonly locale?: readonly string[]
   readonly force: boolean
   readonly dryRun: boolean
   readonly skipPlanned: boolean
@@ -108,6 +110,9 @@ export function resolveOptions(
     exportName: args.exportName,
     seed: args.seed,
     count: args.count,
+    // Rule 1: a `--locale` on the line replaces the file's chain outright rather
+    // than prepending to it. A chain half from each would be neither.
+    locale: args.locale ?? loaded?.config.locale,
     force: args.force,
     dryRun: args.dryRun,
     skipPlanned: args.skipPlanned,

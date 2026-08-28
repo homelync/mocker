@@ -105,10 +105,16 @@ export interface GenerateOptions<Output = unknown> {
    */
   readonly overrides?: PathOverrides<Output>
   /**
-   * Faker locale. Defaults to `en_GB` backed by `en`, this domain being UK
-   * housing stock — postcodes and counties have to look British.
+   * Faker locale, or a fallback chain highest priority first. Defaults to
+   * `en_GB`, this domain being UK housing stock — postcodes and counties have
+   * to look British.
+   *
+   * `en` is appended to whatever is given unless it is already in the chain.
+   * Most locales are partial, and faker throws rather than inventing a value
+   * for a category its locale does not define, so a bare `de_CH` would fail on
+   * the first field it has no data for.
    */
-  readonly locale?: LocaleDefinition
+  readonly locale?: LocaleDefinition | readonly LocaleDefinition[]
 }
 
 /**

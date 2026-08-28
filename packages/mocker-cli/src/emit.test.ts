@@ -264,3 +264,73 @@ describe('entries that produce no fixture', () => {
     expect(result?.reason).toBeTruthy()
   })
 })
+
+describe('the locale a run is generated under', () => {
+  const citySchema = z.object({ reference: z.string(), city: z.string() })
+  const cities: MockRegistry = {
+    'GET /api/property/[reference]': {
+      schema: () => Promise.resolve(citySchema),
+    },
+  }
+
+  /** The one entry's request, filename and body, for a given locale. */
+  async function run(locale?: readonly string[]) {
+    const directory = await mkdtemp(path.join(tmpdir(), 'mocker-cli-'))
+    const [result] = await generateFixtures(cities, { out: directory, locale })
+    const body: unknown = JSON.parse(await readFile(result?.file ?? '', 'utf8'))
+
+    return {
+      request: result?.request ?? '',
+      name: path.relative(directory, result?.file ?? ''),
+      city: citySchema.parse(body).city,
+      directory,
+    }
+  }
+
+  it('changes the language of the generated body', async () => {
+    const swiss = await run(['de_CH'])
+    const british = await run()
+
+    try {
+      expect(swiss.city).not.toBe(british.city)
+    } finally {
+      await rm(swiss.directory, { recursive: true, force: true })
+      await rm(british.directory, { recursive: true, force: true })
+    }
+  })
+
+  it('gives a locale its own fixture, so a tree can hold both', async () => {
+    const swiss = await run(['de_CH'])
+    const british = await run()
+
+    try {
+      expect(swiss.name).not.toBe(british.name)
+    } finally {
+      await rm(swiss.directory, { recursive: true, force: true })
+      await rm(british.directory, { recursive: true, force: true })
+    }
+  })
+
+  it('stays deterministic, so two machines write the same tree', async () => {
+    const once = await run(['de_CH'])
+    const twice = await run(['de_CH'])
+
+    try {
+      expect(once.name).toBe(twice.name)
+      expect(once.city).toBe(twice.city)
+    } finally {
+      await rm(once.directory, { recursive: true, force: true })
+      await rm(twice.directory, { recursive: true, force: true })
+    }
+  })
+
+  it('refuses a locale the mock does not know, rather than ignoring it', async () => {
+    // Thrown rather than reported per entry, exactly as a bad seed or count is:
+    // the mistake is in the run, so twenty identical failures would bury it.
+    // The command line and the config file both check a name before it gets
+    // this far; a library caller of `generateFixtures` has had no such chance.
+    await expect(
+      generateFixtures(cities, { out, locale: ['de-CH'] }),
+    ).rejects.toThrow(InvalidControlError)
+  })
+})

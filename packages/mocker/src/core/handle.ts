@@ -1,6 +1,7 @@
 import type { z } from 'zod'
 import { InvalidControlError, readControls } from './controls'
 import { generate } from './generate'
+import { resolveLocales } from './locales'
 import { shapeRequest } from './shape'
 import type { MockRequestInput } from './shape'
 import type { GenerateOptions } from './types'
@@ -123,11 +124,21 @@ export async function handle<T extends z.ZodType>(
   // an echoed `reference` — which exist in the schema but cannot be named as
   // literals here, since `T` is only known to be some `z.ZodType`. The paths a
   // developer writes are checked where they are written, in the registry entry.
-  const options = shapeRequest(
+  const shaped = shapeRequest(
     endpoint.output,
     input,
     endpoint.options as GenerateOptions,
   )
+
+  // The header wins over the endpoint's own locale, as `x-mock-seed` wins over
+  // its seed: a control exists to see this endpoint answer differently, and one
+  // an entry could veto would do nothing on the entries most worth pointing it
+  // at. Resolved here rather than in `readControls`, which stays a pure reader
+  // of strings — `fixturePath` keys a fixture by the names it returns.
+  const options: GenerateOptions =
+    controls.locale === undefined
+      ? shaped
+      : { ...shaped, locale: resolveLocales(controls.locale) }
   const seed = String(options.seed ?? '')
 
   let generated: unknown

@@ -1,3 +1,5 @@
+import { isLocaleName, LOCALE_NAMES } from './locales'
+
 /**
  * Per-request `x-mock-*` overrides.
  *
@@ -16,6 +18,7 @@ export const MOCK_STATUS_HEADER = 'x-mock-status'
 export const MOCK_DELAY_HEADER = 'x-mock-delay'
 export const MOCK_COUNT_HEADER = 'x-mock-count'
 export const MOCK_SEED_HEADER = 'x-mock-seed'
+export const MOCK_LOCALE_HEADER = 'x-mock-locale'
 
 /** Long enough to watch a skeleton; short enough not to look like a hang. */
 const MAX_DELAY_MS = 30_000
@@ -32,6 +35,12 @@ export interface MockControls {
   readonly count?: number
   /** Replace the request-derived seed, so the same request yields new data. */
   readonly seed?: string
+  /**
+   * Faker locale names, highest priority first: the language the values come
+   * out in. Names rather than definitions, so a control stays a string a header
+   * can carry and a fixture name can be keyed by.
+   */
+  readonly locale?: readonly string[]
 }
 
 /**
@@ -72,6 +81,36 @@ function readInt(
   return value
 }
 
+/**
+ * The locale chain: `de_CH`, or `de_CH,de` for a fallback behind it.
+ *
+ * Checked against the locales faker actually ships, because the whole point of
+ * naming one is that the values come out in that language — `x-mock-locale:
+ * de-CH` (a hyphen, as in `Accept-Language`) would otherwise be indistinguishable
+ * from a mock that ignores locales.
+ */
+function readLocale(headers: Headers): readonly string[] | undefined {
+  const raw = headers.get(MOCK_LOCALE_HEADER)
+  if (raw === null) return undefined
+
+  const names = raw
+    .split(',')
+    .map((name) => name.trim())
+    .filter((name) => name !== '')
+
+  for (const name of names) {
+    if (!isLocaleName(name)) {
+      throw new InvalidControlError(
+        MOCK_LOCALE_HEADER,
+        name,
+        `a faker locale name, e.g. "de_CH". ${String(LOCALE_NAMES.length)} are available`,
+      )
+    }
+  }
+
+  return names.length === 0 ? undefined : names
+}
+
 /** Read the `x-mock-*` controls off a request. */
 export function readControls(headers: Headers): MockControls {
   const seed = headers.get(MOCK_SEED_HEADER)?.trim()
@@ -83,5 +122,6 @@ export function readControls(headers: Headers): MockControls {
     delayMs: readInt(headers, MOCK_DELAY_HEADER, 0, MAX_DELAY_MS),
     count: readInt(headers, MOCK_COUNT_HEADER, 0, MAX_COUNT),
     seed: seed === '' ? undefined : seed,
+    locale: readLocale(headers),
   }
 }

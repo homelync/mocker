@@ -1,3 +1,4 @@
+import { de_CH, en } from '@faker-js/faker'
 import { describe, expect, it } from 'vitest'
 import { z } from 'zod'
 import { UnknownOverridePathError, UnsupportedSchemaError } from './errors'
@@ -381,6 +382,39 @@ describe('overrides', () => {
         overrides: { 'results[].statusID': () => 'GOOD' },
       }),
     ).toThrow(/Did you mean "results\[\]\.statusId"\?/)
+  })
+})
+
+describe('locale', () => {
+  // `de_CH` is deliberately a *partial* locale: it carries Swiss place data and
+  // no `lorem`, which is what makes it a test of the fallback rather than of
+  // faker.
+  const schema = z.object({ city: z.string(), blurb: z.string() })
+
+  it('backs a partial locale with `en` rather than throwing', () => {
+    expect(() => generate(schema, { seed: 1, locale: de_CH })).not.toThrow()
+  })
+
+  it('lets the given locale lead', () => {
+    const swiss = generate(schema, { seed: 1, locale: de_CH })
+    const british = generate(schema, { seed: 1 })
+
+    expect(swiss.city).not.toBe(british.city)
+  })
+
+  it('accepts a chain, and appends `en` to it', () => {
+    // The appended backstop is the only difference between the two, so they
+    // must agree.
+    expect(generate(schema, { seed: 1, locale: [de_CH, en] })).toEqual(
+      generate(schema, { seed: 1, locale: de_CH }),
+    )
+  })
+
+  it('honours chain order', () => {
+    // Same two locales, opposite priority: whichever leads supplies the city.
+    expect(generate(schema, { seed: 1, locale: [en, de_CH] }).city).not.toBe(
+      generate(schema, { seed: 1, locale: [de_CH, en] }).city,
+    )
   })
 })
 

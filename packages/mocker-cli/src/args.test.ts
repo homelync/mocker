@@ -134,4 +134,37 @@ describe('refusals', () => {
       UsageError,
     )
   })
+
+  it('refuses a locale faker does not ship, naming it', () => {
+    // `de-CH` is the Accept-Language spelling. Caught here, it is a typo on the
+    // line in front of you; left to the mock, it is twenty identical failures
+    // in the middle of a report.
+    expect(() =>
+      parseCliArgs(['./r.ts', './mocks', '--locale', 'de-CH']),
+    ).toThrow(/--locale does not know "de-CH"/)
+  })
+})
+
+describe('--locale', () => {
+  it('takes one name', () => {
+    expect(options('./r.ts', './mocks', '--locale', 'de_CH').locale).toEqual([
+      'de_CH',
+    ])
+  })
+
+  it('takes a comma-separated chain, in the order given', () => {
+    expect(options('./r.ts', './mocks', '--locale', 'de_CH,de').locale).toEqual(
+      ['de_CH', 'de'],
+    )
+  })
+
+  it('takes a repeated flag as the same chain', () => {
+    expect(
+      options('./r.ts', './mocks', '-l', 'de_CH', '-l', 'de').locale,
+    ).toEqual(['de_CH', 'de'])
+  })
+
+  it('is absent when the flag is', () => {
+    expect(options('./r.ts', './mocks').locale).toBeUndefined()
+  })
 })

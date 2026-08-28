@@ -54,17 +54,18 @@ mocker <registry> --out <dir> [options]
 mocker [options]                        # with a mocker.config.json
 ```
 
-| Option                | Effect                                                                    |
-| --------------------- | ------------------------------------------------------------------------- |
-| `-o, --out <dir>`     | Output directory, if not given as the second argument                     |
-| `--config <file>`     | Config file to read (default: `./mocker.config.json`)                     |
-| `-e, --export <name>` | Export holding the table (default: `mockRegistry`, `registry`, `default`) |
-| `-s, --seed <value>`  | Pin `x-mock-seed` on every request                                        |
-| `-c, --count <n>`     | Pin `x-mock-count`, sizing every primary collection                       |
-| `-f, --force`         | Overwrite fixtures that already exist                                     |
-| `-n, --dry-run`       | Report what would be written, and write nothing                           |
-| `--skip-planned`      | Leave out entries carrying a `planned` ticket reference                   |
-| `--json`              | Report as JSON on stdout                                                  |
+| Option                 | Effect                                                                    |
+| ---------------------- | ------------------------------------------------------------------------- |
+| `-o, --out <dir>`      | Output directory, if not given as the second argument                     |
+| `--config <file>`      | Config file to read (default: `./mocker.config.json`)                     |
+| `-e, --export <name>`  | Export holding the table (default: `mockRegistry`, `registry`, `default`) |
+| `-s, --seed <value>`   | Pin `x-mock-seed` on every request                                        |
+| `-c, --count <n>`      | Pin `x-mock-count`, sizing every primary collection                       |
+| `-l, --locale <names>` | Pin `x-mock-locale`, e.g. `de_CH` or `de_CH,de` (default: `en_GB`)        |
+| `-f, --force`          | Overwrite fixtures that already exist                                     |
+| `-n, --dry-run`        | Report what would be written, and write nothing                           |
+| `--skip-planned`       | Leave out entries carrying a `planned` ticket reference                   |
+| `--json`               | Report as JSON on stdout                                                  |
 
 Exit codes: `0` every endpoint accounted for, `1` at least one failed to
 generate, `2` the command itself was wrong.
@@ -96,6 +97,7 @@ facts about the _repository_ rather than about a run. State them once:
 {
   "registry": "./src/mocks/registry.ts",
   "out": "./tests/mocks",
+  "locale": "de_CH",
   "params": { "reference": "ABC123" }
 }
 ```
@@ -115,7 +117,25 @@ this time.
 | ---------- | -------------------------------------------------------- |
 | `registry` | The module exporting the table, in place of `<registry>` |
 | `out`      | The fixture tree's root, in place of `<out>`             |
+| `locale`   | Faker locale names, in place of `--locale`               |
 | `params`   | Fixed values for bindings, by name                       |
+
+### `locale`: the language the tree is generated in
+
+`"locale": "de_CH"`, or `["de_CH", "de"]` to put a fallback behind it. It sets
+the language of every generated body, and of the values filled into bindings
+with them, so a fixture's name reads like the data inside it.
+
+`en` backs whatever you name, because most faker locales define only part of the
+data and faker throws on a category none of them covers rather than inventing a
+value. A name faker does not ship is refused by the file, or by the flag, rather
+than twenty entries deep into a report — which is what catches `de-CH`, the
+`Accept-Language` spelling.
+
+An entry that states its own `locale` is overruled, as it is by `--seed` and
+`--count`. Fixtures generated under a locale are named apart from those
+generated without one, so a tree can hold both and `--force` is not needed to
+add a second language.
 
 ### `params`: the binding values your app actually sends
 
@@ -149,6 +169,13 @@ actually sends.
 The values are derived from the endpoint's method and path, so two machines
 produce identical trees and a rerun changes nothing. Adding a query constraint to
 an entry does not rename the file its path fixture already lives in.
+
+A `locale` reaches these too, though it changes fewer of them than you might
+expect. Only a rule that reads locale data is affected: `[street]` comes out
+Swiss under `de_CH`, while `[reference]` is the same alphanumeric code either
+way. And a value that would not survive as a path segment falls back to a code
+whatever the locale, so a `[city]` whose name has a space in it — most Swiss
+ones — is a code rather than a city.
 
 What it **cannot** guess is a request the registry does not fully describe. A key
 states what a request must carry, not everything it may: if your app also sends
