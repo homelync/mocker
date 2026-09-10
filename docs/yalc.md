@@ -28,7 +28,7 @@ pnpm build
 pnpm publish:local
 ```
 
-Node ≥ 24.19 and pnpm 11. `publish:local` runs `pnpm build` itself, so the
+Node ≥ 24.19 and pnpm 12. `publish:local` runs `pnpm build` itself, so the
 explicit build above is only there the first time, when you want to see it
 succeed on its own.
 
@@ -106,9 +106,9 @@ the registry, and stops:
 This error happened while installing the dependencies of @homelync/mocker-next@0.1.0
 ```
 
-Point the nested range at the same local copy. On pnpm 11, overrides live in
-`pnpm-workspace.yaml` — the file is read for settings even in a project that is
-not a workspace:
+Point the nested range at the same local copy. On pnpm 11 and later, overrides
+live in `pnpm-workspace.yaml` — the file is read for settings even in a project
+that is not a workspace:
 
 ```yaml
 overrides:
