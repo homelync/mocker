@@ -2,6 +2,7 @@ Aico
 attero
 codegen
 devicecard
+esac
 esbuild
 fallowrc
 graphify
@@ -19,6 +20,7 @@ predev
 renovatebot
 sperno
 stackback
+startswith
 tsdown
 turba
 turbopack

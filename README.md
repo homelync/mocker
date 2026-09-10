@@ -68,7 +68,7 @@ lockfile:
 
 ```sh
 nvm use               # Node 24.19.0, from .nvmrc
-corepack enable       # pnpm 11.22.0, from the packageManager field
+corepack enable       # pnpm 12.3.4, from the packageManager field
 pnpm install
 pnpm --filter @homelync/e2e-example exec playwright install   # e2e browsers
 ```
