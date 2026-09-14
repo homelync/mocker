@@ -45,11 +45,11 @@ jobs:
 
       - uses: pnpm/action-setup@v6
         with:
-          version: 12.3.4
+          version: 12.4.1
 
       - uses: actions/setup-node@v7
         with:
-          node-version: 24.20.0
+          node-version: 24.21.0
           cache: pnpm
           # We publish to GitHub Packages, not npmjs. This is what writes the
           # `//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}` line, so the
@@ -71,7 +71,7 @@ jobs:
       - name: Create release PR or publish
         # Pinned to a commit SHA: changesets/action ships no immutable major tag,
         # so `@v2` tracks a moving branch head. Comment records the release pinned.
-        uses: changesets/action@8488615a623b1b9c987934bb89eae8af6a946ac1 # v2.1.1
+        uses: changesets/action@ae32849d5ba541f9ae29e40e22a623bc13562f51 # v2.1.2
         with:
           # v2 reads the token from this input only — setting a GITHUB_TOKEN env
           # var is silently ignored and the action falls back to the read-only
