@@ -24,14 +24,14 @@
   "dependencies": {
     "@homelync/mocker": "workspace:*",
     "@homelync/mocker-storybook": "workspace:*",
-    "react": "19.2.8",
-    "react-dom": "19.2.8",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
     "zod": "^4.4.3"
   },
   "devDependencies": {
     "@storybook/react-vite": "^10.6.0",
-    "@types/react": "^19.2.18",
-    "@types/react-dom": "^19.2.7",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
     "msw": "^2.15.0",
     "msw-storybook-addon": "^3.0.0",
     "storybook": "^10.6.0",
