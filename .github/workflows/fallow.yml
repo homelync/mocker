@@ -43,7 +43,7 @@ jobs:
       # first: a fallow major moves the built-in defaults, so the same config
       # can gate on findings here that a local run no longer reports at all.
       - name: Install fallow
-        run: npm install -g fallow@3.17.0
+        run: npm install -g fallow@3.43.1
 
       - name: Run fallow audit
         id: audit
