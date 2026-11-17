@@ -18,7 +18,7 @@ export default defineConfig({
   format: 'esm',
   platform: 'neutral',
   target: 'node20',
-  dts: { oxc: true },
+  dts: { generator: 'oxc' },
   clean: true,
   treeshake: true,
   external: [/^next/, /^zod/, /^@homelync\/mocker/],

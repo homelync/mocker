@@ -21,7 +21,7 @@ export default defineConfig({
   format: 'esm',
   platform: 'neutral',
   target: 'node20',
-  dts: { oxc: true },
+  dts: { generator: 'oxc' },
   clean: true,
   treeshake: true,
   // Nothing is bundled in: `zod` is a peer (a second copy breaks `_zod.def`

@@ -10,7 +10,7 @@ npm install --save-dev @homelync/mocker-storybook msw msw-storybook-addon
 npx msw init public --save
 ```
 
-`@homelync/mocker` comes with it. `msw` (v2) and `zod` (v4) are peers. `vite` is
+`@homelync/mocker` comes with it. `msw` (v3) and `zod` (v4) are peers. `vite` is
 an optional peer, needed only for [fixed responses](#fixed-responses-from-a-file-on-disk).
 ESM only.
 

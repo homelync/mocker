@@ -87,7 +87,7 @@ Peer dependencies are yours to install, as they would be from npm:
 | ----------------------------- | -------------------------------------------- |
 | `@homelync/mocker`            | `zod@^4.4.3`                                 |
 | `@homelync/mocker-next`       | `zod`, `next@^15 \|\| ^16`                   |
-| `@homelync/mocker-storybook`  | `zod`, `msw@^2.15`, `vite@^7 \|\| ^8`        |
+| `@homelync/mocker-storybook`  | `zod`, `msw@^3`, `vite@^7 \|\| ^8`           |
 | `@homelync/mocker-playwright` | `zod`, `@playwright/test`, `playwright-core` |
 | `@homelync/mocker-cli`        | `zod`                                        |
 

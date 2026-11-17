@@ -5,19 +5,46 @@ packages:
   # does. Excluded from `pnpm build`; see the root package.json.
   - 'apps/*'
 
-allowBuilds:
-  esbuild: true
-  msw: true
+# Supply-chain settings. pnpm reads these here rather than from `.npmrc`; see
+# docs/NodeISOCompliance.md for the npm equivalents.
 
-# 3 days
+# Install scripts are reviewed per version. An unlisted script fails the install
+# rather than running unreviewed (or being skipped silently). This is pnpm's
+# default since v11; set explicitly so the policy is visible.
+strictDepBuilds: true
+
+# Every approval is pinned to the version that was reviewed, so a compromised
+# release cannot run its script without someone re-approving it. A bot bump of
+# one of these fails CI until the new version is reviewed and added here.
+allowBuilds:
+  # Arrives via tsx and the Storybook build, and needs its postinstall to
+  # fetch the platform binary.
+  esbuild@0.28.2: true
+  # The msw 2 copy vitest pulls in. Its postinstall only refreshes a worker
+  # file, and the root package has no `msw.workerDirectory`, so it has nothing
+  # to do. msw 3 ships no install script: after an msw bump, regenerate the
+  # Storybook example's worker with `pnpm --filter @homelync/storybook-example
+  # exec msw init public`.
+  msw@2.15.0: false
+
+# Equivalent of npm's `allow-git=none` for transitive dependencies: no
+# dependency may pull code from a git ref or tarball URL, which would bypass the
+# registry and `minimumReleaseAge`.
+blockExoticSubdeps: true
+
+# Fail the install, rather than warn, when Node or pnpm is outside `engines`.
+engineStrict: true
+
+# 3 days. Keep in step with `minimumReleaseAge` in renovate.json.
 minimumReleaseAge: 4320
 # A release younger than the store's minimum age is held back until it appears
 # here. Normally pnpm writes this list and Renovate's bumps rewrite it; the
 # Storybook pins were the versions current on the day the example app was added.
 # The cspell dictionary is a hand-added exception — it shipped inside the
 # three-day window while spell-checking was being set up. Drop it once a later
-# release ages past the cutoff.
+# release ages past the cutoff. Internal `@homelync` packages are exempt.
 minimumReleaseAgeExclude:
+  - '@homelync/*'
   - '@cspell/dict-npm@5.2.47'
   - '@storybook/builder-vite@10.5.9'
   - '@storybook/csf-plugin@10.5.9'
@@ -26,13 +53,13 @@ minimumReleaseAgeExclude:
   - '@storybook/react@10.5.9'
   - storybook@10.5.9
 
-# esbuild arrives transitively (tsdown → rolldown toolchain) and needs its
-# postinstall to fetch the platform binary.
-#
-# msw's postinstall rewrites `mockServiceWorker.js` in the Storybook example's
-# public directory whenever msw moves. The worker is a committed file that must
-# match the installed version exactly — msw refuses to start against a stale one
-# — so leaving this off would make every msw bump a silent break of the example.
-onlyBuiltDependencies:
-  - esbuild
-  - msw
+# Security patches for transitive dependencies, from `pnpm audit --fix`. Remove
+# an entry once nothing in the lockfile resolves below its floor.
+overrides:
+  brace-expansion@>=4.0.0 <5.0.12: ^5.0.12
+  fast-uri@>=3.0.0 <3.1.9: ^3.1.9
+  glob@>=9.0.0 <=14.0.1: ^14.0.2
+  js-yaml@>=4.0.0 <4.3.2: ^4.3.2
+  launch-editor@<=2.14.1: ^2.14.2
+  minimatch@>=7.0.0 <11.0.1: ^11.0.1
+  shell-quote@>=1.8.4 <1.11.0: ^1.11.0

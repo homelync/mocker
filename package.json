@@ -5,7 +5,8 @@
   "type": "module",
   "packageManager": "pnpm@12.3.4",
   "engines": {
-    "node": ">=24.19.0"
+    "node": ">=24.22.0 <25",
+    "pnpm": ">=12.3.4 <13"
   },
   "scripts": {
     "build": "pnpm -r --filter \"./packages/*\" build",
@@ -28,21 +29,21 @@
     "prepare": "husky"
   },
   "devDependencies": {
-    "@changesets/changelog-github": "^1.0.0",
-    "@changesets/cli": "^3.0.1",
-    "@commitlint/cli": "^21.2.2",
-    "@commitlint/config-conventional": "^21.2.2",
-    "@commitlint/types": "^21.2.0",
-    "@types/node": "^24.13.3",
-    "cspell": "^10.1.1",
+    "@changesets/changelog-github": "^1.0.1",
+    "@changesets/cli": "^3.0.3",
+    "@commitlint/cli": "^21.2.4",
+    "@commitlint/config-conventional": "^21.2.4",
+    "@commitlint/types": "^21.2.3",
+    "@types/node": "^24.19.2",
+    "cspell": "^10.5.0",
     "husky": "^9.1.7",
     "nano-staged": "^1.0.2",
-    "oxfmt": "^0.63.0",
-    "oxlint": "^1.78.0",
-    "oxlint-tsgolint": "^7.0.2001",
-    "tsdown": "^0.22.14",
-    "tsx": "^4.23.12",
+    "oxfmt": "^0.78.0",
+    "oxlint": "^1.93.0",
+    "oxlint-tsgolint": "^7.0.2007",
+    "tsdown": "^0.23.7",
+    "tsx": "^4.23.15",
     "typescript": "^7.0.2",
-    "vitest": "^4.1.10"
+    "vitest": "^5.1.0"
   }
 }

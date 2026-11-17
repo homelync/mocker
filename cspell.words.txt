@@ -14,9 +14,12 @@ LLBT
 logomark
 magicspon
 metacharacter
+minimatch
 npmjs
+nvmrc
 pinnable
 predev
+pulumi
 renovatebot
 sperno
 stackback
@@ -29,5 +32,7 @@ unparameterised
 unstub
 untallied
 uprn
+vanta
+vitest
 yalc
 yargs

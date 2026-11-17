@@ -39,7 +39,7 @@ Always respond to the user in plain language using ISO 24495-1:2023
   `const` carries a type annotation that looks redundant — `typescript/no-inferrable-types` is off
   for exactly this reason.
 - **`noUncheckedIndexedAccess` is on.** Guards like `const [, target] = key.split(" "); if (target
-=== undefined)` are correct at runtime and invisible to the typechecker without it — and the
+  === undefined)` are correct at runtime and invisible to the typechecker without it — and the
   type-aware lint would have us delete the check that makes a malformed registry key throw.
 - **ESM only.** Both packages are `"type": "module"` and ship no CJS. `zod` is a peer dependency
   because users pass their own schemas in and a second copy breaks `_zod.def` reads.
@@ -69,7 +69,7 @@ of those is genuinely dead.
 - After modifying code, run `fallow audit --format json --quiet --base main || true`.
 - Append `|| true` to every fallow command: exit 1 means "issues found", only exit 2 is a real error.
 - Before deleting anything fallow reports as unused, confirm with `fallow dead-code --trace
-FILE:EXPORT`. Fallow is syntactic; an export can be imported-but-unreferenced and a dependency can be
+  FILE:EXPORT`. Fallow is syntactic; an export can be imported-but-unreferenced and a dependency can be
   loaded by config rather than by import.
 
 ## Comments

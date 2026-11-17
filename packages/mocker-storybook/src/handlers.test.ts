@@ -51,7 +51,7 @@ const fallback = http.all('*', () => HttpResponse.json({ fallback: true }))
 const server = setupServer(...mockerHandlers(mockRegistry), fallback)
 
 beforeAll(() => {
-  server.listen({ onUnhandledRequest: 'error' })
+  server.listen({ onUnhandledFrame: 'error' })
 })
 afterEach(() => {
   server.resetHandlers()
