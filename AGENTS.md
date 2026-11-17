@@ -63,8 +63,9 @@ This project has a knowledge graph at `graphify-out/`.
 ## fallow
 
 Static analysis for dead code, duplication, complexity and dependency hygiene. Config is
-`.fallowrc.jsonc`, whose `entry` list is every published entry point — anything unreachable from one
-of those is genuinely dead.
+`.fallowrc.jsonc`. Fallow takes each package's published entry points (`exports` and `bin`) from its
+`package.json`, so anything unreachable from one of those is genuinely dead. The config's `entry`
+list holds only files no `package.json` names.
 
 - After modifying code, run `fallow audit --format json --quiet --base main || true`.
 - Append `|| true` to every fallow command: exit 1 means "issues found", only exit 2 is a real error.
