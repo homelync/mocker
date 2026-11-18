@@ -43,13 +43,12 @@ jobs:
           # the registry token stays registry-only and is never handed to git.
           token: ${{ secrets.HOMELINK_BOT_WORKFLOWS_PAT }}
 
+      # No `version`: the action reads `packageManager` from package.json.
       - uses: pnpm/action-setup@v6
-        with:
-          version: 12.3.4
 
       - uses: actions/setup-node@v7
         with:
-          node-version: 24.20.0
+          node-version-file: '.nvmrc'
           cache: pnpm
           # We publish to GitHub Packages, not npmjs. This is what writes the
           # `//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}` line, so the

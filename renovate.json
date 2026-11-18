@@ -16,6 +16,8 @@
 
   "rangeStrategy": "bump",
 
+  "minimumReleaseAge": "3 days",
+
   "postUpgradeTasks": {
     "description": "`pnpm update --changeset` writes a changeset for the bumps its own run makes, and Renovate never makes such a run — it rewrites the range itself. The script reads the change Renovate has already made and hands the writing to `pnpm change`. `update` mode rather than `branch` because only per-upgrade mode exposes the templated fields that say which dep in which manifest moved.",
     "commands": [
@@ -70,6 +72,13 @@
       ],
       "schedule": ["at any time"],
       "labels": ["core-dependencies"]
+    },
+
+    {
+      "description": "Keep Node typings on the major the repo runs (see .nvmrc). Bump the major by hand alongside a Node upgrade.",
+      "matchPackageNames": ["@types/node"],
+      "matchUpdateTypes": ["major"],
+      "enabled": false
     },
 
     {

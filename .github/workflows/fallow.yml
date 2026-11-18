@@ -25,13 +25,12 @@ jobs:
           # Full history so `--base` can diff against the PR base commit.
           fetch-depth: 0
 
+      # No `version`: the action reads `packageManager` from package.json.
       - uses: pnpm/action-setup@v6
-        with:
-          version: 12.3.4
 
       - uses: actions/setup-node@v7
         with:
-          node-version: 24.20.0
+          node-version-file: '.nvmrc'
           cache: pnpm
 
       # Fallow resolves package `exports` maps through node_modules. It runs
@@ -44,7 +43,7 @@ jobs:
       # first: a fallow major moves the built-in defaults, so the same config
       # can gate on findings here that a local run no longer reports at all.
       - name: Install fallow
-        run: npm install -g fallow@3.17.0
+        run: npm install -g fallow@3.43.1
 
       - name: Run fallow audit
         id: audit

@@ -2,29 +2,9 @@
   // This file is JSONC: fallow reads these comments; generic JSON tools may not.
   "$schema": "https://raw.githubusercontent.com/fallow-rs/fallow/main/schema.json",
 
-  // Every published entry point. Anything not reachable from one of these is
-  // genuinely dead — which is the question worth asking in a library repo.
-  "entry": [
-    "packages/mocker/src/index.ts",
-    "packages/mocker/src/core/index.ts",
-    "packages/mocker/src/config.ts",
-    "packages/mocker-next/src/index.ts",
-    "packages/mocker-next/src/config.ts",
-    "packages/mocker-next/src/index.prod.ts",
-    "packages/mocker-storybook/src/index.ts",
-    // The Vite plugin half of the Storybook fixture store. A second entry in its
-    // package.json, and loaded by `.storybook/main.ts` rather than imported from
-    // anywhere in `src/` — so without this line it and everything it reaches
-    // read as dead.
-    "packages/mocker-storybook/src/vite.ts",
-    "packages/mocker-playwright/src/index.ts",
-    "packages/mocker-cli/src/index.ts",
-    // The executable half of the CLI. A `bin`, not an export, so nothing in the
-    // repo imports it and without this line it and everything it reaches — the
-    // argument parser, the loader, the report — read as dead.
-    "packages/mocker-cli/src/cli.ts",
-    "scripts/renovate-changeset.mjs"
-  ],
+  // Fallow already finds each package's published entry points (`exports` and
+  // `bin`) from its package.json. This lists only what no package.json names.
+  "entry": ["scripts/renovate-changeset.mjs"],
 
   // Read by a tool rather than imported by anything. `commitlint.config.js` has
   // a fallow plugin that knows to look for it; nano-staged does not, so without
@@ -33,15 +13,9 @@
 
   "ignorePatterns": [
     "**/.next/**",
-    "**/build/**",
-    "**/coverage/**",
-    "**/dist/**",
     // Written by `msw init`, not by us. Every finding in it is a report about
     // MSW's code that nobody here may act on.
     "**/mockServiceWorker.js",
-    "**/snap/**",
-    "**/storybook-static/**",
-    "**/vite.config.*.timestamp-*.*",
     "graphify-out/**"
   ],
 

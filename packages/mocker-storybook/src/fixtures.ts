@@ -13,7 +13,7 @@ import { FIXTURE_ROUTE } from './route'
  *
  * Every request here goes through MSW's `bypass`, which marks it so the worker
  * passes it straight to the network. Without that, a preview configured with
- * `onUnhandledRequest: "error"` would fail its own fixture lookups — the mock
+ * `onUnhandledFrame: "error"` would fail its own fixture lookups — the mock
  * would be intercepting itself.
  */
 
