@@ -1,5 +1,11 @@
 # @homelync/mocker-storybook
 
+## 2.0.0
+
+### Major Changes
+
+- [#60](https://github.com/homelync/mocker/pull/60) [`7c8e83f`](https://github.com/homelync/mocker/commit/7c8e83f29b416aece48acb81e390d93d9fde7125) Thanks [@magicspon](https://github.com/magicspon)! - Require msw 3. The `msw` peer range is now `^3.0.0`, and msw 2 is no longer supported. Upgrade msw and regenerate your service worker with `npx msw init <public dir>`. If your tests call `server.listen({ onUnhandledRequest })`, rename the option to `onUnhandledFrame`, as msw 3 requires.
+
 ## 1.0.0
 
 ### Major Changes
